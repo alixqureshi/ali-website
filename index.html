@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Qureshi — I build businesses that run on AI and systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --off-white: #f5f5f0;
+            --accent: #f5f5f0;
+            --gray: #6b6b6b;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--off-white);
+            font-family: var(--mono);
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--off-white);
+            color: var(--black);
+        }
+
+        a {
+            color: var(--off-white);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray);
+            transition: border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        a:hover {
+            border-color: var(--off-white);
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: var(--gray);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--off-white), transparent);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-family: var(--serif);
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text h1 span {
+            font-style: italic;
+        }
+
+        .hero-text .tagline {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            font-family: var(--mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--off-white);
+            color: var(--black);
+            border-bottom: none;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.7;
+            border-bottom: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--off-white);
+            border: 1px solid var(--gray);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--off-white);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-wrapper {
+            width: 280px;
+            height: 340px;
+            background: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--off-white);
+            z-index: -1;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .hero-image-wrapper:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Section styling */
+        section {
+            padding: 120px 0;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 400;
+            margin-bottom: 48px;
+            line-height: 1.2;
+        }
+
+        /* What I Do */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .work-item {
+            padding-top: 24px;
+            border-top: 1px solid var(--gray);
+        }
+
+        .work-item h3 {
+            font-family: var(--serif);
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .work-item p {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .work-item a {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Proof */
+        .proof-section {
+            background: #0f0f0f;
+        }
+
+        .stats-line {
+            font-family: var(--serif);
+            font-size: clamp(20px, 3vw, 28px);
+            text-align: center;
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .stats-line span {
+            font-style: italic;
+        }
+
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .client-logo {
+            height: 28px;
+            opacity: 0.7;
+            filter: grayscale(100%) brightness(2);
+            transition: opacity 0.2s ease;
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+        }
+
+        /* Writing */
+        .writing-grid {
+            display: grid;
+            gap: 0;
+        }
+
+        .writing-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 1px solid #1a1a1a;
+            align-items: baseline;
+            transition: background 0.2s ease;
+        }
+
+        .writing-item:hover {
+            background: #0f0f0f;
+            margin: 0 -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .writing-number {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .writing-title {
+            font-family: var(--serif);
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .writing-item a {
+            border-bottom: none;
+        }
+
+        .writing-item a:hover .writing-title {
+            opacity: 0.7;
+        }
+
+        .writing-date {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* Newsletter CTA */
+        .newsletter-section {
+            background: var(--off-white);
+            color: var(--black);
+            text-align: center;
+        }
+
+        .newsletter-section .section-label {
+            color: var(--black);
+            opacity: 0.5;
+        }
+
+        .newsletter-section .section-title {
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .newsletter-description {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            opacity: 0.7;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 20px;
+            font-family: var(--mono);
+            font-size: 14px;
+            background: var(--black);
+            color: var(--off-white);
+            border: none;
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--gray);
+        }
+
+        .newsletter-form button {
+            padding: 16px 32px;
+            font-family: var(--mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--black);
+            color: var(--off-white);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .newsletter-form button:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-email {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .footer-email a {
+            color: var(--off-white);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-image-wrapper {
+                width: 200px;
+                height: 250px;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .writing-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .writing-number {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text, .hero-image, .work-item, .writing-item {
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .hero-image { animation-delay: 0.1s; }
+        .work-item:nth-child(1) { animation-delay: 0.1s; }
+        .work-item:nth-child(2) { animation-delay: 0.2s; }
+        .work-item:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Color label */
+        .color-label {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--off-white);
+            color: var(--black);
+            padding: 8px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>I build businesses that run on <span>AI and systems.</span></h1>
+                    <p class="tagline">I'm Ali Qureshi. I run Adcrate — a 40-person creative agency producing 500+ ads a week for brands like Huel, Harry's, and Tushy. We scaled from $500K to $3M in three years.</p>
+                    <p class="tagline" style="margin-top: -24px;">I'm not an advisor. I'm not a consultant. I'm in the weeds every day — building systems, testing AI workflows, and figuring out how to do more with less. Everything I share comes from what I'm actually doing.</p>
+                    <div class="hero-cta">
+                        <a href="newsletter.html" class="btn btn-primary">Subscribe to the newsletter</a>
+                        <a href="#work" class="btn btn-secondary">See what I'm building</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-image-wrapper">
+                        <img src="https://ca.slack-edge.com/T011Q80C1K8-U04E227B05Q-69218abcfd41-512" alt="Ali Qureshi">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- What I'm Building -->
+    <section id="work">
+        <div class="container">
+            <p class="section-label">What I'm Building</p>
+            <div class="work-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="work-item">
+                    <h3>Adcrate</h3>
+                    <p>My creative agency. 40 people across 12 countries, producing 500+ performance ads per week for DTC and digital brands. Meta-first, fully remote, systems-driven.</p>
+                    <a href="https://adcrate.com" target="_blank">Visit Adcrate →</a>
+                </div>
+                <div class="work-item">
+                    <h3>AI Ops Audit</h3>
+                    <p>90-minute deep dive into your operations. I'll identify where AI can save you 10+ hours per week — with specific tools and implementation steps. $997.</p>
+                    <a href="ai-audit.html">Book an Audit →</a>
+                </div>
+                <div class="work-item">
+                    <h3>What's Next</h3>
+                    <p>Building products that let founders scale creative and marketing without scaling headcount. Built once, sold forever. The newsletter is where I share what's in progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof -->
+    <section class="proof-section">
+        <div class="container">
+            <p class="section-label">Proof</p>
+            <p class="stats-line">
+                <span>500+</span> ads per week · <span>$3M</span> in 3 years · <span>40</span>-person remote team · <span>12</span> countries
+            </p>
+            <div class="client-logos">
+                <img src="logos/huel.png" alt="Huel" class="client-logo">
+                <img src="logos/harrys.png" alt="Harry's" class="client-logo">
+                <img src="logos/tushy.png" alt="Tushy" class="client-logo">
+                <img src="logos/samsung.png" alt="Samsung" class="client-logo">
+                <img src="logos/huawei.png" alt="Huawei" class="client-logo">
+                <img src="logos/suno.png" alt="Suno" class="client-logo">
+                <img src="logos/invideo.png" alt="InVideo" class="client-logo">
+                <img src="logos/rugiet.png" alt="Rugiet" class="client-logo">
+                <img src="logos/tumbler.png" alt="Tumbler" class="client-logo">
+                <img src="logos/1440.png" alt="1440" class="client-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Writing -->
+    <section id="writing">
+        <div class="container">
+            <p class="section-label">Writing</p>
+            <h2 class="section-title">How I build, how I think, and what most people get wrong.</h2>
+            <div class="writing-grid">
+                <div class="writing-item">
+                    <span class="writing-number">01</span>
+                    <a href="#">
+                        <span class="writing-title">How we produce 500 ads a week without burning out</span>
+                    </a>
+                    <span class="writing-date"></span>
+                </div>
+                <div class="writing-item">
+                    <span class="writing-number">02</span>
+                    <a href="#">
+                        <span class="writing-title">Stop hiring. Start building systems.</span>
+                    </a>
+                    <span class="writing-date"></span>
+                </div>
+                <div class="writing-item">
+                    <span class="writing-number">03</span>
+                    <a href="#">
+                        <span class="writing-title">The AI workflows I actually use to run a 40-person agency</span>
+                    </a>
+                    <span class="writing-date"></span>
+                </div>
+                <div class="writing-item">
+                    <span class="writing-number">04</span>
+                    <a href="#">
+                        <span class="writing-title">Why most brands are bleeding money on creative and don't know it</span>
+                    </a>
+                    <span class="writing-date"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="container">
+            <p class="section-label">Newsletter</p>
+            <h2 class="section-title">Leverage Lab</h2>
+            <p class="newsletter-description">Every week I share what I'm building, testing, and learning — from inside a $3M agency that runs on AI and systems. No tool reviews. No hype. Just what's real.</p>
+            <p class="newsletter-description" style="margin-top: -24px;">If you're a founder or operator who wants to see how AI and systems actually work at scale, this is for you.</p>
+            <form class="newsletter-form" id="homepageNewsletterForm">
+                <input type="email" placeholder="Your email address" required id="homepageEmailInput">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('homepageNewsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('homepageEmailInput').value;
+            if (!email) return;
+            var btn = this.querySelector('button');
+            btn.textContent = 'Subscribing...';
+            btn.disabled = true;
+
+            fetch('https://api.convertkit.com/v3/forms/8569586/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ api_key: 'd10BEfuibAt6ylMREn11ZA', email: email })
+            })
+            .then(function() {
+                btn.textContent = 'Subscribed ✓';
+            })
+            .catch(function() {
+                btn.textContent = 'Subscribed ✓';
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/alimqureshi/" target="_blank">LinkedIn</a>
+                    <a href="http://x.com/alixqureshi" target="_blank">X / Twitter</a>
+                </div>
+                <div class="footer-email">
+                    <a href="mailto:ali@adcrate.com">ali@adcrate.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
