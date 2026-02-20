@@ -1,0 +1,46 @@
+name: Fetch Kit Posts
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6am UTC
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch broadcasts from Kit
+        run: |
+          curl -s "https://api.kit.com/v4/broadcasts?per_page=20" \
+            -H "X-Kit-Api-Key: ${{ secrets.KIT_API_KEY }}" \
+            -H "Accept: application/json" | \
+          python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          posts = []
+          for b in data.get('broadcasts', []):
+              if b.get('public') and b.get('published_at'):
+                  posts.append({
+                      'title': b['subject'],
+                      'url': b.get('public_url', ''),
+                      'date': b['published_at'][:10]
+                  })
+          posts.sort(key=lambda x: x['date'], reverse=True)
+          with open('posts.json', 'w') as f:
+              json.dump(posts[:10], f, indent=2)
+          print(f'Wrote {len(posts[:10])} posts')
+          "
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add posts.json
+          git diff --cached --quiet || git commit -m "chore: update posts from Kit" && git push
