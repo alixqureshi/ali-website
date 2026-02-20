@@ -581,33 +581,10 @@
         <div class="container">
             <p class="section-label">Writing</p>
             <h2 class="section-title">How I build, how I think, and what most people get wrong.</h2>
-            <div class="writing-grid">
+            <div class="writing-grid" id="writingGrid">
                 <div class="writing-item">
-                    <span class="writing-number">01</span>
-                    <a href="#">
-                        <span class="writing-title">How we produce 500 ads a week without burning out</span>
-                    </a>
-                    <span class="writing-date"></span>
-                </div>
-                <div class="writing-item">
-                    <span class="writing-number">02</span>
-                    <a href="#">
-                        <span class="writing-title">Stop hiring. Start building systems.</span>
-                    </a>
-                    <span class="writing-date"></span>
-                </div>
-                <div class="writing-item">
-                    <span class="writing-number">03</span>
-                    <a href="#">
-                        <span class="writing-title">The AI workflows I actually use to run a 40-person agency</span>
-                    </a>
-                    <span class="writing-date"></span>
-                </div>
-                <div class="writing-item">
-                    <span class="writing-number">04</span>
-                    <a href="#">
-                        <span class="writing-title">Why most brands are bleeding money on creative and don't know it</span>
-                    </a>
+                    <span class="writing-number" style="visibility:hidden">--</span>
+                    <span class="writing-title" style="color:var(--gray);font-family:var(--mono);font-size:14px">Loading posts...</span>
                     <span class="writing-date"></span>
                 </div>
             </div>
@@ -627,6 +604,33 @@
             </form>
         </div>
     </section>
+
+    <script>
+        fetch('posts.json')
+            .then(function(r) { return r.json(); })
+            .then(function(posts) {
+                var grid = document.getElementById('writingGrid');
+                if (!posts.length) {
+                    grid.innerHTML = '<div class="writing-item"><span class="writing-title" style="color:var(--gray);font-family:var(--mono);font-size:14px">No posts yet.</span></div>';
+                    return;
+                }
+                grid.innerHTML = posts.map(function(post, i) {
+                    var num = String(i + 1).padStart(2, '0');
+                    var date = new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                    return '<div class="writing-item">' +
+                        '<span class="writing-number">' + num + '</span>' +
+                        '<a href="' + post.url + '" target="_blank">' +
+                            '<span class="writing-title">' + post.title + '</span>' +
+                        '</a>' +
+                        '<span class="writing-date">' + date + '</span>' +
+                    '</div>';
+                }).join('');
+            })
+            .catch(function() {
+                document.getElementById('writingGrid').innerHTML =
+                    '<div class="writing-item"><span class="writing-title" style="color:var(--gray);font-family:var(--mono);font-size:14px">Could not load posts.</span></div>';
+            });
+    </script>
 
     <script>
         document.getElementById('homepageNewsletterForm').addEventListener('submit', function(e) {
