@@ -269,23 +269,37 @@
         }
 
         .client-logos {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .client-logo-cell {
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            justify-content: center;
+            padding: 32px 24px;
         }
 
         .client-logo {
-            height: 28px;
-            opacity: 0.7;
-            filter: grayscale(100%) brightness(2);
+            object-fit: contain;
+            opacity: 0.5;
+            filter: invert(1) grayscale(100%);
             transition: opacity 0.2s ease;
         }
 
         .client-logo:hover {
-            opacity: 1;
+            opacity: 0.9;
         }
+
+        /* Normalize visual weight — accounts for baked-in whitespace */
+        .logo-wide       { height: 24px; }  /* Harry's, Rugiet */
+        .logo-medium     { height: 32px; }  /* Huawei */
+        .logo-standard   { height: 40px; }  /* Huel, Tushy */
+        .logo-padded     { height: 48px; }  /* InVideo, Tumbler, 1440 — extra whitespace in file */
+        .logo-square     { height: 48px; }  /* Suno, Samsung */
 
         /* Writing */
         .writing-grid {
@@ -466,6 +480,11 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            .client-logos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
         }
 
         /* Animations */
@@ -562,16 +581,16 @@
                 <span>500+</span> ads per week · <span>$3M</span> in 3 years · <span>40</span>-person remote team · <span>12</span> countries
             </p>
             <div class="client-logos">
-                <img src="logos/huel.png" alt="Huel" class="client-logo">
-                <img src="logos/harrys.png" alt="Harry's" class="client-logo">
-                <img src="logos/tushy.png" alt="Tushy" class="client-logo">
-                <img src="logos/samsung.png" alt="Samsung" class="client-logo">
-                <img src="logos/huawei.png" alt="Huawei" class="client-logo">
-                <img src="logos/suno.png" alt="Suno" class="client-logo">
-                <img src="logos/invideo.png" alt="InVideo" class="client-logo">
-                <img src="logos/rugiet.png" alt="Rugiet" class="client-logo">
-                <img src="logos/tumbler.png" alt="Tumbler" class="client-logo">
-                <img src="logos/1440.png" alt="1440" class="client-logo">
+                <div class="client-logo-cell"><img src="logos/huel.png" alt="Huel" class="client-logo logo-standard"></div>
+                <div class="client-logo-cell"><img src="logos/harrys.png" alt="Harry's" class="client-logo logo-wide"></div>
+                <div class="client-logo-cell"><img src="logos/tushy.png" alt="Tushy" class="client-logo logo-standard"></div>
+                <div class="client-logo-cell"><img src="logos/samsung.png" alt="Samsung" class="client-logo logo-square"></div>
+                <div class="client-logo-cell"><img src="logos/huawei.png" alt="Huawei" class="client-logo logo-medium"></div>
+                <div class="client-logo-cell"><img src="logos/suno.png" alt="Suno" class="client-logo logo-square"></div>
+                <div class="client-logo-cell"><img src="logos/invideo.png" alt="InVideo" class="client-logo logo-padded"></div>
+                <div class="client-logo-cell"><img src="logos/rugiet.png" alt="Rugiet" class="client-logo logo-wide"></div>
+                <div class="client-logo-cell"><img src="logos/tumbler.png" alt="Tumbler" class="client-logo logo-padded"></div>
+                <div class="client-logo-cell"><img src="logos/1440.png" alt="1440" class="client-logo logo-padded"></div>
             </div>
         </div>
     </section>
