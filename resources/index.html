@@ -214,6 +214,87 @@
         }
 
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* Email gate */
+        .gate {
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .gate h2 {
+            font-family: var(--serif);
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .gate .gate-desc {
+            font-size: 15px;
+            color: var(--gray);
+            max-width: 460px;
+            margin: 0 auto 40px;
+        }
+
+        .gate-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .gate-form input {
+            flex: 1;
+            min-width: 240px;
+            padding: 16px 20px;
+            font-family: var(--mono);
+            font-size: 14px;
+            background: #151515;
+            color: var(--off-white);
+            border: 1px solid #2a2a2a;
+        }
+
+        .gate-form input::placeholder { color: var(--gray); }
+
+        .gate-form input:focus {
+            outline: none;
+            border-color: var(--off-white);
+        }
+
+        .gate-form button {
+            padding: 16px 32px;
+            font-family: var(--mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--off-white);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .gate-form button:hover { opacity: 0.7; }
+
+        .gate-note {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 16px;
+        }
+
+        /* Locked state */
+        .resources-locked {
+            filter: blur(4px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .resources-locked .resource-item {
+            opacity: 0.4;
+        }
     </style>
 </head>
 <body>
@@ -237,8 +318,21 @@
         </div>
     </header>
 
+    <!-- Email Gate -->
+    <section class="gate" id="emailGate">
+        <div class="container">
+            <h2>Enter your email to unlock</h2>
+            <p class="gate-desc">All resources are free. Drop your email and get instant access — plus future guides straight to your inbox.</p>
+            <form class="gate-form" id="gateForm">
+                <input type="email" placeholder="Your email address" required id="gateEmail">
+                <button type="submit">Unlock Resources</button>
+            </form>
+            <p class="gate-note">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
     <!-- Resource List -->
-    <section class="resources-section">
+    <section class="resources-section" id="resourceList">
         <div class="container">
 
             <div class="resource-item fade-up">
@@ -274,6 +368,50 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var gate = document.getElementById('emailGate');
+            var resourceList = document.getElementById('resourceList');
+            var gateForm = document.getElementById('gateForm');
+
+            // Check if already unlocked
+            if (localStorage.getItem('resources_unlocked') === 'true') {
+                unlockResources();
+            } else {
+                resourceList.classList.add('resources-locked');
+            }
+
+            // Form submission
+            gateForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var email = document.getElementById('gateEmail').value;
+                if (!email) return;
+
+                var btn = gateForm.querySelector('button');
+                btn.textContent = 'Unlocking...';
+                btn.disabled = true;
+
+                // Subscribe via Kit
+                fetch('https://api.convertkit.com/v3/forms/8569586/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ api_key: 'd10BEfuibAt6ylMREn11ZA', email: email })
+                })
+                .then(function() {
+                    localStorage.setItem('resources_unlocked', 'true');
+                    unlockResources();
+                })
+                .catch(function() {
+                    // Unlock anyway — don't block access on API failure
+                    localStorage.setItem('resources_unlocked', 'true');
+                    unlockResources();
+                });
+            });
+
+            function unlockResources() {
+                gate.style.display = 'none';
+                resourceList.classList.remove('resources-locked');
+            }
+
+            // Scroll-triggered animations
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
