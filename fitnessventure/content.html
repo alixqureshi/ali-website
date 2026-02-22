@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Playbook — The Dad Bod Reset</title>
+    <meta name="description" content="A simple, non-intimidating content system for The Dad Bod Reset. What to post, when, and how — no dancing, no transitions, no cringe.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream': '#FAFAF7',
+                        'cream-dark': '#F0EFE9',
+                        'ink': '#1a1a1a',
+                        'ink-light': '#4a4a4a',
+                        'muted': '#7a7a7a',
+                        'accent': '#2D6A4F',
+                        'accent-dark': '#1B4332',
+                        'accent-light': '#40916C',
+                        'input-border': '#d4d4d0',
+                        'card-bg': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        'sans': ['DM Sans', 'system-ui', 'sans-serif'],
+                    },
+                    maxWidth: {
+                        'container': '1080px',
+                    },
+                    borderRadius: {
+                        'btn': '6px',
+                        'card': '8px',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #2D6A4F; color: #FAFAF7; }
+
+        html { scroll-behavior: smooth; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.2s; }
+        .hero-delay-3 { animation-delay: 0.35s; }
+
+        .pillar-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2D6A4F;
+            opacity: 0.12;
+            line-height: 1;
+            position: absolute;
+            top: 20px;
+            right: 24px;
+        }
+
+        .schedule-table th {
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #7a7a7a;
+            padding: 12px 16px;
+            border-bottom: 2px solid #d4d4d0;
+        }
+
+        .schedule-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #F0EFE9;
+            font-size: 15px;
+            color: #1a1a1a;
+            vertical-align: top;
+        }
+
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schedule-table .day-cell {
+            font-weight: 600;
+            white-space: nowrap;
+            color: #2D6A4F;
+        }
+
+        .schedule-table .pillar-cell {
+            font-weight: 500;
+        }
+
+        .idea-item {
+            padding: 10px 14px;
+            border-left: 3px solid #2D6A4F;
+            background: #FAFAF7;
+            font-size: 15px;
+            color: #1a1a1a;
+            transition: background 0.2s ease;
+        }
+
+        .idea-item:hover {
+            background: #F0EFE9;
+        }
+
+        .mix-bar {
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-cream text-ink font-sans text-base leading-relaxed antialiased">
+
+    <!-- ===== 1. HERO ===== -->
+    <section class="min-h-screen flex items-center justify-center text-center px-6 py-20">
+        <div class="max-w-[680px] w-full">
+            <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-4 py-2 rounded-full mb-8 hero-animate">
+                Content Playbook
+            </span>
+
+            <h1 class="text-[clamp(32px,6.5vw,50px)] font-bold leading-[1.15] tracking-tight text-ink mb-6 hero-animate hero-delay-1">
+                You're not becoming an influencer. You're just showing what you already do.
+            </h1>
+
+            <p class="text-lg text-ink-light max-w-[580px] mx-auto hero-animate hero-delay-2">
+                You eat, you train, you live your life as a dad. That IS the content. Here's exactly what to post, when, and how — no dancing, no transitions, no cringe.
+            </p>
+
+            <div class="mt-12 hero-animate hero-delay-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted mx-auto animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 2. THE MINDSET SHIFT ===== -->
+    <section class="bg-cream-dark py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">The Reframe</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">You're not "creating content"</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[860px] mx-auto mb-12">
+                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
+                    <p class="text-accent font-semibold text-sm uppercase tracking-wide mb-2">Already doing it</p>
+                    <p class="text-ink text-[17px] leading-relaxed font-medium">
+                        You already eat 3 meals a day. Film one of them. 30 seconds.
+                    </p>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
+                    <p class="text-accent font-semibold text-sm uppercase tracking-wide mb-2">Already doing it</p>
+                    <p class="text-ink text-[17px] leading-relaxed font-medium">
+                        You already work out. Prop your phone up and hit record. 30 seconds.
+                    </p>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
+                    <p class="text-accent font-semibold text-sm uppercase tracking-wide mb-2">Already doing it</p>
+                    <p class="text-ink text-[17px] leading-relaxed font-medium">
+                        You already have opinions about food and fitness. Say them out loud into your phone. 30 seconds.
+                    </p>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
+                    <p class="text-accent font-semibold text-sm uppercase tracking-wide mb-2">Already doing it</p>
+                    <p class="text-ink text-[17px] leading-relaxed font-medium">
+                        You already play with your kids. That's content too.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center fade-up">
+                <div class="inline-block bg-accent/10 border border-accent/20 rounded-card px-8 py-5 max-w-[640px]">
+                    <p class="text-ink text-[17px] leading-relaxed font-semibold">
+                        Content isn't something extra you need to do. It's documenting what you already do, with your phone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 3. THE 5 CONTENT PILLARS ===== -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-6 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">Your Framework</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Your 5 content pillars</h2>
+            </div>
+            <p class="text-center text-ink-light max-w-[560px] mx-auto mb-16 fade-up">
+                Every piece of content falls into one of these 5 buckets. When you don't know what to post, pick a pillar and film it.
+            </p>
+
+            <div class="space-y-6">
+                <!-- Pillar 1 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
+                    <span class="pillar-number">01</span>
+                    <div class="relative">
+                        <h3 class="text-xl font-bold text-ink mb-2">Food Callouts</h3>
+                        <p class="text-ink-light mb-6 max-w-[600px]">Call out the BS in the food industry. This is the most viral format in the fitness niche.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="idea-item">"This 'healthy' cereal has more sugar than a Mars bar"</div>
+                            <div class="idea-item">"Stop buying these 'protein' bars — here's why"</div>
+                            <div class="idea-item">"What I feed my kids vs what most parents feed theirs"</div>
+                            <div class="idea-item">"Read the ingredients on this — you'll never buy it again"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
+                    <span class="pillar-number">02</span>
+                    <div class="relative">
+                        <h3 class="text-xl font-bold text-ink mb-2">Simple Workouts</h3>
+                        <p class="text-ink-light mb-6 max-w-[600px]">Show dads what they can do in 30 minutes with zero equipment.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="idea-item">"The only 3 exercises you need as a busy dad"</div>
+                            <div class="idea-item">"30-minute living room workout — try this tonight"</div>
+                            <div class="idea-item">"No gym? No problem. Here's what I do at home."</div>
+                            <div class="idea-item">"This 5-minute morning routine changed my energy levels"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
+                    <span class="pillar-number">03</span>
+                    <div class="relative">
+                        <h3 class="text-xl font-bold text-ink mb-2">Dad Life + Fitness</h3>
+                        <p class="text-ink-light mb-6 max-w-[600px]">Show that being a fit dad and a present dad aren't mutually exclusive.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="idea-item">"POV: keeping up with your kids at 41"</div>
+                            <div class="idea-item">"My morning routine as a fit dad"</div>
+                            <div class="idea-item">"What a Saturday looks like when you're a dad who trains"</div>
+                            <div class="idea-item">"Training with kids around — the real version"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
+                    <span class="pillar-number">04</span>
+                    <div class="relative">
+                        <h3 class="text-xl font-bold text-ink mb-2">Myth-Busting / Contrarian Takes</h3>
+                        <p class="text-ink-light mb-6 max-w-[600px]">Challenge what dads think they know. Debate = comments = reach.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="idea-item">"Stop running. It's not fixing your dad bod."</div>
+                            <div class="idea-item">"You don't need a gym membership"</div>
+                            <div class="idea-item">"Calories in, calories out is NOT the whole story"</div>
+                            <div class="idea-item">"Why most dad fitness advice is wrong"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 5 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
+                    <span class="pillar-number">05</span>
+                    <div class="relative">
+                        <h3 class="text-xl font-bold text-ink mb-2">Motivation / Identity</h3>
+                        <p class="text-ink-light mb-6 max-w-[600px]">Tap into WHY dads want to change. Emotional content gets saved and shared.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="idea-item">"Your kids deserve a dad who can keep up"</div>
+                            <div class="idea-item">"I'm 41 and in the best shape of my life — here's why"</div>
+                            <div class="idea-item">"This is what giving up looks like vs showing up"</div>
+                            <div class="idea-item">"You used to be that guy. You can be him again."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 4. CONTENT MIX ===== -->
+    <section class="bg-cream-dark py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-6 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">The Recipe</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Your weekly content recipe</h2>
+            </div>
+            <p class="text-center text-ink-light max-w-[520px] mx-auto mb-16 fade-up">
+                Not every post has the same job. Here's what your mix should look like each week.
+            </p>
+
+            <!-- Visual bar -->
+            <div class="max-w-[700px] mx-auto mb-12 fade-up">
+                <div class="mix-bar mb-4">
+                    <div class="bg-accent-dark h-full" style="width: 30%"></div>
+                    <div class="bg-accent h-full" style="width: 30%"></div>
+                    <div class="bg-accent-light h-full" style="width: 30%"></div>
+                    <div class="bg-ink h-full" style="width: 10%"></div>
+                </div>
+                <div class="flex text-xs text-muted gap-1 justify-between">
+                    <span>Scroll-stoppers 30%</span>
+                    <span>Educational 30%</span>
+                    <span>Motivational 30%</span>
+                    <span>Invite 10%</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 fade-up">
+                <div class="bg-card-bg border border-input-border rounded-card p-6 text-center">
+                    <div class="text-3xl font-bold text-accent-dark mb-1">30%</div>
+                    <h4 class="font-bold text-ink text-sm mb-2">Scroll-Stoppers</h4>
+                    <p class="text-muted text-sm">Food callouts, contrarian takes</p>
+                    <p class="text-accent text-xs font-semibold mt-3 uppercase tracking-wide">Gets you discovered</p>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 text-center">
+                    <div class="text-3xl font-bold text-accent mb-1">30%</div>
+                    <h4 class="font-bold text-ink text-sm mb-2">Educational</h4>
+                    <p class="text-muted text-sm">Workouts, what I eat, how-tos</p>
+                    <p class="text-accent text-xs font-semibold mt-3 uppercase tracking-wide">Gets you trusted</p>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 text-center">
+                    <div class="text-3xl font-bold text-accent-light mb-1">30%</div>
+                    <h4 class="font-bold text-ink text-sm mb-2">Motivational</h4>
+                    <p class="text-muted text-sm">Dad life, identity, journey</p>
+                    <p class="text-accent text-xs font-semibold mt-3 uppercase tracking-wide">Gets you followed</p>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 text-center">
+                    <div class="text-3xl font-bold text-ink mb-1">10%</div>
+                    <h4 class="font-bold text-ink text-sm mb-2">Invite</h4>
+                    <p class="text-muted text-sm">CTA to free guide or program</p>
+                    <p class="text-accent text-xs font-semibold mt-3 uppercase tracking-wide">Gets you paid</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 5. WEEKLY POSTING SCHEDULE ===== -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-6 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">The Schedule</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Your weekly schedule</h2>
+            </div>
+            <p class="text-center text-ink-light max-w-[560px] mx-auto mb-16 fade-up">
+                Post one reel per day. That's the non-negotiable. Here's a template week:
+            </p>
+
+            <div class="bg-card-bg border border-input-border rounded-card overflow-hidden max-w-[860px] mx-auto fade-up">
+                <div class="overflow-x-auto">
+                    <table class="schedule-table w-full">
+                        <thead>
+                            <tr class="bg-cream-dark">
+                                <th>Day</th>
+                                <th>Pillar</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="day-cell">Monday</td>
+                                <td class="pillar-cell">Food Callout</td>
+                                <td>Film what you're having for lunch + one opinion</td>
+                            </tr>
+                            <tr>
+                                <td class="day-cell">Tuesday</td>
+                                <td class="pillar-cell">Workout</td>
+                                <td>Film 30 seconds of your workout</td>
+                            </tr>
+                            <tr>
+                                <td class="day-cell">Wednesday</td>
+                                <td class="pillar-cell">Myth-Buster</td>
+                                <td>Quick take — "Stop doing X, do Y instead"</td>
+                            </tr>
+                            <tr>
+                                <td class="day-cell">Thursday</td>
+                                <td class="pillar-cell">Dad Life</td>
+                                <td>Film a moment with the kids + tie it to fitness</td>
+                            </tr>
+                            <tr>
+                                <td class="day-cell">Friday</td>
+                                <td class="pillar-cell">Motivation</td>
+                                <td>Your journey, a win, or why you started</td>
+                            </tr>
+                            <tr>
+                                <td class="day-cell">Saturday</td>
+                                <td class="pillar-cell">Workout</td>
+                                <td>Weekend workout demo or challenge</td>
+                            </tr>
+                            <tr>
+                                <td class="day-cell">Sunday</td>
+                                <td class="pillar-cell">Invite</td>
+                                <td>"If you're a dad ready for change — link in bio"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 fade-up">
+                <div class="inline-block bg-accent/10 border border-accent/20 rounded-card px-8 py-5 max-w-[640px]">
+                    <p class="text-ink text-[15px] leading-relaxed font-medium">
+                        This takes 30-60 minutes per day total. Film in the moment. CapCut auto-captions. Post. Done.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 6. HOW TO FILM ===== -->
+    <section class="bg-cream-dark py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-6 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">Stupid Simple</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">How to actually film</h2>
+            </div>
+            <p class="text-center text-ink-light max-w-[520px] mx-auto mb-16 fade-up">
+                No tripod. No ring light. No editing suite. Here are the only 4 steps.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[860px] mx-auto">
+                <!-- Step 1 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+                        <h3 class="text-lg font-bold text-ink">Set Up</h3>
+                        <span class="text-xs text-muted font-medium ml-auto">10 seconds</span>
+                    </div>
+                    <p class="text-ink-light leading-relaxed">
+                        Prop your phone against something. Kitchen counter, water bottle, window ledge. Natural light. That's your studio.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+                        <h3 class="text-lg font-bold text-ink">Hook First</h3>
+                        <span class="text-xs text-muted font-medium ml-auto">3 seconds</span>
+                    </div>
+                    <p class="text-ink-light leading-relaxed">
+                        Start talking BEFORE you think you're ready. The first thing out of your mouth should make someone stop scrolling. "Dads, stop eating this." / "This is why you're still fat." / "I'm 41 and here's what I eat."
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+                        <h3 class="text-lg font-bold text-ink">Deliver</h3>
+                        <span class="text-xs text-muted font-medium ml-auto">15-25 seconds</span>
+                    </div>
+                    <p class="text-ink-light leading-relaxed">
+                        One point. Not five. One thing you want them to know. Keep it under 30 seconds total.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+                        <h3 class="text-lg font-bold text-ink">Post</h3>
+                        <span class="text-xs text-muted font-medium ml-auto">2 minutes</span>
+                    </div>
+                    <p class="text-ink-light leading-relaxed">
+                        Open CapCut. Import. Auto-captions. Pick a bold caption style. Export. Post to Instagram Reels. Cross-post to TikTok. Done.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 7. TRIAL REELS ===== -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="max-w-[720px] mx-auto">
+                <div class="text-center mb-12 fade-up">
+                    <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">Zero Pressure</span>
+                    <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Nobody has to see your first attempts</h2>
+                </div>
+
+                <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-bold text-ink mb-3">What are Trial Reels?</h3>
+                            <p class="text-ink-light leading-relaxed">
+                                Instagram lets you post reels that only go to non-followers. Your existing followers — your friends, family, colleagues — never see them. It's a testing ground with zero social pressure.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-input-border pt-6">
+                            <h3 class="text-lg font-bold text-ink mb-3">Your first 2 weeks</h3>
+                            <p class="text-ink-light leading-relaxed">
+                                Record 20 trial reels in your first 2 weeks. Test different formats. See what gets views. See what feels natural. Then double down on your winning format.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-input-border pt-6">
+                            <div class="bg-accent/10 border border-accent/20 rounded-card px-6 py-4">
+                                <p class="text-ink font-semibold text-[15px] leading-relaxed">
+                                    The point isn't to go viral. The point is to find YOUR format — the one that feels easy and authentic to you.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 8. CONTENT IDEAS BANK ===== -->
+    <section class="bg-cream-dark py-24 md:py-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-6 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">Your Vault</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">50 content ideas to get you started</h2>
+            </div>
+            <p class="text-center text-ink-light max-w-[560px] mx-auto mb-16 fade-up">
+                Every single one of these is a ready-to-film hook. Pick one, hit record, done.
+            </p>
+
+            <!-- Food Callouts -->
+            <div class="mb-10 fade-up">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                    <h3 class="text-lg font-bold text-ink">Food Callouts</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="idea-item">"This 'healthy' breakfast is worse than McDonald's"</div>
+                    <div class="idea-item">"What I actually buy at the supermarket — full shop"</div>
+                    <div class="idea-item">"Stop giving your kids this for breakfast"</div>
+                    <div class="idea-item">"3 meals I eat every single week"</div>
+                    <div class="idea-item">"The worst 'health' foods in your kitchen right now"</div>
+                    <div class="idea-item">"Read the back of this label — you'll put it down"</div>
+                    <div class="idea-item">"What I eat in a day as a 41-year-old dad"</div>
+                    <div class="idea-item">"I swapped this one thing and lost 5kg"</div>
+                    <div class="idea-item">"Your protein bar has more sugar than a Snickers"</div>
+                    <div class="idea-item">"The shopping list that changed my body"</div>
+                </div>
+            </div>
+
+            <!-- Simple Workouts -->
+            <div class="mb-10 fade-up">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                    <h3 class="text-lg font-bold text-ink">Simple Workouts</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="idea-item">"The only workout you need as a busy dad"</div>
+                    <div class="idea-item">"15-minute morning workout — no equipment"</div>
+                    <div class="idea-item">"I do this every day before the kids wake up"</div>
+                    <div class="idea-item">"3 exercises that burn the most fat"</div>
+                    <div class="idea-item">"This 30-minute workout replaced my gym membership"</div>
+                    <div class="idea-item">"Push-ups are the most underrated exercise — here's why"</div>
+                    <div class="idea-item">"The dad workout: try this in your living room tonight"</div>
+                    <div class="idea-item">"Full body workout in the time it takes to boil the kettle"</div>
+                    <div class="idea-item">"My actual workout routine — no gym needed"</div>
+                    <div class="idea-item">"Do this for 30 days and watch what happens"</div>
+                </div>
+            </div>
+
+            <!-- Dad Life -->
+            <div class="mb-10 fade-up">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                    <h3 class="text-lg font-bold text-ink">Dad Life</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="idea-item">"POV: your dad can actually keep up at the park"</div>
+                    <div class="idea-item">"My kids don't know their dad used to be unfit"</div>
+                    <div class="idea-item">"What my morning looks like — school run to workout"</div>
+                    <div class="idea-item">"Being a fit dad isn't about the gym. It's about this."</div>
+                    <div class="idea-item">"Saturday with the kids — the fit dad version"</div>
+                    <div class="idea-item">"The real reason I got in shape (it wasn't for me)"</div>
+                    <div class="idea-item">"My wife's reaction when I started taking my health seriously"</div>
+                    <div class="idea-item">"I'm 41 and I have more energy than most 25-year-olds"</div>
+                    <div class="idea-item">"The hardest part of being a fit dad isn't the training"</div>
+                    <div class="idea-item">"This is what my kids see every morning"</div>
+                </div>
+            </div>
+
+            <!-- Myth-Busting -->
+            <div class="mb-10 fade-up">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+                    <h3 class="text-lg font-bold text-ink">Myth-Busting</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="idea-item">"Stop running. Here's what to do instead."</div>
+                    <div class="idea-item">"Cardio won't save your dad bod"</div>
+                    <div class="idea-item">"You don't need protein shakes"</div>
+                    <div class="idea-item">"The gym is optional. Consistency isn't."</div>
+                    <div class="idea-item">"Why 'eating less' is making you fatter"</div>
+                    <div class="idea-item">"The biggest lie the fitness industry tells dads"</div>
+                    <div class="idea-item">"You don't need a 6-pack. You need this instead."</div>
+                    <div class="idea-item">"Why willpower is a myth (and what actually works)"</div>
+                    <div class="idea-item">"Stop counting calories. Do this instead."</div>
+                    <div class="idea-item">"The truth about cheat meals"</div>
+                </div>
+            </div>
+
+            <!-- Motivation -->
+            <div class="fade-up">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+                    <h3 class="text-lg font-bold text-ink">Motivation</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="idea-item">"Your kids deserve a dad who can keep up"</div>
+                    <div class="idea-item">"The version of you that your family needs is still in there"</div>
+                    <div class="idea-item">"I was exactly where you are 2 years ago"</div>
+                    <div class="idea-item">"It's not about looking good. It's about how you feel when you wake up."</div>
+                    <div class="idea-item">"Every dad who joins says the same thing: 'I wish I started sooner'"</div>
+                    <div class="idea-item">"30 minutes a day. That's all it took to change my life."</div>
+                    <div class="idea-item">"You're not too old. You're not too busy. You're just not started."</div>
+                    <div class="idea-item">"This is what happens when dads hold each other accountable"</div>
+                    <div class="idea-item">"Stop waiting for Monday. Start today."</div>
+                    <div class="idea-item">"You don't need motivation. You need a system."</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 9. FINAL MESSAGE ===== -->
+    <section class="bg-accent py-24 md:py-32 px-6">
+        <div class="max-w-[620px] mx-auto text-center fade-up">
+            <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-white mb-4">
+                You already live this life. Now just hit record.
+            </h2>
+            <p class="text-white/80 text-lg max-w-[500px] mx-auto">
+                The content isn't extra work. It's proof of who you already are. 30 seconds a day. That's all it takes.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-12 px-6 border-t border-input-border">
+        <div class="max-w-container mx-auto text-center">
+            <p class="text-sm text-muted">Content Playbook &mdash; The Dad Bod Reset, 2026</p>
+        </div>
+    </footer>
+
+    <!-- Scroll-triggered fade-up animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+            );
+
+            document.querySelectorAll('.fade-up').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>
