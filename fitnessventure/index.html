@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Dad Bod Reset — Free 7-Day Plan for Busy Dads</title>
-    <meta name="description" content="A free 7-day plan with simple meals, 30-minute workouts, and a daily tracker. Built for dads who have 30 minutes, not 2 hours.">
+    <title>The Dad Bod Reset — Everything You Need</title>
+    <meta name="description" content="The Dad Bod Reset: a fitness business for busy dads. Landing page, 7-day guide, business blueprint, and content playbook — all in one place.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
@@ -41,13 +41,21 @@
     </script>
     <style>
         ::selection { background: #2D6A4F; color: #FAFAF7; }
-
         html { scroll-behavior: smooth; }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.25s; }
+        .hero-delay-3 { animation-delay: 0.4s; }
 
         .fade-up {
             opacity: 0;
@@ -60,252 +68,159 @@
             transform: translateY(0);
         }
 
-        .hero-animate {
-            opacity: 0;
-            animation: fadeUp 0.7s ease forwards;
+        .card-link {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .hero-delay-1 { animation-delay: 0.1s; }
-        .hero-delay-2 { animation-delay: 0.2s; }
-        .hero-delay-3 { animation-delay: 0.35s; }
-        .hero-delay-4 { animation-delay: 0.5s; }
-
-        input::placeholder {
-            color: #9a9a96;
+        .card-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         }
     </style>
 </head>
 <body class="bg-cream text-ink font-sans text-base leading-relaxed antialiased">
 
     <!-- ===== HERO ===== -->
-    <section class="min-h-screen flex items-center justify-center text-center px-6 py-20">
-        <div class="max-w-[620px] w-full">
+    <section class="min-h-[70vh] flex items-center justify-center text-center px-6 py-24">
+        <div class="max-w-[680px] w-full">
             <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-4 py-2 rounded-full mb-8 hero-animate">
-                Free 7-Day Plan for Busy Dads
+                Fitness Venture — The Full Package
             </span>
 
             <h1 class="text-[clamp(36px,7vw,56px)] font-bold leading-[1.12] tracking-tight text-ink mb-6 hero-animate hero-delay-1">
-                Get Back in Shape Without Living in the Gym
+                The Dad Bod <em class="not-italic text-accent">Reset</em>
             </h1>
 
-            <p class="text-lg text-ink-light max-w-[520px] mx-auto mb-10 hero-animate hero-delay-2">
-                A free 7-day plan with simple meals, 30-minute workouts, and a daily tracker. Built for dads who have 30 minutes, not 2 hours.
+            <p class="text-lg text-ink-light max-w-[540px] mx-auto hero-animate hero-delay-2">
+                A £10K/month fitness business helping busy dads get back in shape — with simple meals, 30-minute workouts, and real accountability.
             </p>
 
-            <form class="max-w-[460px] mx-auto mb-5 hero-animate hero-delay-3" onsubmit="return false;">
-                <div class="flex flex-col sm:flex-row gap-3 mb-3">
-                    <input
-                        type="text"
-                        placeholder="Your first name"
-                        required
-                        class="flex-1 px-4 py-3.5 text-[15px] bg-card-bg text-ink border border-input-border rounded-btn focus:border-accent focus:outline-none transition-colors"
-                    >
-                    <input
-                        type="email"
-                        placeholder="Your email"
-                        required
-                        class="flex-1 px-4 py-3.5 text-[15px] bg-card-bg text-ink border border-input-border rounded-btn focus:border-accent focus:outline-none transition-colors"
-                    >
-                </div>
-                <button
-                    type="submit"
-                    class="w-full px-8 py-4 text-[15px] font-semibold uppercase tracking-[0.05em] bg-accent text-white hover:bg-accent-dark transition-colors rounded-btn cursor-pointer"
-                >
-                    Send Me the Free Plan
-                </button>
-            </form>
-
-            <p class="text-sm text-muted hero-animate hero-delay-4">
-                Join hundreds of dads who've started their reset. No spam, unsubscribe anytime.
-            </p>
-        </div>
-    </section>
-
-    <!-- ===== PROBLEM / PAIN POINTS ===== -->
-    <section class="bg-cream-dark py-24 md:py-32 px-6">
-        <div class="max-w-container mx-auto">
-            <div class="text-center mb-16 fade-up">
-                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Sound familiar?</h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[800px] mx-auto">
-                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
-                    <p class="text-ink text-[17px] leading-relaxed font-medium">
-                        You used to be in shape. Now you avoid mirrors.
-                    </p>
-                </div>
-                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
-                    <p class="text-ink text-[17px] leading-relaxed font-medium">
-                        You're out of breath playing with your kids.
-                    </p>
-                </div>
-                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
-                    <p class="text-ink text-[17px] leading-relaxed font-medium">
-                        You've tried before — gym, apps, diets — and quit after 2 weeks.
-                    </p>
-                </div>
-                <div class="bg-card-bg border border-input-border rounded-card p-7 fade-up">
-                    <p class="text-ink text-[17px] leading-relaxed font-medium">
-                        You know what to do. You just can't stick to it alone.
-                    </p>
-                </div>
+            <div class="mt-10 hero-animate hero-delay-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted mx-auto animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                </svg>
             </div>
         </div>
     </section>
 
-    <!-- ===== WHAT'S INSIDE ===== -->
-    <section class="py-24 md:py-32 px-6">
+    <!-- ===== PAGE CARDS ===== -->
+    <section class="pb-32 px-6">
         <div class="max-w-container mx-auto">
-            <div class="text-center mb-16 fade-up">
-                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">What you'll get</h2>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Card 1: Meals -->
-                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
-                    <div class="w-12 h-12 bg-accent/10 rounded-card flex items-center justify-center mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.379a48.474 48.474 0 00-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
+                <!-- Landing Page -->
+                <a href="landing.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Lead Capture</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">Landing Page</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The lead magnet capture page. Visitors enter their name and email to download the free 7-Day Dad Bod Reset Kickstart plan.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View page
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-ink mb-3">7 Days of Simple Meals</h3>
-                    <p class="text-ink-light leading-relaxed">
-                        Real food your family will eat too. No weird ingredients, no meal prep marathons. Includes a full shopping list.
-                    </p>
-                </div>
+                    </span>
+                </a>
 
-                <!-- Card 2: Workouts -->
-                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
-                    <div class="w-12 h-12 bg-accent/10 rounded-card flex items-center justify-center mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                <!-- 7-Day Guide -->
+                <a href="guide.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Lead Magnet</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">7-Day Kickstart Guide</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The free PDF guide. 7 days of simple meals, 30-minute bodyweight workouts, a full shopping list, and a printable daily habit tracker.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View guide
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-ink mb-3">7 x 30-Minute Workouts</h3>
-                    <p class="text-ink-light leading-relaxed">
-                        Bodyweight only. Do them in your living room before the kids wake up. Each one takes exactly 30 minutes.
-                    </p>
-                </div>
+                    </span>
+                </a>
 
-                <!-- Card 3: Tracker -->
-                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
-                    <div class="w-12 h-12 bg-accent/10 rounded-card flex items-center justify-center mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <!-- Business Pitch -->
+                <a href="pitch.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-1.5M12 12.75l3 1.5M12 12.75V17.25m-4.5-5.25L12 9.75" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Business Blueprint</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">Pitch Presentation</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The full business case for Arif. Revenue model, delivery stack, scalable systems, marketing funnel, partnership structure, and 90-day launch plan.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View pitch
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
+                    </span>
+                </a>
+
+                <!-- Content Strategy -->
+                <a href="content.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Content Playbook</span>
                     </div>
-                    <h3 class="text-xl font-bold text-ink mb-3">Daily Habit Tracker</h3>
-                    <p class="text-ink-light leading-relaxed">
-                        Track workouts, meals, water, and sleep. One page, print it out, stick it on the fridge. Simple accountability.
+                    <h2 class="text-xl font-bold text-ink mb-3">Content Strategy</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The complete content system. 5 pillars, weekly posting schedule, how to film in under 5 minutes, trial reels strategy, and 50 ready-to-film content ideas.
                     </p>
-                </div>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View playbook
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                </a>
+
             </div>
         </div>
     </section>
 
-    <!-- ===== MEET YOUR COACH ===== -->
-    <section class="bg-cream-dark py-24 md:py-32 px-6">
+    <!-- ===== QUICK STATS ===== -->
+    <section class="bg-cream-dark py-20 px-6">
         <div class="max-w-container mx-auto">
-            <div class="mb-16 fade-up">
-                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Built by a dad, for dads</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-12 md:gap-16 items-start">
-                <div class="fade-up">
-                    <p class="text-lg text-ink-light leading-relaxed mb-6">
-                        Arif is 41, a dad, and in the best shape of his life. Not because he has some secret or spends 3 hours in the gym. Because he figured out a simple system that works around real life — school runs, work, family dinners, and everything in between.
-                    </p>
-                    <p class="text-lg text-ink-light leading-relaxed">
-                        No certifications. No complicated science. Just a dad who's done it and helps other dads do the same.
-                    </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center fade-up">
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">&pound;749</p>
+                    <p class="text-muted text-sm">3-month program</p>
                 </div>
-
-                <div class="fade-up">
-                    <div class="w-full aspect-[4/5] bg-cream border border-input-border rounded-card flex items-center justify-center">
-                        <span class="text-sm text-muted">Photo of Arif</span>
-                    </div>
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">40</p>
+                    <p class="text-muted text-sm">members = £10K/mo</p>
+                </div>
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">30</p>
+                    <p class="text-muted text-sm">min workouts</p>
+                </div>
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">0</p>
+                    <p class="text-muted text-sm">gym required</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== SOCIAL PROOF ===== -->
-    <section class="py-24 md:py-32 px-6">
-        <div class="max-w-container mx-auto">
-            <div class="text-center mb-16 fade-up">
-                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink mb-3">What dads are saying</h2>
-                <p class="text-muted text-sm">Founding members in progress — testimonials coming soon</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
-                    <p class="text-ink-light leading-relaxed mb-6 italic">
-                        "Placeholder testimonial from a dad who completed the 7-day plan and felt the difference immediately. Simple, no-BS, actually doable."
-                    </p>
-                    <div>
-                        <p class="text-ink font-semibold text-sm">Dave, 38</p>
-                        <p class="text-muted text-sm">Father of two</p>
-                    </div>
-                </div>
-
-                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
-                    <p class="text-ink-light leading-relaxed mb-6 italic">
-                        "Placeholder testimonial from a dad who was skeptical but gave it a shot. The meals were easy, the workouts were quick, and he actually stuck with it."
-                    </p>
-                    <div>
-                        <p class="text-ink font-semibold text-sm">James, 44</p>
-                        <p class="text-muted text-sm">Father of three</p>
-                    </div>
-                </div>
-
-                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
-                    <p class="text-ink-light leading-relaxed mb-6 italic">
-                        "Placeholder testimonial from a dad who'd tried everything else. This was the first plan that actually fit his schedule without making him feel guilty."
-                    </p>
-                    <div>
-                        <p class="text-ink font-semibold text-sm">Marcus, 35</p>
-                        <p class="text-muted text-sm">Father of one</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FINAL CTA ===== -->
-    <section class="bg-accent py-24 md:py-32 px-6">
-        <div class="max-w-[620px] mx-auto text-center fade-up">
-            <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-white mb-4">
-                Ready to start?
-            </h2>
-            <p class="text-white/80 text-lg mb-10 max-w-[480px] mx-auto">
-                Download the free 7-day plan and take the first step. It takes 30 minutes a day. You've got 30 minutes.
-            </p>
-
-            <form class="max-w-[460px] mx-auto mb-5" onsubmit="return false;">
-                <div class="flex flex-col sm:flex-row gap-3 mb-3">
-                    <input
-                        type="text"
-                        placeholder="Your first name"
-                        required
-                        class="flex-1 px-4 py-3.5 text-[15px] bg-white text-ink border border-white/20 rounded-btn focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
-                    >
-                    <input
-                        type="email"
-                        placeholder="Your email"
-                        required
-                        class="flex-1 px-4 py-3.5 text-[15px] bg-white text-ink border border-white/20 rounded-btn focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
-                    >
-                </div>
-                <button
-                    type="submit"
-                    class="w-full px-8 py-4 text-[15px] font-semibold uppercase tracking-[0.05em] bg-ink text-white hover:bg-ink/90 transition-colors rounded-btn cursor-pointer"
-                >
-                    Send Me the Free Plan
-                </button>
-            </form>
-
-            <p class="text-white/60 text-sm">No spam. Unsubscribe anytime.</p>
         </div>
     </section>
 
@@ -313,7 +228,7 @@
     <footer class="py-12 px-6 border-t border-input-border">
         <div class="max-w-container mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <p class="text-sm text-muted">&copy; 2026 The Dad Bod Reset</p>
-            <p class="text-sm text-muted">Built with ❤️ for dads everywhere</p>
+            <p class="text-xs text-muted">Prepared by Ali Qureshi</p>
         </div>
     </footer>
 
