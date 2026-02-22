@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources — Ali Qureshi</title>
+    <meta name="description" content="Free guides, cheat sheets, and tools from Ali Qureshi. Built for operators, founders, and marketers who want to move faster.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --off-white: #f5f5f0;
+            --gray: #6b6b6b;
+            --border: #1a1a1a;
+            --surface-alt: #0f0f0f;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--black);
+            color: var(--off-white);
+            font-family: var(--mono);
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--off-white); color: var(--black); }
+
+        a {
+            color: var(--off-white);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray);
+            transition: border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        a:hover { border-color: var(--off-white); opacity: 0.7; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        .nav {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-back {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray);
+            border-bottom: none;
+        }
+
+        .nav-back:hover { color: var(--off-white); opacity: 1; }
+
+        /* Hero */
+        .hero {
+            padding: 120px 0 80px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            margin-bottom: 48px;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(40px, 7vw, 64px);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 em { font-style: italic; }
+
+        .hero .description {
+            font-size: 16px;
+            color: var(--gray);
+            max-width: 540px;
+        }
+
+        /* Resource list */
+        .resources-section {
+            padding: 80px 0 120px;
+        }
+
+        .resource-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            align-items: start;
+            transition: background 0.2s ease;
+        }
+
+        .resource-item:hover {
+            background: var(--surface-alt);
+            margin: 0 -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .resource-item:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .resource-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+
+        .resource-title {
+            font-family: var(--serif);
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .resource-desc {
+            font-size: 14px;
+            color: var(--gray);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .resource-link {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            align-self: center;
+        }
+
+        .resource-link a { border-bottom: 1px solid var(--gray); }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links { display: flex; gap: 32px; }
+
+        .footer-links a {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-email { font-size: 13px; color: var(--gray); }
+        .footer-email a { color: var(--off-white); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero { padding: 80px 0 60px; }
+
+            .resource-item {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .resource-link { align-self: start; }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate { animation: fadeUp 0.6s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="nav-back">← Ali Qureshi</a>
+                <a href="/#newsletter" class="nav-back">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <p class="section-label animate">Resources</p>
+            <h1 class="animate delay-1">Free guides for <em>operators.</em></h1>
+            <p class="description animate delay-2">Cheat sheets, playbooks, and frameworks I've built from running a $3M agency. No fluff — just usable stuff you can apply today.</p>
+        </div>
+    </header>
+
+    <!-- Resource List -->
+    <section class="resources-section">
+        <div class="container">
+
+            <div class="resource-item fade-up">
+                <div>
+                    <p class="resource-tag">Cheat Sheet</p>
+                    <h2 class="resource-title">GitHub for AI Builders</h2>
+                    <p class="resource-desc">The non-developer's guide to Git, branches, commits, and pull requests. Built for marketers and operators using AI coding tools like Claude Code. No terminal experience required.</p>
+                </div>
+                <div class="resource-link">
+                    <a href="github-cheatsheet.html">Read →</a>
+                </div>
+            </div>
+
+            <!-- ADD NEW RESOURCES HERE -->
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/alimqureshi/" target="_blank">LinkedIn</a>
+                    <a href="http://x.com/alixqureshi" target="_blank">X / Twitter</a>
+                </div>
+                <div class="footer-email">
+                    <a href="mailto:ali@adcrate.com">ali@adcrate.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.fade-up').forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub for AI Builders — The Non-Developer's Cheat Sheet</title>
+    <meta name="description" content="The non-developer's guide to Git, branches, commits, and pull requests. Built for marketers and operators using AI coding tools like Claude Code.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'surface': '#0a0a0a',
+                        'surface-alt': '#0f0f0f',
+                        'off-white': '#f5f5f0',
+                        'muted': '#6b6b6b',
+                        'border': '#1a1a1a',
+                        'input-bg': '#151515',
+                        'input-border': '#2a2a2a',
+                    },
+                    fontFamily: {
+                        'serif': ['Instrument Serif', 'Georgia', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    maxWidth: {
+                        'container': '1000px',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #f5f5f0; color: #0a0a0a; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeUp 0.6s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+    </style>
+</head>
+<body class="bg-surface text-off-white font-mono text-[15px] leading-[1.7] antialiased">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="min-h-screen flex items-center border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-24 md:py-0">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8 animate-fade-up">Cheat Sheet</p>
+            <h1 class="font-serif text-[clamp(48px,8vw,72px)] leading-[1.05] tracking-[-0.02em] mb-8 animate-fade-up delay-1">
+                GitHub for <em>AI builders</em>
+            </h1>
+            <p class="text-muted text-[16px] max-w-[600px] mb-6 animate-fade-up delay-2">
+                The non-developer's guide to Git, branches, commits, and pull requests. Built for marketers and operators using AI coding tools like Claude Code.
+            </p>
+            <p class="text-muted text-[13px] animate-fade-up delay-3">By Ali Qureshi</p>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 1: THE MENTAL MODEL ==================== -->
+    <section class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">The Mental Model</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-6">
+                Think of it like <em>Google Docs</em>
+            </h2>
+            <p class="text-muted text-[16px] max-w-[600px] mb-12">
+                Every Git concept maps to something you already use. Here's the translation.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">Your project folder</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">A Google Doc</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">Git</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">The version history — every save point you can go back to</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">GitHub</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">Google Drive — where the doc lives online so it's backed up and shareable</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">A commit</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">Pressing "save" with a note about what you changed</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">A branch</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">Making a copy of the doc to try edits without messing up the original</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">A pull request</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">Asking someone to review your edits before merging them into the original</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">Push</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">Uploading your local saves to the cloud</p>
+                </div>
+
+                <div class="border-b border-border md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">Pull</p>
+                </div>
+                <div class="border-b border-border py-5 md:pl-8">
+                    <p class="text-muted">Downloading the latest version from the cloud</p>
+                </div>
+
+                <div class="md:border-r py-5 md:pr-8">
+                    <p class="text-off-white mb-1">Main branch</p>
+                </div>
+                <div class="py-5 md:pl-8">
+                    <p class="text-muted">The "official" version of the doc</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 2: CORE CONCEPTS ==================== -->
+    <section class="bg-surface-alt border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">Core Concepts</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-6">
+                The 7 things you <em>actually</em> need to know
+            </h2>
+            <p class="text-muted text-[16px] max-w-[600px] mb-16">
+                Everything else is detail. Master these and you can work with any AI coding tool confidently.
+            </p>
+
+            <!-- Concept 1 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">01</span>
+                    <h3 class="font-serif text-[24px]">Repository (Repo)</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    Your project folder. Everything lives here — code, files, history. One repo per project.
+                </p>
+                <p class="text-muted text-[13px] ml-10">
+                    When you see it: When you create a new project or clone someone else's.
+                </p>
+            </div>
+
+            <!-- Concept 2 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">02</span>
+                    <h3 class="font-serif text-[24px]">Commit</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    A save point. Every time you make changes and want to lock them in, you commit. Each commit has a message explaining what you changed and why.
+                </p>
+                <p class="text-muted text-[13px] mb-4 ml-10">
+                    When you see it: After you've made changes and want to save them. Claude Code will create commits for you.
+                </p>
+                <div class="ml-10 bg-surface px-5 py-3 border border-border">
+                    <code class="text-[13px] text-muted">feat: add landing page for lead magnet capture</code>
+                </div>
+            </div>
+
+            <!-- Concept 3 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">03</span>
+                    <h3 class="font-serif text-[24px]">Branch</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    A parallel copy of your project where you can make changes without affecting the main version. When you're done, you merge it back.
+                </p>
+                <p class="text-muted text-[13px] mb-4 ml-10">
+                    When you see it: Before starting any new feature or change. Never work directly on main.
+                </p>
+                <div class="ml-10 flex flex-wrap gap-3 mb-4">
+                    <div class="bg-surface px-5 py-3 border border-border">
+                        <code class="text-[13px] text-muted">feature/fitness-venture-assets</code>
+                    </div>
+                    <div class="bg-surface px-5 py-3 border border-border">
+                        <code class="text-[13px] text-muted">fix/broken-email-link</code>
+                    </div>
+                </div>
+                <p class="text-off-white text-[13px] ml-10 border-l-2 border-border pl-4">
+                    Key rule: main (or master) is the official version. Never commit directly to it.
+                </p>
+            </div>
+
+            <!-- Concept 4 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">04</span>
+                    <h3 class="font-serif text-[24px]">Push</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    Upload your local commits to GitHub. Until you push, your changes only exist on your machine.
+                </p>
+                <p class="text-muted text-[13px] ml-10">
+                    When you see it: After committing, when you want to back up to the cloud or share with others.
+                </p>
+            </div>
+
+            <!-- Concept 5 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">05</span>
+                    <h3 class="font-serif text-[24px]">Pull</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    Download the latest changes from GitHub to your machine. Always pull before starting new work.
+                </p>
+                <p class="text-muted text-[13px] ml-10">
+                    When you see it: At the start of a session, or when someone else has made changes.
+                </p>
+            </div>
+
+            <!-- Concept 6 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">06</span>
+                    <h3 class="font-serif text-[24px]">Pull Request (PR)</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    A request to merge your branch into main. It shows all the changes you made and lets you (or others) review before merging. It's the quality gate.
+                </p>
+                <p class="text-muted text-[13px] ml-10">
+                    When you see it: When your feature is done and ready to be merged into the official version.
+                </p>
+            </div>
+
+            <!-- Concept 7 -->
+            <div class="border-t border-border py-10">
+                <div class="flex items-baseline gap-4 mb-4">
+                    <span class="text-muted text-[13px]">07</span>
+                    <h3 class="font-serif text-[24px]">Merge</h3>
+                </div>
+                <p class="text-off-white mb-3 ml-10">
+                    Combining your branch's changes into main. After a PR is approved, you merge it. Then delete the branch — it's done its job.
+                </p>
+                <p class="text-muted text-[13px] ml-10">
+                    When you see it: After a PR is approved. GitHub has a merge button.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 3: THE WORKFLOW ==================== -->
+    <section class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">The Workflow</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-6">
+                How it works in <em>practice</em>
+            </h2>
+            <p class="text-muted text-[16px] max-w-[600px] mb-16">
+                This is the typical flow when you're using Claude Code or any AI coding tool.
+            </p>
+
+            <!-- Step 1 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 1</span>
+                        <h3 class="font-serif text-[24px] mt-2">Start on main</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Make sure you're on the main branch and up to date.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Make sure we're on main and pull the latest"</p>
+                        </div>
+                        <div class="bg-surface-alt px-5 py-3 border border-border">
+                            <code class="text-[13px] text-muted">git checkout main && git pull</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 2</span>
+                        <h3 class="font-serif text-[24px] mt-2">Create a branch</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Create a new branch for your work. Name it after what you're doing.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Create a new branch for [feature name]"</p>
+                        </div>
+                        <div class="bg-surface-alt px-5 py-3 border border-border mb-4">
+                            <code class="text-[13px] text-muted">git checkout -b feature/your-feature-name</code>
+                        </div>
+                        <p class="text-muted text-[13px]">
+                            Naming convention: <code class="text-off-white">feature/</code>, <code class="text-off-white">fix/</code>, <code class="text-off-white">chore/</code> prefixes
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 3</span>
+                        <h3 class="font-serif text-[24px] mt-2">Do your work</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Build, edit, create — whatever the task is. All changes happen on your branch.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Build me a landing page" / "Fix the email sequence" / etc.</p>
+                        </div>
+                        <p class="text-muted text-[13px]">
+                            Claude creates and edits files on your branch. The main branch stays untouched.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 4</span>
+                        <h3 class="font-serif text-[24px] mt-2">Commit</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Save your changes with a descriptive message.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Commit this" or "Commit all of this"</p>
+                        </div>
+                        <div class="bg-surface-alt px-5 py-3 border border-border mb-4">
+                            <code class="text-[13px] text-muted">git add [files] && git commit -m "feat: description"</code>
+                        </div>
+                        <p class="text-muted text-[13px]">
+                            Prefixes: <code class="text-off-white">feat:</code> (new feature) <code class="text-off-white">fix:</code> (bug fix) <code class="text-off-white">docs:</code> (documentation) <code class="text-off-white">chore:</code> (maintenance) <code class="text-off-white">refactor:</code> (restructuring)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 5</span>
+                        <h3 class="font-serif text-[24px] mt-2">Push</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Upload your commits to GitHub.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Push this" or "Push it up"</p>
+                        </div>
+                        <div class="bg-surface-alt px-5 py-3 border border-border">
+                            <code class="text-[13px] text-muted">git push -u origin branch-name</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 6</span>
+                        <h3 class="font-serif text-[24px] mt-2">Create a Pull Request</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Open a PR to merge your work into main.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Create a PR for this"</p>
+                        </div>
+                        <div class="bg-surface-alt px-5 py-3 border border-border">
+                            <code class="text-[13px] text-muted">gh pr create --title "feat: description" --body "summary"</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="border-t border-border py-10">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6">
+                    <div>
+                        <span class="text-muted text-[11px] uppercase tracking-[0.2em]">Step 7</span>
+                        <h3 class="font-serif text-[24px] mt-2">Merge and clean up</h3>
+                    </div>
+                    <div>
+                        <p class="text-off-white mb-4">Merge the PR on GitHub, then delete the branch.</p>
+                        <div class="mb-3">
+                            <span class="text-muted text-[11px] uppercase tracking-[0.15em]">You say:</span>
+                            <p class="text-off-white mt-1">"Merge the PR" or do it on GitHub directly</p>
+                        </div>
+                        <p class="text-muted text-[13px]">
+                            Then: "Delete the branch" / "Clean up branches"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 4: PHRASE BOOK ==================== -->
+    <section class="bg-surface-alt border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">Phrase Book</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-6">
+                What to say to <em>Claude Code</em>
+            </h2>
+            <p class="text-muted text-[16px] max-w-[600px] mb-16">
+                Copy-paste these. They work.
+            </p>
+
+            <div class="grid grid-cols-1">
+                <!-- Header row - desktop only -->
+                <div class="hidden md:grid grid-cols-2 border-b border-border pb-4 mb-0">
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">What you want</p>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">What to say</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Check current state</p>
+                    <p class="text-muted">"What branch am I on?" / "Git status"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Start fresh</p>
+                    <p class="text-muted">"Make sure we're on main and pull latest"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">New feature branch</p>
+                    <p class="text-muted">"Create a branch for [feature name]"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Save your work</p>
+                    <p class="text-muted">"Commit this" / "Commit all changes"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Upload to GitHub</p>
+                    <p class="text-muted">"Push this"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Create a review request</p>
+                    <p class="text-muted">"Create a PR for this"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">See what changed</p>
+                    <p class="text-muted">"Show me the diff" / "What's changed?"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Go back to main</p>
+                    <p class="text-muted">"Switch to main"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Clean up old branches</p>
+                    <p class="text-muted">"Delete merged branches" / "Clean up branches"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Undo last change</p>
+                    <p class="text-muted">"Revert the last commit"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 border-b border-border py-5">
+                    <p class="text-off-white mb-1 md:mb-0">See recent history</p>
+                    <p class="text-muted">"Show me recent commits"</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 py-5">
+                    <p class="text-off-white mb-1 md:mb-0">Check if up to date</p>
+                    <p class="text-muted">"Am I up to date with remote?"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 5: BRANCH NAMING ==================== -->
+    <section class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">Naming Conventions</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-16">
+                How to name <em>branches</em>
+            </h2>
+
+            <div class="grid grid-cols-1">
+                <!-- Header row - desktop only -->
+                <div class="hidden md:grid grid-cols-3 border-b border-border pb-4">
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">Prefix</p>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">When to use</p>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">Example</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>feature/</code></p>
+                    <p class="text-muted">Adding something new</p>
+                    <p class="text-muted"><code>feature/landing-page</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>fix/</code></p>
+                    <p class="text-muted">Fixing a bug</p>
+                    <p class="text-muted"><code>fix/broken-email-link</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>chore/</code></p>
+                    <p class="text-muted">Maintenance, cleanup</p>
+                    <p class="text-muted"><code>chore/update-dependencies</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>docs/</code></p>
+                    <p class="text-muted">Documentation changes</p>
+                    <p class="text-muted"><code>docs/add-readme</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>hotfix/</code></p>
+                    <p class="text-muted">Urgent production fix</p>
+                    <p class="text-muted"><code>hotfix/payment-error</code></p>
+                </div>
+            </div>
+
+            <p class="text-muted text-[13px] mt-8 border-l-2 border-border pl-4">
+                Rule: lowercase, hyphens between words, descriptive but short.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 6: COMMIT MESSAGES ==================== -->
+    <section class="bg-surface-alt border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">Commit Messages</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-6">
+                How to write <em>commit messages</em>
+            </h2>
+            <p class="text-muted text-[16px] max-w-[600px] mb-16">
+                The prefix tells you what kind of change it is. The message tells you why.
+            </p>
+
+            <div class="bg-surface px-6 py-4 border border-border mb-12">
+                <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-3">Format</p>
+                <code class="text-off-white text-[15px]">prefix: short description of what changed</code>
+            </div>
+
+            <div class="grid grid-cols-1">
+                <!-- Header row - desktop only -->
+                <div class="hidden md:grid grid-cols-3 border-b border-border pb-4">
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">Prefix</p>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">Meaning</p>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-muted">Example</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>feat:</code></p>
+                    <p class="text-muted">New feature</p>
+                    <p class="text-muted"><code>feat: add lead magnet landing page</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>fix:</code></p>
+                    <p class="text-muted">Bug fix</p>
+                    <p class="text-muted"><code>fix: email form not submitting</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>docs:</code></p>
+                    <p class="text-muted">Documentation</p>
+                    <p class="text-muted"><code>docs: update README with setup instructions</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>refactor:</code></p>
+                    <p class="text-muted">Code restructure (no behavior change)</p>
+                    <p class="text-muted"><code>refactor: simplify email sequence logic</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-border py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>chore:</code></p>
+                    <p class="text-muted">Maintenance</p>
+                    <p class="text-muted"><code>chore: clean up unused files</code></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 py-5 gap-2 md:gap-0">
+                    <p class="text-off-white"><code>style:</code></p>
+                    <p class="text-muted">Formatting/visual changes</p>
+                    <p class="text-muted"><code>style: update landing page typography</code></p>
+                </div>
+            </div>
+
+            <p class="text-off-white text-[13px] mt-8 border-l-2 border-border pl-4 max-w-[600px]">
+                Explain the WHY, not the WHAT. "Fix bug" is bad. "Fix email form failing on mobile Safari" is good.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 7: MISTAKES TO AVOID ==================== -->
+    <section class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">Mistakes to Avoid</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-16">
+                What <em>not</em> to do
+            </h2>
+
+            <div class="grid grid-cols-1 gap-0">
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Working directly on main</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Always create a branch first</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Giant commits with 50 changes</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">One logical change per commit</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Commit messages like "update" or "fix stuff"</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Be specific about what and why</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Never pushing</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Push regularly. If your laptop dies, unpushed work is gone.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Having 20 old branches</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Delete branches after they're merged</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Force pushing to main</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Never. Just don't.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Committing .env files or secrets</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Use .gitignore. If you see a .env file, don't commit it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6 items-start">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">The mistake</p>
+                            <p class="text-off-white line-through decoration-muted/40">Not pulling before starting work</p>
+                        </div>
+                        <p class="text-muted hidden md:block">&rarr;</p>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.15em] text-muted mb-2 md:hidden">Instead</p>
+                            <p class="text-muted">Always pull main before creating a new branch</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 8: QUICK REFERENCE ==================== -->
+    <section class="bg-surface-alt border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px]">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8">Quick Reference</p>
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] mb-16">
+                The <em>one-pager</em>
+            </h2>
+
+            <!-- Flow diagram -->
+            <div class="border border-border bg-surface px-6 py-8 mb-12 overflow-x-auto">
+                <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">The cycle</p>
+                <div class="flex flex-wrap items-center gap-2 text-[13px] text-muted min-w-0">
+                    <span class="text-off-white">START</span>
+                    <span>&rarr;</span>
+                    <span>checkout main</span>
+                    <span>&rarr;</span>
+                    <span>pull</span>
+                    <span>&rarr;</span>
+                    <span>create branch</span>
+                    <span>&rarr;</span>
+                    <span>do work</span>
+                    <span>&rarr;</span>
+                    <span>commit</span>
+                    <span>&rarr;</span>
+                    <span>push</span>
+                    <span>&rarr;</span>
+                    <span>create PR</span>
+                    <span>&rarr;</span>
+                    <span>merge</span>
+                    <span>&rarr;</span>
+                    <span>delete branch</span>
+                    <span>&rarr;</span>
+                    <span class="text-off-white">START</span>
+                </div>
+            </div>
+
+            <!-- Commands reference -->
+            <div class="border border-border bg-surface px-6 py-8">
+                <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Key commands</p>
+                <div class="grid grid-cols-1 gap-4 text-[13px]">
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Switch to main</span>
+                        <code class="text-off-white">git checkout main</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Pull latest</span>
+                        <code class="text-off-white">git pull</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Create branch</span>
+                        <code class="text-off-white">git checkout -b feature/name</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Check status</span>
+                        <code class="text-off-white">git status</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Stage files</span>
+                        <code class="text-off-white">git add [files]</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Commit</span>
+                        <code class="text-off-white">git commit -m "feat: description"</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Push</span>
+                        <code class="text-off-white">git push -u origin branch-name</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Create PR</span>
+                        <code class="text-off-white">gh pr create</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">View diff</span>
+                        <code class="text-off-white">git diff</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">View log</span>
+                        <code class="text-off-white">git log --oneline -10</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Delete branch</span>
+                        <code class="text-off-white">git branch -d branch-name</code>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-1 md:gap-4">
+                        <span class="text-muted">Revert last commit</span>
+                        <code class="text-off-white">git revert HEAD</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 9: CTA ==================== -->
+    <section class="bg-off-white border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-20 md:py-[100px] text-center">
+            <h2 class="font-serif text-[clamp(32px,5vw,48px)] leading-[1.1] text-surface mb-6">
+                Built for operators who <em>build with AI</em>
+            </h2>
+            <p class="text-[16px] text-muted max-w-[520px] mx-auto mb-12">
+                I share frameworks, tools, and systems for using AI to build real businesses. No theory — just what works.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                <a href="https://www.linkedin.com/in/aliqureshi" target="_blank" rel="noopener noreferrer" class="inline-block bg-surface text-off-white px-8 py-4 text-[13px] uppercase tracking-[0.1em] font-mono transition-opacity duration-200 hover:opacity-70">
+                    Follow me on LinkedIn
+                </a>
+                <a href="https://leveragelab.beehiiv.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-surface text-off-white px-8 py-4 text-[13px] uppercase tracking-[0.1em] font-mono transition-opacity duration-200 hover:opacity-70">
+                    Subscribe to Leverage Lab
+                </a>
+            </div>
+            <p class="text-[13px] text-muted">Ali Qureshi — Founder, Adcrate</p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-border">
+        <div class="max-w-container mx-auto px-6 py-8 flex justify-between items-center">
+            <p class="text-[13px] text-muted">&copy; 2026 Ali Qureshi</p>
+            <a href="https://leveragelab.beehiiv.com" target="_blank" rel="noopener noreferrer" class="text-[13px] text-muted border-b border-muted pb-[1px] transition-all duration-200 hover:text-off-white hover:border-off-white hover:opacity-70">
+                Leverage Lab
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
