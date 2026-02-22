@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 7-Day Dad Bod Reset Kickstart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream': '#FAFAF7',
+                        'cream-dark': '#F0EFE9',
+                        'ink': '#1a1a1a',
+                        'ink-light': '#4a4a4a',
+                        'muted': '#7a7a7a',
+                        'accent': '#2D6A4F',
+                        'accent-dark': '#1B4332',
+                        'accent-light': '#40916C',
+                        'input-border': '#d4d4d0',
+                        'card-bg': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        'sans': ['DM Sans', 'system-ui', 'sans-serif'],
+                    },
+                    maxWidth: {
+                        'container': '1080px',
+                    },
+                    borderRadius: {
+                        'btn': '6px',
+                        'card': '8px',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #2D6A4F; color: #FAFAF7; }
+
+        @media print {
+            .page-break { page-break-before: always; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.2s; }
+        .hero-delay-3 { animation-delay: 0.35s; }
+        .hero-delay-4 { animation-delay: 0.5s; }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-cream text-ink font-sans text-base leading-relaxed antialiased">
+
+    <!-- ==================== COVER PAGE ==================== -->
+    <section class="min-h-screen flex items-center justify-center px-6 py-20">
+        <div class="max-w-[620px] w-full text-center">
+            <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-4 py-2 rounded-full mb-8 hero-animate">
+                A Guide for Busy Dads
+            </span>
+
+            <h1 class="text-[clamp(40px,8vw,72px)] font-bold leading-[1.08] tracking-tight text-ink mb-4 hero-animate hero-delay-1">
+                The 7-Day<br>Dad Bod Reset
+            </h1>
+
+            <p class="text-sm font-semibold uppercase tracking-[0.15em] text-accent mb-8 hero-animate hero-delay-2">Kickstart</p>
+
+            <p class="text-lg text-ink-light max-w-[520px] mx-auto leading-relaxed mb-12 hero-animate hero-delay-3">
+                A simple plan for busy dads who want to get back in shape — without the gym, without complicated diets, without the BS.
+            </p>
+
+            <div class="w-full h-px bg-input-border mb-8 hero-animate hero-delay-4"></div>
+            <p class="text-sm text-muted hero-animate hero-delay-4">By Arif [Placeholder]</p>
+        </div>
+    </section>
+
+    <!-- ==================== INTRODUCTION ==================== -->
+    <section class="bg-cream-dark px-6 py-24 md:py-32 page-break">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-5">Why This Exists</span>
+                <div class="max-w-[640px]">
+                    <p class="text-ink-light text-lg leading-relaxed mb-4">
+                        I'm 41. I'm a dad. And I'm in the best shape of my life.
+                    </p>
+                    <p class="text-ink-light text-lg leading-relaxed mb-4">
+                        Not because I have some secret — but because I stopped overcomplicating it. I stopped chasing the latest trend, stopped buying supplements I didn't need, stopped thinking I needed two hours in the gym to see results.
+                    </p>
+                    <p class="text-ink-light text-lg leading-relaxed mb-4">
+                        This 7-day plan is exactly how I'd start if I was starting over. Real food. 30 minutes a day. No BS.
+                    </p>
+                    <p class="text-ink-light text-lg leading-relaxed">
+                        If you follow it properly, you'll feel different by Day 4. By Day 7, you'll wonder why you ever made it harder than this.
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border my-16"></div>
+
+            <div class="fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-8">How to Use This Guide</span>
+                <div class="max-w-[640px] space-y-6">
+                    <div class="flex gap-5 items-start">
+                        <span class="text-[28px] font-bold text-accent leading-none shrink-0 mt-0.5">1</span>
+                        <p class="text-ink-light text-lg leading-relaxed">Follow each day as written. Don't skip ahead, don't modify. Trust the process for 7 days — then decide.</p>
+                    </div>
+                    <div class="flex gap-5 items-start">
+                        <span class="text-[28px] font-bold text-accent leading-none shrink-0 mt-0.5">2</span>
+                        <p class="text-ink-light text-lg leading-relaxed">30 minutes for the workout. That's it. No more. You're proving to yourself that consistency beats marathon sessions.</p>
+                    </div>
+                    <div class="flex gap-5 items-start">
+                        <span class="text-[28px] font-bold text-accent leading-none shrink-0 mt-0.5">3</span>
+                        <p class="text-ink-light text-lg leading-relaxed">Track everything on the habit tracker (last page). Consistency beats intensity. Every single time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MEAL PLANS ==================== -->
+    <section class="bg-cream px-6 py-24 md:py-32 page-break">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-3">Section 01</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Meal Plans</h2>
+            </div>
+
+            <!-- Day 1 -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 1</span>
+                    <span class="text-sm text-muted">— Keep It Simple</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">3 eggs scrambled, 2 slices sourdough toast, handful of spinach</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Chicken breast, white rice, steamed broccoli. Season however you want.</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Salmon fillet, sweet potato, green beans with garlic</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">Apple + handful of almonds</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 2 -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 2</span>
+                    <span class="text-sm text-muted">— Build the Habit</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">Greek yoghurt, handful of blueberries, drizzle of honey, 2 tablespoons oats</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Turkey mince lettuce wraps with diced tomato, cucumber, squeeze of lemon</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Lean beef stir-fry with peppers, onions, soy sauce, served over rice</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">2 boiled eggs, pinch of salt and pepper</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 3 -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 3</span>
+                    <span class="text-sm text-muted">— Find Your Rhythm</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">2-egg omelette with mushrooms, tomatoes, and a slice of sourdough</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Tinned tuna mixed with olive oil, lemon, red onion. Served on 2 rice cakes.</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Baked chicken thighs with roasted potatoes, carrots, and a side of peas</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">Banana + tablespoon of peanut butter</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 4 -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 4</span>
+                    <span class="text-sm text-muted">— Recovery Day</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">Porridge oats with sliced banana, cinnamon, and a drizzle of honey</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Leftover chicken thighs from yesterday, sliced on a mixed salad with olive oil dressing</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Prawn stir-fry with egg noodles, pak choi, garlic, soy sauce</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">Carrot sticks + hummus</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 5 -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 5</span>
+                    <span class="text-sm text-muted">— Push Through</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">3 scrambled eggs with smoked salmon on 1 slice of rye toast</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Chicken wrap — grilled chicken, lettuce, tomato, light mayo in a wholemeal tortilla</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Lamb mince kofta with rice, cucumber-yoghurt dip, and a simple side salad</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">Small handful of mixed nuts + a pear</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 6 -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 6</span>
+                    <span class="text-sm text-muted">— Almost There</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">Overnight oats — oats, yoghurt, milk, chia seeds, berries. Made the night before.</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Tuna steak (or tinned tuna), quinoa or rice, roasted courgette and peppers</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Homemade beef burger (no bun) with sweet potato wedges and coleslaw</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">Greek yoghurt + handful of walnuts</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 7 -->
+            <div class="fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 7</span>
+                    <span class="text-sm text-muted">— Finish Strong</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Breakfast</p>
+                        <p class="text-ink-light">Avocado on sourdough with 2 poached eggs, chilli flakes, squeeze of lemon</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Lunch</p>
+                        <p class="text-ink-light">Grilled chicken salad — mixed greens, cherry tomatoes, cucumber, feta, olive oil dressing</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Dinner</p>
+                        <p class="text-ink-light">Pan-fried sea bass, roasted Mediterranean veg, couscous</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Snack</p>
+                        <p class="text-ink-light">Dark chocolate (2 squares) + a handful of strawberries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WORKOUTS ==================== -->
+    <section class="bg-cream-dark px-6 py-24 md:py-32 page-break">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-3">Section 02</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink mb-4">Workouts</h2>
+                <p class="text-ink-light max-w-[520px]">
+                    30 minutes. No equipment. No gym. Rest 60-90 seconds between sets unless stated otherwise.
+                </p>
+            </div>
+
+            <!-- Day 1 Workout -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 1</span>
+                    <span class="text-sm text-muted">— Full Body Foundation</span>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card divide-y divide-input-border overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Push-ups</span>
+                        <span class="text-muted text-sm">3 x 15</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Bodyweight squats</span>
+                        <span class="text-muted text-sm">3 x 20</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Plank hold</span>
+                        <span class="text-muted text-sm">3 x 30 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Reverse lunges (each leg)</span>
+                        <span class="text-muted text-sm">3 x 12</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Mountain climbers</span>
+                        <span class="text-muted text-sm">3 x 20</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 2 Workout -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 2</span>
+                    <span class="text-sm text-muted">— Upper Body Focus</span>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card divide-y divide-input-border overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Diamond push-ups</span>
+                        <span class="text-muted text-sm">3 x 12</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Pike push-ups</span>
+                        <span class="text-muted text-sm">3 x 10</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Tricep dips (chair or step)</span>
+                        <span class="text-muted text-sm">3 x 15</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Superman holds</span>
+                        <span class="text-muted text-sm">3 x 20 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Plank shoulder taps</span>
+                        <span class="text-muted text-sm">3 x 16</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 3 Workout -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 3</span>
+                    <span class="text-sm text-muted">— Lower Body Focus</span>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card divide-y divide-input-border overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Jump squats</span>
+                        <span class="text-muted text-sm">3 x 15</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Walking lunges (each leg)</span>
+                        <span class="text-muted text-sm">3 x 12</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Glute bridges</span>
+                        <span class="text-muted text-sm">3 x 20</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Wall sit</span>
+                        <span class="text-muted text-sm">3 x 40 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Calf raises</span>
+                        <span class="text-muted text-sm">3 x 25</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 4 Workout -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 4</span>
+                    <span class="text-sm text-muted">— Active Recovery</span>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6">
+                    <p class="text-ink mb-4">No structured workout today. Your body needs to recover.</p>
+                    <div class="space-y-2 text-ink-light">
+                        <p>Go for a 30-minute walk. Outside. No treadmill.</p>
+                        <p>Stretch for 10 minutes when you get back — hamstrings, hip flexors, shoulders, chest.</p>
+                        <p>Hydrate properly. Eat on plan. Sleep well tonight.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 5 Workout -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 5</span>
+                    <span class="text-sm text-muted">— Full Body Strength</span>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card divide-y divide-input-border overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Wide push-ups</span>
+                        <span class="text-muted text-sm">4 x 15</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Bulgarian split squats (each leg)</span>
+                        <span class="text-muted text-sm">3 x 10</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Plank to push-up</span>
+                        <span class="text-muted text-sm">3 x 10</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Single-leg glute bridges (each leg)</span>
+                        <span class="text-muted text-sm">3 x 12</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Dead bugs</span>
+                        <span class="text-muted text-sm">3 x 16</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 6 Workout -->
+            <div class="mb-14 fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 6</span>
+                    <span class="text-sm text-muted">— HIIT Circuit</span>
+                </div>
+                <p class="text-ink-light mb-4">4 rounds. 40 seconds work, 20 seconds rest per exercise. 1 minute rest between rounds.</p>
+                <div class="bg-card-bg border border-input-border rounded-card divide-y divide-input-border overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Burpees</span>
+                        <span class="text-muted text-sm">40 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">High knees</span>
+                        <span class="text-muted text-sm">40 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Jump squats</span>
+                        <span class="text-muted text-sm">40 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Push-ups</span>
+                        <span class="text-muted text-sm">40 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Plank hold</span>
+                        <span class="text-muted text-sm">40 sec</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-14"></div>
+
+            <!-- Day 7 Workout -->
+            <div class="fade-up">
+                <div class="flex items-baseline gap-3 mb-6">
+                    <span class="text-xl font-bold text-accent">Day 7</span>
+                    <span class="text-sm text-muted">— Core + Mobility</span>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card divide-y divide-input-border overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Bicycle crunches</span>
+                        <span class="text-muted text-sm">3 x 20</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Side plank (each side)</span>
+                        <span class="text-muted text-sm">3 x 30 sec</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Leg raises</span>
+                        <span class="text-muted text-sm">3 x 15</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">World's greatest stretch (each side)</span>
+                        <span class="text-muted text-sm">3 x 8</span>
+                    </div>
+                    <div class="flex justify-between items-center px-6 py-4">
+                        <span class="text-ink">Cat-cow stretches</span>
+                        <span class="text-muted text-sm">3 x 10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SHOPPING LIST ==================== -->
+    <section class="bg-cream px-6 py-24 md:py-32 page-break">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-3">Section 03</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink mb-4">Your Shopping List</h2>
+                <p class="text-ink-light max-w-[520px]">
+                    One shop. One week. Everything you need and nothing you don't.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 fade-up">
+                <!-- Proteins -->
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-5">Proteins</p>
+                    <div class="space-y-2.5 text-ink-light">
+                        <p>Chicken breasts (1 kg)</p>
+                        <p>Chicken thighs, bone-in (6 pieces)</p>
+                        <p>Salmon fillets (2)</p>
+                        <p>Sea bass fillets (2)</p>
+                        <p>Smoked salmon (1 pack)</p>
+                        <p>Tinned tuna (2 tins)</p>
+                        <p>Tuna steak (1)</p>
+                        <p>Lean beef mince (500g)</p>
+                        <p>Lamb mince (250g)</p>
+                        <p>Turkey mince (300g)</p>
+                        <p>Prawns (200g)</p>
+                        <p>Eggs (18 — free range)</p>
+                        <p>Greek yoghurt (500g tub)</p>
+                        <p>Feta cheese (1 block)</p>
+                    </div>
+                </div>
+
+                <!-- Vegetables -->
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-5">Vegetables</p>
+                    <div class="space-y-2.5 text-ink-light">
+                        <p>Spinach (1 bag)</p>
+                        <p>Broccoli (2 heads)</p>
+                        <p>Green beans (1 pack)</p>
+                        <p>Peas (frozen, 1 bag)</p>
+                        <p>Mixed peppers (3)</p>
+                        <p>Onions (4)</p>
+                        <p>Red onion (2)</p>
+                        <p>Garlic (1 bulb)</p>
+                        <p>Tomatoes (6)</p>
+                        <p>Cherry tomatoes (1 punnet)</p>
+                        <p>Cucumber (2)</p>
+                        <p>Lettuce / mixed salad leaves</p>
+                        <p>Mushrooms (1 pack)</p>
+                        <p>Carrots (1 bag)</p>
+                        <p>Courgettes (2)</p>
+                        <p>Pak choi (1 pack)</p>
+                        <p>Avocado (2)</p>
+                    </div>
+                </div>
+
+                <!-- Carbs -->
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-5">Carbs</p>
+                    <div class="space-y-2.5 text-ink-light">
+                        <p>White rice (1 kg bag)</p>
+                        <p>Sourdough bread (1 loaf)</p>
+                        <p>Rye bread (1 small loaf)</p>
+                        <p>Sweet potatoes (4)</p>
+                        <p>White potatoes (1 kg)</p>
+                        <p>Porridge oats (500g)</p>
+                        <p>Egg noodles (1 pack)</p>
+                        <p>Couscous (1 pack)</p>
+                        <p>Wholemeal tortilla wraps (pack of 4)</p>
+                        <p>Rice cakes (1 pack)</p>
+                        <p>Quinoa (optional swap for rice)</p>
+                    </div>
+                </div>
+
+                <!-- Fruits & Snacks -->
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-5">Fruits + Snacks</p>
+                    <div class="space-y-2.5 text-ink-light">
+                        <p>Apples (4)</p>
+                        <p>Bananas (4)</p>
+                        <p>Pears (2)</p>
+                        <p>Blueberries (1 punnet)</p>
+                        <p>Strawberries (1 punnet)</p>
+                        <p>Lemons (3)</p>
+                        <p>Almonds (1 bag)</p>
+                        <p>Walnuts (1 small bag)</p>
+                        <p>Mixed nuts (1 bag)</p>
+                        <p>Dark chocolate, 70%+ (1 bar)</p>
+                    </div>
+                </div>
+
+                <!-- Pantry Staples -->
+                <div class="md:col-span-2">
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-5">Pantry Staples</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 text-ink-light">
+                        <p>Olive oil</p>
+                        <p>Soy sauce</p>
+                        <p>Honey</p>
+                        <p>Peanut butter</p>
+                        <p>Hummus (1 tub)</p>
+                        <p>Light mayonnaise</p>
+                        <p>Chia seeds</p>
+                        <p>Cinnamon</p>
+                        <p>Chilli flakes</p>
+                        <p>Salt + pepper</p>
+                        <p>Mixed herbs/spices</p>
+                        <p>Milk (semi-skimmed)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DAILY TRACKER ==================== -->
+    <section class="bg-cream-dark px-6 py-24 md:py-32 page-break">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-3">Section 04</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink mb-4">Daily Tracker</h2>
+                <p class="text-ink-light max-w-[520px]">
+                    Print this page. Stick it on the fridge. Fill it in every night before bed.
+                </p>
+            </div>
+
+            <div class="overflow-x-auto fade-up">
+                <table class="w-full bg-card-bg border border-input-border rounded-card text-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-left p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-muted w-[180px]"></th>
+                            <th class="p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Mon</th>
+                            <th class="p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Tue</th>
+                            <th class="p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Wed</th>
+                            <th class="p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Thu</th>
+                            <th class="p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Fri</th>
+                            <th class="p-4 border-b border-r border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Sat</th>
+                            <th class="p-4 border-b border-input-border text-xs font-semibold uppercase tracking-[0.12em] text-accent text-center">Sun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-4 border-b border-r border-input-border text-ink font-medium">Workout completed</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-input-border text-center text-muted text-lg">&square;</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 border-b border-r border-input-border text-ink font-medium">Meals on plan</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-input-border text-center text-muted text-lg">&square;</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 border-b border-r border-input-border text-ink font-medium">Water (8+ glasses)</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-input-border text-center text-muted text-lg">&square;</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 border-b border-r border-input-border text-ink font-medium">Sleep (7+ hours)</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-r border-input-border text-center text-muted text-lg">&square;</td>
+                            <td class="p-4 border-b border-input-border text-center text-muted text-lg">&square;</td>
+                        </tr>
+                        <tr class="bg-cream">
+                            <td class="p-4 border-r border-input-border text-accent text-xs font-semibold uppercase tracking-[0.12em]">Daily Score</td>
+                            <td class="p-4 border-r border-input-border text-center text-muted">/ 4</td>
+                            <td class="p-4 border-r border-input-border text-center text-muted">/ 4</td>
+                            <td class="p-4 border-r border-input-border text-center text-muted">/ 4</td>
+                            <td class="p-4 border-r border-input-border text-center text-muted">/ 4</td>
+                            <td class="p-4 border-r border-input-border text-center text-muted">/ 4</td>
+                            <td class="p-4 border-r border-input-border text-center text-muted">/ 4</td>
+                            <td class="p-4 border-input-border text-center text-muted">/ 4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-muted text-sm mt-6 italic fade-up">
+                Aim for 24/28 or higher. If you hit that, you're ready for the full programme.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== WHAT'S NEXT ==================== -->
+    <section class="bg-cream px-6 py-24 md:py-32 page-break">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-3">What Comes Next</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Ready for More?</h2>
+            </div>
+
+            <div class="max-w-[640px] mb-16 fade-up">
+                <p class="text-ink-light text-lg leading-relaxed mb-4">
+                    If this 7-day kickstart worked for you, imagine what 90 days of structured programming, daily accountability, and a community of dads doing the same thing could do.
+                </p>
+                <p class="text-ink-light text-lg leading-relaxed">
+                    This guide gave you the taste. The full programme gives you the transformation.
+                </p>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-16"></div>
+
+            <div class="mb-16 fade-up">
+                <h3 class="text-2xl font-bold text-ink mb-1">The Dad Bod Reset</h3>
+                <p class="text-sm text-muted uppercase tracking-[0.12em] mb-10">The Full Programme</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Training</p>
+                        <p class="text-ink-light">12-week progressive training programme delivered via Zenfit. Adapts to your level.</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Nutrition</p>
+                        <p class="text-ink-light">Personalised meal plans with swap options. No rigid diets — real food that fits your life.</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Coaching</p>
+                        <p class="text-ink-light">Weekly live coaching calls with Arif. Form checks, Q&amp;A, programme adjustments.</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-6">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Community</p>
+                        <p class="text-ink-light">Private WhatsApp group of dads on the same journey. Daily accountability and progress tracking.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-16"></div>
+
+            <!-- Pricing -->
+            <div class="mb-16 fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card-bg border-2 border-accent rounded-card p-8">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-4">The 90-Day Program</p>
+                        <p class="text-[48px] font-bold text-ink leading-none mb-2">&pound;749</p>
+                        <p class="text-muted text-sm">for the full 3-month transformation</p>
+                    </div>
+                    <div class="bg-card-bg border border-input-border rounded-card p-8">
+                        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted mb-4">Rolling Monthly</p>
+                        <p class="text-[48px] font-bold text-ink leading-none mb-2">&pound;250</p>
+                        <p class="text-muted text-sm">per month after completing the program</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-px bg-input-border mb-16"></div>
+
+            <!-- CTA -->
+            <div class="text-center fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-8">Get Started</span>
+                <p class="text-ink-light text-lg leading-relaxed mb-2">
+                    DM Arif on Instagram <span class="text-accent font-semibold">@[placeholder]</span>
+                </p>
+                <p class="text-ink-light text-lg leading-relaxed mb-12">
+                    or visit <span class="text-accent font-semibold">[placeholder link]</span>
+                </p>
+                <div class="w-full h-px bg-input-border mb-12"></div>
+                <p class="text-xl md:text-2xl font-semibold text-ink max-w-[480px] mx-auto italic">
+                    Your kids deserve a dad who can keep up.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-12 px-6 border-t border-input-border">
+        <div class="max-w-container mx-auto text-center">
+            <p class="text-sm text-muted">&copy; 2026 Arif [Placeholder] &middot; The Dad Bod Reset</p>
+        </div>
+    </footer>
+
+    <!-- Scroll-triggered fade-up animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+            );
+
+            document.querySelectorAll('.fade-up').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>
