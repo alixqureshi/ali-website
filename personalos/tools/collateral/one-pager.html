@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BRAND_NAME}} — One Pager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-accent: #1a1a1a;
+      --text-primary: #f5f5f0;
+      --text-secondary: #8a8a8a;
+      --text-muted: #555555;
+      --accent: #c9a227;
+      --accent-dim: rgba(201, 162, 39, 0.15);
+      --border: #2a2a2a;
+      --font-heading: 'Instrument Serif', Georgia, serif;
+      --font-body: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 11px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: var(--bg-primary);
+      padding: 44px 48px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .header-left h1 {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .header-left .tagline {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .header-right .contact-line {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-right .contact-line.highlight {
+      color: var(--accent);
+    }
+
+    /* Proof Points Row */
+    .proof-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .proof-item {
+      padding: 22px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .proof-item:last-child {
+      border-right: none;
+    }
+
+    .proof-item .value {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .proof-item .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-secondary);
+    }
+
+    /* Section Labels */
+    .section-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Positioning Statement */
+    .positioning {
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .positioning p {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      max-width: 580px;
+    }
+
+    /* Services Grid */
+    .services {
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .service-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .service-card .icon {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 10px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Mini Case Study */
+    .case-study-mini {
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .case-study-mini .cs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .case-study-mini .cs-client {
+      font-family: var(--font-heading);
+      font-size: 16px;
+    }
+
+    .case-study-mini .cs-metrics {
+      display: flex;
+      gap: 24px;
+    }
+
+    .case-study-mini .cs-metric {
+      text-align: right;
+    }
+
+    .case-study-mini .cs-metric .value {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .case-study-mini .cs-metric .label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    .case-study-mini .cs-description {
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Client Logos */
+    .logos-section {
+      margin-bottom: 24px;
+      flex-shrink: 0;
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo-placeholder {
+      flex: 1;
+      height: 36px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* CTA Footer */
+    .cta-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .cta-footer .cta-left h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .cta-footer .cta-left p {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .cta-footer .cta-right {
+      text-align: right;
+    }
+
+    .cta-footer .cta-right .cta-button {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 10px 24px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+
+    .cta-footer .cta-right .contact-info {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Print */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .page {
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <h1>{{BRAND_NAME}}</h1>
+        <div class="tagline">{{TAGLINE}}</div>
+      </div>
+      <div class="header-right">
+        <div class="contact-line highlight">{{CONTACT_EMAIL}}</div>
+        <div class="contact-line">{{CONTACT_URL}}</div>
+      </div>
+    </div>
+
+    <!-- Proof Points -->
+    <div class="proof-row">
+      <div class="proof-item">
+        <div class="value">{{PROOF_1_VALUE}}</div>
+        <div class="label">{{PROOF_1_LABEL}}</div>
+      </div>
+      <div class="proof-item">
+        <div class="value">{{PROOF_2_VALUE}}</div>
+        <div class="label">{{PROOF_2_LABEL}}</div>
+      </div>
+      <div class="proof-item">
+        <div class="value">{{PROOF_3_VALUE}}</div>
+        <div class="label">{{PROOF_3_LABEL}}</div>
+      </div>
+    </div>
+
+    <!-- Positioning -->
+    <div class="positioning">
+      <div class="section-label">What We Do</div>
+      <p>{{POSITIONING_STATEMENT}}</p>
+    </div>
+
+    <!-- Services -->
+    <div class="services">
+      <div class="section-label">Services</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">{{SERVICE_1_ICON}}</div>
+          <h3>{{SERVICE_1_TITLE}}</h3>
+          <p>{{SERVICE_1_DESCRIPTION}}</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">{{SERVICE_2_ICON}}</div>
+          <h3>{{SERVICE_2_TITLE}}</h3>
+          <p>{{SERVICE_2_DESCRIPTION}}</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">{{SERVICE_3_ICON}}</div>
+          <h3>{{SERVICE_3_TITLE}}</h3>
+          <p>{{SERVICE_3_DESCRIPTION}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-it-works">
+      <div class="section-label">How It Works</div>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>{{STEP_1_TITLE}}</h4>
+            <p>{{STEP_1_DESCRIPTION}}</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>{{STEP_2_TITLE}}</h4>
+            <p>{{STEP_2_DESCRIPTION}}</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>{{STEP_3_TITLE}}</h4>
+            <p>{{STEP_3_DESCRIPTION}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini Case Study -->
+    <div class="case-study-mini">
+      <div class="cs-header">
+        <div class="cs-client">{{CS_CLIENT_NAME}}</div>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <div class="value">{{CS_METRIC_1}}</div>
+            <div class="label">{{CS_METRIC_1_LABEL}}</div>
+          </div>
+          <div class="cs-metric">
+            <div class="value">{{CS_METRIC_2}}</div>
+            <div class="label">{{CS_METRIC_2_LABEL}}</div>
+          </div>
+          <div class="cs-metric">
+            <div class="value">{{CS_METRIC_3}}</div>
+            <div class="label">{{CS_METRIC_3_LABEL}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-description">{{CS_DESCRIPTION}}</div>
+    </div>
+
+    <!-- Client Logos -->
+    <div class="logos-section">
+      <div class="section-label">Trusted By</div>
+      <div class="logos-row">
+        <div class="logo-placeholder">{{LOGO_1}}</div>
+        <div class="logo-placeholder">{{LOGO_2}}</div>
+        <div class="logo-placeholder">{{LOGO_3}}</div>
+        <div class="logo-placeholder">{{LOGO_4}}</div>
+        <div class="logo-placeholder">{{LOGO_5}}</div>
+        <div class="logo-placeholder">{{LOGO_6}}</div>
+      </div>
+    </div>
+
+    <!-- CTA Footer -->
+    <div class="cta-footer">
+      <div class="cta-left">
+        <h3>{{CTA_HEADLINE}}</h3>
+        <p>{{CTA_SUBTEXT}}</p>
+      </div>
+      <div class="cta-right">
+        <a href="#" class="cta-button">{{CTA_BUTTON_TEXT}}</a>
+        <div class="contact-info">{{CONTACT_PHONE}} | {{CONTACT_EMAIL}}</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

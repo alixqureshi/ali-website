@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BRAND_NAME}} — Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-accent: #1a1a1a;
+      --text-primary: #f5f5f0;
+      --text-secondary: #8a8a8a;
+      --text-muted: #555555;
+      --accent: #c9a227;
+      --accent-dim: rgba(201, 162, 39, 0.15);
+      --border: #2a2a2a;
+      --font-heading: 'Instrument Serif', Georgia, serif;
+      --font-body: 'JetBrains Mono', monospace;
+      --slide-width: 1280px;
+      --slide-height: 720px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    /* Slide Container */
+    .deck {
+      position: relative;
+      width: var(--slide-width);
+      height: var(--slide-height);
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      border: 1px solid var(--border);
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Typography */
+    .slide h1 {
+      font-family: var(--font-heading);
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .slide h2 {
+      font-family: var(--font-heading);
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .slide h3 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .slide p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 800px;
+    }
+
+    .slide .subtitle {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .slide .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    /* Slide Number */
+    .slide-number {
+      position: absolute;
+      bottom: 32px;
+      right: 40px;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* Accent line */
+    .accent-line {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 32px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .card .number {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* Metric boxes */
+    .metric {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .metric .value {
+      font-family: var(--font-heading);
+      font-size: 52px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric .label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* Step indicators */
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    /* Comparison table */
+    .comparison {
+      width: 100%;
+      margin-top: 24px;
+      border-collapse: collapse;
+    }
+
+    .comparison th,
+    .comparison td {
+      text-align: left;
+      padding: 16px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison th {
+      color: var(--text-muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+    }
+
+    .comparison td {
+      color: var(--text-secondary);
+    }
+
+    .comparison .highlight td {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Quote */
+    .quote {
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
+      margin-top: 24px;
+    }
+
+    .quote p {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .quote .attribution {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-style: normal;
+      margin-top: 12px;
+    }
+
+    /* Pricing */
+    .pricing-tier {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .pricing-tier.recommended {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .pricing-tier.recommended::before {
+      content: 'RECOMMENDED';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--bg-primary);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 2px 12px;
+    }
+
+    .pricing-tier .price {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      color: var(--text-primary);
+      margin: 16px 0;
+    }
+
+    .pricing-tier .price span {
+      font-size: 16px;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+    }
+
+    .pricing-tier ul {
+      list-style: none;
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .pricing-tier ul li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-tier ul li::before {
+      content: '+';
+      color: var(--accent);
+      margin-right: 8px;
+    }
+
+    /* Client logos */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      margin-top: 32px;
+    }
+
+    .logo-placeholder {
+      width: 120px;
+      height: 48px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Steps list */
+    .steps-list {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .steps-list li .step-num {
+      color: var(--accent);
+      font-weight: 500;
+      min-width: 24px;
+    }
+
+    /* Cover slide special styling */
+    .slide.cover {
+      justify-content: flex-end;
+      padding-bottom: 100px;
+    }
+
+    .slide.cover h1 {
+      font-size: 72px;
+      margin-bottom: 16px;
+    }
+
+    .slide.cover .prepared-for {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(20, 20, 20, 0.9);
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav button {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .nav button:hover {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
+    .nav .progress {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* Team */
+    .team-member {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .team-avatar {
+      width: 64px;
+      height: 64px;
+      background: var(--bg-accent);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .team-info h3 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .team-info .role {
+      font-size: 12px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .team-info p {
+      font-size: 13px;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        overflow: visible;
+        height: auto;
+        background: white;
+      }
+
+      .nav {
+        display: none !important;
+      }
+
+      .deck {
+        width: 100%;
+        height: auto;
+      }
+
+      .slide {
+        position: relative;
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: 100%;
+        height: 100vh;
+        page-break-after: always;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+      }
+    }
+
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- Slide 1: Cover -->
+  <div class="slide cover active" data-slide="1">
+    <div class="accent-line"></div>
+    <h1>{{BRAND_NAME}}</h1>
+    <p>{{TAGLINE}}</p>
+    <div class="prepared-for">Prepared for {{CLIENT_NAME}} &mdash; {{DATE}}</div>
+    <div class="slide-number">01</div>
+  </div>
+
+  <!-- Slide 2: The Problem -->
+  <div class="slide" data-slide="2">
+    <div class="subtitle">The Problem</div>
+    <h2>{{PROBLEM_HEADLINE}}</h2>
+    <p>{{PROBLEM_DESCRIPTION}}</p>
+    <div class="grid-3" style="margin-top: 48px;">
+      <div class="metric">
+        <div class="value">{{PROBLEM_STAT_1}}</div>
+        <div class="label">{{PROBLEM_STAT_1_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{PROBLEM_STAT_2}}</div>
+        <div class="label">{{PROBLEM_STAT_2_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{PROBLEM_STAT_3}}</div>
+        <div class="label">{{PROBLEM_STAT_3_LABEL}}</div>
+      </div>
+    </div>
+    <div class="slide-number">02</div>
+  </div>
+
+  <!-- Slide 3: Cost of Inaction -->
+  <div class="slide" data-slide="3">
+    <div class="subtitle">The Cost of Inaction</div>
+    <h2>What happens if you don't fix this?</h2>
+    <div class="grid-2" style="margin-top: 32px;">
+      <div class="card">
+        <div class="number">{{COST_METRIC_1}}</div>
+        <h3>{{COST_TITLE_1}}</h3>
+        <p>{{COST_DESCRIPTION_1}}</p>
+      </div>
+      <div class="card">
+        <div class="number">{{COST_METRIC_2}}</div>
+        <h3>{{COST_TITLE_2}}</h3>
+        <p>{{COST_DESCRIPTION_2}}</p>
+      </div>
+    </div>
+    <div class="slide-number">03</div>
+  </div>
+
+  <!-- Slide 4: Current Solutions -->
+  <div class="slide" data-slide="4">
+    <div class="subtitle">Current Landscape</div>
+    <h2>Why existing solutions fall short</h2>
+    <table class="comparison">
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Pros</th>
+          <th>Limitations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ALT_1_NAME}}</td>
+          <td>{{ALT_1_PROS}}</td>
+          <td>{{ALT_1_CONS}}</td>
+        </tr>
+        <tr>
+          <td>{{ALT_2_NAME}}</td>
+          <td>{{ALT_2_PROS}}</td>
+          <td>{{ALT_2_CONS}}</td>
+        </tr>
+        <tr>
+          <td>{{ALT_3_NAME}}</td>
+          <td>{{ALT_3_PROS}}</td>
+          <td>{{ALT_3_CONS}}</td>
+        </tr>
+        <tr class="highlight">
+          <td>{{BRAND_NAME}}</td>
+          <td>{{BRAND_PROS}}</td>
+          <td>{{BRAND_CONS}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="slide-number">04</div>
+  </div>
+
+  <!-- Slide 5: Your Solution -->
+  <div class="slide" data-slide="5">
+    <div class="subtitle">Our Approach</div>
+    <h2>{{SOLUTION_HEADLINE}}</h2>
+    <p style="margin-top: 16px;">{{SOLUTION_DESCRIPTION}}</p>
+    <div class="grid-3" style="margin-top: 48px;">
+      <div class="metric">
+        <div class="value">{{PROOF_STAT_1}}</div>
+        <div class="label">{{PROOF_STAT_1_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{PROOF_STAT_2}}</div>
+        <div class="label">{{PROOF_STAT_2_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{PROOF_STAT_3}}</div>
+        <div class="label">{{PROOF_STAT_3_LABEL}}</div>
+      </div>
+    </div>
+    <div class="slide-number">05</div>
+  </div>
+
+  <!-- Slide 6: How It Works -->
+  <div class="slide" data-slide="6">
+    <div class="subtitle">How It Works</div>
+    <h2>Three phases to results</h2>
+    <div class="grid-3" style="margin-top: 40px;">
+      <div class="card">
+        <div class="step-number">01</div>
+        <h3>{{PHASE_1_TITLE}}</h3>
+        <p>{{PHASE_1_DESCRIPTION}}</p>
+        <div class="label" style="margin-top: 16px;">{{PHASE_1_TIMELINE}}</div>
+      </div>
+      <div class="card">
+        <div class="step-number">02</div>
+        <h3>{{PHASE_2_TITLE}}</h3>
+        <p>{{PHASE_2_DESCRIPTION}}</p>
+        <div class="label" style="margin-top: 16px;">{{PHASE_2_TIMELINE}}</div>
+      </div>
+      <div class="card">
+        <div class="step-number">03</div>
+        <h3>{{PHASE_3_TITLE}}</h3>
+        <p>{{PHASE_3_DESCRIPTION}}</p>
+        <div class="label" style="margin-top: 16px;">{{PHASE_3_TIMELINE}}</div>
+      </div>
+    </div>
+    <div class="slide-number">06</div>
+  </div>
+
+  <!-- Slide 7: Case Study 1 -->
+  <div class="slide" data-slide="7">
+    <div class="subtitle">Case Study</div>
+    <h2>{{CASE_1_CLIENT}}</h2>
+    <p>{{CASE_1_CHALLENGE}}</p>
+    <div class="grid-4" style="margin-top: 40px;">
+      <div class="metric">
+        <div class="value">{{CASE_1_METRIC_1}}</div>
+        <div class="label">{{CASE_1_METRIC_1_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{CASE_1_METRIC_2}}</div>
+        <div class="label">{{CASE_1_METRIC_2_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{CASE_1_METRIC_3}}</div>
+        <div class="label">{{CASE_1_METRIC_3_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{CASE_1_METRIC_4}}</div>
+        <div class="label">{{CASE_1_METRIC_4_LABEL}}</div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top: 32px;">
+      <p>"{{CASE_1_QUOTE}}"</p>
+      <div class="attribution">&mdash; {{CASE_1_QUOTE_ATTRIBUTION}}</div>
+    </div>
+    <div class="slide-number">07</div>
+  </div>
+
+  <!-- Slide 8: Case Study 2 -->
+  <div class="slide" data-slide="8">
+    <div class="subtitle">Case Study</div>
+    <h2>{{CASE_2_CLIENT}}</h2>
+    <p>{{CASE_2_CHALLENGE}}</p>
+    <div class="grid-4" style="margin-top: 40px;">
+      <div class="metric">
+        <div class="value">{{CASE_2_METRIC_1}}</div>
+        <div class="label">{{CASE_2_METRIC_1_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{CASE_2_METRIC_2}}</div>
+        <div class="label">{{CASE_2_METRIC_2_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{CASE_2_METRIC_3}}</div>
+        <div class="label">{{CASE_2_METRIC_3_LABEL}}</div>
+      </div>
+      <div class="metric">
+        <div class="value">{{CASE_2_METRIC_4}}</div>
+        <div class="label">{{CASE_2_METRIC_4_LABEL}}</div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top: 32px;">
+      <p>"{{CASE_2_QUOTE}}"</p>
+      <div class="attribution">&mdash; {{CASE_2_QUOTE_ATTRIBUTION}}</div>
+    </div>
+    <div class="slide-number">08</div>
+  </div>
+
+  <!-- Slide 9: What's Included -->
+  <div class="slide" data-slide="9">
+    <div class="subtitle">What You Get</div>
+    <h2>What's included</h2>
+    <div class="grid-2" style="margin-top: 32px;">
+      <div>
+        <ul class="steps-list">
+          <li><span class="step-num">+</span> {{DELIVERABLE_1}}</li>
+          <li><span class="step-num">+</span> {{DELIVERABLE_2}}</li>
+          <li><span class="step-num">+</span> {{DELIVERABLE_3}}</li>
+          <li><span class="step-num">+</span> {{DELIVERABLE_4}}</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="steps-list">
+          <li><span class="step-num">+</span> {{DELIVERABLE_5}}</li>
+          <li><span class="step-num">+</span> {{DELIVERABLE_6}}</li>
+          <li><span class="step-num">+</span> {{DELIVERABLE_7}}</li>
+          <li><span class="step-num">+</span> {{DELIVERABLE_8}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-number">09</div>
+  </div>
+
+  <!-- Slide 10: Who We Work With -->
+  <div class="slide" data-slide="10">
+    <div class="subtitle">Ideal Fit</div>
+    <h2>Who we work with</h2>
+    <p style="margin-bottom: 32px;">{{IDEAL_CLIENT_DESCRIPTION}}</p>
+    <div class="logo-row">
+      <div class="logo-placeholder">{{LOGO_1}}</div>
+      <div class="logo-placeholder">{{LOGO_2}}</div>
+      <div class="logo-placeholder">{{LOGO_3}}</div>
+      <div class="logo-placeholder">{{LOGO_4}}</div>
+      <div class="logo-placeholder">{{LOGO_5}}</div>
+      <div class="logo-placeholder">{{LOGO_6}}</div>
+    </div>
+    <div class="slide-number">10</div>
+  </div>
+
+  <!-- Slide 11: The Team -->
+  <div class="slide" data-slide="11">
+    <div class="subtitle">Your Team</div>
+    <h2>Who you'll work with</h2>
+    <div class="grid-2" style="margin-top: 32px;">
+      <div class="team-member">
+        <div class="team-avatar">Photo</div>
+        <div class="team-info">
+          <h3>{{TEAM_1_NAME}}</h3>
+          <div class="role">{{TEAM_1_ROLE}}</div>
+          <p>{{TEAM_1_BIO}}</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">Photo</div>
+        <div class="team-info">
+          <h3>{{TEAM_2_NAME}}</h3>
+          <div class="role">{{TEAM_2_ROLE}}</div>
+          <p>{{TEAM_2_BIO}}</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">Photo</div>
+        <div class="team-info">
+          <h3>{{TEAM_3_NAME}}</h3>
+          <div class="role">{{TEAM_3_ROLE}}</div>
+          <p>{{TEAM_3_BIO}}</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">Photo</div>
+        <div class="team-info">
+          <h3>{{TEAM_4_NAME}}</h3>
+          <div class="role">{{TEAM_4_ROLE}}</div>
+          <p>{{TEAM_4_BIO}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">11</div>
+  </div>
+
+  <!-- Slide 12: Investment -->
+  <div class="slide" data-slide="12">
+    <div class="subtitle">Investment</div>
+    <h2>Pricing</h2>
+    <div class="grid-3" style="margin-top: 32px;">
+      <div class="pricing-tier">
+        <div class="label">{{TIER_1_NAME}}</div>
+        <div class="price">{{TIER_1_PRICE}}<span>/mo</span></div>
+        <ul>
+          <li>{{TIER_1_FEATURE_1}}</li>
+          <li>{{TIER_1_FEATURE_2}}</li>
+          <li>{{TIER_1_FEATURE_3}}</li>
+          <li>{{TIER_1_FEATURE_4}}</li>
+        </ul>
+      </div>
+      <div class="pricing-tier recommended">
+        <div class="label">{{TIER_2_NAME}}</div>
+        <div class="price">{{TIER_2_PRICE}}<span>/mo</span></div>
+        <ul>
+          <li>{{TIER_2_FEATURE_1}}</li>
+          <li>{{TIER_2_FEATURE_2}}</li>
+          <li>{{TIER_2_FEATURE_3}}</li>
+          <li>{{TIER_2_FEATURE_4}}</li>
+          <li>{{TIER_2_FEATURE_5}}</li>
+        </ul>
+      </div>
+      <div class="pricing-tier">
+        <div class="label">{{TIER_3_NAME}}</div>
+        <div class="price">{{TIER_3_PRICE}}<span>/mo</span></div>
+        <ul>
+          <li>{{TIER_3_FEATURE_1}}</li>
+          <li>{{TIER_3_FEATURE_2}}</li>
+          <li>{{TIER_3_FEATURE_3}}</li>
+          <li>{{TIER_3_FEATURE_4}}</li>
+          <li>{{TIER_3_FEATURE_5}}</li>
+          <li>{{TIER_3_FEATURE_6}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-number">12</div>
+  </div>
+
+  <!-- Slide 13: Next Steps -->
+  <div class="slide" data-slide="13">
+    <div class="subtitle">Getting Started</div>
+    <h2>Next steps</h2>
+    <ul class="steps-list" style="max-width: 700px;">
+      <li><span class="step-num">01</span> {{NEXT_STEP_1}}</li>
+      <li><span class="step-num">02</span> {{NEXT_STEP_2}}</li>
+      <li><span class="step-num">03</span> {{NEXT_STEP_3}}</li>
+      <li><span class="step-num">04</span> {{NEXT_STEP_4}}</li>
+    </ul>
+    <div class="slide-number">13</div>
+  </div>
+
+  <!-- Slide 14: Q&A / Contact -->
+  <div class="slide" data-slide="14" style="text-align: center; align-items: center;">
+    <div class="accent-line" style="margin: 0 auto 32px;"></div>
+    <h1 style="font-size: 64px;">Questions?</h1>
+    <p style="margin-top: 24px; text-align: center;">{{CONTACT_NAME}}</p>
+    <p style="text-align: center;">{{CONTACT_EMAIL}}</p>
+    <p style="text-align: center; color: var(--accent);">{{CONTACT_URL}}</p>
+    <div class="slide-number">14</div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button onclick="prevSlide()">&larr;</button>
+  <div class="progress"><span id="current">1</span> / <span id="total">14</span></div>
+  <button onclick="nextSlide()">&rarr;</button>
+</div>
+
+<script>
+  let currentSlide = 1;
+  const totalSlides = document.querySelectorAll('.slide').length;
+
+  document.getElementById('total').textContent = totalSlides;
+
+  function showSlide(n) {
+    if (n < 1 || n > totalSlides) return;
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+    currentSlide = n;
+    document.getElementById('current').textContent = n;
+  }
+
+  function nextSlide() { showSlide(currentSlide + 1); }
+  function prevSlide() { showSlide(currentSlide - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      nextSlide();
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      prevSlide();
+    }
+  });
+
+  // Click to advance (left third = back, right two-thirds = forward)
+  document.querySelector('.deck').addEventListener('click', (e) => {
+    if (e.target.closest('.nav')) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    if (x < rect.width / 3) {
+      prevSlide();
+    } else {
+      nextSlide();
+    }
+  });
+</script>
+
+</body>
+</html>

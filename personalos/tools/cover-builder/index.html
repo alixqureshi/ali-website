@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cover Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      color: #f5f5f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px;
+    }
+
+    ::selection {
+      background: #f5f5f0;
+      color: #0a0a0a;
+    }
+
+    /* Controls */
+    .controls {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #6b6b6b;
+    }
+
+    input[type="text"],
+    textarea {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      color: #f5f5f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #f5f5f0;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle input {
+      display: none;
+    }
+
+    .toggle .box {
+      width: 16px;
+      height: 16px;
+      border: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .toggle input:checked + .box {
+      border-color: #f5f5f0;
+      background: #f5f5f0;
+    }
+
+    .toggle input:checked + .box::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #0a0a0a;
+    }
+
+    .toggle span:last-child {
+      font-size: 13px;
+      color: #6b6b6b;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #4a4a4a;
+      margin-top: 2px;
+    }
+
+    .divider {
+      grid-column: 1 / -1;
+      height: 1px;
+      background: #1a1a1a;
+    }
+
+    /* Preview wrapper */
+    .preview-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #6b6b6b;
+      margin-bottom: 16px;
+    }
+
+    /* ========== COVER ========== */
+    .cover {
+      width: 1200px;
+      height: 480px;
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .cover .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245, 245, 240, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 245, 240, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .cover .top-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #f5f5f0;
+    }
+
+    .cover .bottom-border {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #f5f5f0;
+    }
+
+    .cover .content {
+      position: relative;
+      z-index: 2;
+      padding: 0 80px;
+      width: 100%;
+    }
+
+    .cover .cover-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #6b6b6b;
+      margin-bottom: 24px;
+    }
+
+    .cover .headline {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #f5f5f0;
+      margin-bottom: 28px;
+      max-width: 820px;
+    }
+
+    .cover .headline em {
+      font-style: italic;
+    }
+
+    .cover .subline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: #6b6b6b;
+      max-width: 520px;
+    }
+
+    .cover .terminal {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      opacity: 0.12;
+    }
+
+    .cover .terminal-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #f5f5f0;
+      line-height: 2.2;
+      white-space: nowrap;
+    }
+
+    .cover .terminal-line .prompt {
+      color: #6b6b6b;
+    }
+
+    .cover .author {
+      position: absolute;
+      bottom: 28px;
+      left: 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #6b6b6b;
+      z-index: 2;
+    }
+
+    .cover .author strong {
+      color: #f5f5f0;
+      font-weight: 400;
+    }
+
+    /* Hidden elements */
+    .cover .cover-label.hidden,
+    .cover .subline.hidden,
+    .cover .terminal.hidden,
+    .cover .author.hidden {
+      display: none;
+    }
+    /* Export button */
+    .export-row {
+      max-width: 1200px;
+      margin: 24px auto 0;
+    }
+
+    .export-btn {
+      background: #f5f5f0;
+      color: #0a0a0a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border: none;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .export-btn:hover {
+      opacity: 0.85;
+    }
+
+    .export-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== CONTROLS ===== -->
+  <div class="controls">
+
+    <div class="control-group full">
+      <label>Headline</label>
+      <input type="text" id="headlineInput" value="How I 10x'd my marketing with Claude Code" placeholder="Your headline here">
+      <div class="hint">Wrap words in *asterisks* to make them italic. Use | for line breaks.</div>
+    </div>
+
+    <div class="control-group">
+      <label>Label (top)</label>
+      <input type="text" id="labelInput" value="" placeholder="e.g. X Article, Newsletter, YouTube">
+    </div>
+
+    <div class="control-group">
+      <label>Subline (below headline)</label>
+      <input type="text" id="sublineInput" value="" placeholder="e.g. 14 skills. 5 tools. One repo.">
+    </div>
+
+    <div class="control-group">
+      <label>Author line (bottom left)</label>
+      <input type="text" id="authorInput" value="" placeholder="e.g. Ali Qureshi / Adcrate">
+    </div>
+
+    <div class="control-group">
+      <label>Headline size</label>
+      <input type="text" id="fontSizeInput" value="64" placeholder="64">
+      <div class="hint">In pixels. Default 64. Try 52 for longer headlines.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="control-group full">
+      <label>Terminal lines (one per line, prefix with $ or > or [tag])</label>
+      <textarea id="terminalInput" placeholder="$ claude
+> write ad copy for Huel
+[skill] copywriting loaded
+[brand] adcrate/voice-profile.md">$ claude
+> write ad copy for Huel
+[skill] copywriting loaded
+[brand] adcrate/voice-profile.md
+[brand] adcrate/audience.md
+[exec] generating copy...
+
+> build creative brief
+[agent] strategist activated
+[agent] researcher activated
+[schema] creative-brief.md
+
+> find youtube outliers
+[mcp] youtube-outlier connected
+[data] 3 channels synced
+[outlier] 12 videos flagged (5x+)</textarea>
+    </div>
+
+    <div class="control-group full">
+      <label>Show / Hide</label>
+      <div class="toggle-row">
+        <label class="toggle">
+          <input type="checkbox" id="toggleLabel">
+          <span class="box"></span>
+          <span>Label</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="toggleSubline">
+          <span class="box"></span>
+          <span>Subline</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="toggleTerminal" checked>
+          <span class="box"></span>
+          <span>Terminal</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="toggleAuthor">
+          <span class="box"></span>
+          <span>Author</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="toggleGrid" checked>
+          <span class="box"></span>
+          <span>Grid</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="toggleBorders">
+          <span class="box"></span>
+          <span>Borders</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== PREVIEW ===== -->
+  <div class="preview-wrapper">
+    <div class="preview-label">Preview (1200 x 480)</div>
+    <div class="cover" id="cover">
+      <div class="grid-bg" id="gridBg"></div>
+      <div class="top-border" id="topBorder"></div>
+
+      <div class="content">
+        <div class="cover-label hidden" id="coverLabel"></div>
+        <h1 class="headline" id="coverHeadline"></h1>
+        <p class="subline hidden" id="coverSubline"></p>
+      </div>
+
+      <div class="terminal" id="coverTerminal"></div>
+      <div class="author hidden" id="coverAuthor"></div>
+      <div class="bottom-border" id="bottomBorder"></div>
+    </div>
+  </div>
+
+  <!-- ===== EXPORT ===== -->
+  <div class="export-row">
+    <button class="export-btn" id="exportBtn" onclick="exportPNG()">Export PNG</button>
+  </div>
+
+  <script>
+    const headlineInput = document.getElementById('headlineInput');
+    const labelInput = document.getElementById('labelInput');
+    const sublineInput = document.getElementById('sublineInput');
+    const authorInput = document.getElementById('authorInput');
+    const fontSizeInput = document.getElementById('fontSizeInput');
+    const terminalInput = document.getElementById('terminalInput');
+
+    const toggleLabel = document.getElementById('toggleLabel');
+    const toggleSubline = document.getElementById('toggleSubline');
+    const toggleTerminal = document.getElementById('toggleTerminal');
+    const toggleAuthor = document.getElementById('toggleAuthor');
+    const toggleGrid = document.getElementById('toggleGrid');
+    const toggleBorders = document.getElementById('toggleBorders');
+
+    const coverHeadline = document.getElementById('coverHeadline');
+    const coverLabel = document.getElementById('coverLabel');
+    const coverSubline = document.getElementById('coverSubline');
+    const coverTerminal = document.getElementById('coverTerminal');
+    const coverAuthor = document.getElementById('coverAuthor');
+    const gridBg = document.getElementById('gridBg');
+    const topBorder = document.getElementById('topBorder');
+    const bottomBorder = document.getElementById('bottomBorder');
+
+    function parseHeadline(text) {
+      // Replace *word* with <em>word</em>
+      let html = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      // Replace | with <br>
+      html = html.replace(/\|/g, '<br>');
+      return html;
+    }
+
+    function parseTerminal(text) {
+      if (!text.trim()) return '';
+      const lines = text.split('\n');
+      return lines.map(line => {
+        if (!line.trim()) return '<div class="terminal-line">&nbsp;</div>';
+
+        // Match $, >, or [tag] prefixes
+        const prefixMatch = line.match(/^(\$|>|\[[^\]]+\])\s*(.*)/);
+        if (prefixMatch) {
+          return `<div class="terminal-line"><span class="prompt">${prefixMatch[1]}</span> ${prefixMatch[2]}</div>`;
+        }
+        return `<div class="terminal-line">${line}</div>`;
+      }).join('');
+    }
+
+    function update() {
+      // Headline
+      coverHeadline.innerHTML = parseHeadline(headlineInput.value);
+      coverHeadline.style.fontSize = (fontSizeInput.value || 64) + 'px';
+
+      // Label
+      coverLabel.textContent = labelInput.value;
+      coverLabel.classList.toggle('hidden', !toggleLabel.checked || !labelInput.value);
+
+      // Subline
+      coverSubline.textContent = sublineInput.value;
+      coverSubline.classList.toggle('hidden', !toggleSubline.checked || !sublineInput.value);
+
+      // Terminal
+      coverTerminal.innerHTML = parseTerminal(terminalInput.value);
+      coverTerminal.classList.toggle('hidden', !toggleTerminal.checked);
+
+      // Author
+      if (authorInput.value) {
+        const parts = authorInput.value.split('/');
+        if (parts.length > 1) {
+          coverAuthor.innerHTML = `<strong>${parts[0].trim()}</strong> / ${parts[1].trim()}`;
+        } else {
+          coverAuthor.innerHTML = `<strong>${parts[0].trim()}</strong>`;
+        }
+      }
+      coverAuthor.classList.toggle('hidden', !toggleAuthor.checked || !authorInput.value);
+
+      // Grid
+      gridBg.style.display = toggleGrid.checked ? 'block' : 'none';
+
+      // Borders
+      topBorder.style.display = toggleBorders.checked ? 'block' : 'none';
+      bottomBorder.style.display = toggleBorders.checked ? 'block' : 'none';
+    }
+
+    // Bind all inputs
+    [headlineInput, labelInput, sublineInput, authorInput, fontSizeInput, terminalInput].forEach(el => {
+      el.addEventListener('input', update);
+    });
+
+    [toggleLabel, toggleSubline, toggleTerminal, toggleAuthor, toggleGrid, toggleBorders].forEach(el => {
+      el.addEventListener('change', update);
+    });
+
+    // Export
+    function exportPNG() {
+      const btn = document.getElementById('exportBtn');
+      btn.textContent = 'Exporting...';
+      btn.disabled = true;
+
+      const cover = document.getElementById('cover');
+      html2canvas(cover, {
+        width: 1200,
+        height: 480,
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#0a0a0a',
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'cover.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.textContent = 'Export PNG';
+        btn.disabled = false;
+      }).catch(() => {
+        btn.textContent = 'Export PNG';
+        btn.disabled = false;
+      });
+    }
+
+    // Initial render
+    update();
+  </script>
+
+</body>
+</html>

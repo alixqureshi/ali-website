@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BRAND_NAME}} — Proposal for {{CLIENT_NAME}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-accent: #1a1a1a;
+      --text-primary: #f5f5f0;
+      --text-secondary: #8a8a8a;
+      --text-muted: #555555;
+      --accent: #c9a227;
+      --accent-dim: rgba(201, 162, 39, 0.15);
+      --border: #2a2a2a;
+      --font-heading: 'Instrument Serif', Georgia, serif;
+      --font-body: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 12px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    /* Page structure */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 56px 60px;
+      background: var(--bg-primary);
+      position: relative;
+    }
+
+    .page + .page {
+      margin-top: 2px;
+    }
+
+    /* Page header (repeating) */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .page-header .brand {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+
+    .page-header .section-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+    }
+
+    /* Page footer */
+    .page-footer {
+      position: absolute;
+      bottom: 36px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* Typography */
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .accent-line {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    ul li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 6px 0;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 6px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* Cover page */
+    .page.cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 80px;
+    }
+
+    .cover .prepared-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .cover .client-name {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .cover .date {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .cover .confidential {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      position: absolute;
+      bottom: 40px;
+      right: 60px;
+    }
+
+    /* TOC */
+    .toc-list {
+      list-style: none;
+      margin: 0;
+    }
+
+    .toc-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .toc-list li::before {
+      display: none;
+    }
+
+    .toc-list li .toc-num {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      margin-right: 16px;
+    }
+
+    .toc-list li .toc-title {
+      flex: 1;
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--text-primary);
+    }
+
+    .toc-list li .toc-page {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Metrics row */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .metric-item {
+      padding: 24px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric-item:last-child {
+      border-right: none;
+    }
+
+    .metric-item .value {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-item .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    /* Scope table */
+    .scope-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .scope-table th,
+    .scope-table td {
+      text-align: left;
+      padding: 14px 16px;
+      font-size: 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .scope-table th {
+      color: var(--text-muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 10px;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .scope-table td {
+      color: var(--text-secondary);
+    }
+
+    .scope-table td:first-child {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Case study card */
+    .case-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .case-card .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .case-card .case-client {
+      font-family: var(--font-heading);
+      font-size: 20px;
+    }
+
+    .case-card .case-metrics {
+      display: flex;
+      gap: 24px;
+    }
+
+    .case-card .case-metric .value {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .case-card .case-metric .label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    .case-card .case-body p {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .case-card .case-quote {
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+      margin-top: 16px;
+    }
+
+    .case-card .case-quote p {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .case-card .case-quote .attribution {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: normal;
+    }
+
+    /* Pricing table */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .pricing-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .pricing-card.recommended {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .pricing-card.recommended::before {
+      content: 'RECOMMENDED';
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--bg-primary);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      padding: 2px 10px;
+    }
+
+    .pricing-card .tier-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .pricing-card .price {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .pricing-card .price-period {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .pricing-card ul {
+      text-align: left;
+    }
+
+    .pricing-card ul li {
+      font-size: 11px;
+      padding: 5px 0;
+      padding-left: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Timeline */
+    .timeline {
+      margin: 24px 0;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-row .period {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .timeline-row .activities h4 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .timeline-row .activities p {
+      font-size: 11px;
+      margin-bottom: 0;
+    }
+
+    .timeline-bar {
+      display: flex;
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    .timeline-bar .bar-segment {
+      flex: 1;
+      height: 6px;
+      background: var(--accent-dim);
+    }
+
+    .timeline-bar .bar-segment.active {
+      background: var(--accent);
+    }
+
+    /* Next steps */
+    .next-steps-list {
+      list-style: none;
+    }
+
+    .next-steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .next-steps-list li::before {
+      display: none;
+    }
+
+    .next-steps-list .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .next-steps-list .step-content h4 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .next-steps-list .step-content p {
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+
+    /* Validity notice */
+    .validity {
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      padding: 16px 20px;
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Print */
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-after: always;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="page cover">
+    <div class="accent-line"></div>
+    <h1>{{BRAND_NAME}}</h1>
+    <p style="font-size: 16px; color: var(--text-secondary); max-width: 500px; margin-bottom: 48px;">{{TAGLINE}}</p>
+    <div class="prepared-label">Prepared For</div>
+    <div class="client-name">{{CLIENT_NAME}}</div>
+    <div class="date">{{DATE}}</div>
+    <div class="confidential">Confidential</div>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}}</span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Contents</div>
+    </div>
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li>
+        <span class="toc-num">01</span>
+        <span class="toc-title">Executive Summary</span>
+        <span class="toc-page">3</span>
+      </li>
+      <li>
+        <span class="toc-num">02</span>
+        <span class="toc-title">Understanding Your Challenges</span>
+        <span class="toc-page">4</span>
+      </li>
+      <li>
+        <span class="toc-num">03</span>
+        <span class="toc-title">About {{BRAND_NAME}}</span>
+        <span class="toc-page">5</span>
+      </li>
+      <li>
+        <span class="toc-num">04</span>
+        <span class="toc-title">Proposed Engagement</span>
+        <span class="toc-page">6</span>
+      </li>
+      <li>
+        <span class="toc-num">05</span>
+        <span class="toc-title">Scope of Work</span>
+        <span class="toc-page">7</span>
+      </li>
+      <li>
+        <span class="toc-num">06</span>
+        <span class="toc-title">Case Studies</span>
+        <span class="toc-page">8</span>
+      </li>
+      <li>
+        <span class="toc-num">07</span>
+        <span class="toc-title">Investment</span>
+        <span class="toc-page">9</span>
+      </li>
+      <li>
+        <span class="toc-num">08</span>
+        <span class="toc-title">Timeline</span>
+        <span class="toc-page">10</span>
+      </li>
+      <li>
+        <span class="toc-num">09</span>
+        <span class="toc-title">Next Steps</span>
+        <span class="toc-page">11</span>
+      </li>
+    </ul>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>2</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Executive Summary</div>
+    </div>
+    <div class="section-label">01</div>
+    <h2>Executive Summary</h2>
+    <p>{{EXEC_SUMMARY_PARAGRAPH_1}}</p>
+    <p>{{EXEC_SUMMARY_PARAGRAPH_2}}</p>
+    <div class="metrics-row">
+      <div class="metric-item">
+        <div class="value">{{EXEC_METRIC_1}}</div>
+        <div class="label">{{EXEC_METRIC_1_LABEL}}</div>
+      </div>
+      <div class="metric-item">
+        <div class="value">{{EXEC_METRIC_2}}</div>
+        <div class="label">{{EXEC_METRIC_2_LABEL}}</div>
+      </div>
+      <div class="metric-item">
+        <div class="value">{{EXEC_METRIC_3}}</div>
+        <div class="label">{{EXEC_METRIC_3_LABEL}}</div>
+      </div>
+    </div>
+    <h3>Expected Outcomes</h3>
+    <ul>
+      <li>{{EXEC_OUTCOME_1}}</li>
+      <li>{{EXEC_OUTCOME_2}}</li>
+      <li>{{EXEC_OUTCOME_3}}</li>
+      <li>{{EXEC_OUTCOME_4}}</li>
+    </ul>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>3</span>
+    </div>
+  </div>
+
+  <!-- UNDERSTANDING YOUR CHALLENGES -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Your Challenges</div>
+    </div>
+    <div class="section-label">02</div>
+    <h2>Understanding Your Challenges</h2>
+    <p>{{CHALLENGES_INTRO}}</p>
+    <h3>Current Situation</h3>
+    <p>{{CURRENT_SITUATION}}</p>
+    <h3>Key Challenges</h3>
+    <ul>
+      <li>{{CHALLENGE_1}}</li>
+      <li>{{CHALLENGE_2}}</li>
+      <li>{{CHALLENGE_3}}</li>
+      <li>{{CHALLENGE_4}}</li>
+    </ul>
+    <h3>Impact</h3>
+    <p>{{CHALLENGES_IMPACT}}</p>
+    <h3>What You've Tried</h3>
+    <p>{{WHAT_YOUVE_TRIED}}</p>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>4</span>
+    </div>
+  </div>
+
+  <!-- ABOUT BRAND -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">About Us</div>
+    </div>
+    <div class="section-label">03</div>
+    <h2>About {{BRAND_NAME}}</h2>
+    <p>{{ABOUT_PARAGRAPH_1}}</p>
+    <p>{{ABOUT_PARAGRAPH_2}}</p>
+    <div class="metrics-row">
+      <div class="metric-item">
+        <div class="value">{{ABOUT_METRIC_1}}</div>
+        <div class="label">{{ABOUT_METRIC_1_LABEL}}</div>
+      </div>
+      <div class="metric-item">
+        <div class="value">{{ABOUT_METRIC_2}}</div>
+        <div class="label">{{ABOUT_METRIC_2_LABEL}}</div>
+      </div>
+      <div class="metric-item">
+        <div class="value">{{ABOUT_METRIC_3}}</div>
+        <div class="label">{{ABOUT_METRIC_3_LABEL}}</div>
+      </div>
+    </div>
+    <h3>Why {{BRAND_NAME}}</h3>
+    <ul>
+      <li>{{WHY_US_1}}</li>
+      <li>{{WHY_US_2}}</li>
+      <li>{{WHY_US_3}}</li>
+      <li>{{WHY_US_4}}</li>
+    </ul>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>5</span>
+    </div>
+  </div>
+
+  <!-- PROPOSED ENGAGEMENT -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Proposed Engagement</div>
+    </div>
+    <div class="section-label">04</div>
+    <h2>Proposed Engagement</h2>
+    <p>{{ENGAGEMENT_OVERVIEW}}</p>
+    <h3>Phase 1: {{PHASE_1_TITLE}}</h3>
+    <p>{{PHASE_1_DESCRIPTION}}</p>
+    <ul>
+      <li>{{PHASE_1_ACTIVITY_1}}</li>
+      <li>{{PHASE_1_ACTIVITY_2}}</li>
+      <li>{{PHASE_1_ACTIVITY_3}}</li>
+    </ul>
+    <h3>Phase 2: {{PHASE_2_TITLE}}</h3>
+    <p>{{PHASE_2_DESCRIPTION}}</p>
+    <ul>
+      <li>{{PHASE_2_ACTIVITY_1}}</li>
+      <li>{{PHASE_2_ACTIVITY_2}}</li>
+      <li>{{PHASE_2_ACTIVITY_3}}</li>
+    </ul>
+    <h3>Phase 3: {{PHASE_3_TITLE}}</h3>
+    <p>{{PHASE_3_DESCRIPTION}}</p>
+    <ul>
+      <li>{{PHASE_3_ACTIVITY_1}}</li>
+      <li>{{PHASE_3_ACTIVITY_2}}</li>
+      <li>{{PHASE_3_ACTIVITY_3}}</li>
+    </ul>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>6</span>
+    </div>
+  </div>
+
+  <!-- SCOPE OF WORK -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Scope of Work</div>
+    </div>
+    <div class="section-label">05</div>
+    <h2>Scope of Work</h2>
+    <table class="scope-table">
+      <thead>
+        <tr>
+          <th>Deliverable</th>
+          <th>Description</th>
+          <th>Frequency</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{SCOPE_1_NAME}}</td>
+          <td>{{SCOPE_1_DESC}}</td>
+          <td>{{SCOPE_1_FREQ}}</td>
+          <td>{{SCOPE_1_OWNER}}</td>
+        </tr>
+        <tr>
+          <td>{{SCOPE_2_NAME}}</td>
+          <td>{{SCOPE_2_DESC}}</td>
+          <td>{{SCOPE_2_FREQ}}</td>
+          <td>{{SCOPE_2_OWNER}}</td>
+        </tr>
+        <tr>
+          <td>{{SCOPE_3_NAME}}</td>
+          <td>{{SCOPE_3_DESC}}</td>
+          <td>{{SCOPE_3_FREQ}}</td>
+          <td>{{SCOPE_3_OWNER}}</td>
+        </tr>
+        <tr>
+          <td>{{SCOPE_4_NAME}}</td>
+          <td>{{SCOPE_4_DESC}}</td>
+          <td>{{SCOPE_4_FREQ}}</td>
+          <td>{{SCOPE_4_OWNER}}</td>
+        </tr>
+        <tr>
+          <td>{{SCOPE_5_NAME}}</td>
+          <td>{{SCOPE_5_DESC}}</td>
+          <td>{{SCOPE_5_FREQ}}</td>
+          <td>{{SCOPE_5_OWNER}}</td>
+        </tr>
+        <tr>
+          <td>{{SCOPE_6_NAME}}</td>
+          <td>{{SCOPE_6_DESC}}</td>
+          <td>{{SCOPE_6_FREQ}}</td>
+          <td>{{SCOPE_6_OWNER}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Out of Scope</h3>
+    <ul>
+      <li>{{OUT_OF_SCOPE_1}}</li>
+      <li>{{OUT_OF_SCOPE_2}}</li>
+      <li>{{OUT_OF_SCOPE_3}}</li>
+    </ul>
+    <h3>Client Responsibilities</h3>
+    <ul>
+      <li>{{CLIENT_RESP_1}}</li>
+      <li>{{CLIENT_RESP_2}}</li>
+      <li>{{CLIENT_RESP_3}}</li>
+    </ul>
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>7</span>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Case Studies</div>
+    </div>
+    <div class="section-label">06</div>
+    <h2>Proven Results</h2>
+
+    <!-- Case Study 1 -->
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-client">{{CASE_1_CLIENT}}</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="value">{{CASE_1_METRIC_1}}</div>
+            <div class="label">{{CASE_1_METRIC_1_LABEL}}</div>
+          </div>
+          <div class="case-metric">
+            <div class="value">{{CASE_1_METRIC_2}}</div>
+            <div class="label">{{CASE_1_METRIC_2_LABEL}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <p>{{CASE_1_DESCRIPTION}}</p>
+      </div>
+      <div class="case-quote">
+        <p>"{{CASE_1_QUOTE}}"</p>
+        <div class="attribution">&mdash; {{CASE_1_QUOTE_ATTRIBUTION}}</div>
+      </div>
+    </div>
+
+    <!-- Case Study 2 -->
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-client">{{CASE_2_CLIENT}}</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="value">{{CASE_2_METRIC_1}}</div>
+            <div class="label">{{CASE_2_METRIC_1_LABEL}}</div>
+          </div>
+          <div class="case-metric">
+            <div class="value">{{CASE_2_METRIC_2}}</div>
+            <div class="label">{{CASE_2_METRIC_2_LABEL}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <p>{{CASE_2_DESCRIPTION}}</p>
+      </div>
+      <div class="case-quote">
+        <p>"{{CASE_2_QUOTE}}"</p>
+        <div class="attribution">&mdash; {{CASE_2_QUOTE_ATTRIBUTION}}</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>8</span>
+    </div>
+  </div>
+
+  <!-- INVESTMENT -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Investment</div>
+    </div>
+    <div class="section-label">07</div>
+    <h2>Investment</h2>
+    <p>{{INVESTMENT_INTRO}}</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier-name">{{TIER_1_NAME}}</div>
+        <div class="price">{{TIER_1_PRICE}}</div>
+        <div class="price-period">per month</div>
+        <ul>
+          <li>{{TIER_1_FEATURE_1}}</li>
+          <li>{{TIER_1_FEATURE_2}}</li>
+          <li>{{TIER_1_FEATURE_3}}</li>
+          <li>{{TIER_1_FEATURE_4}}</li>
+        </ul>
+      </div>
+      <div class="pricing-card recommended">
+        <div class="tier-name">{{TIER_2_NAME}}</div>
+        <div class="price">{{TIER_2_PRICE}}</div>
+        <div class="price-period">per month</div>
+        <ul>
+          <li>{{TIER_2_FEATURE_1}}</li>
+          <li>{{TIER_2_FEATURE_2}}</li>
+          <li>{{TIER_2_FEATURE_3}}</li>
+          <li>{{TIER_2_FEATURE_4}}</li>
+          <li>{{TIER_2_FEATURE_5}}</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="tier-name">{{TIER_3_NAME}}</div>
+        <div class="price">{{TIER_3_PRICE}}</div>
+        <div class="price-period">per month</div>
+        <ul>
+          <li>{{TIER_3_FEATURE_1}}</li>
+          <li>{{TIER_3_FEATURE_2}}</li>
+          <li>{{TIER_3_FEATURE_3}}</li>
+          <li>{{TIER_3_FEATURE_4}}</li>
+          <li>{{TIER_3_FEATURE_5}}</li>
+          <li>{{TIER_3_FEATURE_6}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Payment Terms</h3>
+    <ul>
+      <li>{{PAYMENT_TERM_1}}</li>
+      <li>{{PAYMENT_TERM_2}}</li>
+      <li>{{PAYMENT_TERM_3}}</li>
+    </ul>
+
+    <h3>Additional Costs</h3>
+    <p>{{ADDITIONAL_COSTS}}</p>
+
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>9</span>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Timeline</div>
+    </div>
+    <div class="section-label">08</div>
+    <h2>Timeline</h2>
+    <p>{{TIMELINE_INTRO}}</p>
+
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="period">{{TIMELINE_1_PERIOD}}</div>
+        <div class="activities">
+          <h4>{{TIMELINE_1_TITLE}}</h4>
+          <p>{{TIMELINE_1_ACTIVITIES}}</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="period">{{TIMELINE_2_PERIOD}}</div>
+        <div class="activities">
+          <h4>{{TIMELINE_2_TITLE}}</h4>
+          <p>{{TIMELINE_2_ACTIVITIES}}</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="period">{{TIMELINE_3_PERIOD}}</div>
+        <div class="activities">
+          <h4>{{TIMELINE_3_TITLE}}</h4>
+          <p>{{TIMELINE_3_ACTIVITIES}}</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="period">{{TIMELINE_4_PERIOD}}</div>
+        <div class="activities">
+          <h4>{{TIMELINE_4_TITLE}}</h4>
+          <p>{{TIMELINE_4_ACTIVITIES}}</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="period">{{TIMELINE_5_PERIOD}}</div>
+        <div class="activities">
+          <h4>{{TIMELINE_5_TITLE}}</h4>
+          <p>{{TIMELINE_5_ACTIVITIES}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-bar">
+      <div class="bar-segment active" title="Phase 1"></div>
+      <div class="bar-segment active" title="Phase 1"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.7;" title="Phase 2"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.7;" title="Phase 2"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.7;" title="Phase 2"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.7;" title="Phase 2"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.4;" title="Phase 3"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.4;" title="Phase 3"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.4;" title="Phase 3"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.4;" title="Phase 3"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.4;" title="Phase 3"></div>
+      <div class="bar-segment" style="background: var(--accent); opacity: 0.4;" title="Phase 3"></div>
+    </div>
+
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>10</span>
+    </div>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="page">
+    <div class="page-header">
+      <div class="brand">{{BRAND_NAME}}</div>
+      <div class="section-name">Next Steps</div>
+    </div>
+    <div class="section-label">09</div>
+    <h2>Next Steps</h2>
+    <p>{{NEXT_STEPS_INTRO}}</p>
+
+    <ul class="next-steps-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>{{NEXT_1_TITLE}}</h4>
+          <p>{{NEXT_1_DESCRIPTION}}</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>{{NEXT_2_TITLE}}</h4>
+          <p>{{NEXT_2_DESCRIPTION}}</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>{{NEXT_3_TITLE}}</h4>
+          <p>{{NEXT_3_DESCRIPTION}}</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>{{NEXT_4_TITLE}}</h4>
+          <p>{{NEXT_4_DESCRIPTION}}</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="validity">
+      This proposal is valid for 30 days from {{DATE}}. After this date, pricing and availability may be subject to change.
+    </div>
+
+    <div style="text-align: center; margin-top: 48px;">
+      <div class="accent-line" style="margin: 0 auto 20px;"></div>
+      <h3>{{CONTACT_NAME}}</h3>
+      <p style="color: var(--accent); text-align: center;">{{CONTACT_EMAIL}}</p>
+      <p style="text-align: center;">{{CONTACT_URL}}</p>
+    </div>
+
+    <div class="page-footer">
+      <span>{{BRAND_NAME}} &mdash; Proposal for {{CLIENT_NAME}}</span>
+      <span>11</span>
+    </div>
+  </div>
+
+</body>
+</html>

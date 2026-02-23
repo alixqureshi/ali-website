@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Catalogue — Pick a Direction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'surface': '#0a0a0a',
+                        'surface-alt': '#111111',
+                        'off-white': '#f5f5f0',
+                        'muted': '#6b6b6b',
+                        'border': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'serif': ['Instrument Serif', 'Georgia', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #f5f5f0; color: #0a0a0a; }
+        body { -webkit-font-smoothing: antialiased; }
+        .card-img { aspect-ratio: 16/10; object-fit: cover; object-position: top; }
+        .swatch { width: 20px; height: 20px; border: 1px solid #333; }
+        .filter-btn.active { background: #f5f5f0; color: #0a0a0a; }
+        .tab-btn.active { border-bottom-color: #f5f5f0; color: #f5f5f0; }
+        .tab-btn { border-bottom: 2px solid transparent; color: #6b6b6b; }
+        .direction-card { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .direction-card.hidden-filter { opacity: 0; position: absolute; pointer-events: none; transform: scale(0.95); }
+        .ref-card { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .ref-card.hidden-filter { opacity: 0; position: absolute; pointer-events: none; transform: scale(0.95); }
+        .ref-img { aspect-ratio: 16/10; object-fit: cover; object-position: top; background: #111; }
+        .ref-img-placeholder { aspect-ratio: 16/10; background: #111; display: flex; align-items: center; justify-content: center; }
+        .ref-img-placeholder span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6b6b; }
+    </style>
+</head>
+<body class="bg-surface text-off-white font-mono text-[14px] leading-[1.7] min-h-screen">
+
+    <!-- Header -->
+    <header class="border-b border-border py-10 px-6">
+        <div class="max-w-[1200px] mx-auto">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-4">Web UI Design Skill</p>
+            <h1 class="font-serif text-[clamp(36px,6vw,56px)] font-normal leading-[1.1] tracking-[-0.02em]">
+                Design <span class="italic">Catalogue</span>
+            </h1>
+            <p class="text-muted mt-4 max-w-[500px]">
+                18 design directions + 48 references. Pick a direction, study the references, build with taste.
+            </p>
+        </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="border-b border-border px-6">
+        <div class="max-w-[1200px] mx-auto flex gap-8">
+            <button class="tab-btn active py-4 text-[13px] uppercase tracking-[0.1em] transition-all" data-tab="directions">
+                Directions (18)
+            </button>
+            <button class="tab-btn py-4 text-[13px] uppercase tracking-[0.1em] transition-all" data-tab="references">
+                References (48)
+            </button>
+        </div>
+    </nav>
+
+    <!-- Filters — Directions -->
+    <nav class="border-b border-border py-4 px-6 sticky top-0 bg-surface/95 backdrop-blur-sm z-50" id="filters-directions">
+        <div class="max-w-[1200px] mx-auto flex gap-2 flex-wrap">
+            <button class="filter-btn active px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="all" data-target="directions">All (18)</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="dark" data-target="directions">Dark</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="light" data-target="directions">Light</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="saas" data-target="directions">SaaS</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="agency" data-target="directions">Agency</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="product" data-target="directions">Product</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="fintech" data-target="directions">Fintech/Crypto</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="portfolio" data-target="directions">Portfolio</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="photo" data-target="directions">Photo-Driven</button>
+        </div>
+    </nav>
+
+    <!-- Filters — References -->
+    <nav class="border-b border-border py-4 px-6 sticky top-0 bg-surface/95 backdrop-blur-sm z-50 hidden" id="filters-references">
+        <div class="max-w-[1200px] mx-auto flex gap-2 flex-wrap">
+            <button class="filter-btn active px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="all" data-target="references">All (48)</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="saas" data-target="references">SaaS</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="agency" data-target="references">Agency</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="ecommerce" data-target="references">eCommerce</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="creator" data-target="references">Creator</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="editorial" data-target="references">Editorial</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="portfolio" data-target="references">Portfolio</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="dashboard" data-target="references">Dashboard</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="membership" data-target="references">Membership</button>
+            <button class="filter-btn px-4 py-2 text-[12px] uppercase tracking-[0.1em] border border-border hover:bg-off-white hover:text-surface transition-all" data-filter="inspiration" data-target="references">Inspiration</button>
+        </div>
+    </nav>
+
+    <!-- ==================== DIRECTIONS GRID ==================== -->
+    <main class="px-6 py-12" id="grid-directions">
+        <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- 01 Dark Editorial -->
+            <div class="direction-card" data-categories="dark,agency,portfolio">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/01-peaks-studio.jpg" alt="Dark Editorial" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">01</span>
+                            <span class="text-[11px] uppercase tracking-[0.1em] bg-off-white text-surface px-2 py-0.5">Locked — Ali Website</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Dark Editorial</h3>
+                        <p class="text-[13px] text-muted mb-4">Restrained dark editorial — serif meets monospace, nothing wasted</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0a0a0a" title="#0a0a0a"></div>
+                            <div class="swatch" style="background:#f5f5f0" title="#f5f5f0"></div>
+                            <div class="swatch" style="background:#6b6b6b" title="#6b6b6b"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Personal brand, editorial, consulting</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 02 Minimal Product -->
+            <div class="direction-card" data-categories="dark,product">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/02-tiempo.jpg" alt="Minimal Product" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">02</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Minimal Product</h3>
+                        <p class="text-[13px] text-muted mb-4">Austere dark product showcase — one accent, ruthless simplicity</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0a0a0a" title="#0a0a0a"></div>
+                            <div class="swatch" style="background:#f0f0e8" title="#f0f0e8"></div>
+                            <div class="swatch" style="background:#C8FF00" title="#C8FF00"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Product launches, app landing pages</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03 Light Portfolio -->
+            <div class="direction-card" data-categories="light,portfolio">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/03-helin-portfolio.jpg" alt="Light Portfolio" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">03</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Light Portfolio</h3>
+                        <p class="text-[13px] text-muted mb-4">Clean white editorial portfolio — restraint in light mode</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#fafafa" title="#fafafa"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                            <div class="swatch" style="background:#888888" title="#888888"></div>
+                            <div class="swatch" style="background:#e5e5e5" title="#e5e5e5"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Designer portfolios, personal sites, minimal blogs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 04 Cosmic Product -->
+            <div class="direction-card" data-categories="dark,product">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/04-alcove.jpg" alt="Cosmic Product" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">04</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Cosmic Product</h3>
+                        <p class="text-[13px] text-muted mb-4">Dark cosmic — centered hero with 3D product icon and atmospheric glow</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#050505" title="#050505"></div>
+                            <div class="swatch" style="background:#f0ece4" title="#f0ece4"></div>
+                            <div class="swatch" style="background:#888888" title="#888888"></div>
+                            <div class="swatch" style="background:#d4a574" title="#d4a574"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">App launches, waitlist pages, indie products</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 05 Dreamy SaaS -->
+            <div class="direction-card" data-categories="dark,saas,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/05-novara-ai.jpg" alt="Dreamy SaaS" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">05</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Dreamy SaaS</h3>
+                        <p class="text-[13px] text-muted mb-4">Warm dreamy landscape — aspirational AI/SaaS with nature imagery</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#1a2810" title="#1a2810"></div>
+                            <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+                            <div class="swatch" style="background:#c8c0b0" title="#c8c0b0"></div>
+                            <div class="swatch" style="background:#d4a030" title="#d4a030"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">AI products, SaaS platforms, B2B with human touch</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 06 Soft App -->
+            <div class="direction-card" data-categories="light,product">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/06-saskia-app.jpg" alt="Soft App" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">06</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Soft App</h3>
+                        <p class="text-[13px] text-muted mb-4">Soft, light, pastel — friendly app landing with rounded elements</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#f8f9fc" title="#f8f9fc"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                            <div class="swatch" style="background:#999999" title="#999999"></div>
+                            <div class="swatch" style="background:#d4e4f7" title="#d4e4f7"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Consumer apps, wellness, meditation, health</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 07 Atmospheric SaaS -->
+            <div class="direction-card" data-categories="dark,saas,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/07-noctra-email.jpg" alt="Atmospheric SaaS" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">07</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Atmospheric SaaS</h3>
+                        <p class="text-[13px] text-muted mb-4">Moody atmospheric — blurred mountain backdrop with dark product mockup</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#1a1510" title="#1a1510"></div>
+                            <div class="swatch" style="background:#faf5ef" title="#faf5ef"></div>
+                            <div class="swatch" style="background:#a89880" title="#a89880"></div>
+                            <div class="swatch" style="background:#2a2520" title="#2a2520"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">AI tools, email products, B2B SaaS, dev tools</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 08 Nature Fintech -->
+            <div class="direction-card" data-categories="dark,fintech,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/08-synergeus-fintech.jpg" alt="Nature Fintech" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">08</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Nature Fintech</h3>
+                        <p class="text-[13px] text-muted mb-4">Premium fintech with nature imagery — green tones, editorial authority</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0a1a0a" title="#0a1a0a"></div>
+                            <div class="swatch" style="background:#f5f0e8" title="#f5f0e8"></div>
+                            <div class="swatch" style="background:#6b8b5e" title="#6b8b5e"></div>
+                            <div class="swatch" style="background:#c8ff00" title="#c8ff00"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Fintech, wealth management, investment platforms</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 09 Dark Agency -->
+            <div class="direction-card" data-categories="dark,agency">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/09-keileth-taste-a.jpg" alt="Dark Agency" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">09</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Dark Agency</h3>
+                        <p class="text-[13px] text-muted mb-4">Bold dark agency — monochrome with mountain textures and strong typography</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0d0d0d" title="#0d0d0d"></div>
+                            <div class="swatch" style="background:#f0f0f0" title="#f0f0f0"></div>
+                            <div class="swatch" style="background:#666666" title="#666666"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Agencies, design studios, branding services</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10 Editorial Collage -->
+            <div class="direction-card" data-categories="light,portfolio,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/12-keileth-taste-d.jpg" alt="Editorial Collage" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">10</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Editorial Collage</h3>
+                        <p class="text-[13px] text-muted mb-4">Editorial collage — off-white paper with scattered Polaroid photography</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#f5f0e8" title="#f5f0e8"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                            <div class="swatch" style="background:#8a8070" title="#8a8070"></div>
+                            <div class="swatch" style="background:#d4c8b8" title="#d4c8b8"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Creative portfolios, luxury brands, storytelling</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11 Gradient Hero -->
+            <div class="direction-card" data-categories="light,fintech,product">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/13-hero-section-luthra-a.jpg" alt="Gradient Hero" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">11</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Gradient Hero</h3>
+                        <p class="text-[13px] text-muted mb-4">Warm gradient hero — orange-to-sage with product screenshot on stone</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#b8c4a8" title="#b8c4a8"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                            <div class="swatch" style="background:#f0ece4" title="#f0ece4"></div>
+                            <div class="swatch" style="background:#c87a4a" title="#c87a4a"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Web3, trading platforms, fintech dashboards</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12 Cloud SaaS -->
+            <div class="direction-card" data-categories="light,saas">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/14-hero-section-luthra-b.jpg" alt="Cloud SaaS" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">12</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Cloud SaaS</h3>
+                        <p class="text-[13px] text-muted mb-4">Bright sky — 3D cloud elements with clean centered typography</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#e0f0ff" title="#e0f0ff"></div>
+                            <div class="swatch" style="background:#1a1a1a" title="#1a1a1a"></div>
+                            <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+                            <div class="swatch" style="background:#4da6e8" title="#4da6e8"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Cloud infra, DevOps, monitoring, light SaaS</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13 Bold Crypto -->
+            <div class="direction-card" data-categories="dark,fintech">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/15-hero-section-luthra-c.jpg" alt="Bold Crypto" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">13</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Bold Crypto</h3>
+                        <p class="text-[13px] text-muted mb-4">Deep red crypto — dark with bold red accent, 3D wallet visuals</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#150505" title="#150505"></div>
+                            <div class="swatch" style="background:#f0e8e0" title="#f0e8e0"></div>
+                            <div class="swatch" style="background:#666666" title="#666666"></div>
+                            <div class="swatch" style="background:#e63b2e" title="#e63b2e"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Crypto wallets, web3, DeFi, blockchain</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14 Cinematic Hero -->
+            <div class="direction-card" data-categories="dark,agency,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/16-hero-section-luthra-d.jpg" alt="Cinematic Hero" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">14</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Cinematic Hero</h3>
+                        <p class="text-[13px] text-muted mb-4">Cinematic sunset — sci-fi city, movie-poster energy</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0d0d1a" title="#0d0d1a"></div>
+                            <div class="swatch" style="background:#f5f0e8" title="#f5f0e8"></div>
+                            <div class="swatch" style="background:#888888" title="#888888"></div>
+                            <div class="swatch" style="background:#e05a2b" title="#e05a2b"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">AI consulting, futuristic products, premium agencies</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15 Ink Wash Minimal -->
+            <div class="direction-card" data-categories="light,saas">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/17-rishabh-sumi.jpg" alt="Ink Wash Minimal" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">15</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Ink Wash Minimal</h3>
+                        <p class="text-[13px] text-muted mb-4">Ink wash minimalism — white canvas with sumi-e watercolor landscape</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+                            <div class="swatch" style="background:#000000" title="#000000"></div>
+                            <div class="swatch" style="background:#999999" title="#999999"></div>
+                            <div class="swatch" style="background:#e8e8e8" title="#e8e8e8"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Enterprise knowledge tools, data platforms, cerebral B2B</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16 Dark Focus App -->
+            <div class="direction-card" data-categories="dark,product,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/18-rishabh-lumaire.jpg" alt="Dark Focus App" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">16</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Dark Focus App</h3>
+                        <p class="text-[13px] text-muted mb-4">Dark ambient focus — moody portrait photography with olive-green UI</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0a0f0a" title="#0a0f0a"></div>
+                            <div class="swatch" style="background:#e8e0d0" title="#e8e0d0"></div>
+                            <div class="swatch" style="background:#6b6b5e" title="#6b6b5e"></div>
+                            <div class="swatch" style="background:#8a9a6e" title="#8a9a6e"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Focus/productivity apps, meditation, deep work tools</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 17 Brutalist Dashboard -->
+            <div class="direction-card" data-categories="dark,saas">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/19-rishabh-inflection.jpg" alt="Brutalist Dashboard" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">17</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Brutalist Dashboard</h3>
+                        <p class="text-[13px] text-muted mb-4">Brutalist data — grid-heavy dark dashboard with exposed structure</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0a0a0a" title="#0a0a0a"></div>
+                            <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+                            <div class="swatch" style="background:#666666" title="#666666"></div>
+                            <div class="swatch" style="background:#333333" title="#333333"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Enterprise platforms, analytics, strategy tools</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 18 Cinematic Contemplative -->
+            <div class="direction-card" data-categories="dark,agency,photo">
+                <div class="border border-border overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="../references/20-rishabh-aether.jpg" alt="Cinematic Contemplative" class="card-img w-full transition-all duration-300">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-[11px] uppercase tracking-[0.15em] text-muted">18</span>
+                        </div>
+                        <h3 class="font-serif text-xl mb-2">Cinematic Contemplative</h3>
+                        <p class="text-[13px] text-muted mb-4">Contemplative cinema — dark with portal composition, philosophical</p>
+                        <div class="flex gap-1 mb-3">
+                            <div class="swatch" style="background:#0d0d0d" title="#0d0d0d"></div>
+                            <div class="swatch" style="background:#f0ece4" title="#f0ece4"></div>
+                            <div class="swatch" style="background:#6b6b6b" title="#6b6b6b"></div>
+                            <div class="swatch" style="background:#e05a2b" title="#e05a2b"></div>
+                        </div>
+                        <p class="text-[11px] text-muted">Premium AI, philosophy brands, high-end consulting</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ==================== REFERENCES GRID ==================== -->
+    <main class="px-6 py-12 hidden" id="grid-references">
+        <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- ===== SaaS ===== -->
+            <div class="ref-card" data-ref-category="saas">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">S01 · SaaS</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Stripe</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Gradient mesh hero + product screenshots. Progressive disclosure of complexity turns infrastructure into elegance.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimalist</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Gradient</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 02, 12</span>
+                        <a href="https://stripe.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="saas">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">S02 · SaaS</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Linear</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Scroll-triggered reveals + changelog marketing. Dark premium that makes project management feel like a luxury product.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Premium</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Motion</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 07, 17</span>
+                        <a href="https://linear.app" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="saas">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">S03 · SaaS</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Vercel</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Terminal aesthetic + speed-as-brand. Black and white with real-time deployment animations.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Developer</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Terminal</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 02, 17</span>
+                        <a href="https://vercel.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="saas">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">S04 · SaaS</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Notion</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Template gallery + use-case segmentation. Playful illustrations make a complex tool feel approachable.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Playful</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Modular</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 12</span>
+                        <a href="https://notion.so" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="saas">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">S05 · SaaS</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Loom</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Video embed as hero + playful illustration. Warm, light, video-first design that sells the product by showing it.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Warm</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Video-first</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 05</span>
+                        <a href="https://loom.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Agency ===== -->
+            <div class="ref-card" data-ref-category="agency">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">A01 · Agency</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Basic/Agency</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Zero imagery — pure type hierarchy. Whitespace as a power move, hover-reveal portfolio navigation.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Typography</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 01, 03</span>
+                        <a href="https://basic.agency" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="agency">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">A02 · Agency</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Fantasy Interactive</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Full-bleed case study hero images. Dark, immersive, cinematic — three-color constraint (black/white/red).</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Immersive</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Cinematic</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 09, 14</span>
+                        <a href="https://fantasy.co" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="agency">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">A03 · Agency</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Instrument</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Work grid with hover-reveal descriptions. Clean, restrained — borrowed-color accent from each project.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Grid</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Restrained</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03, 09</span>
+                        <a href="https://instrument.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="agency">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">A04 · Agency</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Huge Inc</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Radical single-word hero. Editorial blog + case study hybrid with dark container / vibrant content framing.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Bold</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Editorial</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Mixed</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 09, 10</span>
+                        <a href="https://hugeinc.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="agency">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">A05 · Agency</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Anti</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Experimental navigation + raw aesthetics. Swiss grid with intentional breaks, Scandinavian brutalism.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Brutalist</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Experimental</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 17</span>
+                        <a href="https://anti.as" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== eCommerce ===== -->
+            <div class="ref-card" data-ref-category="ecommerce">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">E01 · eCommerce</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Allbirds</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Sustainability narrative woven into product. Organic, warm — mission storytelling that sells.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Organic</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Sustainable</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Warm</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 08</span>
+                        <a href="https://allbirds.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="ecommerce">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">E02 · eCommerce</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Glossier</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Community-driven product marketing. Soft pink, editorial — the brand IS the community.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Soft</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Editorial</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Community</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 10</span>
+                        <a href="https://glossier.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="ecommerce">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">E03 · eCommerce</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Aesop</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Store-first, anti-ecommerce aesthetics. Premium, minimal, restrained — the product speaks for itself.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Premium</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Restrained</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 01, 02</span>
+                        <a href="https://aesop.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="ecommerce">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">E04 · eCommerce</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Rapha</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Cycling culture editorial that sells product. Photography-driven lifestyle storytelling.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Editorial</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Photography</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Lifestyle</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 10, 14</span>
+                        <a href="https://rapha.cc" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="ecommerce">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">E05 · eCommerce</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Apple Store</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Product as the entire design — nothing else needed. Minimal, dark/light, product-hero perfection.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Product-hero</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 02, 04</span>
+                        <a href="https://apple.com/shop" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Creator ===== -->
+            <div class="ref-card" data-ref-category="creator">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">C01 · Creator</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Ali Abdaal</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Course funnel + newsletter CTA integration. Light, clean content-hub that monetizes attention efficiently.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Content-hub</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03, 06</span>
+                        <a href="https://aliabdaal.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="creator">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">C02 · Creator</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Sahil Bloom</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Single-purpose newsletter landing page. Minimal, focused — one CTA, maximum conversion.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Newsletter</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 02, 03</span>
+                        <a href="https://sahilbloom.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="creator">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">C03 · Creator</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Tim Ferriss</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Long-form content hub + podcast integration. Content-dense, blog-first — depth over design.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Content-dense</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Blog-first</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03</span>
+                        <a href="https://tim.blog" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="creator">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">C04 · Creator</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">James Clear</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Book as hero + newsletter as secondary CTA. Clean, minimal — the book cover does the selling.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Book-first</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03, 15</span>
+                        <a href="https://jamesclear.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="creator">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">C05 · Creator</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Naval</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Zero design — content does all the work. Ultra-minimal, text-only, philosophical.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Ultra-minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Text-only</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 01, 15</span>
+                        <a href="https://nav.al" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Editorial ===== -->
+            <div class="ref-card" data-ref-category="editorial">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">ED01 · Editorial</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">The Pudding</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Data journalism with interactive storytelling. Bespoke scrollytelling — each essay gets its own design system.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Interactive</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Data-viz</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Playful</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 17</span>
+                        <a href="https://pudding.cool" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="editorial">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">ED02 · Editorial</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Stripe Press</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Book publisher aesthetic online. 3D book visualization with warm editorial color system (cream + warm blacks).</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Premium</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Book</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Warm</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 01, 15</span>
+                        <a href="https://press.stripe.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="editorial">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">ED03 · Editorial</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Monocle</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Print magazine translated to digital. Swiss modular grid with structured luxury through consistency.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Magazine</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Grid</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Editorial</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 10, 03</span>
+                        <a href="https://monocle.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="editorial">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">ED04 · Editorial</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Bloomberg Businessweek</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Typography as illustration. Bold section-level color theming — magazine cover energy on every page.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Bold</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Typographic</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Colorful</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 10, 17</span>
+                        <a href="https://www.bloomberg.com/businessweek" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="editorial">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">ED05 · Editorial</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Readymag Stories</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Scroll-driven visual storytelling format. The format itself is the product demo — immersive, cinematic.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Immersive</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Scroll-driven</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Cinematic</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 14, 18</span>
+                        <a href="https://readymag.com/stories" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Portfolio ===== -->
+            <div class="ref-card" data-ref-category="portfolio">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">P01 · Portfolio</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Lynn Fisher</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Annual complete redesign as portfolio piece. Resize-responsive CSS art demonstrates mastery through construction.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Playful</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Experimental</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Creative</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 17</span>
+                        <a href="https://lynnandtonic.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="portfolio">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">P02 · Portfolio</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Bram.us</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Blog-as-portfolio for technical credibility. 20+ years of CSS posts ARE the credential — content-first.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Developer</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Content-first</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 01, 03</span>
+                        <a href="https://www.bram.us" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="portfolio">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">P03 · Portfolio</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Tobias van Schneider</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Personal brand as design studio. Dark monochromatic base with strategic color injection through project work.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Editorial</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Brand</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 01, 09</span>
+                        <a href="https://vanschneider.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="portfolio">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">P04 · Portfolio</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Pentagram</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Partner-first structure + massive case study grid. Blank-canvas aesthetic — white lets diverse work shine.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Grid</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Partner-focused</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03, 09</span>
+                        <a href="https://www.pentagram.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="portfolio">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">P05 · Portfolio</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Rauno Freiberg</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">OS-metaphor navigation with dock-style interface. Every micro-interaction proves the "interaction designer" title.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Interaction</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Craft</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 02, 15</span>
+                        <a href="https://rauno.me" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Dashboard ===== -->
+            <div class="ref-card" data-ref-category="dashboard">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">D01 · Dashboard</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Mercury</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Financial data presented beautifully. Clean banking UI — warm minimal palette, product-led marketing.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Banking</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03, 08</span>
+                        <a href="https://mercury.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="dashboard">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">D02 · Dashboard</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Linear App</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Keyboard-driven UI + information density. Dark, dense — opacity-based text hierarchy, compact list items.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dense</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Keyboard</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 07, 17</span>
+                        <a href="https://linear.app" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="dashboard">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">D03 · Dashboard</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Figma</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Canvas-based spatial interface. Multiplayer cursor indicators, approachable complexity with overlapping elements.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Collaborative</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Spatial</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 12</span>
+                        <a href="https://figma.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="dashboard">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">D04 · Dashboard</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Vercel Dashboard</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Real-time deployment logs + terminal aesthetic. Black-and-white, 1px border cards, no shadows.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Developer</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Real-time</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 02, 17</span>
+                        <a href="https://vercel.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="dashboard">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">D05 · Dashboard</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Notion</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Block-based modular content system. Emoji as navigation, warm near-black palette, template gallery as growth engine.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Modular</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Block-based</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 15</span>
+                        <a href="https://notion.so" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Membership ===== -->
+            <div class="ref-card" data-ref-category="membership">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">M01 · Membership</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Circle</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Community platform with course integration. Creator showcase, white-label positioning — warm and light.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Community</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Warm</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 12</span>
+                        <a href="https://circle.so" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="membership">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">M02 · Membership</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Supercast</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Radically simple creator monetization. Narrow content, copy-only hero, revenue metric callouts.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Creator</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 03, 02</span>
+                        <a href="https://supercast.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="membership">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">M03 · Membership</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Maven</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Cohort-based learning marketplace. Instructor-first cards, sticky enrollment sidebar, urgency with real numbers.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Bold</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Education</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Cohort</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 11</span>
+                        <a href="https://maven.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="membership">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">M04 · Membership</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Teachable</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Course builder with revenue social proof ($1B+). Product screenshots in browser frames, pricing tier highlights.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Creator</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 12</span>
+                        <a href="https://teachable.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="membership">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">M05 · Membership</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Patreon</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Tiered membership with creator showcasing. Overlapping avatar hero, warm tones, community signals throughout.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Warm</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Creator</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Layered</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">Directions: 06, 05</span>
+                        <a href="https://patreon.com" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Inspiration (X/Twitter Design References) ===== -->
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I01 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Rishabh Joshi</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Dark dashboard/landing UI with gradient accents. Product screenshots, data visualizations, and clean typography across 4 designs.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dark</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dashboard</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Gradient</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@rishabhhdesigns · 4 shots</span>
+                        <a href="https://x.com/rishabhhdesigns" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 mt-3">
+                        <img src="design-references/rishabh-01.jpg" alt="Rishabh 01" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/rishabh-02.jpg" alt="Rishabh 02" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/rishabh-03.jpg" alt="Rishabh 03" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/rishabh-04.jpg" alt="Rishabh 04" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I02 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Atiqur Rahaman</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Clean landing page with minimal aesthetic. Focus on whitespace, typography hierarchy, and clear visual structure.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Minimal</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Light</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@atiq31416 · 1 shot</span>
+                        <a href="https://x.com/atiq31416" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="mt-3">
+                        <img src="design-references/atiq-clean-landing-01.jpg" alt="Atiqur clean landing" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I03 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Tariq / Goldsand</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Modern prayer and Quran app UI redesigns. Beautiful Islamic-themed interfaces with premium feel and smooth animations.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Mobile</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Premium</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">App UI</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@thesubmitter_ · 1 shot</span>
+                        <a href="https://x.com/thesubmitter_" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="mt-3">
+                        <img src="design-references/tariq-prayer-app-ui-01.jpg" alt="Tariq prayer app UI" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I04 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Kuba / Frame5</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Web designs for founders, creators and startups. Clean layouts, modern typography, strong visual hierarchy across 4 designs.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Clean</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Founder</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Modern</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@uikuba · 4 shots</span>
+                        <a href="https://x.com/uikuba" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 mt-3">
+                        <img src="design-references/kuba-web-design-01.jpg" alt="Kuba 01" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/kuba-web-design-02.jpg" alt="Kuba 02" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/kuba-web-design-03.jpg" alt="Kuba 03" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/kuba-web-design-04.jpg" alt="Kuba 04" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I05 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Adonias</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Digital experiences for tech startups. Clean, modern interfaces with strong visual hierarchy across 4 designs.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Tech</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Startup</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Modern</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@adomicael · 4 shots</span>
+                        <a href="https://x.com/adomicael" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 mt-3">
+                        <img src="design-references/adonias-startup-design-01.jpg" alt="Adonias 01" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/adonias-startup-design-02.jpg" alt="Adonias 02" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/adonias-startup-design-03.jpg" alt="Adonias 03" class="ref-img w-full rounded-sm" loading="lazy">
+                        <img src="design-references/adonias-startup-design-04.jpg" alt="Adonias 04" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I06 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Sujon Hossain</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">$3K landing page that makes a $100K healing journey feel deeply worth it. Premium wellness with sophisticated visual design.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Premium</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Wellness</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">High-ticket</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@sujon_co · 1 shot</span>
+                        <a href="https://x.com/sujon_co" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="mt-3">
+                        <img src="design-references/sujon-healing-landing-01.jpg" alt="Sujon healing landing" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I07 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Aman Ansari</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">AI-generated design showcase. High-quality product design for startup/SaaS founders pushing AI design capabilities.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">AI-gen</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">SaaS</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Startup</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@HeyAnsariUX · 1 shot</span>
+                        <a href="https://x.com/HeyAnsariUX" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="mt-3">
+                        <img src="design-references/ansari-ai-design-01.jpg" alt="Ansari AI design" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ref-card" data-ref-category="inspiration">
+                <div class="border border-border p-5 h-full flex flex-col">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-muted">I08 · Inspiration</span>
+                    <h3 class="font-serif text-xl mt-2 mb-1">Dennis Adriaansen</h3>
+                    <p class="text-[13px] text-muted mb-3 flex-1">Popular Nuxt UI template with beautiful components and dashboard design. Clean, modern, developer-friendly aesthetics.</p>
+                    <div class="flex gap-2 flex-wrap mb-3">
+                        <span class="text-[11px] border border-border px-2 py-0.5">Dashboard</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Components</span>
+                        <span class="text-[11px] border border-border px-2 py-0.5">Nuxt</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-muted">@DennisAdriaans · 1 shot</span>
+                        <a href="https://x.com/DennisAdriaans" target="_blank" rel="noopener" class="text-off-white border-b border-current hover:opacity-70 transition-opacity">Visit →</a>
+                    </div>
+                    <div class="mt-3">
+                        <img src="design-references/dennis-nuxt-ui-template-01.jpg" alt="Dennis Nuxt UI template" class="ref-img w-full rounded-sm" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border py-8 px-6">
+        <div class="max-w-[1200px] mx-auto flex justify-between items-center text-[12px] text-muted">
+            <span>18 directions · 48 references · Updated Feb 2026</span>
+            <span>Open <code class="text-off-white">catalogue/INDEX.md</code> for recommendation matrix</span>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab-btn');
+        const dirGrid = document.getElementById('grid-directions');
+        const refGrid = document.getElementById('grid-references');
+        const dirFilters = document.getElementById('filters-directions');
+        const refFilters = document.getElementById('filters-references');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                if (target === 'directions') {
+                    dirGrid.classList.remove('hidden');
+                    refGrid.classList.add('hidden');
+                    dirFilters.classList.remove('hidden');
+                    refFilters.classList.add('hidden');
+                } else {
+                    dirGrid.classList.add('hidden');
+                    refGrid.classList.remove('hidden');
+                    dirFilters.classList.add('hidden');
+                    refFilters.classList.remove('hidden');
+                }
+            });
+        });
+
+        // Filter logic — Directions
+        const dirButtons = dirFilters.querySelectorAll('.filter-btn');
+        const dirCards = document.querySelectorAll('.direction-card');
+
+        dirButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                dirButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                dirCards.forEach(card => {
+                    const categories = card.dataset.categories.split(',');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.classList.remove('hidden-filter');
+                    } else {
+                        card.classList.add('hidden-filter');
+                    }
+                });
+            });
+        });
+
+        // Filter logic — References
+        const refButtons = refFilters.querySelectorAll('.filter-btn');
+        const refCards = document.querySelectorAll('.ref-card');
+
+        refButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                refButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                refCards.forEach(card => {
+                    const category = card.dataset.refCategory;
+                    if (filter === 'all' || category === filter) {
+                        card.classList.remove('hidden-filter');
+                    } else {
+                        card.classList.add('hidden-filter');
+                    }
+                });
+            });
+        });
+
+        // Inject screenshot thumbnails into reference cards
+        document.querySelectorAll('.ref-card').forEach(card => {
+            const link = card.querySelector('a[target="_blank"]');
+            if (!link) return;
+            const url = link.href;
+            const inner = card.querySelector('.border');
+            const siteName = card.querySelector('h3').textContent;
+
+            // Restructure card: remove padding, add thumbnail + content wrapper
+            inner.classList.remove('p-5');
+            inner.classList.add('overflow-hidden');
+            const content = inner.innerHTML;
+            inner.innerHTML = `
+                <div class="overflow-hidden">
+                    <img src="https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=600&h=375"
+                         alt="${siteName}"
+                         class="ref-img w-full transition-all duration-300"
+                         loading="lazy"
+                         onerror="this.parentElement.innerHTML='<div class=\\'ref-img-placeholder\\'><span>${new URL(url).hostname}</span></div>'">
+                </div>
+                <div class="p-5 flex flex-col flex-1">${content}</div>
+            `;
+        });
+    </script>
+</body>
+</html>
