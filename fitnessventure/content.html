@@ -113,17 +113,128 @@
             font-weight: 500;
         }
 
-        .idea-item {
-            padding: 10px 14px;
+        .idea-card {
             border-left: 3px solid #2D6A4F;
             background: #FAFAF7;
             font-size: 15px;
             color: #1a1a1a;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            overflow: hidden;
         }
 
-        .idea-item:hover {
+        .idea-card:hover {
             background: #F0EFE9;
+        }
+
+        .idea-card.open {
+            border-color: #1B4332;
+            background: #FFFFFF;
+            border-left-width: 4px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .idea-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .idea-toggle {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #2D6A4F;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .idea-card.open .idea-toggle {
+            transform: rotate(45deg);
+            background: #1B4332;
+        }
+
+        .idea-brief {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .idea-card.open .idea-brief {
+            max-height: 800px;
+        }
+
+        .brief-inner {
+            padding: 0 16px 16px 16px;
+            border-top: 1px solid #F0EFE9;
+        }
+
+        .brief-label {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #2D6A4F;
+            margin-bottom: 4px;
+        }
+
+        .brief-section {
+            margin-top: 12px;
+        }
+
+        .brief-section p, .brief-section li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4a4a4a;
+        }
+
+        .brief-section ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .brief-section li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 6px;
+        }
+
+        .brief-section li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #2D6A4F;
+            opacity: 0.4;
+        }
+
+        .brief-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #F0EFE9;
+        }
+
+        .brief-meta span {
+            font-size: 12px;
+            color: #7a7a7a;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .mix-bar {
@@ -216,78 +327,48 @@
             </p>
 
             <div class="space-y-6">
-                <!-- Pillar 1 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
                     <span class="pillar-number">01</span>
                     <div class="relative">
                         <h3 class="text-xl font-bold text-ink mb-2">Food Callouts</h3>
-                        <p class="text-ink-light mb-6 max-w-[600px]">Call out the BS in the food industry. This is the most viral format in the fitness niche.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="idea-item">"This 'healthy' cereal has more sugar than a Mars bar"</div>
-                            <div class="idea-item">"Stop buying these 'protein' bars — here's why"</div>
-                            <div class="idea-item">"What I feed my kids vs what most parents feed theirs"</div>
-                            <div class="idea-item">"Read the ingredients on this — you'll never buy it again"</div>
-                        </div>
+                        <p class="text-ink-light mb-4 max-w-[600px]">Call out the BS in the food industry. This is the most viral format in the fitness niche.</p>
+                        <a href="#food-callouts" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline">See all 10 ideas with video briefs &darr;</a>
                     </div>
                 </div>
 
-                <!-- Pillar 2 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
                     <span class="pillar-number">02</span>
                     <div class="relative">
                         <h3 class="text-xl font-bold text-ink mb-2">Simple Workouts</h3>
-                        <p class="text-ink-light mb-6 max-w-[600px]">Show dads what they can do in 30 minutes with zero equipment.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="idea-item">"The only 3 exercises you need as a busy dad"</div>
-                            <div class="idea-item">"30-minute living room workout — try this tonight"</div>
-                            <div class="idea-item">"No gym? No problem. Here's what I do at home."</div>
-                            <div class="idea-item">"This 5-minute morning routine changed my energy levels"</div>
-                        </div>
+                        <p class="text-ink-light mb-4 max-w-[600px]">Show dads what they can do in 30 minutes with zero equipment.</p>
+                        <a href="#simple-workouts" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline">See all 10 ideas with video briefs &darr;</a>
                     </div>
                 </div>
 
-                <!-- Pillar 3 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
                     <span class="pillar-number">03</span>
                     <div class="relative">
                         <h3 class="text-xl font-bold text-ink mb-2">Dad Life + Fitness</h3>
-                        <p class="text-ink-light mb-6 max-w-[600px]">Show that being a fit dad and a present dad aren't mutually exclusive.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="idea-item">"POV: keeping up with your kids at 41"</div>
-                            <div class="idea-item">"My morning routine as a fit dad"</div>
-                            <div class="idea-item">"What a Saturday looks like when you're a dad who trains"</div>
-                            <div class="idea-item">"Training with kids around — the real version"</div>
-                        </div>
+                        <p class="text-ink-light mb-4 max-w-[600px]">Show that being a fit dad and a present dad aren't mutually exclusive.</p>
+                        <a href="#dad-life" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline">See all 10 ideas with video briefs &darr;</a>
                     </div>
                 </div>
 
-                <!-- Pillar 4 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
                     <span class="pillar-number">04</span>
                     <div class="relative">
                         <h3 class="text-xl font-bold text-ink mb-2">Myth-Busting / Contrarian Takes</h3>
-                        <p class="text-ink-light mb-6 max-w-[600px]">Challenge what dads think they know. Debate = comments = reach.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="idea-item">"Stop running. It's not fixing your dad bod."</div>
-                            <div class="idea-item">"You don't need a gym membership"</div>
-                            <div class="idea-item">"Calories in, calories out is NOT the whole story"</div>
-                            <div class="idea-item">"Why most dad fitness advice is wrong"</div>
-                        </div>
+                        <p class="text-ink-light mb-4 max-w-[600px]">Challenge what dads think they know. Debate = comments = reach.</p>
+                        <a href="#myth-busting" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline">See all 10 ideas with video briefs &darr;</a>
                     </div>
                 </div>
 
-                <!-- Pillar 5 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 md:p-10 relative overflow-hidden fade-up">
                     <span class="pillar-number">05</span>
                     <div class="relative">
                         <h3 class="text-xl font-bold text-ink mb-2">Motivation / Identity</h3>
-                        <p class="text-ink-light mb-6 max-w-[600px]">Tap into WHY dads want to change. Emotional content gets saved and shared.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="idea-item">"Your kids deserve a dad who can keep up"</div>
-                            <div class="idea-item">"I'm 41 and in the best shape of my life — here's why"</div>
-                            <div class="idea-item">"This is what giving up looks like vs showing up"</div>
-                            <div class="idea-item">"You used to be that guy. You can be him again."</div>
-                        </div>
+                        <p class="text-ink-light mb-4 max-w-[600px]">Tap into WHY dads want to change. Emotional content gets saved and shared.</p>
+                        <a href="#motivation" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline">See all 10 ideas with video briefs &darr;</a>
                     </div>
                 </div>
             </div>
@@ -305,7 +386,6 @@
                 Not every post has the same job. Here's what your mix should look like each week.
             </p>
 
-            <!-- Visual bar -->
             <div class="max-w-[700px] mx-auto mb-12 fade-up">
                 <div class="mix-bar mb-4">
                     <div class="bg-accent-dark h-full" style="width: 30%"></div>
@@ -372,41 +452,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="day-cell">Monday</td>
-                                <td class="pillar-cell">Food Callout</td>
-                                <td>Film what you're having for lunch + one opinion</td>
-                            </tr>
-                            <tr>
-                                <td class="day-cell">Tuesday</td>
-                                <td class="pillar-cell">Workout</td>
-                                <td>Film 30 seconds of your workout</td>
-                            </tr>
-                            <tr>
-                                <td class="day-cell">Wednesday</td>
-                                <td class="pillar-cell">Myth-Buster</td>
-                                <td>Quick take — "Stop doing X, do Y instead"</td>
-                            </tr>
-                            <tr>
-                                <td class="day-cell">Thursday</td>
-                                <td class="pillar-cell">Dad Life</td>
-                                <td>Film a moment with the kids + tie it to fitness</td>
-                            </tr>
-                            <tr>
-                                <td class="day-cell">Friday</td>
-                                <td class="pillar-cell">Motivation</td>
-                                <td>Your journey, a win, or why you started</td>
-                            </tr>
-                            <tr>
-                                <td class="day-cell">Saturday</td>
-                                <td class="pillar-cell">Workout</td>
-                                <td>Weekend workout demo or challenge</td>
-                            </tr>
-                            <tr>
-                                <td class="day-cell">Sunday</td>
-                                <td class="pillar-cell">Invite</td>
-                                <td>"If you're a dad ready for change — link in bio"</td>
-                            </tr>
+                            <tr><td class="day-cell">Monday</td><td class="pillar-cell">Food Callout</td><td>Film what you're having for lunch + one opinion</td></tr>
+                            <tr><td class="day-cell">Tuesday</td><td class="pillar-cell">Workout</td><td>Film 30 seconds of your workout</td></tr>
+                            <tr><td class="day-cell">Wednesday</td><td class="pillar-cell">Myth-Buster</td><td>Quick take — "Stop doing X, do Y instead"</td></tr>
+                            <tr><td class="day-cell">Thursday</td><td class="pillar-cell">Dad Life</td><td>Film a moment with the kids + tie it to fitness</td></tr>
+                            <tr><td class="day-cell">Friday</td><td class="pillar-cell">Motivation</td><td>Your journey, a win, or why you started</td></tr>
+                            <tr><td class="day-cell">Saturday</td><td class="pillar-cell">Workout</td><td>Weekend workout demo or challenge</td></tr>
+                            <tr><td class="day-cell">Sunday</td><td class="pillar-cell">Invite</td><td>"If you're a dad ready for change — link in bio"</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -434,7 +486,6 @@
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[860px] mx-auto">
-                <!-- Step 1 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
@@ -445,8 +496,6 @@
                         Prop your phone against something. Kitchen counter, water bottle, window ledge. Natural light. That's your studio.
                     </p>
                 </div>
-
-                <!-- Step 2 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
@@ -457,8 +506,6 @@
                         Start talking BEFORE you think you're ready. The first thing out of your mouth should make someone stop scrolling. "Dads, stop eating this." / "This is why you're still fat." / "I'm 41 and here's what I eat."
                     </p>
                 </div>
-
-                <!-- Step 3 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
@@ -469,8 +516,6 @@
                         One point. Not five. One thing you want them to know. Keep it under 30 seconds total.
                     </p>
                 </div>
-
-                <!-- Step 4 -->
                 <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
@@ -502,14 +547,12 @@
                                 Instagram lets you post reels that only go to non-followers. Your existing followers — your friends, family, colleagues — never see them. It's a testing ground with zero social pressure.
                             </p>
                         </div>
-
                         <div class="border-t border-input-border pt-6">
                             <h3 class="text-lg font-bold text-ink mb-3">Your first 2 weeks</h3>
                             <p class="text-ink-light leading-relaxed">
                                 Record 20 trial reels in your first 2 weeks. Test different formats. See what gets views. See what feels natural. Then double down on your winning format.
                             </p>
                         </div>
-
                         <div class="border-t border-input-border pt-6">
                             <div class="bg-accent/10 border border-accent/20 rounded-card px-6 py-4">
                                 <p class="text-ink font-semibold text-[15px] leading-relaxed">
@@ -530,108 +573,56 @@
                 <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">Your Vault</span>
                 <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">50 content ideas to get you started</h2>
             </div>
-            <p class="text-center text-ink-light max-w-[560px] mx-auto mb-16 fade-up">
-                Every single one of these is a ready-to-film hook. Pick one, hit record, done.
+            <p class="text-center text-ink-light max-w-[560px] mx-auto mb-6 fade-up">
+                Every single one of these is a ready-to-film hook. Click any idea to see the full video brief — what to say, how to film it, and where.
+            </p>
+            <p class="text-center text-muted text-sm mb-16 fade-up">
+                <span class="inline-flex items-center gap-1.5"><span class="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">+</span> Click to expand video brief</span>
             </p>
 
             <!-- Food Callouts -->
-            <div class="mb-10 fade-up">
+            <div id="food-callouts" class="mb-12 fade-up">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
                     <h3 class="text-lg font-bold text-ink">Food Callouts</h3>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="idea-item">"This 'healthy' breakfast is worse than McDonald's"</div>
-                    <div class="idea-item">"What I actually buy at the supermarket — full shop"</div>
-                    <div class="idea-item">"Stop giving your kids this for breakfast"</div>
-                    <div class="idea-item">"3 meals I eat every single week"</div>
-                    <div class="idea-item">"The worst 'health' foods in your kitchen right now"</div>
-                    <div class="idea-item">"Read the back of this label — you'll put it down"</div>
-                    <div class="idea-item">"What I eat in a day as a 41-year-old dad"</div>
-                    <div class="idea-item">"I swapped this one thing and lost 5kg"</div>
-                    <div class="idea-item">"Your protein bar has more sugar than a Snickers"</div>
-                    <div class="idea-item">"The shopping list that changed my body"</div>
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pillar-food"></div>
             </div>
 
             <!-- Simple Workouts -->
-            <div class="mb-10 fade-up">
+            <div id="simple-workouts" class="mb-12 fade-up">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
                     <h3 class="text-lg font-bold text-ink">Simple Workouts</h3>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="idea-item">"The only workout you need as a busy dad"</div>
-                    <div class="idea-item">"15-minute morning workout — no equipment"</div>
-                    <div class="idea-item">"I do this every day before the kids wake up"</div>
-                    <div class="idea-item">"3 exercises that burn the most fat"</div>
-                    <div class="idea-item">"This 30-minute workout replaced my gym membership"</div>
-                    <div class="idea-item">"Push-ups are the most underrated exercise — here's why"</div>
-                    <div class="idea-item">"The dad workout: try this in your living room tonight"</div>
-                    <div class="idea-item">"Full body workout in the time it takes to boil the kettle"</div>
-                    <div class="idea-item">"My actual workout routine — no gym needed"</div>
-                    <div class="idea-item">"Do this for 30 days and watch what happens"</div>
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pillar-workouts"></div>
             </div>
 
             <!-- Dad Life -->
-            <div class="mb-10 fade-up">
+            <div id="dad-life" class="mb-12 fade-up">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
                     <h3 class="text-lg font-bold text-ink">Dad Life</h3>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="idea-item">"POV: your dad can actually keep up at the park"</div>
-                    <div class="idea-item">"My kids don't know their dad used to be unfit"</div>
-                    <div class="idea-item">"What my morning looks like — school run to workout"</div>
-                    <div class="idea-item">"Being a fit dad isn't about the gym. It's about this."</div>
-                    <div class="idea-item">"Saturday with the kids — the fit dad version"</div>
-                    <div class="idea-item">"The real reason I got in shape (it wasn't for me)"</div>
-                    <div class="idea-item">"My wife's reaction when I started taking my health seriously"</div>
-                    <div class="idea-item">"I'm 41 and I have more energy than most 25-year-olds"</div>
-                    <div class="idea-item">"The hardest part of being a fit dad isn't the training"</div>
-                    <div class="idea-item">"This is what my kids see every morning"</div>
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pillar-dadlife"></div>
             </div>
 
             <!-- Myth-Busting -->
-            <div class="mb-10 fade-up">
+            <div id="myth-busting" class="mb-12 fade-up">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
                     <h3 class="text-lg font-bold text-ink">Myth-Busting</h3>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="idea-item">"Stop running. Here's what to do instead."</div>
-                    <div class="idea-item">"Cardio won't save your dad bod"</div>
-                    <div class="idea-item">"You don't need protein shakes"</div>
-                    <div class="idea-item">"The gym is optional. Consistency isn't."</div>
-                    <div class="idea-item">"Why 'eating less' is making you fatter"</div>
-                    <div class="idea-item">"The biggest lie the fitness industry tells dads"</div>
-                    <div class="idea-item">"You don't need a 6-pack. You need this instead."</div>
-                    <div class="idea-item">"Why willpower is a myth (and what actually works)"</div>
-                    <div class="idea-item">"Stop counting calories. Do this instead."</div>
-                    <div class="idea-item">"The truth about cheat meals"</div>
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pillar-myths"></div>
             </div>
 
             <!-- Motivation -->
-            <div class="fade-up">
+            <div id="motivation" class="fade-up">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
                     <h3 class="text-lg font-bold text-ink">Motivation</h3>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="idea-item">"Your kids deserve a dad who can keep up"</div>
-                    <div class="idea-item">"The version of you that your family needs is still in there"</div>
-                    <div class="idea-item">"I was exactly where you are 2 years ago"</div>
-                    <div class="idea-item">"It's not about looking good. It's about how you feel when you wake up."</div>
-                    <div class="idea-item">"Every dad who joins says the same thing: 'I wish I started sooner'"</div>
-                    <div class="idea-item">"30 minutes a day. That's all it took to change my life."</div>
-                    <div class="idea-item">"You're not too old. You're not too busy. You're just not started."</div>
-                    <div class="idea-item">"This is what happens when dads hold each other accountable"</div>
-                    <div class="idea-item">"Stop waiting for Monday. Start today."</div>
-                    <div class="idea-item">"You don't need motivation. You need a system."</div>
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pillar-motivation"></div>
             </div>
         </div>
     </section>
@@ -655,25 +646,140 @@
         </div>
     </footer>
 
-    <!-- Scroll-triggered fade-up animation -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-            );
+    // ===== VIDEO BRIEF DATA =====
+    const briefs = {
+        food: [
+            {title:"This \u2018healthy\u2019 breakfast is worse than McDonald\u2019s",hook:"Your breakfast is worse than a McDonald\u2019s. I\u2019ll prove it.",setup:"You swapped the fry-up for granola and yoghurt. You\u2019re being good. Except you\u2019re not.",value:["Pick up your granola \u2014 (hold the bag up) \u2014 flip it over","Read the sugar line. Go on.","Most branded granola has 25-30g of sugar per serving \u2014 that\u2019s more than a Big Mac meal","You think you\u2019re making progress. You\u2019re actually in a sugar spike by 8am, crashing by 10","One swap: eggs and fruit. Done. Takes the same time."],cta:"Follow for more of these. I\u2019ve got a full food list \u2014 DM me RESET.",setting:"Kitchen counter, morning light, granola bag in hand",duration:"35 sec"},
+            {title:"What I actually buy at the supermarket \u2014 full shop",hook:"This is everything I buy every week. Forty-one years old, two kids, no chef.",setup:"People make food complicated. It doesn\u2019t have to be. Same 15-20 items, every week.",value:["Walk the shop with me \u2014 (walking down aisle, talking to camera)","Protein: chicken thighs, mince, eggs, Greek yoghurt \u2014 (pick each up)","Carbs: rice, sweet potato, oats \u2014 nothing special","Veg: whatever\u2019s cheap and in season \u2014 frozen is fine","That\u2019s a week of meals for the whole family. Under \u00a380."],cta:"Want the full list? Comment LIST and I\u2019ll send it.",setting:"Supermarket floor, hand-held phone, walking and talking",duration:"40 sec"},
+            {title:"Stop giving your kids this for breakfast",hook:"Please stop giving your kids this for breakfast.",setup:"I get it \u2014 mornings are chaos. School run, lunches, shoes everywhere. Cereal is easy. But look at what\u2019s actually in it.",value:["(Hold up a cereal box \u2014 something marketed at kids)","Third ingredient: sugar. Sometimes second.","They\u2019ll be starving by 9am, can\u2019t focus in class","Swap: scrambled eggs takes four minutes. Oats take two.","Your kids eat better, you eat better, everyone\u2019s less mental by lunchtime."],cta:"Follow \u2014 I post stuff like this every week.",setting:"Kitchen, school run morning energy",duration:"35 sec"},
+            {title:"3 meals I eat every single week",hook:"Three meals I eat every single week. Same ones. Every week.",setup:"Not because I\u2019m boring. Because decision fatigue is real, and I refuse to think about food at 6pm after a full day.",value:["Meal one: chicken thighs, rice, frozen veg \u2014 (point to pan) \u2014 20 minutes","Meal two: mince and sweet potato \u2014 family eats the same thing","Meal three: eggs and whatever\u2019s in the fridge","You don\u2019t need variety. You need reliability.","Consistency beats perfection every time."],cta:"DM me RESET \u2014 I\u2019ll send you the full weekly meal structure.",setting:"Kitchen, cooking one of the meals mid-video",duration:"40 sec"},
+            {title:"The worst \u2018health\u2019 foods in your kitchen right now",hook:"Go to your kitchen. These five things are not as healthy as you think.",setup:"The diet industry sells you \u2018healthy\u2019 food that\u2019s mostly marketing. Your kitchen\u2019s probably full of it.",value:["Flavoured yoghurt \u2014 (go to the fridge) \u2014 same sugar as a dessert","Fruit juice \u2014 not the same as fruit. Basically sugar water.","Low-fat anything \u2014 they cut fat, add sugar to make it taste decent","Protein bars \u2014 (hold one up) \u2014 check the sugar line","None of this is your fault. The labelling is designed to confuse you."],cta:"Follow. I\u2019ll keep calling these out.",setting:"Kitchen, opening cupboards and fridge as you go",duration:"40 sec"},
+            {title:"Read the back of this label \u2014 you\u2019ll put it down",hook:"Read the back of this. Go on. You\u2019ll put it down.",setup:"You grabbed this because the front said \u2018natural\u2019 and \u2018high protein.\u2019 The front is a lie.",value:["(Hold up a popular \u2018health\u2019 product)","Ingredients: first three things should be real food. What are they?","Sugar, glucose syrup, modified starch \u2014 that\u2019s not food, that\u2019s a formula","Two rules: if you can\u2019t pronounce three or more ingredients, put it back. If sugar appears twice under different names, put it back."],cta:"More of this every week. Follow so you don\u2019t miss it.",setting:"Supermarket or kitchen. Flip the product over mid-video.",duration:"38 sec"},
+            {title:"What I eat in a day as a 41-year-old dad",hook:"What I actually eat in a day. Forty-one, two kids, no meal prep Sundays.",setup:"Not a fitness influencer diet. Not six meals. Just what works when you\u2019ve got a full day and no time to overthink food.",value:["Breakfast: eggs, sometimes oats \u2014 five minutes, same every day","Lunch: leftovers from dinner or chicken and rice","Snack if I need it: Greek yoghurt, piece of fruit","Dinner: whatever I\u2019m cooking for the family \u2014 always protein, always veg","No supplements, no shakes, no complicated tracking."],cta:"DM me RESET if you want the simple weekly structure I use.",setting:"Kitchen, across the day or one sitting talking through it",duration:"42 sec"},
+            {title:"I swapped this one thing and lost 5kg",hook:"One swap. That\u2019s it. Five kilos.",setup:"Not a diet. Not a challenge. One thing I stopped buying that I didn\u2019t realise was holding me back.",value:["Fruit juice \u2014 (hold up a carton)","Was having a glass every morning. Felt like the healthy choice.","It\u2019s not. Basically sugar without the fibre. Spikes you, drops you.","Swapped it for water and a piece of actual fruit.","First two weeks felt nothing. By week four the weight started moving."],cta:"Follow \u2014 I post one thing like this every week.",setting:"Kitchen, fridge in background, hold the juice carton",duration:"38 sec"},
+            {title:"Your protein bar has more sugar than a Snickers",hook:"Your protein bar has more sugar than a Snickers. I\u2019m not joking.",setup:"You\u2019re grabbing it because it says 20g protein on the front. But nobody reads the back.",value:["(Hold up a popular branded protein bar)","Sugar content \u2014 (flip it over) \u2014 20, 25, sometimes 30 grams","Snickers bar: 27 grams. Roughly even.","Except the Snickers doesn\u2019t pretend to be a health food.","If you need a snack: Greek yoghurt, boiled eggs, handful of nuts."],cta:"More label callouts like this \u2014 follow so you catch them.",setting:"Kitchen or supermarket snack aisle",duration:"37 sec"},
+            {title:"The shopping list that changed my body",hook:"This is the shopping list that actually changed things for me.",setup:"Not a diet plan. Not a challenge. A list. Same one every week. Takes twenty minutes in the shop.",value:["Protein: chicken thighs, beef mince, eggs, Greek yoghurt","Carbs: rice, sweet potato, oats \u2014 nothing exotic","Veg: broccoli, spinach, whatever\u2019s cheap \u2014 frozen counts","About fifteen to twenty items. Same every week.","You stop making food decisions every day. Decision fatigue is why you reach for rubbish at 7pm."],cta:"DM me RESET and I\u2019ll send you the actual list.",setting:"Supermarket, trolley in hand, walking and talking",duration:"45 sec"}
+        ],
+        workouts: [
+            {title:"The only workout you need as a busy dad",hook:"Three movements. That\u2019s it. I haven\u2019t done anything else in six months.",setup:"Most dads think they need a full programme. You don\u2019t. You need something you\u2019ll actually do.",value:["Push-ups \u2014 drop and demo 10 reps, living room carpet","Squats \u2014 stand up, do 15, no weight \u2014 \u2018biggest muscles, burn the most\u2019","Plank \u2014 get on the floor, hold 30 seconds \u2014 \u2018core, back, everything\u2019","Three rounds. Twenty-five minutes. Done before the school run."],cta:"Follow \u2014 I post one of these every week. No gym required.",setting:"Living room floor, morning light, phone propped against sofa",duration:"35 sec"},
+            {title:"15-minute morning workout \u2014 no equipment",hook:"Fifteen minutes before anyone in this house wakes up \u2014 watch.",setup:"You don\u2019t need an hour. You don\u2019t need a gym. You need 15 minutes and a bit of floor space.",value:["Minute one: 20 jumping jacks \u2014 \u2018heart rate up, cost: nothing\u2019","Minute two and three: push-ups to failure, rest 30 seconds, repeat","Minute four and five: bodyweight squats, slow and controlled","Repeat the circuit twice \u2014 \u2018that\u2019s it, fifteen minutes, done\u2019","Pour your coffee. Kids aren\u2019t even up yet."],cta:"DM me RESET if you want the full weekly plan.",setting:"Kitchen, pre-dawn light, casual, barefoot",duration:"40 sec"},
+            {title:"I do this every day before the kids wake up",hook:"Six-fifteen every morning. Kids are asleep. This is mine.",setup:"Not a gym session. Not an hour. Eight minutes of movement that means I\u2019ve already won the day.",value:["Show the living room \u2014 dark, quiet, just you \u2014 \u2018this is the window\u2019","Three rounds: push-ups, squats, a plank \u2014 demo each one quickly","Point at the clock: \u2018six twenty-three. Done.\u2019","It\u2019s not about the workout. It\u2019s about proving to yourself you showed up before the chaos started."],cta:"Follow for the full routine \u2014 I\u2019ll post it this week.",setting:"Dark living room, lamp on, phone propped on coffee table",duration:"38 sec"},
+            {title:"3 exercises that burn the most fat",hook:"You only need three exercises. Most dads are doing the wrong ones.",setup:"If time is the issue \u2014 and it always is \u2014 you need the moves that do the most work in the least time.",value:["Number one: squats \u2014 biggest muscle group, demo 10 reps","Number two: push-ups \u2014 upper body, core, all at once \u2014 demo 10 clean","Number three: mountain climbers \u2014 demo 20 \u2014 \u2018heart rate up in thirty seconds\u2019","Three rounds of those three. Twenty minutes. That\u2019s your session."],cta:"Save this. Come back to it tonight.",setting:"Living room floor, good natural light from window",duration:"35 sec"},
+            {title:"This 30-minute workout replaced my gym membership",hook:"Cancelled my gym membership two years ago. Haven\u2019t looked back.",setup:"Not because the gym is bad. Because I\u2019ve got two kids, a job, and a commute. I don\u2019t have two hours.",value:["Hold up your phone \u2014 \u2018everything I do is on here or in this room\u2019","Walk through the living room \u2014 \u2018push-ups, squats, lunges \u2014 all here\u2019","Show a water bottle: \u2018this is my weight on shoulder days\u2019","The gym isn\u2019t the problem. The commute is. Cut the commute, keep the work."],cta:"Comment \u2018HOME\u2019 and I\u2019ll send you the exact routine.",setting:"Living room, natural light, water bottle prop",duration:"42 sec"},
+            {title:"Push-ups are the most underrated exercise \u2014 here\u2019s why",hook:"Push-ups. That\u2019s it. That\u2019s the post.",setup:"Sounds too simple. But if you haven\u2019t done a proper push-up in six months, you\u2019re not ready to argue.",value:["Get on the floor and demo \u2014 hands shoulder-width, chest to floor, full extension","Point at your chest, shoulders, triceps, core: \u2018five muscle groups in one move\u2019","Show a bad rep vs a good rep \u2014 shallow vs full range","20 push-ups a day. Start there. In four weeks you\u2019ll be doing 50."],cta:"Follow \u2014 I\u2019m building the 30-day push-up plan this month.",setting:"Living room floor, phone propped low to see the position",duration:"40 sec"},
+            {title:"The dad workout: try this in your living room tonight",hook:"Put the kids to bed. Come back here. Do this.",setup:"Eight PM. Kids are down. You\u2019ve got thirty minutes before you\u2019re too tired. Use them.",value:["Stand in your living room \u2014 show the space \u2014 \u2018this is the gym tonight\u2019","Round one: 15 squats, 10 push-ups, 30-second plank \u2014 demo each fast","Rest 60 seconds \u2014 \u2018don\u2019t sit down, you won\u2019t get back up\u2019","Three rounds. Twenty-five minutes. You\u2019ll sleep better tonight."],cta:"DM me RESET \u2014 I\u2019ll send you the full week plan.",setting:"Living room, evening, lamps on, kids\u2019 stuff in the corner",duration:"38 sec"},
+            {title:"Full body workout in the time it takes to boil the kettle",hook:"Kettle\u2019s on. Four minutes. Let\u2019s go.",setup:"Everyone\u2019s got time to wait for a kettle. Most dads just stand there scrolling. I don\u2019t.",value:["Show the kettle \u2014 press the button \u2014 \u2018clock starts now\u2019","20 jumping jacks \u2014 demo in the kitchen","10 push-ups on the kitchen floor","15 squats by the counter","Kettle clicks. \u2018Four minutes. Full body. Now I\u2019m having my coffee.\u2019"],cta:"Save this for tomorrow morning.",setting:"Kitchen, kettle visible, casual morning clothes",duration:"40 sec"},
+            {title:"My actual workout routine \u2014 no gym needed",hook:"People keep asking what I actually do. Here it is.",setup:"No programme name. No app subscription. Just the routine I\u2019ve run for eighteen months as a dad with no spare time.",value:["Monday, Wednesday, Friday \u2014 three fingers \u2014 \u2018three days, non-negotiable\u2019","Each session: push-ups, squats, lunges, plank, mountain climbers \u2014 demo fast","Three rounds. Thirty minutes. Done before school drop-off.","Tuesday, Thursday \u2014 walk with the kids, playground, park","Show your phone notes app: \u2018no app, no tracker, just this\u2019"],cta:"Follow \u2014 I\u2019ll break down each session this week.",setting:"Living room or kitchen, morning, notes app visible briefly",duration:"42 sec"},
+            {title:"Do this for 30 days and watch what happens",hook:"Thirty days. Same three moves. Every single morning.",setup:"Not a challenge. Not a programme. A habit test. Find out what thirty days of showing up actually does.",value:["The moves: push-ups, squats, plank \u2014 demo each \u2014 \u2018that\u2019s it, every day\u2019","Day one you\u2019ll do ten push-ups. Day thirty you\u2019ll do thirty.","You won\u2019t lose a stone in thirty days \u2014 I\u2019m not going to tell you that.","But your energy at three PM will be different. You\u2019ll keep up at the playground.","Not a six-pack. A different body to live in."],cta:"Comment \u2018thirty\u2019 if you\u2019re starting today \u2014 I\u2019ll check in.",setting:"Living room, morning light, demo the moves on camera",duration:"45 sec"}
+        ],
+        dadlife: [
+            {title:"POV: your dad can actually keep up at the park",hook:"\u2026and he\u2019s not even out of breath.",setup:"Most dads arrive at the park and just watch. I used to think that was just what being a dad looked like.",value:["(filming at the park, kids running ahead, handheld) \u2014 keeping pace","There\u2019s a version of you that\u2019s IN it. Not just watching from the bench.","I didn\u2019t get here by spending 2 hours in the gym. Consistent 30 minutes.","Same battle as you \u2014 school run, work, cooking. Just built a system.","(turn camera to show kids) \u2014 this is the reason."],cta:"DM me RESET if you want the system.",setting:"Local park, kids visible, walking or jogging alongside them",duration:"35 sec"},
+            {title:"My kids only know one version of me",hook:"My kids only know one version of me.",setup:"They\u2019ve never seen me turn down a kickaround because I was too tired. Never seen me on the sidelines.",value:["(at the park or garden, kids in background) \u2014 that didn\u2019t happen by accident","When I became a dad, time disappeared. Energy disappeared. The gym wasn\u2019t an option.","So I stopped training like a 22-year-old and started training like a dad \u2014 30 minutes, real food, no drama.","Now my kids just think this is what dads look like.","(pause, look at kids) \u2014 that\u2019s the one thing I want to keep."],cta:"Follow if you want that for your kids too.",setting:"Garden or park. Kids playing in background. Calm, reflective.",duration:"40 sec"},
+            {title:"What my morning looks like \u2014 school run to workout",hook:"6:47am. School bag, water bottle, someone can\u2019t find their shoes.",setup:"This is the window I\u2019ve got. And I\u2019ve stopped pretending I\u2019ll get more.",value:["(filming at school gates or walking back after drop-off)","I used to think I needed an hour minimum. That was the excuse.","Now: school run done, back home, 28 minutes. That\u2019s the session.","Same battle as every dad \u2014 built a system that fits in the gaps.","(arriving home) \u2014 started before the excuses could catch up."],cta:"Comment MORNING if you want the exact routine.",setting:"School gates, then walking home or kitchen. Real morning chaos.",duration:"38 sec"},
+            {title:"Being a fit dad isn\u2019t about the gym. It\u2019s about this.",hook:"I haven\u2019t been to a gym in four months.",setup:"And I\u2019m in the best shape I\u2019ve been in since becoming a dad.",value:["(kitchen or garden) \u2014 the gym was always the thing I thought I needed","But the gym needs 90 minutes. A drive. A window that doesn\u2019t exist with two kids and a job.","Being a fit dad is about what you do in the gaps. The 25-minute session. The walk. The meal you actually cook.","Boring? Yeah. But boring stacks up over 6 months.","(straight at camera) \u2014 it\u2019s not the gym. It\u2019s the system."],cta:"DM me RESET and I\u2019ll show you mine.",setting:"Kitchen or back garden. No gym equipment visible.",duration:"35 sec"},
+            {title:"Saturday with the kids \u2014 the fit dad version",hook:"Saturday morning. Two kids, no plan, full energy.",setup:"This used to feel like a write-off for any kind of health. Now it\u2019s the best part of the week.",value:["(filming at park or playground, kids visible) \u2014 park run, football, climbing","Didn\u2019t need a session today. This counts. Movement is movement.","(cut to kitchen) \u2014 chicken, rice, whatever veg was in the fridge","No faff. Just food that doesn\u2019t set you back.","Saturday used to undo the week. Now it\u2019s just a good day."],cta:"Follow \u2014 I post the Saturday routine every week.",setting:"Starts at park/playground, cuts to kitchen. Weekend energy.",duration:"42 sec"},
+            {title:"The real reason I got in shape (it wasn\u2019t for me)",hook:"I didn\u2019t do this for the mirror.",setup:"That\u2019s a bonus. But it\u2019s not what made it stick.",value:["(at the park, thoughtful) \u2014 there was a moment I realised I was physically checked out","Arriving at the park and not being IN it. Watching instead of playing.","I didn\u2019t want my kids to grow up thinking their dad just sat on the side.","30 minutes a day. Real food. No excuses. That\u2019s all it took.","(look at kids in background) \u2014 the reason it started was them."],cta:"If that hits \u2014 follow. I post for dads like us.",setting:"Park. Kids visible but not staged. Quiet, honest tone.",duration:"40 sec"},
+            {title:"My wife\u2019s reaction when I started taking my health seriously",hook:"She didn\u2019t say anything at first.",setup:"That was kind of the point. She\u2019d heard it before.",value:["(walking, handheld) \u2014 every January she\u2019d watched me \u2018start again\u2019","This time I didn\u2019t announce it. Just did it. 25 minutes before school run.","About 6 weeks in she said: \u2018you seem different.\u2019 Not your body. You.","More energy. Less snappy. Actually present in the evenings.","It\u2019s not about how you look to her. It\u2019s about who you become."],cta:"DM me RESET if you want the system that made it stick.",setting:"Walking outside or at home. Warm, honest.",duration:"42 sec"},
+            {title:"I\u2019m 41 and I have more energy than most 25-year-olds",hook:"41 years old. Two kids. Less sleep than I\u2019ve ever had.",setup:"And I wake up before my alarm most mornings.",value:["(morning kitchen) \u2014 this isn\u2019t genetics. Took years to figure out.","I used to think low energy was just being a dad. Part of the deal.","Turns out it was what I was eating, when I was moving, and how consistent I was.","Sleep is protected. Movement is non-negotiable. Food is simple.","You can do this at 35, 40, 45."],cta:"Follow \u2014 I post the exact habits every week.",setting:"Morning kitchen. Natural light. Relaxed, no performance.",duration:"38 sec"},
+            {title:"The hardest part of being a fit dad isn\u2019t the training",hook:"The training is the easy bit, honestly.",setup:"30 minutes. Done. That part I\u2019ve figured out.",value:["(kitchen or table, direct to camera) \u2014 the hard part is the environment","Cooking for a family who don\u2019t eat what you eat. Kids\u2019 leftovers at 7pm.","Nobody talks about that. They just say \u2018be consistent.\u2019","Stopped trying to eat separate food. Built meals the whole family eats that work for me.","(hold up plate) \u2014 this is dinner tonight. Everyone\u2019s having it.","The training isn\u2019t the battle. The kitchen is."],cta:"Comment KITCHEN and I\u2019ll post my go-to family meals.",setting:"Kitchen, evening. Food visible. Real, lived-in kitchen.",duration:"40 sec"},
+            {title:"This is what my kids see every morning",hook:"Every morning, before they\u2019re properly awake \u2014",setup:"I\u2019m moving. Not because I love it at 6am. Because I love what it does to the rest of the day.",value:["(early morning, low light, keeping quiet) \u2014 25 minutes. That\u2019s all.","They come downstairs and I\u2019m done. Breakfast is on. I\u2019m calm. Present.","Not every dad can do that. Shift work, baby up all night. It doesn\u2019t always land.","But when it does \u2014 they see a dad who takes care of himself.","That\u2019s the thing you\u2019re really teaching them. Not fitness. Just that it\u2019s worth looking after yourself."],cta:"Follow if you want to be that dad.",setting:"Early morning, home. Low light, quiet. Intimate, not staged.",duration:"38 sec"}
+        ],
+        myths: [
+            {title:"Stop running. Here\u2019s what to do instead.",hook:"Running is the worst thing you can do for your dad bod \u2014",setup:"You\u2019ve been told cardio is the answer. So you lace up, do a few weeks, hate every second, and quit. Sound familiar?",value:["Running barely burns anything \u2014 and you\u2019re too tired to do enough of it","It makes you hungrier. So you eat more. Net result? Nothing.","What actually works: resistance. 3 sessions, 30 minutes, in your living room.","You build muscle, your body burns more at rest, and you\u2019re not destroying your knees at 6am."],cta:"DM me RESET and I\u2019ll show you the exact sessions.",setting:"Kitchen or back garden, morning light, casual clothes",duration:"35 sec"},
+            {title:"Cardio won\u2019t save your dad bod",hook:"Cardio is not your problem. It never was \u2014",setup:"Every dad I talk to has done the same thing. Cardio push. Two weeks. Gone. Body looks the same.",value:["Cardio doesn\u2019t change what you look like. It changes stamina. Different thing.","What changes how you look and feel chasing the kids \u2014 building some muscle. Not a lot. Just enough.","The fitness industry sells cardio because it\u2019s easy to sell. But none of it was built for a 38-year-old with a full house."],cta:"Follow if you want the version that actually fits your life.",setting:"Walking outside, handheld, talking direct to camera",duration:"40 sec"},
+            {title:"You don\u2019t need protein shakes",hook:"Put the protein shake down \u2014",setup:"Someone sold you the idea that you need supplements to get results. You don\u2019t.",value:["Eggs, chicken, Greek yoghurt, a decent portion of whatever you cook for the family. That\u2019s your protein sorted.","The supplement industry makes money when you feel like you\u2019re missing something. You\u2019re not missing a shake.","I\u2019ve never told a client to buy anything. Not once. Results come from the routine, not the products."],cta:"Drop \u2018RESET\u2019 in the comments and I\u2019ll send you the exact food list.",setting:"Kitchen, natural daylight, something real on the counter",duration:"38 sec"},
+            {title:"The gym is optional. Consistency isn\u2019t.",hook:"I\u2019m going to say something the gym industry hates \u2014",setup:"You don\u2019t need a membership. You never did.",value:["The problem is the commute, the schedule, the \u2018I\u2019ll go tomorrow.\u2019 The gym adds friction. Friction kills consistency.","Three sessions a week, in your bedroom or garden, no equipment, 30 minutes. That\u2019s the whole programme.","The dads I work with stopped going to the gym and started getting results. Not because the gym is bad \u2014 because removing the excuse removes the quitting."],cta:"If you\u2019ve quit a gym membership at least once, follow. This is for you.",setting:"Living room or garden \u2014 deliberately not a gym setting",duration:"42 sec"},
+            {title:"Why \u2018eating less\u2019 is making you fatter",hook:"Starving yourself is why you can\u2019t lose weight \u2014",setup:"You cut everything out. You\u2019re hungry all day. Then Friday comes, kids are in bed, and you eat everything in the kitchen.",value:["That\u2019s not a willpower problem. That\u2019s biology. Your body thinks you\u2019re in a famine.","Eating enough of the right stuff \u2014 consistently \u2014 is what actually changes how your body works.","The weekend blowout isn\u2019t the cause. The Monday-to-Friday starvation is."],cta:"DM me RESET \u2014 I\u2019ll show you what a normal eating week looks like.",setting:"Kitchen, evening, like you\u2019re talking after the kids are in bed",duration:"40 sec"},
+            {title:"The biggest lie the fitness industry tells dads",hook:"The fitness industry doesn\u2019t want you to figure this out \u2014",setup:"You\u2019ve been buying programmes, apps, memberships. All built for someone with two hours a day and zero responsibilities.",value:["Fitness was designed by people who made fitness their whole life. That\u2019s not you.","You\u2019ve got a job, a partner, kids, a house \u2014 and about 30 minutes on a good day.","Then they tell you it\u2019s your fault for not being disciplined enough. That\u2019s the lie.","The system was never built for your life. That\u2019s what I fix."],cta:"Follow. I build this stuff specifically for dads.",setting:"Outside walking, candid handheld, slightly intense energy",duration:"38 sec"},
+            {title:"You don\u2019t need a 6-pack. You need this instead.",hook:"You don\u2019t actually want a six-pack \u2014",setup:"You want to not feel wrecked by 8pm. Keep up with your kids. Feel like yourself again.",value:["The six-pack goal is someone else\u2019s goal. The fitness industry planted it.","It requires levels of sacrifice not compatible with your life and your family.","What\u2019s actually achievable: energy, fitting in your clothes, not dreading a photo.","That\u2019s a 12-week problem, not a 12-month problem, when you stop chasing the wrong target."],cta:"Comment \u2018RESET\u2019 if this is what you actually want.",setting:"Casual home setting, speaking plainly",duration:"35 sec"},
+            {title:"Why willpower is a myth (and what actually works)",hook:"You don\u2019t have a willpower problem \u2014",setup:"You\u2019ve blamed yourself every time you quit. Told yourself you\u2019re not disciplined enough. That\u2019s not what\u2019s happening.",value:["Willpower is finite. By 7pm, after work, after the kids \u2014 there\u2019s nothing left.","Every diet that relies on willpower will fail at 7pm.","What works is removing the decision. A routine built so specifically it just happens.","That\u2019s a system. Not motivation. Not discipline. Structure."],cta:"DM me RESET \u2014 I\u2019ll show you how the system works.",setting:"Kitchen or lounge, evening vibe, kids\u2019 stuff visible",duration:"42 sec"},
+            {title:"Stop counting calories. Do this instead.",hook:"Obsessing over numbers is making your relationship with food worse \u2014",setup:"You\u2019ve done it. Logged everything, tracked every meal, burned out in two weeks.",value:["Tracking everything puts food in your head 24/7. Exhausting. Not sustainable with a family.","Three simple rules around meals. Nothing to track. Nothing to weigh. You know if you\u2019re following it.","The goal is a relationship with food you can maintain for 20 years. Not a six-week obsession."],cta:"Follow \u2014 the three rules are coming in the next one.",setting:"Kitchen, standing near the hob or fridge",duration:"38 sec"},
+            {title:"The truth about cheat meals",hook:"Cheat meals are keeping you stuck \u2014",setup:"You\u2019ve been good all week. So Friday is your reward. Then Friday turns into Saturday. And Sunday you \u2018restart Monday.\u2019",value:["The cheat meal is a symptom of a plan that\u2019s too restrictive.","When nothing is off limits, nothing is a cheat. When you\u2019re eating enough, Friday is just Friday.","The dads who get results aren\u2019t \u2018eating clean all week\u2019 \u2014 they\u2019re eating normally, consistently, with a plan that has room in it."],cta:"DM me RESET if you\u2019re done with the weekly restart cycle.",setting:"Kitchen, Friday evening feel, relaxed",duration:"40 sec"}
+        ],
+        motivation: [
+            {title:"Your kids deserve a dad who can keep up",hook:"My son asked me to race him last week. I said yes.",setup:"And halfway across the garden, I had to stop. Not because I\u2019m old. Because somewhere between work and trying to keep everything together \u2014 I let myself go.",value:["That moment stuck. Because he didn\u2019t care about my excuses. He just wanted his dad to run with him.","Most dads have a moment like that. A photo. A breath they shouldn\u2019t have lost.","That\u2019s not a fitness problem. That\u2019s a \u2018this life doesn\u2019t have room for me anymore\u2019 problem.","The version of you that could keep up \u2014 he\u2019s still there. He just needs a system that fits your life."],cta:"If you\u2019re done watching from the sidelines \u2014 DM me RESET.",setting:"Garden or park, early morning or evening. Direct to camera.",duration:"40 sec"},
+            {title:"The version of you that your family needs is still in there",hook:"There\u2019s a version of you your family still needs. And you\u2019ve been burying him under alarms you don\u2019t keep and diets you quit by Wednesday.",setup:"Not because you\u2019re weak. Because everything you\u2019ve tried was built for someone with a different life.",value:["The guy who had energy. Who was present. Who felt good in his body \u2014 he didn\u2019t disappear.","He got pushed to the back of the queue. Kids first. Work first. Wife first. Then him. Eventually \u2014 never.","Your family doesn\u2019t need you perfect. They need you present. With energy at the end of the day.","That\u2019s what I build with dads. Not six-packs. A version of themselves that has enough left to show up."],cta:"Follow if that hit something. DM me RESET if you want to talk.",setting:"Indoors, after kids are in bed. Lamp-lit. Quiet honesty.",duration:"38 sec"},
+            {title:"I fight the same battle you do. Two years ago I nearly gave up.",hook:"Two years ago I nearly gave up on staying fit altogether. Not because I\u2019d let myself go \u2014 because I couldn\u2019t figure out how to hold onto it.",setup:"New kid. Business growing. Less sleep than I\u2019d had in years. Every time I built momentum, life knocked it over.",value:["I\u2019ve always trained. That\u2019s not the shared struggle. The shared struggle is time. Energy. Showing up when you\u2019ve got nothing left.","My old routine just stopped working. It wasn\u2019t designed for this version of my life.","So I rebuilt it. Around school runs and early meetings and the nights where the kids don\u2019t sleep.","Things don\u2019t calm down. You just build a better system."],cta:"If you\u2019re fighting the same battle \u2014 DM me RESET.",setting:"Early morning. Kitchen. Natural honesty \u2014 not rehearsed.",duration:"42 sec"},
+            {title:"It\u2019s not about looking good. It\u2019s about how you feel when you wake up.",hook:"When\u2019s the last time you woke up and actually felt good? Not just functional. Actually good.",setup:"Most dads I talk to can\u2019t remember. Running on fumes so long it just feels normal.",value:["They\u2019re not chasing a body. They\u2019re chasing a feeling. Energy without coffee carrying them.","Confidence that doesn\u2019t require a good shirt.","The ability to walk into a room and not feel like a smaller version of who you used to be.","Just feeling like yourself again. Consistent. Clear. Present."],cta:"That\u2019s what I help dads get back. Follow \u2014 or DM me RESET.",setting:"Morning. Natural light. Just woken up feel. Authentic.",duration:"35 sec"},
+            {title:"Every dad who joins says the same thing: \u2018I wish I started sooner\u2019",hook:"Every single dad I\u2019ve worked with says the same thing at the end of month one.",setup:"\u2018I wish I\u2019d started sooner.\u2019 Not because of the results. Because of how quickly they remembered what it felt like.",value:["Two weeks in, one guy played football with his son for the first time in two years. Not because he\u2019d lost weight \u2014 because he had energy.","Another said his wife asked what was different. He couldn\u2019t explain it. Just felt lighter. Clearer.","That stuff happens fast when the system fits your life instead of fighting it.","The regret isn\u2019t starting. The regret is the months you waited."],cta:"Don\u2019t be the guy who waits another six months. DM me RESET.",setting:"Walking outside, casual. Talking like he\u2019s on the phone with a mate.",duration:"40 sec"},
+            {title:"30 minutes a day. That\u2019s all it took.",hook:"I rebuilt my entire routine around 30 minutes. Not because that\u2019s ideal \u2014 because that\u2019s what dad life gave me.",setup:"For years I chased the 90-minute sessions from before kids. Every time I couldn\u2019t hit them, I quit.",value:["The problem wasn\u2019t discipline. It was measuring success against a life I no longer had.","So I stopped. What can I actually do, consistently, with the life I have right now?","Thirty minutes. Five days. Built around school drop-off. Non-negotiable. Non-complicated.","Same guy. Same family. Same job. Different system. And it stuck."],cta:"DM me RESET and I\u2019ll send you the exact structure.",setting:"Home or small training space. Post-workout. Genuine.",duration:"38 sec"},
+            {title:"You\u2019re not too old. You\u2019re not too busy. You\u2019re just not started.",hook:"You\u2019re not too old. You\u2019re not too busy. You\u2019ve been waiting for conditions that are never coming.",setup:"\u2018When the project\u2019s done.\u2019 \u2018When the kids are older.\u2019 \u2018When things settle down.\u2019 They don\u2019t.",value:["Every month you wait, the gap gets a bit wider. A bit harder to close.","Not because your body is failing. Because the story you\u2019re telling yourself is getting louder.","The dads who make it work don\u2019t have more time. They stopped waiting for permission.","You already know what you need to do. You just haven\u2019t decided yet."],cta:"When you\u2019re ready to decide \u2014 DM me RESET.",setting:"Outdoors. Evening walk. Reflective but direct.",duration:"36 sec"},
+            {title:"This is what happens when dads hold each other accountable",hook:"Something shifts when you\u2019re in a group of dads fighting the same battle.",setup:"Not a generic group chat. Dads who are in it \u2014 same pressures, same life stage, same enemy.",value:["One guy was struggling last month. Work blown up, sleep gone, missed a week.","He posted at 10pm. By 10:15 \u2014 four other dads who\u2019d been there, telling him how they got back.","That\u2019s not motivation. That\u2019s infrastructure. People who know the life \u2014 not just the gym.","You don\u2019t need someone to cheer you on. You need people who don\u2019t let you disappear."],cta:"That\u2019s what we built. DM me RESET if you want in.",setting:"Quiet room. Late evening. Reflective, warm.",duration:"42 sec"},
+            {title:"Stop waiting for Monday. Start today.",hook:"Monday is a lie you\u2019ve been telling yourself for six months.",setup:"Not a dig. Just the truth. \u2018I\u2019ll start properly on Monday.\u2019 Monday comes. Life happens. New Monday.",value:["The problem isn\u2019t the day. It\u2019s waiting to feel ready. That feeling never comes.","Readiness isn\u2019t a feeling. It\u2019s a decision. You decide, then the feeling follows.","What would starting today look like? Not a full programme. One thing.","A 20-minute walk. Cutting the late night snacking. Getting to bed an hour earlier. One thing, today."],cta:"Comment \u2018START\u2019 and I\u2019ll reply with the one thing I\u2019d tell every dad.",setting:"Daytime. Direct light. Slightly more energy.",duration:"34 sec"},
+            {title:"You don\u2019t need motivation. You need a system.",hook:"Motivation is the most unreliable thing you can build a fitness routine on.",setup:"It comes in waves. High after a bad photo. Gone by Thursday. When it disappears \u2014 there\u2019s nothing underneath.",value:["That\u2019s why most dads cycle. Motivated, start strong, life gets in the way, quit, feel worse, wait.","The dads who stick to it don\u2019t feel more motivated. They built something that doesn\u2019t rely on it.","Specific time. Specific days. Short enough that \u2018I don\u2019t have time\u2019 isn\u2019t true.","That\u2019s a system. Built for your real life, not the one you had ten years ago."],cta:"DM me RESET. I\u2019ll show you the exact system and help you build yours.",setting:"Home. Morning. Grounded, calm. Core philosophy \u2014 not a hype reel.",duration:"40 sec"}
+        ]
+    };
 
-            document.querySelectorAll('.fade-up').forEach((el) => {
-                observer.observe(el);
-            });
+    // ===== RENDER CARDS =====
+    function renderIdeas(containerId, ideas) {
+        const container = document.getElementById(containerId);
+        ideas.forEach((idea, i) => {
+            const card = document.createElement('div');
+            card.className = 'idea-card rounded-card';
+            card.innerHTML = `
+                <div class="idea-header" onclick="toggleCard(this.parentElement)">
+                    <span class="text-[15px] font-medium">${idea.title}</span>
+                    <span class="idea-toggle">+</span>
+                </div>
+                <div class="idea-brief">
+                    <div class="brief-inner">
+                        <div class="brief-section">
+                            <span class="brief-label">Hook (0-2 sec)</span>
+                            <p>${idea.hook}</p>
+                        </div>
+                        <div class="brief-section">
+                            <span class="brief-label">Setup (2-5 sec)</span>
+                            <p>${idea.setup}</p>
+                        </div>
+                        <div class="brief-section">
+                            <span class="brief-label">Talking Points</span>
+                            <ul>${idea.value.map(v => `<li>${v}</li>`).join('')}</ul>
+                        </div>
+                        <div class="brief-section">
+                            <span class="brief-label">CTA</span>
+                            <p>${idea.cta}</p>
+                        </div>
+                        <div class="brief-meta">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"/></svg> ${idea.setting}</span>
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${idea.duration}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
         });
+    }
+
+    function toggleCard(card) {
+        card.classList.toggle('open');
+    }
+
+    // Render all pillars
+    renderIdeas('pillar-food', briefs.food);
+    renderIdeas('pillar-workouts', briefs.workouts);
+    renderIdeas('pillar-dadlife', briefs.dadlife);
+    renderIdeas('pillar-myths', briefs.myths);
+    renderIdeas('pillar-motivation', briefs.motivation);
+
+    // ===== SCROLL ANIMATIONS =====
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        document.querySelectorAll('.fade-up').forEach((el) => {
+            observer.observe(el);
+        });
+    });
     </script>
 
 </body>
