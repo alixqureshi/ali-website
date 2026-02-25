@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arif's Action Plan — Dad Bod Reset Launch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream': '#FAFAF7',
+                        'cream-dark': '#F0EFE9',
+                        'ink': '#1a1a1a',
+                        'ink-light': '#4a4a4a',
+                        'muted': '#6B7280',
+                        'accent': '#2D6A4F',
+                        'accent-dark': '#1B4332',
+                        'accent-light': '#40916C',
+                        'input-border': '#d4d4d0',
+                        'card-bg': '#FFFFFF',
+                        'red': '#DC2626',
+                    },
+                    fontFamily: {
+                        'sans': ['DM Sans', 'system-ui', 'sans-serif'],
+                    },
+                    maxWidth: {
+                        'container': '1000px',
+                    },
+                    borderRadius: {
+                        'btn': '6px',
+                        'card': '8px',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #2D6A4F; color: #FAFAF7; }
+        html { scroll-behavior: smooth; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .hero-delay-1 { animation-delay: 0.15s; }
+        .hero-delay-2 { animation-delay: 0.3s; }
+        .hero-delay-3 { animation-delay: 0.45s; }
+
+        .nav-link {
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .nav-link.active {
+            color: #2D6A4F;
+            border-bottom-color: #2D6A4F;
+        }
+
+        .task-card {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .task-card:hover {
+            border-color: #2D6A4F;
+            box-shadow: 0 2px 12px rgba(45, 106, 79, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-cream text-ink font-sans text-base leading-relaxed antialiased">
+
+    <!-- ===== STICKY NAV ===== -->
+    <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-input-border">
+        <div class="max-w-container mx-auto px-6 py-3 flex items-center justify-between">
+            <a href="./" class="text-sm font-bold tracking-tight text-ink hover:text-accent transition-colors">Dad Bod Reset</a>
+            <div class="hidden sm:flex gap-6 text-sm text-muted overflow-x-auto">
+                <a href="#blocking" class="nav-link border-b-2 border-transparent pb-0.5 hover:text-ink">Phase 1</a>
+                <a href="#product" class="nav-link border-b-2 border-transparent pb-0.5 hover:text-ink">Phase 2</a>
+                <a href="#content" class="nav-link border-b-2 border-transparent pb-0.5 hover:text-ink">Phase 3</a>
+                <a href="#ongoing" class="nav-link border-b-2 border-transparent pb-0.5 hover:text-ink">Ongoing</a>
+                <a href="#priorities" class="nav-link border-b-2 border-transparent pb-0.5 hover:text-ink">This Week</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="min-h-[70vh] flex items-center justify-center px-6 py-24">
+        <div class="max-w-container mx-auto w-full">
+            <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-4 py-2 rounded-full mb-8 hero-animate">
+                Action Plan &mdash; Arif
+            </span>
+            <h1 class="text-[clamp(36px,7vw,56px)] font-bold leading-[1.08] tracking-tight text-ink mb-6 hero-animate hero-delay-1">
+                What you need to do.<br>In what order. And why.
+            </h1>
+            <p class="text-lg md:text-xl text-ink-light max-w-[640px] mb-10 hero-animate hero-delay-2">
+                Ali handles the landing page, funnel, ads, email sequences, and tech setup. This is everything you need to do to get Dad Bod Reset live.
+            </p>
+            <p class="text-sm text-muted hero-animate hero-delay-3">Total time commitment: ~8-10 hours across 1 week.</p>
+        </div>
+    </section>
+
+    <!-- ===== THE ONE RULE ===== -->
+    <section class="bg-cream-dark py-16 px-6">
+        <div class="max-w-[700px] mx-auto text-center fade-up">
+            <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-5">The One Rule</span>
+            <h2 class="text-[clamp(24px,5vw,36px)] font-bold tracking-tight text-ink mb-4">
+                You are not selling fitness. You are selling yourself as a coach.
+            </h2>
+            <p class="text-lg text-ink-light">
+                Every piece of content, every video, every photo &mdash; the audience is buying Arif, not a program. Your face, your voice, your story, your credibility. That's the product.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== PHASE 1: BLOCKING ITEMS ===== -->
+    <section id="blocking" class="py-20 md:py-28 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="mb-14 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-red bg-red/10 px-3 py-1.5 rounded-full mb-4">Phase 1 &mdash; Blockers</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Do these first</h2>
+                <p class="text-ink-light text-lg mt-3 max-w-[600px]">These block the landing page from going live. Nothing launches until these exist.</p>
+            </div>
+
+            <!-- Task 1: VSL -->
+            <div class="task-card bg-card-bg border border-input-border rounded-card p-8 mb-6 fade-up">
+                <div class="flex items-start gap-4 mb-6">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">1</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-ink">Film your 2-minute video (VSL)</h3>
+                        <p class="text-sm text-muted mt-1">30 minutes &bull; Unblocks the landing page</p>
+                    </div>
+                </div>
+
+                <p class="text-[15px] text-ink-light leading-relaxed mb-6">
+                    A raw, talking-to-camera video for the landing page. This is the single most important piece of content for the entire brand. No script. No editing. Just you, talking to a dad who's watching on his phone.
+                </p>
+
+                <div class="bg-cream-dark rounded-card p-6 mb-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-4">Story beats (in order)</p>
+                    <ol class="space-y-3 text-[15px] text-ink-light">
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">1.</span> "I've trained my whole life."</li>
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">2.</span> "Then I became a dad with a full-time job."</li>
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">3.</span> "Everything that used to work stopped working &mdash; I couldn't get to the gym, couldn't spend 90 minutes, couldn't eat separately from my family."</li>
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">4.</span> "So I had to figure it out from scratch. 30 minutes. At home. Real food my family actually eats."</li>
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">5.</span> "Now I'm 41 and in the best shape of my life. Not despite being a dad. As a dad."</li>
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">6.</span> "I built this program so you don't have to figure it out alone. I coach you 1-1 &mdash; your training, your nutrition, your recovery."</li>
+                        <li class="flex gap-3"><span class="text-accent font-semibold flex-shrink-0">7.</span> "If you're a dad who's done starting over, apply below."</li>
+                    </ol>
+                </div>
+
+                <div class="bg-cream-dark rounded-card p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-red mb-4">Rules</p>
+                    <ul class="space-y-2 text-[15px] text-ink-light">
+                        <li>&bull; Do NOT say "I've been where you are" &mdash; you haven't been overweight. Say "I fight the same battle you do."</li>
+                        <li>&bull; Do NOT read from a script. Talk like you're explaining this to a mate at the school gates.</li>
+                        <li>&bull; Film at home &mdash; living room, garden. NOT a gym. The setting IS the message.</li>
+                        <li>&bull; Phone camera. Natural light. No ring light.</li>
+                        <li>&bull; Film 3 takes. Send all 3 to Ali. Don't overthink it.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 2: Photos -->
+            <div class="task-card bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                <div class="flex items-start gap-4 mb-6">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">2</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-ink">Photos for the landing page</h3>
+                        <p class="text-sm text-muted mt-1">1 hour &bull; Unblocks the landing page</p>
+                    </div>
+                </div>
+
+                <p class="text-[15px] text-ink-light leading-relaxed mb-6">
+                    3-5 photos of you. Ali will pick the best ones for different sections. Get your wife or a mate to take them while you're actually doing the thing.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">Training at home</p>
+                        <p class="text-sm text-ink-light">Living room or garden, mid-workout. Candid, not posed.</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">With your kids</p>
+                        <p class="text-sm text-ink-light">Park, garden, school run. Dad life, not fitness content.</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">Headshot / portrait</p>
+                        <p class="text-sm text-ink-light">Simple background, good light. Friendly and approachable.</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">Real meal</p>
+                        <p class="text-sm text-ink-light">Cooking or eating a normal family dinner. No meal prep aesthetic.</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-cream-dark rounded-card p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-red mb-3">Rules</p>
+                    <p class="text-[15px] text-ink-light">No gym selfies. No shirtless mirror pics. No flexing. Phone camera is fine. Natural light. Candid &gt; posed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PHASE 2: PRODUCT SETUP ===== -->
+    <section id="product" class="bg-cream-dark py-20 md:py-28 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="mb-14 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-4">Phase 2 &mdash; Product Setup</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Build the products</h2>
+                <p class="text-ink-light text-lg mt-3 max-w-[600px]">These can happen in parallel with Ali setting up Stripe, emails, and ads.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Task 3: Starter Kit -->
+                <div class="task-card bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <div class="flex items-start gap-4 mb-5">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="text-lg font-bold text-ink">Starter Kit (&pound;99)</h3>
+                            <p class="text-sm text-muted mt-1">2-3 hours</p>
+                        </div>
+                    </div>
+                    <p class="text-[15px] text-ink-light leading-relaxed mb-5">4-week self-guided program. No coaching, no calls. Just the plan.</p>
+                    <ul class="space-y-2 text-sm text-ink-light">
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> 4 weeks of workouts (5 days/week, 30 min, home-friendly)</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Meal plan / food guide (7-14 days, family-friendly)</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Deliver via Zenfit or PDF</li>
+                    </ul>
+                    <p class="text-sm text-muted mt-5 italic">Should feel like a subset of the full program, not a separate product.</p>
+                </div>
+
+                <!-- Task 4: Full Coaching -->
+                <div class="task-card bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <div class="flex items-start gap-4 mb-5">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="text-lg font-bold text-ink">Full Coaching (&pound;749 + &pound;250/mo)</h3>
+                            <p class="text-sm text-muted mt-1">1-2 days</p>
+                        </div>
+                    </div>
+                    <p class="text-[15px] text-ink-light leading-relaxed mb-5">12-week program with all protocols. The full coaching experience.</p>
+                    <ul class="space-y-2 text-sm text-ink-light">
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> 12 weeks of training (3 levels or progressive)</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Personalised meal plan template</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Sleep protocol</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Supplement guide</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Recovery protocol</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Client onboarding questionnaire</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PHASE 3: CONTENT ===== -->
+    <section id="content" class="py-20 md:py-28 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="mb-14 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-4">Phase 3 &mdash; Content</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Start this as soon as Phase 1 is done</h2>
+                <p class="text-ink-light text-lg mt-3 max-w-[600px]">No content = no followers = no emails = no clients. This is the fuel for the funnel.</p>
+            </div>
+
+            <!-- Task 5: Reels -->
+            <div class="task-card bg-card-bg border border-input-border rounded-card p-8 mb-6 fade-up">
+                <div class="flex items-start gap-4 mb-6">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">5</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-ink">Film 10 Instagram Reels</h3>
+                        <p class="text-sm text-muted mt-1">2 hours &bull; Batch film in one session &bull; 2-3 weeks of content</p>
+                    </div>
+                </div>
+
+                <p class="text-[15px] text-ink-light leading-relaxed mb-6">
+                    Film 2 of each pillar. That gives you 2-3 weeks of posting at 3-5x/week.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">"I fight the same battle"</p>
+                        <p class="text-xs text-ink-light">What training looks like as a 41-year-old dad. Your morning before the school run.</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">"This is what I eat"</p>
+                        <p class="text-xs text-ink-light">Film actual family meals. "Dinner tonight. Same meal for everyone."</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">"30-minute proof"</p>
+                        <p class="text-xs text-ink-light">Full or time-lapsed home workout. "This is the entire session."</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">"You've been lied to"</p>
+                        <p class="text-xs text-ink-light">"You don't need a gym." "Supplements are mostly a waste." Myth-busting.</p>
+                    </div>
+                    <div class="bg-cream-dark rounded-card p-5">
+                        <p class="text-sm font-semibold text-ink mb-1">"Done starting over"</p>
+                        <p class="text-xs text-ink-light">"You've tried the gym, the app, the diet. You quit every time. Here's why."</p>
+                    </div>
+                </div>
+
+                <div class="bg-cream-dark rounded-card p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-3">Filming rules</p>
+                    <ul class="space-y-2 text-sm text-ink-light">
+                        <li>&bull; Vertical (9:16). Always.</li>
+                        <li>&bull; Raw &gt; polished. Film on your phone. No transitions needed.</li>
+                        <li>&bull; Hook in the first 1-2 seconds. Start mid-sentence or with a confrontational statement.</li>
+                        <li>&bull; Under 60 seconds. 30-45 seconds is ideal.</li>
+                        <li>&bull; End with: "Link in bio" or "DM me RESET"</li>
+                        <li>&bull; Film in real settings: kitchen, living room, park. NOT a gym.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 6: Lead Magnet -->
+            <div class="task-card bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                <div class="flex items-start gap-4 mb-6">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">6</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-ink">7-Day Challenge content (lead magnet)</h3>
+                        <p class="text-sm text-muted mt-1">1-2 hours to write &bull; +1 hour if filming video intros</p>
+                    </div>
+                </div>
+
+                <p class="text-[15px] text-ink-light leading-relaxed mb-6">
+                    The free 7-day email challenge captures emails. You provide the workout and food swap content for each day.
+                </p>
+
+                <ul class="space-y-2 text-sm text-ink-light">
+                    <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> 7 workouts (30 min each, home-friendly, no equipment, beginner-suitable)</li>
+                    <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> 7 food swaps (one per day, family-friendly, 1-2 sentences each)</li>
+                    <li class="flex items-start gap-2"><span class="text-accent mt-0.5">&#9744;</span> Optional: 30-60 sec video intro per day ("Day 3. Your legs are going to hate me.")</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PHASE 4: ONGOING ===== -->
+    <section id="ongoing" class="bg-cream-dark py-20 md:py-28 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="mb-14 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-4">Phase 4 &mdash; Ongoing</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Once you're live</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Weekly rhythm -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <h3 class="text-lg font-bold text-ink mb-5">Weekly coaching rhythm</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-input-border/50 pb-3">
+                            <span class="text-[15px] text-ink-light">1-1 WhatsApp coaching</span>
+                            <span class="text-sm font-medium text-ink">30-45 min/day</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-input-border/50 pb-3">
+                            <span class="text-[15px] text-ink-light">Weekly live Zoom session</span>
+                            <span class="text-sm font-medium text-ink">1 hour/week</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-input-border/50 pb-3">
+                            <span class="text-[15px] text-ink-light">Programming updates / check-ins</span>
+                            <span class="text-sm font-medium text-ink">1-2 hours/week</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-input-border/50 pb-3">
+                            <span class="text-[15px] text-ink-light">Content filming (batch)</span>
+                            <span class="text-sm font-medium text-ink">2 hours/2-3 weeks</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-[15px] font-semibold text-ink">Total</span>
+                            <span class="text-sm font-bold text-accent">~10-12 hours/week</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-muted mt-4">Manageable alongside your day job.</p>
+                </div>
+
+                <!-- Content cadence -->
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <h3 class="text-lg font-bold text-ink mb-5">Content cadence</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-input-border/50 pb-3">
+                            <div>
+                                <p class="text-[15px] text-ink">Instagram Reels</p>
+                                <p class="text-xs text-muted">Short, raw, hook-first</p>
+                            </div>
+                            <span class="text-sm font-medium text-ink">3-5x/week</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-input-border/50 pb-3">
+                            <div>
+                                <p class="text-[15px] text-ink">Instagram Stories</p>
+                                <p class="text-xs text-muted">Behind the scenes, meals, workouts</p>
+                            </div>
+                            <span class="text-sm font-medium text-ink">Daily</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-[15px] text-ink">Email newsletter</p>
+                                <p class="text-xs text-muted">1 tip, 1 meal idea</p>
+                            </div>
+                            <span class="text-sm font-medium text-muted">Future</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHO DOES WHAT ===== -->
+    <section class="py-20 md:py-28 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="text-center mb-14 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-4">Ownership</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Who does what</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <h3 class="text-lg font-bold text-accent mb-5">Arif</h3>
+                    <ul class="space-y-3 text-[15px] text-ink-light">
+                        <li>Films 2-min VSL</li>
+                        <li>Takes 3-5 photos</li>
+                        <li>Builds Starter Kit program</li>
+                        <li>Builds full coaching program</li>
+                        <li>Films 10 Reels</li>
+                        <li>Writes 7-day challenge content</li>
+                        <li>Coaches clients 1-1</li>
+                        <li>Posts content</li>
+                    </ul>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-8 fade-up">
+                    <h3 class="text-lg font-bold text-ink mb-5">Ali</h3>
+                    <ul class="space-y-3 text-[15px] text-ink-light">
+                        <li>Builds landing page <span class="text-accent text-xs font-medium ml-1">done</span></li>
+                        <li>Sets up Stripe checkout</li>
+                        <li>Writes email nurture sequence</li>
+                        <li>Builds email capture page</li>
+                        <li>Sets up email automation</li>
+                        <li>Runs paid ads</li>
+                        <li>Manages funnel &amp; analytics</li>
+                        <li>Strategy, positioning, pricing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THIS WEEK ===== -->
+    <section id="priorities" class="bg-cream-dark py-20 md:py-28 px-6">
+        <div class="max-w-[700px] mx-auto">
+            <div class="text-center mb-14 fade-up">
+                <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-3 py-1.5 rounded-full mb-4">This Week</span>
+                <h2 class="text-[clamp(28px,5vw,40px)] font-bold tracking-tight text-ink">Priority order</h2>
+            </div>
+
+            <div class="space-y-4 fade-up">
+                <div class="bg-card-bg border border-input-border rounded-card p-6 flex items-center gap-5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red/10 text-red font-bold text-sm flex-shrink-0">1</span>
+                    <div>
+                        <p class="font-semibold text-ink">Film the VSL</p>
+                        <p class="text-sm text-muted">30 min &mdash; unblocks the landing page</p>
+                    </div>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 flex items-center gap-5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red/10 text-red font-bold text-sm flex-shrink-0">2</span>
+                    <div>
+                        <p class="font-semibold text-ink">Take the photos</p>
+                        <p class="text-sm text-muted">1 hour &mdash; unblocks the landing page</p>
+                    </div>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 flex items-center gap-5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">3</span>
+                    <div>
+                        <p class="font-semibold text-ink">Write the 7-day challenge workouts + food swaps</p>
+                        <p class="text-sm text-muted">1-2 hours &mdash; unblocks the lead magnet</p>
+                    </div>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 flex items-center gap-5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">4</span>
+                    <div>
+                        <p class="font-semibold text-ink">Build the Starter Kit in Zenfit</p>
+                        <p class="text-sm text-muted">2-3 hours &mdash; unblocks the &pound;99 product</p>
+                    </div>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 flex items-center gap-5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">5</span>
+                    <div>
+                        <p class="font-semibold text-ink">Film 10 Reels</p>
+                        <p class="text-sm text-muted">2 hours &mdash; unblocks the content engine</p>
+                    </div>
+                </div>
+                <div class="bg-card-bg border border-input-border rounded-card p-6 flex items-center gap-5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent font-bold text-sm flex-shrink-0">6</span>
+                    <div>
+                        <p class="font-semibold text-ink">Build the full coaching program</p>
+                        <p class="text-sm text-muted">1-2 days &mdash; unblocks accepting clients</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-up">
+                <p class="text-2xl font-bold text-ink">~8-10 hours total.</p>
+                <p class="text-lg text-ink-light mt-2">Everything else is Ali's job.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-8 px-6 text-center border-t border-input-border">
+        <p class="text-xs text-muted">Dad Bod Reset &mdash; Action Plan for Arif &bull; Prepared by Ali Qureshi</p>
+    </footer>
+
+    <!-- ===== SCROLL ANIMATIONS ===== -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Active nav tracking
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
