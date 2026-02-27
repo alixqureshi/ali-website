@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thumbnail Designer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface':       '#0a0a0a',
+            'surface-alt':   '#0f0f0f',
+            'surface-card':  '#111111',
+            'surface-hover': '#161616',
+            'off-white':     '#f5f5f0',
+            'muted':         '#6b6b6b',
+            'border':        '#1a1a1a',
+            'gold':          '#c9a227',
+            'gold-dim':      'rgba(201,162,39,0.15)',
+          },
+          fontFamily: {
+            'serif':  ['Instrument Serif', 'Georgia', 'serif'],
+            'mono':   ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'JetBrains Mono', monospace; background: #0a0a0a; color: #f5f5f0; }
+    ::selection { background: #f5f5f0; color: #0a0a0a; }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb:hover { background: #2a2a2a; }
+
+    .strategy-card { transition: border-color 0.2s ease, background-color 0.2s ease; }
+    .strategy-card:hover { border-color: rgba(201, 162, 39, 0.3); }
+    .strategy-card.active { border-color: #c9a227; background-color: rgba(201, 162, 39, 0.08); }
+
+    .toggle-btn { transition: all 0.2s ease; }
+    .toggle-btn.active { background: rgba(201, 162, 39, 0.15); color: #c9a227; border-color: #c9a227; }
+
+    .drop-zone { transition: border-color 0.2s ease; }
+    .drop-zone.dragover { border-color: #c9a227; background: rgba(201, 162, 39, 0.05); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { animation: spin 1s linear infinite; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeUp 0.4s ease forwards; }
+
+    /* Modal backdrop */
+    .modal-backdrop { transition: opacity 0.2s ease; }
+    .modal-content { transition: transform 0.2s ease, opacity 0.2s ease; }
+  </style>
+</head>
+<body class="bg-surface text-off-white min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-surface/90 backdrop-blur-sm border-b border-border px-6 py-4 flex items-center justify-between">
+    <div>
+      <h1 class="font-serif text-2xl">Thumbnail Designer</h1>
+      <p class="text-[11px] text-muted mt-1">AI-powered YouTube thumbnails</p>
+    </div>
+    <button id="settings-toggle" class="p-2 text-muted hover:text-off-white transition-colors" title="Settings">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Settings Panel (collapsible) -->
+  <div id="settings-panel" class="hidden border-b border-border bg-surface-alt px-6 py-4">
+    <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Gemini API Key</label>
+        <input id="api-key-input" type="password" placeholder="Enter your API key"
+          class="w-full bg-surface border border-border text-[13px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40">
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Model</label>
+        <input id="model-input" type="text" placeholder="gemini-2.0-flash-exp"
+          class="w-full bg-surface border border-border text-[13px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40">
+      </div>
+    </div>
+    <div class="max-w-3xl mx-auto mt-3 flex items-center gap-3">
+      <button id="save-settings" class="text-[11px] uppercase tracking-[0.15em] text-gold hover:text-off-white transition-colors">Save Settings</button>
+      <span id="settings-status" class="text-[11px] text-muted hidden">Saved</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-5xl mx-auto px-6 py-8">
+
+    <!-- Strategy Selector -->
+    <section class="mb-8">
+      <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-4">Strategy</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3" id="strategy-grid">
+        <button class="strategy-card active bg-surface-card border border-border p-3 text-left cursor-pointer" data-strategy="face-emotion">
+          <p class="text-[12px] text-off-white mb-1">Face + Emotion</p>
+          <p class="text-[10px] text-muted leading-relaxed">Exaggerated expression, eye contact</p>
+        </button>
+        <button class="strategy-card bg-surface-card border border-border p-3 text-left cursor-pointer" data-strategy="before-after">
+          <p class="text-[12px] text-off-white mb-1">Before / After</p>
+          <p class="text-[10px] text-muted leading-relaxed">Split transformation layout</p>
+        </button>
+        <button class="strategy-card bg-surface-card border border-border p-3 text-left cursor-pointer" data-strategy="curiosity-gap">
+          <p class="text-[12px] text-off-white mb-1">Curiosity Gap</p>
+          <p class="text-[10px] text-muted leading-relaxed">Intrigue, partial reveal, blur</p>
+        </button>
+        <button class="strategy-card bg-surface-card border border-border p-3 text-left cursor-pointer" data-strategy="numbers-claims">
+          <p class="text-[12px] text-off-white mb-1">Numbers</p>
+          <p class="text-[10px] text-muted leading-relaxed">Bold number as focal point</p>
+        </button>
+        <button class="strategy-card bg-surface-card border border-border p-3 text-left cursor-pointer" data-strategy="shock">
+          <p class="text-[12px] text-off-white mb-1">Shock</p>
+          <p class="text-[10px] text-muted leading-relaxed">Pattern interrupt, unexpected</p>
+        </button>
+        <button class="strategy-card bg-surface-card border border-border p-3 text-left cursor-pointer" data-strategy="custom">
+          <p class="text-[12px] text-off-white mb-1">Custom</p>
+          <p class="text-[10px] text-muted leading-relaxed">No preset, your instructions only</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Left column -->
+      <div class="space-y-5">
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Instructions</label>
+          <textarea id="instructions" rows="5" placeholder="Describe the thumbnail — composition, emotion, background, what to show..."
+            class="w-full bg-surface-card border border-border text-[13px] text-off-white px-4 py-3 focus:outline-none focus:border-gold placeholder:text-muted/40 resize-y leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Text Overlay <span class="text-muted/40">· max 3-4 words</span></label>
+          <input id="text-overlay" type="text" placeholder="e.g. $47K IN 30 DAYS"
+            class="w-full bg-surface-card border border-border text-[13px] text-off-white px-4 py-3 focus:outline-none focus:border-gold placeholder:text-muted/40">
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="text-[10px] uppercase tracking-[0.15em] text-muted">Profile</label>
+            <button id="manage-profiles-btn" class="text-[10px] uppercase tracking-[0.15em] text-gold hover:text-off-white transition-colors">Manage</button>
+          </div>
+          <select id="profile-select"
+            class="w-full bg-surface-card border border-border text-[13px] text-off-white px-4 py-3 focus:outline-none focus:border-gold appearance-none cursor-pointer">
+            <option value="">No profile</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="space-y-5">
+
+        <!-- Resolution -->
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Resolution</label>
+          <div class="flex gap-2" id="resolution-group">
+            <button class="toggle-btn flex-1 bg-surface-card border border-border text-[12px] text-muted px-3 py-2.5 cursor-pointer" data-value="1K">1K <span class="text-muted/40 text-[10px]">Draft</span></button>
+            <button class="toggle-btn flex-1 bg-surface-card border border-border text-[12px] text-muted px-3 py-2.5 cursor-pointer active" data-value="2K">2K <span class="text-muted/40 text-[10px]">Default</span></button>
+            <button class="toggle-btn flex-1 bg-surface-card border border-border text-[12px] text-muted px-3 py-2.5 cursor-pointer" data-value="4K">4K <span class="text-muted/40 text-[10px]">Final</span></button>
+          </div>
+        </div>
+
+        <!-- Aspect Ratio -->
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Aspect Ratio</label>
+          <div class="flex gap-2" id="aspect-group">
+            <button class="toggle-btn flex-1 bg-surface-card border border-border text-[12px] text-muted px-3 py-2.5 cursor-pointer active" data-value="16:9">16:9</button>
+            <button class="toggle-btn flex-1 bg-surface-card border border-border text-[12px] text-muted px-3 py-2.5 cursor-pointer" data-value="1:1">1:1</button>
+            <button class="toggle-btn flex-1 bg-surface-card border border-border text-[12px] text-muted px-3 py-2.5 cursor-pointer" data-value="4:3">4:3</button>
+          </div>
+        </div>
+
+        <!-- Reference Image -->
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-2">Reference Image <span class="text-muted/40">· optional</span></label>
+          <div id="ref-drop-zone" class="drop-zone border border-dashed border-border bg-surface-card p-4 text-center cursor-pointer hover:border-muted transition-colors">
+            <input type="file" id="ref-image-input" accept="image/*" class="hidden">
+            <p id="ref-drop-label" class="text-[11px] text-muted">Drop image or click to upload</p>
+            <img id="ref-image-preview" class="hidden max-h-20 mx-auto mt-2">
+          </div>
+          <button id="ref-image-clear" class="hidden text-[10px] text-muted hover:text-off-white mt-1 transition-colors">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Generate -->
+    <section class="mb-8">
+      <button id="generate-btn"
+        class="w-full bg-gold text-surface font-mono text-[13px] uppercase tracking-[0.15em] py-4 hover:bg-off-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+        Generate Thumbnail
+      </button>
+      <div id="generate-status" class="hidden mt-3 text-center">
+        <span class="text-[11px] text-muted"><span class="inline-block spinner">&#9696;</span> Generating — this takes 15-30 seconds...</span>
+      </div>
+      <div id="error-status" class="hidden mt-3 text-center">
+        <span class="text-[12px] text-red-400" id="error-message"></span>
+      </div>
+    </section>
+
+    <!-- Output -->
+    <section id="output-section" class="hidden mb-8 fade-in">
+      <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-4">Result</p>
+      <div class="bg-surface-card border border-border p-4">
+        <img id="output-image" class="w-full max-w-3xl mx-auto" alt="Generated thumbnail">
+        <div class="flex items-center justify-between mt-4 pt-4 border-t border-border">
+          <p id="output-meta" class="text-[11px] text-muted"></p>
+          <div class="flex gap-3">
+            <button id="copy-prompt-btn" class="text-[10px] uppercase tracking-[0.15em] text-muted hover:text-off-white transition-colors">Copy Prompt</button>
+            <button id="download-btn" class="text-[10px] uppercase tracking-[0.15em] text-gold hover:text-off-white transition-colors">Download PNG</button>
+          </div>
+        </div>
+        <div id="model-text-section" class="hidden mt-4 pt-4 border-t border-border">
+          <p class="text-[10px] uppercase tracking-[0.15em] text-muted/60 mb-2">Model Notes</p>
+          <p id="model-text" class="text-[12px] text-muted leading-relaxed"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Strip -->
+    <section id="history-section" class="hidden mb-8">
+      <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-4">History <span class="text-muted/30">· this session</span></p>
+      <div id="history-strip" class="flex gap-3 overflow-x-auto pb-2"></div>
+    </section>
+
+  </main>
+
+  <!-- Profile Manager Modal -->
+  <div id="profile-modal" class="hidden fixed inset-0 z-50">
+    <div class="modal-backdrop absolute inset-0 bg-black/60" id="profile-modal-backdrop"></div>
+    <div class="modal-content absolute inset-4 md:inset-y-8 md:inset-x-auto md:w-[560px] md:mx-auto bg-surface-alt border border-border overflow-y-auto">
+
+      <div class="sticky top-0 bg-surface-alt border-b border-border px-6 py-4 flex items-center justify-between z-10">
+        <h2 class="font-serif text-xl">Profiles</h2>
+        <button id="close-profile-modal" class="text-muted hover:text-off-white transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Profile List -->
+      <div id="profile-list" class="px-6 py-4 space-y-3"></div>
+
+      <!-- Add / Edit Form -->
+      <div class="px-6 py-4 border-t border-border">
+        <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-4" id="profile-form-title">New Profile</p>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Name <span class="text-muted/40">· ID</span></label>
+              <input id="pf-name" type="text" placeholder="e.g. ali"
+                class="w-full bg-surface border border-border text-[12px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40">
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Display Name</label>
+              <input id="pf-display" type="text" placeholder="e.g. Ali Qureshi"
+                class="w-full bg-surface border border-border text-[12px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Face Description</label>
+            <textarea id="pf-face" rows="2" placeholder="Detailed appearance for Gemini — skin tone, facial hair, hair style, etc."
+              class="w-full bg-surface border border-border text-[12px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40 resize-y"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Headshot</label>
+            <div class="flex items-center gap-3">
+              <div id="pf-headshot-zone" class="drop-zone border border-dashed border-border bg-surface w-16 h-16 flex items-center justify-center cursor-pointer hover:border-muted transition-colors overflow-hidden">
+                <input type="file" id="pf-headshot-input" accept="image/*" class="hidden">
+                <span id="pf-headshot-placeholder" class="text-[10px] text-muted">+</span>
+                <img id="pf-headshot-preview" class="hidden w-full h-full object-cover">
+              </div>
+              <button id="pf-headshot-clear" class="hidden text-[10px] text-muted hover:text-off-white transition-colors">Clear</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Brand Colors <span class="text-muted/40">· comma-separated hex</span></label>
+            <input id="pf-colors" type="text" placeholder="#c9a227, #0a0a0a"
+              class="w-full bg-surface border border-border text-[12px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40">
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Style Preferences</label>
+            <input id="pf-style" type="text" placeholder="e.g. Clean, modern, high contrast"
+              class="w-full bg-surface border border-border text-[12px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40">
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Additional Context</label>
+            <textarea id="pf-context" rows="2" placeholder="Extra instructions always injected when using this profile"
+              class="w-full bg-surface border border-border text-[12px] text-off-white px-3 py-2 focus:outline-none focus:border-gold placeholder:text-muted/40 resize-y"></textarea>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button id="save-profile-btn" class="bg-gold text-surface text-[11px] uppercase tracking-[0.15em] px-4 py-2 hover:bg-off-white transition-colors">Save Profile</button>
+            <button id="cancel-profile-btn" class="text-[11px] uppercase tracking-[0.15em] text-muted hover:text-off-white transition-colors">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Import/Export -->
+      <div class="px-6 py-4 border-t border-border flex items-center gap-4">
+        <button id="export-profiles-btn" class="text-[10px] uppercase tracking-[0.15em] text-muted hover:text-off-white transition-colors">Export JSON</button>
+        <label class="text-[10px] uppercase tracking-[0.15em] text-muted hover:text-off-white transition-colors cursor-pointer">
+          Import JSON
+          <input type="file" id="import-profiles-input" accept=".json" class="hidden">
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ════════════════════════════════════════════════════════
+    // CONFIG — ported from thumbnail-generator/src/config.ts
+    // ════════════════════════════════════════════════════════
+    const DEFAULT_MODEL = 'gemini-2.0-flash-exp';
+
+    const THUMBNAIL_RULES = [
+      'YouTube thumbnail, 16:9 aspect ratio, 1280x720 pixels',
+      'Must be visually clear and readable at 120x68px (mobile thumbnail size)',
+      'Maximum 3-4 words of text overlay if text is included',
+      'High contrast between foreground and background',
+      'Single clear focal point — avoid clutter',
+      'Bold, saturated colors that pop against YouTube white/dark backgrounds',
+      'If a face is present: exaggerated expression, eye contact with viewer, face takes up at least 30% of frame',
+      'Professional quality, NOT stock photography or generic AI art',
+    ];
+
+    const STRATEGY_MODIFIERS = {
+      'face-emotion': 'Human face is the dominant element. Exaggerated genuine emotion (shock, excitement, curiosity). Eye contact with viewer. Face fills 40-60% of frame.',
+      'before-after': 'Clear split or transformation shown. Left/right or before/after layout. Strong visual contrast between the two states.',
+      'curiosity-gap': 'Show enough to intrigue but hold back the payoff. Blur, partial reveal, or redacted element. Viewer must click to resolve the unknown.',
+      'numbers-claims': 'Large, bold number as the focal point. Specific over vague ($47,293 not "a lot"). Number should be readable at mobile thumbnail size.',
+      'shock': 'Unexpected visual or juxtaposition. Something that makes the viewer pause scrolling. Avoid clickbait — the shock should relate to actual content.',
+      'custom': '',
+    };
+
+    // ════════════════════════════════════════════════════════
+    // STATE
+    // ════════════════════════════════════════════════════════
+    let selectedStrategy = 'face-emotion';
+    let selectedResolution = '2K';
+    let selectedAspect = '16:9';
+    let refImageData = null; // { base64, mimeType }
+    let lastPrompt = '';
+    let editingProfile = null; // null = new, string = editing name
+    let pfHeadshotData = null; // base64 data URL for profile form
+
+    // ════════════════════════════════════════════════════════
+    // PROMPT BUILDER — ported from prompt-builder.ts
+    // ════════════════════════════════════════════════════════
+    function buildThumbnailPrompt({ instructions, profile, textOverlay, strategy }) {
+      const sections = [];
+
+      // 1. Core thumbnail context
+      sections.push('=== THUMBNAIL REQUIREMENTS ===');
+      sections.push(THUMBNAIL_RULES.join('\n'));
+
+      // 2. Strategy modifier
+      if (strategy && strategy !== 'custom') {
+        const modifier = STRATEGY_MODIFIERS[strategy];
+        if (modifier) {
+          sections.push(`\n=== STRATEGY: ${strategy.toUpperCase()} ===`);
+          sections.push(modifier);
+        }
+      }
+
+      // 3. Profile context
+      if (profile) {
+        sections.push('\n=== SUBJECT/BRAND CONTEXT ===');
+        if (profile.face_description) {
+          sections.push(`Subject appearance: ${profile.face_description}`);
+        }
+        if (profile.brand_colors && profile.brand_colors.length > 0) {
+          sections.push(`Brand colors: ${profile.brand_colors.join(', ')}`);
+        }
+        if (profile.style_preferences) {
+          sections.push(`Style: ${profile.style_preferences}`);
+        }
+        if (profile.additional_context) {
+          sections.push(profile.additional_context);
+        }
+      }
+
+      // 4. Text overlay
+      if (textOverlay) {
+        sections.push('\n=== TEXT OVERLAY ===');
+        sections.push(`Render this text on the thumbnail in bold, high-contrast lettering: "${textOverlay}"`);
+      }
+
+      // 5. User instructions (highest priority)
+      sections.push('\n=== INSTRUCTIONS ===');
+      sections.push(instructions);
+
+      return sections.join('\n');
+    }
+
+    // ════════════════════════════════════════════════════════
+    // PROFILE STORE — localStorage
+    // ════════════════════════════════════════════════════════
+    const PROFILES_KEY = 'thumbnail-profiles';
+
+    function getProfiles() {
+      try { return JSON.parse(localStorage.getItem(PROFILES_KEY) || '{}'); }
+      catch { return {}; }
+    }
+
+    function saveProfile(name, data) {
+      const profiles = getProfiles();
+      profiles[name] = { ...data, name, updated_at: new Date().toISOString() };
+      if (!profiles[name].created_at) profiles[name].created_at = profiles[name].updated_at;
+      localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+    }
+
+    function deleteProfile(name) {
+      const profiles = getProfiles();
+      delete profiles[name];
+      localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+    }
+
+    function getProfile(name) {
+      return getProfiles()[name] || null;
+    }
+
+    // ════════════════════════════════════════════════════════
+    // IMAGE UTILS
+    // ════════════════════════════════════════════════════════
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          const base64 = dataUrl.split(',')[1];
+          resolve({ base64, mimeType: file.type || 'image/png', dataUrl });
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function resizeImage(dataUrl, maxWidth) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          if (img.width <= maxWidth) {
+            resolve(dataUrl);
+            return;
+          }
+          const scale = maxWidth / img.width;
+          const canvas = document.createElement('canvas');
+          canvas.width = maxWidth;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
+        };
+        img.src = dataUrl;
+      });
+    }
+
+    // ════════════════════════════════════════════════════════
+    // GEMINI API
+    // ════════════════════════════════════════════════════════
+    async function callGemini({ prompt, images, resolution, aspectRatio }) {
+      const apiKey = localStorage.getItem('gemini-api-key');
+      if (!apiKey) throw new Error('API key not set. Click the settings icon to add your Gemini API key.');
+
+      const model = localStorage.getItem('gemini-model') || DEFAULT_MODEL;
+      const parts = [];
+
+      // Add images first (headshot, then reference)
+      for (const img of images) {
+        parts.push({ inlineData: { mimeType: img.mimeType, data: img.base64 } });
+      }
+
+      // Add text prompt
+      parts.push({ text: prompt });
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: {
+            responseModalities: ['TEXT', 'IMAGE'],
+            imageConfig: {
+              aspectRatio: aspectRatio,
+              imageSize: resolution,
+            },
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error?.message || `API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      let imageBase64 = null;
+      let modelText = null;
+
+      if (data.candidates && data.candidates[0]?.content?.parts) {
+        for (const part of data.candidates[0].content.parts) {
+          if (part.text) modelText = part.text;
+          if (part.inlineData) imageBase64 = part.inlineData.data;
+        }
+      }
+
+      if (!imageBase64) throw new Error('No image in response. Try adjusting your prompt.');
+
+      return { imageBase64, modelText };
+    }
+
+    // ════════════════════════════════════════════════════════
+    // HISTORY — sessionStorage
+    // ════════════════════════════════════════════════════════
+    const HISTORY_KEY = 'thumbnail-history';
+
+    function getHistory() {
+      try { return JSON.parse(sessionStorage.getItem(HISTORY_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    function addToHistory(entry) {
+      const history = getHistory();
+      history.unshift(entry);
+      if (history.length > 5) history.pop();
+      sessionStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    }
+
+    // ════════════════════════════════════════════════════════
+    // UI LOGIC
+    // ════════════════════════════════════════════════════════
+
+    // -- Settings --
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsPanel = document.getElementById('settings-panel');
+    const apiKeyInput = document.getElementById('api-key-input');
+    const modelInput = document.getElementById('model-input');
+    const saveSettingsBtn = document.getElementById('save-settings');
+    const settingsStatus = document.getElementById('settings-status');
+
+    settingsToggle.addEventListener('click', () => {
+      settingsPanel.classList.toggle('hidden');
+      if (!settingsPanel.classList.contains('hidden')) {
+        apiKeyInput.value = localStorage.getItem('gemini-api-key') || '';
+        modelInput.value = localStorage.getItem('gemini-model') || DEFAULT_MODEL;
+      }
+    });
+
+    saveSettingsBtn.addEventListener('click', () => {
+      localStorage.setItem('gemini-api-key', apiKeyInput.value.trim());
+      const model = modelInput.value.trim() || DEFAULT_MODEL;
+      localStorage.setItem('gemini-model', model);
+      settingsStatus.classList.remove('hidden');
+      setTimeout(() => settingsStatus.classList.add('hidden'), 2000);
+    });
+
+    // -- Strategy selector --
+    const strategyGrid = document.getElementById('strategy-grid');
+    strategyGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.strategy-card');
+      if (!card) return;
+      strategyGrid.querySelectorAll('.strategy-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      selectedStrategy = card.dataset.strategy;
+    });
+
+    // -- Toggle groups --
+    function setupToggleGroup(groupId, setter) {
+      const group = document.getElementById(groupId);
+      group.addEventListener('click', (e) => {
+        const btn = e.target.closest('.toggle-btn');
+        if (!btn) return;
+        group.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        setter(btn.dataset.value);
+      });
+    }
+    setupToggleGroup('resolution-group', v => selectedResolution = v);
+    setupToggleGroup('aspect-group', v => selectedAspect = v);
+
+    // -- Reference image --
+    const refDropZone = document.getElementById('ref-drop-zone');
+    const refImageInput = document.getElementById('ref-image-input');
+    const refDropLabel = document.getElementById('ref-drop-label');
+    const refPreview = document.getElementById('ref-image-preview');
+    const refClear = document.getElementById('ref-image-clear');
+
+    refDropZone.addEventListener('click', () => refImageInput.click());
+    refDropZone.addEventListener('dragover', (e) => { e.preventDefault(); refDropZone.classList.add('dragover'); });
+    refDropZone.addEventListener('dragleave', () => refDropZone.classList.remove('dragover'));
+    refDropZone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      refDropZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) await loadRefImage(file);
+    });
+    refImageInput.addEventListener('change', async () => {
+      if (refImageInput.files[0]) await loadRefImage(refImageInput.files[0]);
+    });
+    refClear.addEventListener('click', clearRefImage);
+
+    async function loadRefImage(file) {
+      const data = await readFileAsBase64(file);
+      const resized = await resizeImage(data.dataUrl, 1024);
+      const resizedBase64 = resized.split(',')[1];
+      refImageData = { base64: resizedBase64, mimeType: 'image/jpeg' };
+      refPreview.src = resized;
+      refPreview.classList.remove('hidden');
+      refDropLabel.textContent = file.name;
+      refClear.classList.remove('hidden');
+    }
+
+    function clearRefImage() {
+      refImageData = null;
+      refPreview.classList.add('hidden');
+      refPreview.src = '';
+      refDropLabel.textContent = 'Drop image or click to upload';
+      refClear.classList.add('hidden');
+      refImageInput.value = '';
+    }
+
+    // -- Profile dropdown --
+    function refreshProfileDropdown() {
+      const select = document.getElementById('profile-select');
+      const current = select.value;
+      select.innerHTML = '<option value="">No profile</option>';
+      const profiles = getProfiles();
+      for (const name of Object.keys(profiles).sort()) {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = profiles[name].display_name || name;
+        select.appendChild(opt);
+      }
+      if (profiles[current]) select.value = current;
+    }
+
+    // -- Generate --
+    const generateBtn = document.getElementById('generate-btn');
+    const generateStatus = document.getElementById('generate-status');
+    const errorStatus = document.getElementById('error-status');
+    const errorMessage = document.getElementById('error-message');
+    const outputSection = document.getElementById('output-section');
+    const outputImage = document.getElementById('output-image');
+    const outputMeta = document.getElementById('output-meta');
+    const modelTextSection = document.getElementById('model-text-section');
+    const modelTextEl = document.getElementById('model-text');
+    const downloadBtn = document.getElementById('download-btn');
+    const copyPromptBtn = document.getElementById('copy-prompt-btn');
+
+    generateBtn.addEventListener('click', async () => {
+      const instructions = document.getElementById('instructions').value.trim();
+      if (!instructions) {
+        showError('Instructions are required.');
+        return;
+      }
+
+      if (!localStorage.getItem('gemini-api-key')) {
+        showError('API key not set. Click the settings icon (top right) to add your Gemini API key.');
+        return;
+      }
+
+      // Build inputs
+      const profileName = document.getElementById('profile-select').value;
+      const profile = profileName ? getProfile(profileName) : null;
+      const textOverlay = document.getElementById('text-overlay').value.trim() || null;
+
+      const prompt = buildThumbnailPrompt({
+        instructions,
+        profile,
+        textOverlay,
+        strategy: selectedStrategy,
+      });
+      lastPrompt = prompt;
+
+      // Collect images
+      const images = [];
+      if (profile && profile.headshot) {
+        const hsBase64 = profile.headshot.split(',')[1] || profile.headshot;
+        images.push({ base64: hsBase64, mimeType: 'image/jpeg' });
+      }
+      if (refImageData) {
+        images.push(refImageData);
+      }
+
+      // UI state
+      generateBtn.disabled = true;
+      generateStatus.classList.remove('hidden');
+      errorStatus.classList.add('hidden');
+      outputSection.classList.add('hidden');
+
+      try {
+        const result = await callGemini({
+          prompt,
+          images,
+          resolution: selectedResolution,
+          aspectRatio: selectedAspect,
+        });
+
+        // Show output
+        const dataUrl = `data:image/png;base64,${result.imageBase64}`;
+        outputImage.src = dataUrl;
+        outputMeta.textContent = `${selectedStrategy} · ${selectedResolution} · ${selectedAspect}${profileName ? ` · ${profileName}` : ''}`;
+
+        if (result.modelText) {
+          modelTextEl.textContent = result.modelText;
+          modelTextSection.classList.remove('hidden');
+        } else {
+          modelTextSection.classList.add('hidden');
+        }
+
+        outputSection.classList.remove('hidden');
+
+        // Add to history
+        addToHistory({
+          dataUrl,
+          strategy: selectedStrategy,
+          resolution: selectedResolution,
+          aspect: selectedAspect,
+          timestamp: Date.now(),
+        });
+        renderHistory();
+
+      } catch (err) {
+        showError(err.message);
+      } finally {
+        generateBtn.disabled = false;
+        generateStatus.classList.add('hidden');
+      }
+    });
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorStatus.classList.remove('hidden');
+    }
+
+    // -- Download --
+    downloadBtn.addEventListener('click', () => {
+      const src = outputImage.src;
+      if (!src) return;
+      const a = document.createElement('a');
+      a.href = src;
+      const slug = document.getElementById('instructions').value.trim().slice(0, 40).replace(/[^a-z0-9]+/gi, '-').toLowerCase().replace(/-+$/, '');
+      const ts = new Date().toISOString().slice(0, 19).replace(/[T:]/g, '-');
+      a.download = `${ts}-thumbnail-${slug || 'output'}.png`;
+      a.click();
+    });
+
+    // -- Copy prompt --
+    copyPromptBtn.addEventListener('click', async () => {
+      if (!lastPrompt) return;
+      await navigator.clipboard.writeText(lastPrompt);
+      copyPromptBtn.textContent = 'Copied';
+      setTimeout(() => copyPromptBtn.textContent = 'Copy Prompt', 2000);
+    });
+
+    // -- History --
+    function renderHistory() {
+      const history = getHistory();
+      const section = document.getElementById('history-section');
+      const strip = document.getElementById('history-strip');
+      if (history.length === 0) { section.classList.add('hidden'); return; }
+      section.classList.remove('hidden');
+      strip.innerHTML = '';
+      history.forEach((entry, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'shrink-0 w-24 h-14 border border-border hover:border-gold transition-colors cursor-pointer overflow-hidden';
+        btn.title = `${entry.strategy} · ${entry.resolution}`;
+        const img = document.createElement('img');
+        img.src = entry.dataUrl;
+        img.className = 'w-full h-full object-cover';
+        btn.appendChild(img);
+        btn.addEventListener('click', () => {
+          outputImage.src = entry.dataUrl;
+          outputMeta.textContent = `${entry.strategy} · ${entry.resolution} · ${entry.aspect}`;
+          modelTextSection.classList.add('hidden');
+          outputSection.classList.remove('hidden');
+        });
+        strip.appendChild(btn);
+      });
+    }
+
+    // ════════════════════════════════════════════════════════
+    // PROFILE MODAL
+    // ════════════════════════════════════════════════════════
+    const profileModal = document.getElementById('profile-modal');
+    const profileList = document.getElementById('profile-list');
+    const manageBtn = document.getElementById('manage-profiles-btn');
+    const closeModalBtn = document.getElementById('close-profile-modal');
+    const modalBackdrop = document.getElementById('profile-modal-backdrop');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+    const cancelProfileBtn = document.getElementById('cancel-profile-btn');
+    const profileFormTitle = document.getElementById('profile-form-title');
+    const pfHeadshotZone = document.getElementById('pf-headshot-zone');
+    const pfHeadshotInput = document.getElementById('pf-headshot-input');
+    const pfHeadshotPreview = document.getElementById('pf-headshot-preview');
+    const pfHeadshotPlaceholder = document.getElementById('pf-headshot-placeholder');
+    const pfHeadshotClear = document.getElementById('pf-headshot-clear');
+
+    function openModal() {
+      profileModal.classList.remove('hidden');
+      renderProfileList();
+      clearProfileForm();
+    }
+    function closeModal() {
+      profileModal.classList.add('hidden');
+    }
+
+    manageBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+
+    function renderProfileList() {
+      const profiles = getProfiles();
+      const names = Object.keys(profiles).sort();
+      if (names.length === 0) {
+        profileList.innerHTML = '<p class="text-[12px] text-muted">No profiles yet.</p>';
+        return;
+      }
+      profileList.innerHTML = '';
+      names.forEach(name => {
+        const p = profiles[name];
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between bg-surface border border-border px-4 py-3';
+        row.innerHTML = `
+          <div class="flex items-center gap-3">
+            ${p.headshot ? `<img src="${p.headshot}" class="w-8 h-8 object-cover border border-border">` : '<div class="w-8 h-8 bg-surface-card border border-border flex items-center justify-center text-[10px] text-muted">' + (p.display_name || name).charAt(0).toUpperCase() + '</div>'}
+            <div>
+              <p class="text-[12px] text-off-white">${p.display_name || name}</p>
+              <p class="text-[10px] text-muted">${name}${p.brand_colors?.length ? ' · ' + p.brand_colors.length + ' colors' : ''}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <button class="edit-profile text-[10px] text-muted hover:text-off-white transition-colors" data-name="${name}">Edit</button>
+            <button class="delete-profile text-[10px] text-muted hover:text-red-400 transition-colors" data-name="${name}">Delete</button>
+          </div>
+        `;
+        profileList.appendChild(row);
+      });
+
+      profileList.querySelectorAll('.edit-profile').forEach(btn => {
+        btn.addEventListener('click', () => loadProfileIntoForm(btn.dataset.name));
+      });
+      profileList.querySelectorAll('.delete-profile').forEach(btn => {
+        btn.addEventListener('click', () => {
+          deleteProfile(btn.dataset.name);
+          renderProfileList();
+          refreshProfileDropdown();
+        });
+      });
+    }
+
+    function clearProfileForm() {
+      editingProfile = null;
+      pfHeadshotData = null;
+      profileFormTitle.textContent = 'New Profile';
+      document.getElementById('pf-name').value = '';
+      document.getElementById('pf-name').disabled = false;
+      document.getElementById('pf-display').value = '';
+      document.getElementById('pf-face').value = '';
+      document.getElementById('pf-colors').value = '';
+      document.getElementById('pf-style').value = '';
+      document.getElementById('pf-context').value = '';
+      pfHeadshotPreview.classList.add('hidden');
+      pfHeadshotPreview.src = '';
+      pfHeadshotPlaceholder.classList.remove('hidden');
+      pfHeadshotClear.classList.add('hidden');
+    }
+
+    function loadProfileIntoForm(name) {
+      const p = getProfile(name);
+      if (!p) return;
+      editingProfile = name;
+      profileFormTitle.textContent = `Edit: ${name}`;
+      document.getElementById('pf-name').value = name;
+      document.getElementById('pf-name').disabled = true;
+      document.getElementById('pf-display').value = p.display_name || '';
+      document.getElementById('pf-face').value = p.face_description || '';
+      document.getElementById('pf-colors').value = (p.brand_colors || []).join(', ');
+      document.getElementById('pf-style').value = p.style_preferences || '';
+      document.getElementById('pf-context').value = p.additional_context || '';
+      if (p.headshot) {
+        pfHeadshotData = p.headshot;
+        pfHeadshotPreview.src = p.headshot;
+        pfHeadshotPreview.classList.remove('hidden');
+        pfHeadshotPlaceholder.classList.add('hidden');
+        pfHeadshotClear.classList.remove('hidden');
+      } else {
+        pfHeadshotData = null;
+        pfHeadshotPreview.classList.add('hidden');
+        pfHeadshotPlaceholder.classList.remove('hidden');
+        pfHeadshotClear.classList.add('hidden');
+      }
+    }
+
+    // Headshot upload in profile form
+    pfHeadshotZone.addEventListener('click', () => pfHeadshotInput.click());
+    pfHeadshotInput.addEventListener('change', async () => {
+      const file = pfHeadshotInput.files[0];
+      if (!file) return;
+      const data = await readFileAsBase64(file);
+      const resized = await resizeImage(data.dataUrl, 200);
+      pfHeadshotData = resized;
+      pfHeadshotPreview.src = resized;
+      pfHeadshotPreview.classList.remove('hidden');
+      pfHeadshotPlaceholder.classList.add('hidden');
+      pfHeadshotClear.classList.remove('hidden');
+    });
+    pfHeadshotClear.addEventListener('click', () => {
+      pfHeadshotData = null;
+      pfHeadshotPreview.classList.add('hidden');
+      pfHeadshotPreview.src = '';
+      pfHeadshotPlaceholder.classList.remove('hidden');
+      pfHeadshotClear.classList.add('hidden');
+      pfHeadshotInput.value = '';
+    });
+
+    // Save profile
+    saveProfileBtn.addEventListener('click', () => {
+      const name = document.getElementById('pf-name').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+      if (!name) return;
+      const colorsRaw = document.getElementById('pf-colors').value.trim();
+      const colors = colorsRaw ? colorsRaw.split(',').map(c => c.trim()).filter(c => c) : [];
+
+      saveProfile(editingProfile || name, {
+        display_name: document.getElementById('pf-display').value.trim(),
+        face_description: document.getElementById('pf-face').value.trim(),
+        headshot: pfHeadshotData || null,
+        brand_colors: colors,
+        style_preferences: document.getElementById('pf-style').value.trim(),
+        additional_context: document.getElementById('pf-context').value.trim(),
+      });
+
+      clearProfileForm();
+      renderProfileList();
+      refreshProfileDropdown();
+    });
+
+    cancelProfileBtn.addEventListener('click', clearProfileForm);
+
+    // Import/Export
+    document.getElementById('export-profiles-btn').addEventListener('click', () => {
+      const data = JSON.stringify(getProfiles(), null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'thumbnail-profiles.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    document.getElementById('import-profiles-input').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const text = await file.text();
+      try {
+        const imported = JSON.parse(text);
+        const existing = getProfiles();
+        const merged = { ...existing, ...imported };
+        localStorage.setItem(PROFILES_KEY, JSON.stringify(merged));
+        renderProfileList();
+        refreshProfileDropdown();
+      } catch {
+        alert('Invalid JSON file');
+      }
+      e.target.value = '';
+    });
+
+    // ════════════════════════════════════════════════════════
+    // INIT
+    // ════════════════════════════════════════════════════════
+    refreshProfileDropdown();
+    renderHistory();
+
+    // Show settings hint if no API key
+    if (!localStorage.getItem('gemini-api-key')) {
+      settingsPanel.classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
