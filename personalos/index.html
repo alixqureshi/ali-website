@@ -226,17 +226,6 @@
         </div>
       </div>
 
-      <!-- Subscribers Widget -->
-      <div class="mb-10 fade-in fade-in-delay-1">
-        <div class="flex items-center gap-4 mb-5">
-          <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60">Subscribers</p>
-          <div id="sub-total" class="text-[11px] text-muted">--</div>
-        </div>
-        <div id="sub-feed" class="flex flex-col gap-0">
-          <div class="text-[11px] text-muted/40 py-3">Loading...</div>
-        </div>
-      </div>
-
       <!-- Tools Section -->
       <div class="mb-10">
         <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-6 fade-in fade-in-delay-1">Tools</p>
@@ -280,10 +269,22 @@
         </div>
       </div>
 
-      <!-- Collateral Section -->
+      <!-- Collateral & Stats -->
       <div>
-        <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-6 fade-in fade-in-delay-3">Collateral</p>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-muted/60 mb-6 fade-in fade-in-delay-3">Collateral & Stats</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <!-- Subscribers: Total -->
+          <div class="bg-surface-card border border-border p-6 fade-in fade-in-delay-3">
+            <p class="text-[10px] uppercase tracking-[0.15em] text-muted/60 mb-3">Total Subscribers</p>
+            <p class="font-serif text-2xl text-off-white" id="sub-total">--</p>
+          </div>
+
+          <!-- Subscribers: Today -->
+          <div class="bg-surface-card border border-border p-6 fade-in fade-in-delay-4">
+            <p class="text-[10px] uppercase tracking-[0.15em] text-muted/60 mb-3">New Today</p>
+            <p class="font-serif text-2xl text-off-white" id="sub-today">--</p>
+          </div>
 
           <!-- Proposal Card -->
           <a href="#proposal" class="tool-card block bg-surface-card border border-border p-6 cursor-pointer fade-in fade-in-delay-3">
@@ -534,7 +535,6 @@
     }
 
     // ── Subscribers (Kit.com via Cloudflare Worker) ───────
-    // Replace with your deployed worker URL
     const KIT_WORKER_URL = 'https://personal-os-kit-proxy.ali-e80.workers.dev';
 
     async function fetchSubscribers() {
@@ -542,58 +542,14 @@
         const res = await fetch(`${KIT_WORKER_URL}/subscribers/stats`);
         const data = await res.json();
 
-        // Total count
-        const totalEl = document.getElementById('sub-total');
         if (data.total !== null) {
-          totalEl.textContent = `${data.total.toLocaleString()} total`;
-          totalEl.classList.remove('text-muted');
-          totalEl.classList.add('text-gold');
+          document.getElementById('sub-total').textContent = data.total.toLocaleString();
         }
-
-        // Recent feed
-        const feedEl = document.getElementById('sub-feed');
-        if (!data.subscribers || data.subscribers.length === 0) {
-          feedEl.innerHTML = '<div class="text-[11px] text-muted/40 py-3">No recent subscribers</div>';
-          return;
-        }
-
-        feedEl.innerHTML = data.subscribers.map(sub => {
-          const name = sub.first_name || 'Someone';
-          const email = sub.email;
-          const ago = timeAgo(new Date(sub.created_at));
-          return `
-            <div class="flex items-center justify-between py-2.5 border-b border-border/50 last:border-0">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-6 h-6 bg-surface-hover border border-border flex items-center justify-center text-[9px] text-muted uppercase tracking-wider shrink-0">${name.charAt(0)}</div>
-                <div class="min-w-0">
-                  <span class="text-[12px] text-off-white">${name}</span>
-                  <span class="text-[11px] text-muted/40 ml-2 hidden sm:inline">${maskEmail(email)}</span>
-                </div>
-              </div>
-              <span class="text-[10px] text-muted/40 shrink-0 ml-3">${ago}</span>
-            </div>
-          `;
-        }).join('');
+        document.getElementById('sub-today').textContent = data.today_count ?? 0;
       } catch (e) {
-        document.getElementById('sub-feed').innerHTML = '<div class="text-[11px] text-muted/40 py-3">Unavailable</div>';
+        document.getElementById('sub-total').textContent = '--';
+        document.getElementById('sub-today').textContent = '--';
       }
-    }
-
-    function maskEmail(email) {
-      if (!email) return '';
-      const [user, domain] = email.split('@');
-      if (!domain) return email;
-      return user.slice(0, 2) + '***@' + domain;
-    }
-
-    function timeAgo(date) {
-      const now = new Date();
-      const diff = Math.floor((now - date) / 1000);
-      if (diff < 60) return 'just now';
-      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-      if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-      if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
-      return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
     }
 
     // ── Init ───────────────────────────────────────────────
