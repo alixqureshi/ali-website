@@ -281,9 +281,14 @@
           </div>
 
           <!-- Subscribers: Today -->
-          <div class="bg-surface-card border border-border p-6 fade-in fade-in-delay-4">
+          <div class="bg-surface-card border border-border p-6 fade-in fade-in-delay-4 relative cursor-default" id="sub-today-card">
             <p class="text-[10px] uppercase tracking-[0.15em] text-muted/60 mb-3">New Subs Today</p>
             <p class="font-serif text-2xl text-off-white" id="sub-today">--</p>
+            <!-- Hover popover -->
+            <div id="sub-today-popover" class="hidden absolute left-0 top-full mt-2 w-64 bg-surface-alt border border-border p-4 z-20 shadow-lg shadow-black/40">
+              <p class="text-[10px] uppercase tracking-[0.15em] text-muted/60 mb-3">Today's signups</p>
+              <div id="sub-today-list" class="text-[11px] text-muted">No new subscribers yet</div>
+            </div>
           </div>
 
           <!-- Proposal Card -->
@@ -546,11 +551,28 @@
           document.getElementById('sub-total').textContent = data.total.toLocaleString();
         }
         document.getElementById('sub-today').textContent = data.today_count ?? 0;
+
+        // Populate hover list
+        const listEl = document.getElementById('sub-today-list');
+        if (data.today_subscribers && data.today_subscribers.length > 0) {
+          listEl.innerHTML = data.today_subscribers.map(s => {
+            const name = s.first_name || '--';
+            return `<div class="py-1.5 border-b border-border/30 last:border-0 flex justify-between gap-2"><span class="text-off-white">${name}</span><span class="text-muted/50 truncate">${s.email}</span></div>`;
+          }).join('');
+        } else {
+          listEl.textContent = 'No new subscribers yet';
+        }
       } catch (e) {
         document.getElementById('sub-total').textContent = '--';
         document.getElementById('sub-today').textContent = '--';
       }
     }
+
+    // Hover popover for today's subs
+    const todayCard = document.getElementById('sub-today-card');
+    const todayPopover = document.getElementById('sub-today-popover');
+    todayCard.addEventListener('mouseenter', () => todayPopover.classList.remove('hidden'));
+    todayCard.addEventListener('mouseleave', () => todayPopover.classList.add('hidden'));
 
     // ── Init ───────────────────────────────────────────────
     window.addEventListener('hashchange', navigate);
