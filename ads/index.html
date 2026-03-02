@@ -418,43 +418,43 @@
                     <div class="terminal-line" data-delay="0">
                         <span class="text-accent">$</span> <span class="text-text-primary" id="typed-command"></span><span class="text-accent animate-pulse" id="cursor">|</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="2200">
+                    <div class="terminal-line hidden" data-delay="1200">
                         <span class="text-text-secondary">&nbsp;</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="2500">
+                    <div class="terminal-line hidden" data-delay="1400">
                         <span class="text-accent">[strategy]</span> <span class="text-text-secondary">Pulling patterns from 50+ accounts...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="3200">
+                    <div class="terminal-line hidden" data-delay="1800">
                         <span class="text-accent">[strategy]</span> <span class="text-text-secondary">Mapping angles to funnel stage...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="3900">
+                    <div class="terminal-line hidden" data-delay="2200">
                         <span class="text-accent">[copywriter]</span> <span class="text-text-secondary">Generating hooks from top-performing patterns...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="4600">
+                    <div class="terminal-line hidden" data-delay="2600">
                         <span class="text-accent">[copywriter]</span> <span class="text-text-secondary">Writing scripts × 5 angles...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="5300">
+                    <div class="terminal-line hidden" data-delay="3000">
                         <span class="text-accent">[scene-gen]</span> <span class="text-text-secondary">Building character-consistent scenes...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="6000">
+                    <div class="terminal-line hidden" data-delay="3400">
                         <span class="text-accent">[scene-gen]</span> <span class="text-text-secondary">Rendering 20 images across 4 formats...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="6700">
+                    <div class="terminal-line hidden" data-delay="3800">
                         <span class="text-accent">[voice]</span> <span class="text-text-secondary">Generating voiceover from scripts...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="7400">
+                    <div class="terminal-line hidden" data-delay="4200">
                         <span class="text-accent">[video]</span> <span class="text-text-secondary">Producing 15s clips × 8 variations...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="8100">
+                    <div class="terminal-line hidden" data-delay="4600">
                         <span class="text-accent">[video]</span> <span class="text-text-secondary">Optimising for Meta, TikTok, YouTube Shorts...</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="8800">
+                    <div class="terminal-line hidden" data-delay="5000">
                         <span class="text-text-secondary">&nbsp;</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="9100">
+                    <div class="terminal-line hidden" data-delay="5200">
                         <span class="text-[#28c840]">✓</span> <span class="text-text-primary">20 ad creatives ready for Ali's review</span>
                     </div>
-                    <div class="terminal-line hidden" data-delay="9800">
+                    <div class="terminal-line hidden" data-delay="5600">
                         <span class="text-[#28c840]">✓</span> <span class="text-text-primary">Delivered to your drive in 48 hours</span>
                     </div>
                 </div>
@@ -670,7 +670,7 @@
                     terminalObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.15 });
 
         var terminal = document.getElementById('terminal');
         if (terminal) terminalObserver.observe(terminal);
@@ -695,7 +695,7 @@
                     // Show lines
                     showTerminalLines();
                 }
-            }, 35);
+            }, 18);
         }
 
         function showTerminalLines() {
