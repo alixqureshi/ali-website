@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply — Ads with Ali</title>
+    <meta name="description" content="Apply to work with Ads with Ali. Limited to 10 clients.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg': '#0a0a0a',
+                        'surface': '#111111',
+                        'accent': '#c8a97e',
+                        'text-primary': '#f5f5f0',
+                        'text-secondary': '#a0a0a0',
+                        'border': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'serif': ['Instrument Serif', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    maxWidth: {
+                        'container': '1200px',
+                        'narrow': '760px',
+                        'form': '580px',
+                    },
+                    borderRadius: {
+                        'none': '0',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #c8a97e; color: #0a0a0a; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, label {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+        }
+
+        input, textarea, select {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #555;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #c8a97e;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a0a0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .cta-primary {
+            transition: opacity 0.2s ease;
+        }
+        .cta-primary:hover {
+            opacity: 0.85;
+        }
+
+        /* Success state */
+        #success-message {
+            display: none;
+        }
+        #success-message.show {
+            display: block;
+        }
+        #apply-form.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-bg text-text-primary font-mono text-[0.875rem] leading-[1.7] antialiased">
+
+    <!-- ===== NAV ===== -->
+    <nav class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="index.html" class="text-[0.75rem] uppercase tracking-[0.2em] text-text-primary hover:opacity-70 transition-opacity">Ads with Ali</a>
+            <a href="index.html" class="text-[0.6875rem] text-text-secondary hover:text-text-primary transition-colors">&larr; Back</a>
+        </div>
+    </nav>
+
+    <!-- ===== FORM ===== -->
+    <section class="pt-20 pb-24 md:pt-32 md:pb-36 px-6">
+        <div class="max-w-form mx-auto">
+
+            <div class="mb-14">
+                <h1 class="text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.15] mb-4">Apply</h1>
+                <p class="text-text-secondary text-[0.875rem] leading-[1.7]">
+                    Limited to 10 clients. Fill this out and I'll get back to you within 24 hours.
+                </p>
+            </div>
+
+            <form id="apply-form" class="space-y-8" onsubmit="handleSubmit(event)">
+
+                <!-- Name -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">Your name</label>
+                    <input type="text" name="name" required
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors"
+                        placeholder="Ali Qureshi">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">Email</label>
+                    <input type="email" name="email" required
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors"
+                        placeholder="ali@brand.com">
+                </div>
+
+                <!-- Brand / Company -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">Brand or company</label>
+                    <input type="text" name="brand" required
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors"
+                        placeholder="Brand name or URL">
+                </div>
+
+                <!-- Monthly ad spend -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">Monthly ad spend</label>
+                    <select name="spend" required
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors cursor-pointer">
+                        <option value="" disabled selected class="bg-bg text-text-secondary">Select range</option>
+                        <option value="under-10k" class="bg-bg">Under $10K/mo</option>
+                        <option value="10k-25k" class="bg-bg">$10K - $25K/mo</option>
+                        <option value="25k-50k" class="bg-bg">$25K - $50K/mo</option>
+                        <option value="50k-100k" class="bg-bg">$50K - $100K/mo</option>
+                        <option value="100k-plus" class="bg-bg">$100K+/mo</option>
+                    </select>
+                </div>
+
+                <!-- Platforms -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">Which platforms are you running ads on?</label>
+                    <input type="text" name="platforms"
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors"
+                        placeholder="Meta, TikTok, YouTube, etc.">
+                </div>
+
+                <!-- Biggest creative challenge -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">What's your biggest creative challenge right now?</label>
+                    <textarea name="challenge" rows="4"
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors resize-none"
+                        placeholder="Creative fatigue, can't produce fast enough, no strategy, etc."></textarea>
+                </div>
+
+                <!-- How did you hear about AWA -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">How did you find Ads with Ali?</label>
+                    <select name="source"
+                        class="w-full bg-transparent border border-border px-4 py-3 text-[0.8125rem] text-text-primary transition-colors cursor-pointer">
+                        <option value="" disabled selected class="bg-bg text-text-secondary">Select one</option>
+                        <option value="linkedin" class="bg-bg">LinkedIn</option>
+                        <option value="youtube" class="bg-bg">YouTube</option>
+                        <option value="newsletter" class="bg-bg">Newsletter (Leverage Lab)</option>
+                        <option value="twitter" class="bg-bg">Twitter / X</option>
+                        <option value="referral" class="bg-bg">Referral</option>
+                        <option value="other" class="bg-bg">Other</option>
+                    </select>
+                </div>
+
+                <!-- Tier interest -->
+                <div>
+                    <label class="block text-[1.0625rem] mb-3">Which tier are you interested in?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="border border-border p-4 cursor-pointer hover:border-text-primary transition-colors has-[:checked]:border-accent">
+                            <input type="radio" name="tier" value="starter" class="hidden">
+                            <span class="block text-[0.8125rem] text-text-primary mb-1">Starter — $4,999/mo</span>
+                            <span class="block text-[0.6875rem] text-text-secondary">20 creatives/month</span>
+                        </label>
+                        <label class="border border-border p-4 cursor-pointer hover:border-text-primary transition-colors has-[:checked]:border-accent">
+                            <input type="radio" name="tier" value="scale" class="hidden">
+                            <span class="block text-[0.8125rem] text-text-primary mb-1">Scale — $6,000/mo</span>
+                            <span class="block text-[0.6875rem] text-text-secondary">40 creatives/month</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="pt-4">
+                    <button type="submit"
+                        class="cta-primary bg-accent text-bg text-[0.8125rem] uppercase tracking-[0.15em] px-10 py-4 rounded-none cursor-pointer w-full sm:w-auto">
+                        Submit Application
+                    </button>
+                    <p class="text-text-secondary text-[0.6875rem] mt-4">
+                        I'll review your application and respond within 24 hours.
+                    </p>
+                </div>
+
+            </form>
+
+            <!-- Success message -->
+            <div id="success-message" class="text-center py-16">
+                <span class="text-[#28c840] text-[2rem] block mb-6">✓</span>
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] leading-[1.2] mb-4">Application received.</h2>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.7] max-w-[400px] mx-auto mb-8">
+                    I'll review your details and get back to you within 24 hours. Keep an eye on your inbox.
+                </p>
+                <a href="index.html" class="inline-block border border-border text-text-primary text-[0.75rem] uppercase tracking-[0.15em] px-6 py-3 rounded-none hover:border-text-primary transition-colors">
+                    Back to Ads with Ali
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-border">
+        <div class="max-w-container mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span class="text-[0.6875rem] text-text-secondary">Ads with Ali — A venture by <a href="https://www.linkedin.com/in/aliqureshi1/" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Ali Qureshi</a></span>
+            <span class="text-[0.6875rem] text-text-secondary">Part of the <a href="https://adcrate.com" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Adcrate</a> ecosystem</span>
+        </div>
+    </footer>
+
+    <script>
+        // Replace with your deployed Cloudflare Worker URL
+        var WORKER_URL = 'https://awa-form-handler.ali-e80.workers.dev';
+
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            var form = document.getElementById('apply-form');
+            var btn = form.querySelector('button[type="submit"]');
+            var btnText = btn.textContent;
+
+            // Collect form data
+            var formData = new FormData(form);
+            var data = {};
+            formData.forEach(function(value, key) {
+                data[key] = value;
+            });
+
+            // Disable button while submitting
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            btn.style.opacity = '0.5';
+
+            fetch(WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            })
+            .then(function(res) {
+                return res.json().then(function(body) {
+                    if (!res.ok) throw new Error(body.detail || body.error || 'Submission failed');
+                    return body;
+                });
+            })
+            .then(function() {
+                form.classList.add('hidden');
+                document.getElementById('success-message').classList.add('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            })
+            .catch(function(err) {
+                btn.disabled = false;
+                btn.textContent = btnText;
+                btn.style.opacity = '1';
+                console.error('Form error:', err);
+                alert('Error: ' + err.message);
+            });
+        }
+    </script>
+
+</body>
+</html>
