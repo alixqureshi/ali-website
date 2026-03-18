@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adcrate — Performance Creative Growth Partner</title>
+  <meta name="description" content="Performance creative growth partner. $127M revenue driven across 50+ brands. Fresh creative in your ad account, every single week.">
+  <meta property="og:title" content="Adcrate — Performance Creative Growth Partner">
+  <meta property="og:description" content="$127M revenue driven. 50+ brands scaled. 500+ ads shipped per week.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://adcrate.com">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface': '#0a0a0a',
+            'surface-alt': '#111111',
+            'off-white': '#f5f5f0',
+            'muted': '#6b6b6b',
+            'border': '#1a1a1a',
+            'gold': '#c9a227',
+          },
+          fontFamily: {
+            'serif': ['Instrument Serif', 'Georgia', 'serif'],
+            'mono': ['JetBrains Mono', 'monospace'],
+          },
+          maxWidth: {
+            'container': '1000px',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    .fade-target {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-target.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::selection {
+      background: #f5f5f0;
+      color: #0a0a0a;
+    }
+
+    /* Mosaic hero */
+    .mosaic-wrap {
+      position: absolute;
+      inset: -40px;
+      display: flex;
+      gap: 6px;
+      overflow: hidden;
+      justify-content: center;
+    }
+    .mosaic-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .mosaic-card {
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      opacity: 0.4;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .mosaic-card span {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(107,107,107,0.3);
+    }
+
+    @keyframes drift-up-1 {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-300px); }
+    }
+    @keyframes drift-up-2 {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-250px); }
+    }
+    @keyframes drift-up-3 {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-350px); }
+    }
+
+    .mosaic-col:nth-child(odd) { animation: drift-up-1 40s ease-in-out infinite alternate; }
+    .mosaic-col:nth-child(even) { animation: drift-up-2 50s ease-in-out infinite alternate; }
+    .mosaic-col:nth-child(3n) { animation: drift-up-3 45s ease-in-out infinite alternate; }
+
+    .format-card .format-preview:hover {
+      border-color: #2a2a2a;
+    }
+  </style>
+</head>
+
+<body class="bg-surface text-off-white font-mono text-[15px] leading-[1.7] font-normal">
+
+  <nav id="nav" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-surface/80 backdrop-blur-sm border border-border rounded-full px-2 py-2 flex items-center gap-1 transition-all duration-300">
+    <a href="#" class="px-4 py-2 hover:opacity-70 transition-opacity flex items-center"><img src="logo-wordmark.svg" alt="Adcrate" class="h-3.5"></a>
+    <a href="#how" class="px-4 py-2 text-[13px] text-muted hover:text-off-white transition-colors">How It Works</a>
+    <a href="#work" class="px-4 py-2 text-[13px] text-muted hover:text-off-white transition-colors">Results</a>
+    <a href="#" class="px-4 py-2 text-[13px] text-muted hover:text-off-white transition-colors">Careers</a>
+    <a href="#apply" class="px-4 py-2 text-[13px] uppercase tracking-[0.1em] bg-gold text-surface rounded-full hover:opacity-80 transition-opacity">Apply</a>
+  </nav>
+
+
+  <!-- ===== SECTION 1: HERO ===== -->
+  <section class="min-h-[85vh] flex items-center justify-center text-center pt-32 pb-16 relative overflow-hidden">
+
+    <!-- Mosaic background -->
+    <div class="mosaic-wrap" aria-hidden="true">
+      <!-- Col 1 -->
+      <div class="mosaic-col" style="margin-top: -40px;">
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(-1.5deg);"><span>Static</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 9/16; transform: rotate(0.5deg);"><span>Video</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 16/9; transform: rotate(-0.8deg);"><span>Brand</span></div>
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(1deg);"><span>UGC</span></div>
+      </div>
+      <!-- Col 2 -->
+      <div class="mosaic-col" style="margin-top: -20px;">
+        <div class="mosaic-card" style="width: 155px; aspect-ratio: 9/16; transform: rotate(1deg);"><span>UGC</span></div>
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(-0.5deg);"><span>AI</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 16/9; transform: rotate(0.8deg);"><span>Mashup</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(-1deg);"><span>Static</span></div>
+      </div>
+      <!-- Col 3 -->
+      <div class="mosaic-col" style="margin-top: -60px;">
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(0.5deg);"><span>Brand</span></div>
+        <div class="mosaic-card" style="width: 155px; aspect-ratio: 9/16; transform: rotate(-1deg);"><span>Podcast</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(1.5deg);"><span>Video</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 16/9; transform: rotate(-0.5deg);"><span>Street</span></div>
+      </div>
+      <!-- Col 4 -->
+      <div class="mosaic-col" style="margin-top: -30px;">
+        <div class="mosaic-card" style="width: 160px; aspect-ratio: 16/9; transform: rotate(-0.8deg);"><span>Mashup</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(1.2deg);"><span>Static</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 9/16; transform: rotate(-1.5deg);"><span>AI</span></div>
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(0.5deg);"><span>UGC</span></div>
+      </div>
+      <!-- Col 5 -->
+      <div class="mosaic-col" style="margin-top: -70px;">
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 9/16; transform: rotate(1deg);"><span>Video</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(-1.2deg);"><span>Podcast</span></div>
+        <div class="mosaic-card" style="width: 155px; aspect-ratio: 16/9; transform: rotate(0.8deg);"><span>Brand</span></div>
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(-0.5deg);"><span>Street</span></div>
+      </div>
+      <!-- Col 6 -->
+      <div class="mosaic-col" style="margin-top: -50px;">
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(-1deg);"><span>AI</span></div>
+        <div class="mosaic-card" style="width: 155px; aspect-ratio: 9/16; transform: rotate(0.5deg);"><span>UGC</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(1.5deg);"><span>Mashup</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 16/9; transform: rotate(-0.8deg);"><span>Static</span></div>
+      </div>
+      <!-- Col 7 -->
+      <div class="mosaic-col" style="margin-top: -25px;">
+        <div class="mosaic-card" style="width: 155px; aspect-ratio: 16/9; transform: rotate(0.8deg);"><span>Street</span></div>
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(-1.5deg);"><span>Video</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 9/16; transform: rotate(1deg);"><span>Brand</span></div>
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 4/5; transform: rotate(-0.5deg);"><span>Podcast</span></div>
+      </div>
+      <!-- Col 8 -->
+      <div class="mosaic-col" style="margin-top: -80px;">
+        <div class="mosaic-card" style="width: 140px; aspect-ratio: 4/5; transform: rotate(1.2deg);"><span>Mashup</span></div>
+        <div class="mosaic-card" style="width: 160px; aspect-ratio: 9/16; transform: rotate(-0.8deg);"><span>AI</span></div>
+        <div class="mosaic-card" style="width: 145px; aspect-ratio: 16/9; transform: rotate(0.5deg);"><span>UGC</span></div>
+        <div class="mosaic-card" style="width: 150px; aspect-ratio: 4/5; transform: rotate(-1deg);"><span>Static</span></div>
+      </div>
+    </div>
+
+    <!-- Vignette overlay -->
+    <div class="absolute inset-0 z-[5] pointer-events-none" style="background: radial-gradient(ellipse 50% 55% at center, #0a0a0a 0%, #0a0a0a 25%, rgba(10,10,10,0.85) 45%, rgba(10,10,10,0.5) 65%, rgba(10,10,10,0.08) 100%);"></div>
+
+    <!-- Center content -->
+    <div class="max-w-[700px] px-6 relative z-10">
+      <h1 class="fade-target font-serif text-[clamp(48px,8vw,80px)] font-normal leading-[1.05] tracking-[-0.02em] mb-8">
+        The growth partner behind brands that <span class="italic">compound.</span>
+      </h1>
+      <p class="fade-target font-serif text-[clamp(18px,2.5vw,24px)] text-muted leading-[1.6] mb-12">
+        Fresh creative in your ad account, every single week.
+      </p>
+      <a href="#apply" class="fade-target inline-block px-9 py-4 font-mono text-[13px] uppercase tracking-[0.1em] bg-gold text-surface hover:opacity-80 transition-opacity">
+        Apply
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ===== SECTION 2: SOCIAL PROOF + STATS ===== -->
+  <section class="pt-10 pb-20 border-t border-border">
+    <div class="max-w-container mx-auto px-6">
+
+      <p class="text-[11px] uppercase tracking-[0.2em] text-muted text-center mb-10 fade-target">Trusted by brands spending $100K–$2M+/month</p>
+
+      <div class="flex justify-center items-center flex-wrap gap-x-12 gap-y-4 mb-20 fade-target">
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">Huel</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">Harry's</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">Motion</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">The Perfect Jean</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">InVideo</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">Rugiet</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">1440</span>
+        <span class="font-serif italic text-[clamp(20px,3vw,26px)] text-off-white/70">Tushy</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-8 text-center fade-target">
+        <div>
+          <p class="font-serif italic text-[clamp(40px,6vw,64px)] text-gold leading-none mb-3">$127M</p>
+          <p class="text-[12px] uppercase tracking-[0.15em] text-muted">Revenue driven</p>
+        </div>
+        <div>
+          <p class="font-serif italic text-[clamp(40px,6vw,64px)] text-off-white leading-none mb-3">500+</p>
+          <p class="text-[12px] uppercase tracking-[0.15em] text-muted">Ads shipped / week</p>
+        </div>
+        <div>
+          <p class="font-serif italic text-[clamp(40px,6vw,64px)] text-off-white leading-none mb-3">50+</p>
+          <p class="text-[12px] uppercase tracking-[0.15em] text-muted">Brands scaled</p>
+        </div>
+        <div>
+          <p class="font-serif italic text-[clamp(40px,6vw,64px)] text-off-white leading-none mb-3">90%+</p>
+          <p class="text-[12px] uppercase tracking-[0.15em] text-muted">Client retention</p>
+        </div>
+        <div>
+          <p class="font-serif italic text-[clamp(40px,6vw,64px)] text-off-white leading-none mb-3">3 wks</p>
+          <p class="text-[12px] uppercase tracking-[0.15em] text-muted">To first concepts</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 3: THE PROBLEM ===== -->
+  <section class="py-[120px] bg-surface-alt">
+    <div class="max-w-container mx-auto px-6">
+
+      <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8 fade-target">The Problem</p>
+
+      <h2 class="font-serif text-[clamp(32px,5vw,48px)] font-normal leading-[1.15] tracking-[-0.01em] mb-16 fade-target">
+        Your creative process is <span class="italic">broken.</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 fade-target">
+        <div class="border-t border-muted pt-6">
+          <p class="font-serif italic text-[28px] text-off-white/30 mb-4">01</p>
+          <p class="text-muted text-[14px] leading-[1.7]">You're burning budget on creative that looks good but doesn't convert.</p>
+        </div>
+        <div class="border-t border-muted pt-6">
+          <p class="font-serif italic text-[28px] text-off-white/30 mb-4">02</p>
+          <p class="text-muted text-[14px] leading-[1.7]">Your in-house team can't produce enough volume to feed the algorithm.</p>
+        </div>
+        <div class="border-t border-muted pt-6">
+          <p class="font-serif italic text-[28px] text-off-white/30 mb-4">03</p>
+          <p class="text-muted text-[14px] leading-[1.7]">Every agency you've tried delivers a burst of quality, then coasts.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 4: RESULTS + TESTIMONIALS (Proof early) ===== -->
+  <section id="work" class="py-[120px]">
+    <div class="max-w-container mx-auto px-6">
+
+      <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-16 fade-target">Results</p>
+
+      <!-- Case Study 1: TPJ -->
+      <div class="mb-16 fade-target">
+        <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-4">The Perfect Jean</p>
+        <h3 class="font-serif text-[clamp(28px,4vw,40px)] font-normal leading-[1.2] mb-6">
+          CPA from <span class="text-gold">$45 to $29</span>. ROAS from <span class="text-gold">2.1x to 5.2x</span>. Spend scaled 3.3x.
+        </h3>
+        <p class="text-muted max-w-[600px]">
+          Premium denim brand stuck on the same three creative concepts for six months. We rebuilt their creative engine with lifestyle-first storytelling, 20+ UGC creators across body types, and a rapid testing framework that launched 10 new concepts per week.
+        </p>
+      </div>
+
+      <!-- Testimonial 1 -->
+      <div class="border-t border-border pt-10 mb-20 fade-target">
+        <blockquote class="max-w-[700px]">
+          <p class="font-serif italic text-[clamp(20px,3vw,28px)] leading-[1.4] mb-6">
+            "Adcrate's creative work has consistently been among our best performers, both in terms of ROAS and engagement. They go beyond just creating content; they craft ads with thought-out scripts and value propositions that truly resonate."
+          </p>
+          <cite class="text-[13px] text-muted not-italic font-mono">Ovadia Labaton, Co-Founder — The Perfect Jean</cite>
+        </blockquote>
+      </div>
+
+      <!-- Case Study 2: InVideo -->
+      <div class="mb-16 fade-target">
+        <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-4">InVideo</p>
+        <h3 class="font-serif text-[clamp(28px,4vw,40px)] font-normal leading-[1.2] mb-6">
+          <span class="text-gold">$3M to $10M/month</span>. Turnaround cut from <span class="text-gold">2 weeks to 3 days</span>.
+        </h3>
+        <p class="text-muted max-w-[600px]">
+          Fast-growing SaaS platform needed creative at startup speed. We embedded into their workflow, built a roster of 10 creators on standby, and shipped 200+ ads in 12 months across Meta, TikTok, YouTube, and Pinterest.
+        </p>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="border-t border-border pt-10 mb-20 fade-target">
+        <blockquote class="max-w-[700px]">
+          <p class="font-serif italic text-[clamp(20px,3vw,28px)] leading-[1.4] mb-6">
+            "I love the flexibility and quick turnarounds. As a fast-growing organization, InVideo has evolving needs, and Adcrate is adaptable and agile enough to meet all of them."
+          </p>
+          <cite class="text-[13px] text-muted not-italic font-mono">Ankan Dey, Growth Marketing — InVideo</cite>
+        </blockquote>
+      </div>
+
+      <!-- Case Study 3: Rugiet -->
+      <div class="fade-target">
+        <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-4">Rugiet</p>
+        <h3 class="font-serif text-[clamp(28px,4vw,40px)] font-normal leading-[1.2] mb-6">
+          <span class="text-gold">30%</span> better metrics. <span class="text-gold">20%</span> lower CAC. <span class="text-gold">10x</span> testing velocity.
+        </h3>
+        <p class="text-muted max-w-[600px]">
+          Men's health brand drowning in a sea of identical supplement ads. We shifted from generic lifestyle shots to a credibility-first strategy: founder-led authority, education content, and real customer proof. Produced 100+ ads and found 5 winning concepts that scaled profitably.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 5: FINAL TESTIMONIAL ===== -->
+  <section class="bg-surface-alt py-16">
+    <div class="max-w-container mx-auto px-6 text-center fade-target">
+      <blockquote class="max-w-[700px] mx-auto">
+        <p class="font-serif italic text-[clamp(20px,3vw,28px)] leading-[1.4] mb-6">
+          "We've seen our ad metrics improve by 30%+ and our acquisition costs have dropped over 20% as a result. Would 100% recommend."
+        </p>
+        <cite class="text-[13px] text-muted not-italic font-mono">Dylan Carpenter, Media Buyer — Rugiet</cite>
+      </blockquote>
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 6: THE CREATIVE COMPOUND ===== -->
+  <section id="how" class="py-[120px]">
+    <div class="max-w-container mx-auto px-6">
+      <div class="bg-off-white text-surface rounded-[16px] px-8 sm:px-12 py-16 sm:py-20">
+
+        <p class="text-[11px] uppercase tracking-[0.2em] text-surface/40 mb-8 fade-target">How It Works</p>
+
+        <h2 class="font-serif text-[clamp(36px,5vw,56px)] font-normal leading-[1.1] tracking-[-0.01em] mb-8 fade-target">
+          The Creative <span class="italic">Compound.</span>
+        </h2>
+
+        <p class="text-surface/60 max-w-[600px] mb-16 fade-target">
+          Most agencies deliver creative in bursts. We built a system that compounds — every ad we ship feeds data back into the next round. Research gets sharper. Hooks get stronger. Costs go down. Results go up. Month after month.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 fade-target">
+          <div class="border-t border-surface/15 pt-6">
+            <p class="font-serif italic text-[36px] text-gold leading-none mb-3">01</p>
+            <p class="font-serif text-[18px] mb-2">Research</p>
+            <p class="text-surface/50 text-sm leading-[1.6]">Mine reviews, study competitors, map audience language. Build the brief from real data, not guesswork.</p>
+          </div>
+          <div class="border-t border-surface/15 pt-6">
+            <p class="font-serif italic text-[36px] text-gold leading-none mb-3">02</p>
+            <p class="font-serif text-[18px] mb-2">Build</p>
+            <p class="text-surface/50 text-sm leading-[1.6]">Produce statics, video, UGC, AI — every format your media buyer needs. Volume and variety, every week.</p>
+          </div>
+          <div class="border-t border-surface/15 pt-6">
+            <p class="font-serif italic text-[36px] text-gold leading-none mb-3">03</p>
+            <p class="font-serif text-[18px] mb-2">Test</p>
+            <p class="text-surface/50 text-sm leading-[1.6]">Launch, measure, kill losers in 48 hours. Iterate on winners. Feed insights into the next cycle.</p>
+          </div>
+          <div class="border-t border-surface/15 pt-6">
+            <p class="font-serif italic text-[36px] text-gold leading-none mb-3">04</p>
+            <p class="font-serif text-[18px] mb-2">Compound</p>
+            <p class="text-surface/50 text-sm leading-[1.6]">Every round builds on the last. Your creative engine gets cheaper and more effective every month.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 7: FULL-STACK CAPABILITIES ===== -->
+  <section class="py-[100px]">
+    <div class="max-w-container mx-auto px-6">
+
+      <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8 fade-target">More Than Creative</p>
+
+      <h2 class="font-serif text-[clamp(32px,5vw,48px)] font-normal leading-[1.15] tracking-[-0.01em] mb-8 fade-target">
+        Your pod has done this at brands <span class="italic">like yours.</span>
+      </h2>
+
+      <p class="text-muted max-w-[600px] mb-16 fade-target">
+        You get a dedicated team — media buyers, creative strategists, designers, editors, and creators — who've scaled brands in your category. Not generalists. Specialists who know what converts.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 fade-target">
+        <div class="border-l-2 border-gold pl-5">
+          <p class="font-serif text-[18px] mb-2">Performance Ads</p>
+          <p class="text-muted text-sm leading-[1.6]">Statics, video, UGC, AI — built to convert, not just look good. Every asset is data-informed.</p>
+        </div>
+        <div class="border-l-2 border-gold pl-5">
+          <p class="font-serif text-[18px] mb-2">Landing Pages</p>
+          <p class="text-muted text-sm leading-[1.6]">High-converting landing pages and advertorials designed to match your ad creative and close the sale.</p>
+        </div>
+        <div class="border-l-2 border-gold pl-5">
+          <p class="font-serif text-[18px] mb-2">Creator Whitelisting</p>
+          <p class="text-muted text-sm leading-[1.6]">Access to 1,500+ vetted creators. We handle sourcing, briefing, and whitelisting so ads run from real profiles.</p>
+        </div>
+        <div class="border-l-2 border-gold pl-5">
+          <p class="font-serif text-[18px] mb-2">Media Buying Expertise</p>
+          <p class="text-muted text-sm leading-[1.6]">Our strategists speak the language of media buyers. Creative is built for the algorithm, not the portfolio.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 8: DEDICATED SHOOTS ===== -->
+  <section class="py-[100px] bg-surface-alt">
+    <div class="max-w-container mx-auto px-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+        <div class="grid grid-cols-2 gap-4 fade-target">
+          <div class="aspect-[4/5] bg-[#181818] border border-[#2a2a2a] rounded-lg flex items-center justify-center">
+            <span class="text-[11px] uppercase tracking-[0.15em] text-muted/40">Brand Shoot</span>
+          </div>
+          <div class="aspect-[4/5] bg-[#181818] border border-[#2a2a2a] rounded-lg flex items-center justify-center">
+            <span class="text-[11px] uppercase tracking-[0.15em] text-muted/40">Street Interview</span>
+          </div>
+          <div class="aspect-[4/5] bg-[#181818] border border-[#2a2a2a] rounded-lg flex items-center justify-center">
+            <span class="text-[11px] uppercase tracking-[0.15em] text-muted/40">Podcast Ad</span>
+          </div>
+          <div class="aspect-[4/5] bg-[#181818] border border-[#2a2a2a] rounded-lg flex items-center justify-center">
+            <span class="text-[11px] uppercase tracking-[0.15em] text-muted/40">Studio Production</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8 fade-target">Dedicated Shoots</p>
+
+          <h2 class="font-serif text-[clamp(32px,5vw,48px)] font-normal leading-[1.15] tracking-[-0.01em] mb-8 fade-target">
+            UGC has a ceiling. This is what comes <span class="italic">after.</span>
+          </h2>
+
+          <p class="text-muted max-w-[500px] mb-10 fade-target">
+            When you've exhausted the creator pool and UGC starts blending together, original footage is the unlock. We plan and produce dedicated shoots informed by your performance data — so every frame has a reason to exist.
+          </p>
+
+          <div class="flex flex-wrap gap-3 fade-target">
+            <span class="px-4 py-2 border border-gold/40 text-gold text-[12px] uppercase tracking-[0.1em] rounded-full">Podcast ads</span>
+            <span class="px-4 py-2 border border-gold/40 text-gold text-[12px] uppercase tracking-[0.1em] rounded-full">Street interviews</span>
+            <span class="px-4 py-2 border border-gold/40 text-gold text-[12px] uppercase tracking-[0.1em] rounded-full">Studio production</span>
+            <span class="px-4 py-2 border border-gold/40 text-gold text-[12px] uppercase tracking-[0.1em] rounded-full">On-location shoots</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 9: CREATIVE FORMATS ===== -->
+  <section class="py-[120px]">
+    <div class="max-w-container mx-auto px-6">
+
+      <p class="text-[11px] uppercase tracking-[0.2em] text-muted mb-8 fade-target">The Full Arsenal</p>
+
+      <h2 class="font-serif text-[clamp(32px,5vw,48px)] font-normal leading-[1.15] tracking-[-0.01em] mb-16 fade-target">
+        Every format your media buyer <span class="italic">needs.</span>
+      </h2>
+
+      <div class="grid grid-cols-3 sm:grid-cols-5 gap-4 fade-target">
+        <!-- UGC -->
+        <div class="format-card">
+          <div class="format-preview aspect-[4/5] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">4:5</span>
+          </div>
+          <p class="font-serif text-[16px]">UGC</p>
+          <p class="text-muted text-[12px]">Creator-led content</p>
+        </div>
+        <!-- Static -->
+        <div class="format-card">
+          <div class="format-preview aspect-[4/5] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">4:5</span>
+          </div>
+          <p class="font-serif text-[16px]">Static</p>
+          <p class="text-muted text-[12px]">Scroll-stopping stills</p>
+        </div>
+        <!-- Video -->
+        <div class="format-card">
+          <div class="format-preview aspect-[9/16] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">9:16</span>
+          </div>
+          <p class="font-serif text-[16px]">Video</p>
+          <p class="text-muted text-[12px]">Short-form performance</p>
+        </div>
+        <!-- Widescreen -->
+        <div class="format-card">
+          <div class="format-preview aspect-[16/9] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">16:9</span>
+          </div>
+          <p class="font-serif text-[16px]">Widescreen</p>
+          <p class="text-muted text-[12px]">YouTube & CTV</p>
+        </div>
+        <!-- AI -->
+        <div class="format-card">
+          <div class="format-preview aspect-[4/5] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">4:5</span>
+          </div>
+          <p class="font-serif text-[16px]">AI</p>
+          <p class="text-muted text-[12px]">AI-generated visuals</p>
+        </div>
+        <!-- Podcast -->
+        <div class="format-card">
+          <div class="format-preview aspect-[4/5] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">4:5</span>
+          </div>
+          <p class="font-serif text-[16px]">Podcast</p>
+          <p class="text-muted text-[12px]">Authority-driven ads</p>
+        </div>
+        <!-- Street Interviews -->
+        <div class="format-card">
+          <div class="format-preview aspect-[9/16] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">9:16</span>
+          </div>
+          <p class="font-serif text-[16px]">Street Interviews</p>
+          <p class="text-muted text-[12px]">Real reactions</p>
+        </div>
+        <!-- Brand Shoots -->
+        <div class="format-card">
+          <div class="format-preview aspect-[16/9] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">16:9</span>
+          </div>
+          <p class="font-serif text-[16px]">Brand Shoots</p>
+          <p class="text-muted text-[12px]">Premium production</p>
+        </div>
+        <!-- Mashups -->
+        <div class="format-card">
+          <div class="format-preview aspect-[4/5] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">4:5</span>
+          </div>
+          <p class="font-serif text-[16px]">Mashups</p>
+          <p class="text-muted text-[12px]">Remixed winners</p>
+        </div>
+        <!-- Iterations -->
+        <div class="format-card">
+          <div class="format-preview aspect-[9/16] bg-[#181818] border border-[#1a1a1a] rounded-lg flex items-center justify-center mb-3 transition-colors">
+            <span class="text-[11px] text-muted/30 tracking-wider">9:16</span>
+          </div>
+          <p class="font-serif text-[16px]">Iterations</p>
+          <p class="text-muted text-[12px]">Data-driven variants</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 10: WHO IT'S FOR ===== -->
+  <section class="py-[100px] bg-surface-alt">
+    <div class="max-w-container mx-auto px-6 text-center">
+
+      <h2 class="font-serif text-[clamp(36px,5vw,56px)] font-normal leading-[1.1] mb-20 fade-target">
+        This is for brands that are <span class="italic">already winning</span> — and want to win <span class="italic">faster.</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-left fade-target">
+        <div class="border border-border px-8 py-8">
+          <p class="text-gold font-mono text-[13px] mb-4">$100K+/month</p>
+          <p class="text-muted text-[14px] leading-[1.7]">on paid social — and you need creative that keeps pace with your spend.</p>
+        </div>
+        <div class="border border-border px-8 py-8">
+          <p class="text-gold font-mono text-[13px] mb-4">Creative bottleneck</p>
+          <p class="text-muted text-[14px] leading-[1.7]">Your media buying is fine. Your product converts. Creative is what's holding you back.</p>
+        </div>
+        <div class="border border-border px-8 py-8">
+          <p class="text-gold font-mono text-[13px] mb-4">Long-term partner</p>
+          <p class="text-muted text-[14px] leading-[1.7]">You want a system that compounds over months, not a burst of creative that fades.</p>
+        </div>
+      </div>
+
+      <p class="text-muted text-[13px] fade-target">Partnerships start at <span class="text-off-white">$7.5K/month</span>.</p>
+
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION 11: APPLY CTA ===== -->
+  <section id="apply" class="bg-off-white text-surface py-[120px]">
+    <div class="max-w-container mx-auto px-6 text-center">
+      <p class="text-[11px] uppercase tracking-[0.2em] text-surface/40 mb-12 fade-target">Apply</p>
+      <h2 class="font-serif text-[clamp(32px,5vw,48px)] font-normal max-w-[550px] mx-auto mb-8 leading-[1.2] fade-target">
+        Limited partnerships. Serious brands <span class="italic">only.</span>
+      </h2>
+      <p class="text-base text-surface/60 max-w-[450px] mx-auto mb-12 fade-target">
+        We take on a handful of new brands each quarter. If creative is your bottleneck and you're ready to scale, we should talk.
+      </p>
+      <a href="#apply" class="fade-target inline-block px-9 py-4 font-mono text-[13px] uppercase tracking-[0.1em] bg-surface text-off-white hover:opacity-70 transition-opacity mb-12">
+        Apply Now
+      </a>
+      <!-- What happens next -->
+      <div class="flex justify-center gap-8 flex-wrap fade-target">
+        <div class="text-[13px] text-surface/40">
+          <span class="text-surface/70 font-mono">01</span> <span class="text-surface/50">Submit application</span>
+        </div>
+        <div class="text-[13px] text-surface/40">
+          <span class="text-surface/70 font-mono">02</span> <span class="text-surface/50">Discovery call within 48hrs</span>
+        </div>
+        <div class="text-[13px] text-surface/40">
+          <span class="text-surface/70 font-mono">03</span> <span class="text-surface/50">Custom proposal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="border-t border-border overflow-hidden">
+    <div class="px-6 pt-16 pb-4">
+      <img src="logo-wordmark.svg" alt="Adcrate" class="w-[80%] mx-auto opacity-[0.07]">
+    </div>
+    <div class="max-w-container mx-auto px-6 pb-12">
+      <div class="flex justify-between items-center flex-wrap gap-6">
+        <div class="flex gap-8 items-center">
+          <a href="https://linkedin.com/company/adcrate" target="_blank" rel="noopener" class="text-[13px] uppercase tracking-[0.1em] text-muted hover:text-off-white border-b border-transparent hover:border-off-white transition-all">LinkedIn</a>
+          <a href="https://x.com/adcrate" target="_blank" rel="noopener" class="text-[13px] uppercase tracking-[0.1em] text-muted hover:text-off-white border-b border-transparent hover:border-off-white transition-all">X</a>
+          <a href="mailto:hello@adcrate.com" class="text-[13px] text-muted hover:text-off-white border-b border-transparent hover:border-off-white transition-all">hello@adcrate.com</a>
+        </div>
+        <div class="text-[13px] text-muted/50">&copy; 2026 Adcrate. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ===== JS: Scroll + FadeUp ===== -->
+  <script>
+    // Fade-up on intersection
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const siblings = entry.target.parentElement.querySelectorAll('.fade-target');
+          const i = Array.from(siblings).indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-target').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Nav scroll background
+    var nav = document.getElementById('nav');
+    if (nav) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          nav.style.borderColor = '#2a2a2a';
+          nav.style.background = 'rgba(10, 10, 10, 0.95)';
+        } else {
+          nav.style.borderColor = '';
+          nav.style.background = '';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
