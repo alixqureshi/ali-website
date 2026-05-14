@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ads with Ali — 50+ ad accounts. $100M+ in spend. Now I'll make your ads.</title>
+    <meta name="description" content="Creative strategy from 50+ ad accounts, $100M+ in spend, 500+ ads a week. The creative engine for brands spending $10-50K/mo on paid social. $4,999/mo.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg': '#0a0a0a',
+                        'surface': '#111111',
+                        'accent': '#c8a97e',
+                        'text-primary': '#f5f5f0',
+                        'text-secondary': '#a0a0a0',
+                        'border': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'serif': ['Instrument Serif', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    maxWidth: {
+                        'container': '1200px',
+                        'narrow': '760px',
+                    },
+                    borderRadius: {
+                        'none': '0',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #c8a97e; color: #0a0a0a; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+        }
+
+        /* Fade-up animation */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.2s; }
+        .hero-delay-3 { animation-delay: 0.35s; }
+
+        /* FAQ accordion */
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 400px;
+            opacity: 1;
+            padding-top: 16px;
+        }
+
+        .faq-item .faq-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Ambient terminal (hero) */
+        .ambient-line {
+            opacity: 0;
+            animation: ambientFade 9s infinite;
+        }
+        @keyframes ambientFade {
+            0% { opacity: 0; transform: translateY(3px); }
+            8% { opacity: 0.7; transform: translateY(0); }
+            70% { opacity: 0.7; transform: translateY(0); }
+            85% { opacity: 0; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(3px); }
+        }
+        .ambient-line:nth-child(1) { animation-delay: 0.3s; }
+        .ambient-line:nth-child(2) { animation-delay: 0.6s; }
+        .ambient-line:nth-child(3) { animation-delay: 0.9s; }
+        .ambient-line:nth-child(4) { animation-delay: 1.2s; }
+        .ambient-line:nth-child(5) { animation-delay: 1.5s; }
+        .ambient-line:nth-child(6) { animation-delay: 1.8s; }
+        .ambient-line:nth-child(7) { animation-delay: 2.1s; }
+        .ambient-line:nth-child(8) { animation-delay: 2.4s; }
+        .ambient-line:nth-child(9) { animation-delay: 2.7s; }
+
+        /* Terminal (full demo) */
+        .terminal-line {
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .terminal-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .terminal-line.hidden {
+            display: none;
+        }
+        .terminal-line.shown {
+            display: block;
+        }
+
+        /* CTA hover */
+        .cta-primary {
+            transition: opacity 0.2s ease;
+        }
+        .cta-primary:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body class="bg-bg text-text-primary font-mono text-[0.875rem] leading-[1.7] antialiased">
+
+    <!-- ===== NAV ===== -->
+    <nav class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-5">
+            <span class="text-[0.75rem] uppercase tracking-[0.2em] text-text-primary">Ads with Ali</span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 px-6">
+        <div class="max-w-container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <!-- Left: Copy -->
+            <div>
+                <span class="inline-block text-[0.6875rem] uppercase tracking-[0.2em] text-accent mb-8 hero-animate">
+                    Creative engine for performance brands
+                </span>
+
+                <h1 class="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.08] tracking-tight mb-8 hero-animate hero-delay-1">
+                    50+ ad accounts. $100M+ in spend. Now I'll make your ads.
+                </h1>
+
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.7] max-w-[520px] mb-10 hero-animate hero-delay-2">
+                    I've spent years deep in ad accounts — 50+ brands, $100M+ in spend, 500+ ads a week. I know what hooks hold, what angles die, and what converts cold traffic. That expertise is yours for <span class="text-accent">$4,999/mo.</span>
+                </p>
+
+                <div class="hero-animate hero-delay-3">
+                    <a href="apply.html" class="cta-primary inline-block bg-accent text-bg text-[0.8125rem] uppercase tracking-[0.15em] px-8 py-4 rounded-none">
+                        Apply Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Ambient terminal -->
+            <div class="hero-animate hero-delay-3 hidden lg:block">
+                <div class="bg-surface border border-border p-5 md:p-6" id="hero-terminal">
+                    <div class="flex items-center gap-2 mb-4 pb-3 border-b border-border">
+                        <span class="w-[8px] h-[8px] bg-[#ff5f57] inline-block"></span>
+                        <span class="w-[8px] h-[8px] bg-[#febc2e] inline-block"></span>
+                        <span class="w-[8px] h-[8px] bg-[#28c840] inline-block"></span>
+                        <span class="text-text-secondary text-[0.625rem] ml-2">ads-with-ali</span>
+                    </div>
+                    <div class="font-mono text-[0.75rem] leading-[2] text-text-secondary" id="ambient-lines">
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[strategy]</span> Pulling patterns from 50+ accounts</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[strategy]</span> Mapping angles to funnel stage</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[copywriter]</span> Generating hooks × 5 angles</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[scene-gen]</span> Building character-consistent scenes</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[scene-gen]</span> Rendering across 4 formats</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[voice]</span> Generating voiceover from scripts</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[video]</span> Producing 15s clips × 8 variations</div>
+                        <div class="ambient-line"><span class="text-accent text-[0.6875rem]">[video]</span> Optimising for Meta, TikTok, Shorts</div>
+                        <div class="ambient-line"><span class="text-[#28c840]">✓</span> <span class="text-text-primary">20 creatives ready for review</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== THE TENSION ===== -->
+    <section class="py-16 md:py-24 px-6 border-t border-border">
+        <div class="max-w-narrow mx-auto">
+            <div class="fade-up">
+                <p class="font-serif text-[clamp(1.25rem,2.5vw,1.625rem)] leading-[1.55] text-text-primary mb-10">
+                    Your creative is the bottleneck. Not your targeting. Not your spend. Your creative.
+                </p>
+
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    The average ad dies in 7 days. You need 50+ fresh creatives a month just to keep the algorithm fed. Most brands can't produce half of that.
+                </p>
+
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    You've tried freelancers. They give you hands, not a brain. You're still doing the strategic thinking yourself. Still writing the briefs. Still deciding the angles.
+                </p>
+
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    You've looked at agencies. $10K+/mo. You get passed to a junior account manager juggling 10 other clients. Your urgent requests sit in a queue. Every 10-day creative gap costs you real money in paused spend.
+                </p>
+
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    You've tried AI tools. They generate 100 variations of a bad concept. Volume without judgment. No one telling you which hook will actually hold or which angle is already fatigued.
+                </p>
+
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-10">
+                    The gap is obvious. Nobody combines senior creative strategy with production speed at a price that makes sense for your stage.
+                </p>
+
+                <p class="font-serif italic text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.4] text-text-primary">
+                    That's what Ads with Ali is. A creative engine — not a tool, not a freelancer, not an agency. A system.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THE MOAT ===== -->
+    <section class="py-20 md:py-32 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+
+            <!-- Row 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12 items-start border-b border-border pb-12 mb-12 fade-up">
+                <span class="font-serif text-[clamp(3rem,8vw,5rem)] leading-[1] text-accent">$100M+</span>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] md:pt-4">
+                    in managed ad spend across 50+ accounts. Every brief I write is informed by what's already working — not theory, not templates, patterns from real campaigns.
+                </p>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12 items-start border-b border-border pb-12 mb-12 fade-up">
+                <span class="font-serif text-[clamp(3rem,8vw,5rem)] leading-[1] text-accent">500+</span>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] md:pt-4">
+                    ads produced every week through Adcrate, the agency I co-founded. I've been in the accounts personally. I've seen which hooks hold, which angles convert, which formats fatigue first.
+                </p>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12 items-start border-b border-border pb-12 mb-12 fade-up">
+                <span class="font-serif text-[clamp(3rem,8vw,5rem)] leading-[1] text-accent">$10K+</span>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] md:pt-4">
+                    is what brands pay monthly for Adcrate's full creative operation. You get the same strategic brain — the same frameworks, the same data — at a fraction of that.
+                </p>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12 items-start fade-up">
+                <span class="font-serif text-[clamp(3rem,8vw,5rem)] leading-[1] text-accent">48hrs</span>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] md:pt-4">
+                    turnaround on creative. Not 2 weeks. Not "we'll get back to you." AI handles production. I handle strategy. You get both, fast.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-16 fade-up">Questions</h2>
+
+            <div class="max-w-[720px] fade-up" id="faq-container">
+                <!-- FAQ 1 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">How is this different from hiring a freelancer?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            Freelancers give you hands. I give you a brain. Every creative is informed by data from 50+ ad accounts and $100M+ in spend. Angles mapped to your funnel. Hooks informed by what I've seen work across hundreds of campaigns. A freelancer doesn't have that.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">How is this different from an agency?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            At an agency, you pay $10K+/mo and get passed to a junior account manager. Here, I'm the strategist. Same frameworks behind 500+ ads/week — but without the overhead, the queue, or the account manager buffer. AI handles production. I handle the thinking.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">Will AI creative look fake?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            I review everything before it ships. The pipeline produces character-consistent, platform-native creative — not stock-looking AI slop. If it doesn't pass the scroll test, it doesn't go out. Your audience won't know and won't care how it was made. They'll care that it stops them mid-scroll.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">What platforms do you produce for?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            Meta, TikTok, and YouTube Shorts. Every asset is formatted and optimised for the platform. Can adapt to others on request.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">How fast is turnaround?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            First batch within 7 days of onboarding. After that, 48-hour turnaround on standard requests. Priority turnaround on the Scale tier. You'll always have fresh creative in the pipeline.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">Is there a minimum commitment?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            3 months. Creative strategy compounds — you can't judge it from one batch. After that, month-to-month. Most clients stay because each month gets sharper as I learn what works for your brand.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="faq-item border-b border-border">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">What if I'm not happy with the creative?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            Unlimited revisions within scope. I personally review every asset. The goal is creative that performs, not creative that ships.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="faq-item">
+                    <button class="faq-trigger w-full flex items-center justify-between py-6 text-left cursor-pointer" onclick="toggleFaq(this)">
+                        <span class="text-[0.875rem] text-text-primary pr-4">Do you do media buying?</span>
+                        <span class="faq-icon text-accent text-[1.25rem] leading-none flex-shrink-0">+</span>
+                    </button>
+                    <div class="faq-answer pb-6">
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            No. Creative production only. Pairs perfectly with your media buyer or in-house team. You handle spend and targeting. I handle the creative that makes it convert.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THE SYSTEM ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-narrow mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-4 fade-up">How $10K+ expertise costs $4,999.</h2>
+            <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-12 fade-up">
+                3 years of building systems. AI agents that handle production. I handle strategy. This is what creative production looks like now.
+            </p>
+
+            <!-- Terminal -->
+            <div class="bg-surface border border-border p-6 md:p-8 fade-up" id="terminal">
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-border">
+                    <span class="w-[10px] h-[10px] bg-[#ff5f57] inline-block"></span>
+                    <span class="w-[10px] h-[10px] bg-[#febc2e] inline-block"></span>
+                    <span class="w-[10px] h-[10px] bg-[#28c840] inline-block"></span>
+                    <span class="text-text-secondary text-[0.6875rem] ml-3">ads-with-ali</span>
+                </div>
+
+                <div class="font-mono text-[0.8125rem] leading-[2.2]" id="terminal-lines">
+                    <div class="terminal-line" data-delay="0">
+                        <span class="text-accent">$</span> <span class="text-text-primary" id="typed-command"></span><span class="text-accent animate-pulse" id="cursor">|</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="1200">
+                        <span class="text-text-secondary">&nbsp;</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="1400">
+                        <span class="text-accent">[strategy]</span> <span class="text-text-secondary">Pulling patterns from 50+ accounts...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="1800">
+                        <span class="text-accent">[strategy]</span> <span class="text-text-secondary">Mapping angles to funnel stage...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="2200">
+                        <span class="text-accent">[copywriter]</span> <span class="text-text-secondary">Generating hooks from top-performing patterns...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="2600">
+                        <span class="text-accent">[copywriter]</span> <span class="text-text-secondary">Writing scripts × 5 angles...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="3000">
+                        <span class="text-accent">[scene-gen]</span> <span class="text-text-secondary">Building character-consistent scenes...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="3400">
+                        <span class="text-accent">[scene-gen]</span> <span class="text-text-secondary">Rendering 20 images across 4 formats...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="3800">
+                        <span class="text-accent">[voice]</span> <span class="text-text-secondary">Generating voiceover from scripts...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="4200">
+                        <span class="text-accent">[video]</span> <span class="text-text-secondary">Producing 15s clips × 8 variations...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="4600">
+                        <span class="text-accent">[video]</span> <span class="text-text-secondary">Optimising for Meta, TikTok, YouTube Shorts...</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="5000">
+                        <span class="text-text-secondary">&nbsp;</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="5200">
+                        <span class="text-[#28c840]">✓</span> <span class="text-text-primary">20 ad creatives ready for Ali's review</span>
+                    </div>
+                    <div class="terminal-line hidden" data-delay="5600">
+                        <span class="text-[#28c840]">✓</span> <span class="text-text-primary">Delivered to your drive in 48 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-8 fade-up">
+                The systems took 3 years to build. The AI does in hours what a team does in weeks. I review everything before it ships. That's the leverage.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-16 fade-up">Two tiers. No fluff.</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 fade-up">
+                <!-- Starter -->
+                <div class="border border-border p-8 md:p-12">
+                    <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-text-secondary block mb-3">Starter</span>
+                    <div class="flex items-baseline gap-2 mb-8">
+                        <span class="font-serif text-[2.5rem] leading-none">$4,999</span>
+                        <span class="text-text-secondary text-[0.75rem]">/mo</span>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>20 ad creatives/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Static + short-form video</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>1 strategy session/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Character-consistent AI actors</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Platform-optimised (Meta, TikTok, YouTube Shorts)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Monthly performance review</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Unlimited revisions within scope</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-10">
+                        <a href="apply.html" class="inline-block border border-border text-text-primary text-[0.75rem] uppercase tracking-[0.15em] px-6 py-3 rounded-none hover:border-text-primary transition-colors">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Scale -->
+                <div class="border border-accent p-8 md:p-12 bg-surface">
+                    <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-accent block mb-3">Scale</span>
+                    <div class="flex items-baseline gap-2 mb-8">
+                        <span class="font-serif text-[2.5rem] leading-none">$6,000</span>
+                        <span class="text-text-secondary text-[0.75rem]">/mo</span>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>40 ad creatives/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Everything in Starter, plus:</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Custom voice cloning</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Video ad production (15-30s)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>A/B creative testing roadmap</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>2 strategy sessions/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Priority turnaround (48hrs)</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-10">
+                        <a href="apply.html" class="cta-primary inline-block bg-accent text-bg text-[0.75rem] uppercase tracking-[0.15em] px-6 py-3 rounded-none">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-10 text-center fade-up">
+                Both tiers include my creative strategy — the same frameworks behind 500+ ads every week across 50+ accounts.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="py-10 md:py-14 px-6 border-t border-border">
+        <div class="max-w-narrow mx-auto fade-up">
+            <p class="font-serif text-[clamp(1.125rem,2.5vw,1.375rem)] leading-[1.6] text-text-primary">
+                Strategy session <span class="text-text-secondary">&rarr;</span> Creative brief <span class="text-text-secondary">&rarr;</span> AI production <span class="text-text-secondary">&rarr;</span> Delivered to your drive. Every month. I review everything.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== THE BRANDS ===== -->
+    <section class="py-14 md:py-20 px-6 border-t border-border">
+        <div class="max-w-container mx-auto fade-up text-center">
+            <p class="text-text-secondary text-[0.8125rem] mb-8">Strategy informed by work across</p>
+            <div class="flex flex-wrap justify-center gap-x-10 gap-y-4">
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Huel</span>
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Harry's</span>
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Motion</span>
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Tushy</span>
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">The Perfect Jean</span>
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">1440</span>
+                <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">InVideo</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA / APPLY ===== -->
+    <section class="py-24 md:py-36 px-6 border-t border-border">
+        <div class="max-w-narrow mx-auto text-center">
+            <h2 class="text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.15] mb-4 fade-up">10 spots. First come, first served.</h2>
+
+            <p class="font-serif italic text-accent text-[1.125rem] mb-10 fade-up">
+                Founding clients get 20% off for 3 months.
+            </p>
+
+            <div class="fade-up">
+                <a href="apply.html" class="cta-primary inline-block bg-accent text-bg text-[0.8125rem] uppercase tracking-[0.15em] px-10 py-4 rounded-none">
+                    Apply Now
+                </a>
+            </div>
+
+            <p class="text-text-secondary text-[0.75rem] mt-8 fade-up">
+                Typical response time: 24 hours.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-border">
+        <div class="max-w-container mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span class="text-[0.6875rem] text-text-secondary">Ads with Ali — A venture by <a href="https://www.linkedin.com/in/alimqureshi/" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Ali Qureshi</a></span>
+            <span class="text-[0.6875rem] text-text-secondary">Part of the <a href="https://adcrate.com" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Adcrate</a> ecosystem</span>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // FAQ Accordion
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(function(el) {
+                el.classList.remove('open');
+            });
+
+            // Open clicked (if it wasn't already open)
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        // Fade-up on scroll — applied sparingly to section-level elements
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.fade-up').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // Terminal typing animation
+        var terminalStarted = false;
+        var terminalObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !terminalStarted) {
+                    terminalStarted = true;
+                    startTerminal();
+                    terminalObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0, rootMargin: '0px 0px 200px 0px' });
+
+        var terminal = document.getElementById('terminal');
+        if (terminal) terminalObserver.observe(terminal);
+
+        function startTerminal() {
+            var command = 'generate campaign --brand "your-brand" --angles 5';
+            var typedEl = document.getElementById('typed-command');
+            var cursorEl = document.getElementById('cursor');
+            var i = 0;
+
+            // Type the command
+            var typeInterval = setInterval(function() {
+                if (i < command.length) {
+                    typedEl.textContent += command[i];
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                    // Hide cursor after typing
+                    setTimeout(function() {
+                        cursorEl.style.display = 'none';
+                    }, 400);
+                    // Show lines
+                    showTerminalLines();
+                }
+            }, 18);
+        }
+
+        function showTerminalLines() {
+            var lines = document.querySelectorAll('.terminal-line[data-delay]');
+            lines.forEach(function(line, index) {
+                if (index === 0) return; // skip the command line
+                var delay = parseInt(line.getAttribute('data-delay'));
+                setTimeout(function() {
+                    line.classList.remove('hidden');
+                    line.classList.add('shown');
+                    // Trigger reflow then add visible
+                    requestAnimationFrame(function() {
+                        requestAnimationFrame(function() {
+                            line.classList.add('visible');
+                        });
+                    });
+                }, delay);
+            });
+        }
+    </script>
+
+</body>
+</html>

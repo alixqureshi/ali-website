@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AZADEA Group — Creative Proposal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111;
+    --surface-2: #1a1a1a;
+    --border: #222;
+    --text: #e8e8e8;
+    --dim: #999;
+    --muted: #555;
+    --accent: #c8ff00;
+    --red: #ff4d4d;
+    --orange: #ff9f43;
+    --green: #00d68f;
+    --purple: #b44dff;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* ===== SLIDE SYSTEM ===== */
+  .deck {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 100px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    overflow-y: auto;
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Nav bar */
+  .slide-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .slide-nav .nav-left {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  .slide-nav .nav-center {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.active {
+    background: var(--accent);
+    width: 24px;
+    border-radius: 4px;
+  }
+  .dot:hover { background: var(--muted); }
+  .dot.active:hover { background: var(--accent); }
+  .slide-nav .nav-right {
+    display: flex;
+    gap: 12px;
+  }
+  .nav-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--dim);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { background: var(--border); color: var(--text); }
+  .nav-btn.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .nav-btn.primary:hover { opacity: 0.85; }
+
+  /* Slide counter top-right */
+  .slide-counter {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  /* ===== SLIDE CONTENT STYLES ===== */
+  .slide-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .slide h1 {
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  .slide h1 span { color: var(--accent); }
+  .slide h2 {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.12;
+    margin-bottom: 16px;
+  }
+  .slide-sub {
+    font-size: 18px;
+    color: var(--dim);
+    max-width: 600px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .slide-meta {
+    margin-top: 48px;
+    display: flex;
+    gap: 40px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Grid helpers */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+  /* Reality cards */
+  .reality-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px;
+  }
+  .reality-card.want { border-color: var(--muted); }
+  .reality-card.get {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(200,255,0,0.03) 0%, var(--surface) 100%);
+  }
+  .reality-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .reality-card.want .reality-label { color: var(--dim); }
+  .reality-card.get .reality-label { color: var(--accent); }
+  .reality-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+  .reality-card p { color: var(--dim); font-size: 15px; line-height: 1.65; }
+  .price-tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+  .reality-card.want .price-tag { background: rgba(255,77,77,0.1); color: var(--red); }
+  .reality-card.get .price-tag { background: rgba(200,255,0,0.1); color: var(--accent); }
+
+  /* Honest box */
+  .honest-box {
+    background: var(--surface);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 28px 32px;
+    margin-top: 32px;
+    max-width: 720px;
+  }
+  .honest-box h4 { font-size: 15px; font-weight: 700; color: var(--orange); margin-bottom: 8px; }
+  .honest-box p { color: var(--dim); font-size: 14px; line-height: 1.7; }
+
+  /* Brands table */
+  .brands-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .brands-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .brands-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--dim);
+  }
+  .brands-table .bn { color: var(--text); font-weight: 600; }
+  .ct {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .ct-f { background: rgba(180,77,255,0.12); color: var(--purple); }
+  .ct-r { background: rgba(255,159,67,0.12); color: var(--orange); }
+
+  /* Split insight */
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .split-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .split-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .split-card p { color: var(--dim); font-size: 14px; line-height: 1.65; }
+  .split-card .split-verdict {
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  .verdict-go { background: rgba(200,255,0,0.1); color: var(--accent); }
+  .verdict-wait { background: rgba(255,159,67,0.1); color: var(--orange); }
+
+  /* Pricing cards */
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .price-card.rec {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(200,255,0,0.04) 0%, var(--surface) 30%);
+  }
+  .rec-badge {
+    position: absolute;
+    top: -11px;
+    right: 20px;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .tier-name {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .price {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 6px;
+  }
+  .price span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .price-desc {
+    font-size: 13px;
+    color: var(--dim);
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.55;
+  }
+  .price-card ul { list-style: none; padding: 0; flex-grow: 1; }
+  .price-card li {
+    padding: 5px 0;
+    font-size: 13px;
+    color: var(--dim);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .ck { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .xk { color: var(--red); font-weight: 700; flex-shrink: 0; }
+  .price-card .excluded { color: var(--muted); opacity: 0.4; }
+
+  /* Build system */
+  .build-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .build-card .phase-num {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--surface-2);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .build-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+  .build-card .phase-cost {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .build-card ul { list-style: none; padding: 0; }
+  .build-card li {
+    padding: 3px 0;
+    font-size: 12px;
+    color: var(--dim);
+    padding-left: 14px;
+    position: relative;
+  }
+  .build-card li::before {
+    content: '~';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .compare-note {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--dim);
+    line-height: 1.65;
+  }
+  .compare-note strong { color: var(--text); }
+  .hl { color: var(--accent); font-weight: 600; }
+
+  /* Next steps */
+  .q-box {
+    background: linear-gradient(135deg, rgba(200,255,0,0.06) 0%, var(--surface) 100%);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 40px;
+    max-width: 700px;
+  }
+  .q-box h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+  .q-box > p { font-size: 15px; color: var(--dim); line-height: 1.7; margin-bottom: 10px; }
+  .q-box ul { list-style: none; padding: 0; margin-top: 20px; }
+  .q-box li {
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--dim);
+    border-bottom: 1px solid rgba(200,255,0,0.1);
+    display: flex;
+    gap: 12px;
+  }
+  .q-box li:last-child { border-bottom: none; }
+  .qn { color: var(--accent); font-weight: 700; flex-shrink: 0; width: 24px; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .slide { padding: 60px 32px; }
+    .g2, .g3, .split-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Keyboard hint */
+  .key-hint {
+    position: fixed;
+    top: 40px;
+    right: 60px;
+    font-size: 11px;
+    color: var(--muted);
+    z-index: 50;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="key-hint">Arrow keys or click to navigate</div>
+
+<!-- ===== NAVIGATION ===== -->
+<div class="slide-nav">
+  <div class="nav-left">AZADEA GROUP</div>
+  <div class="nav-center" id="dots"></div>
+  <div class="nav-right">
+    <button class="nav-btn" onclick="prev()">Back</button>
+    <button class="nav-btn primary" onclick="next()">Next</button>
+  </div>
+</div>
+
+<div class="deck">
+
+<!-- ===== SLIDE 1: Title ===== -->
+<div class="slide active" data-title="Title">
+  <div class="slide-label">Proposal / Confidential</div>
+  <h1>Creative for <span>AZADEA</span></h1>
+  <p class="slide-sub">A performance creative approach for 5 brands across fashion and F&B — built around what actually drives ROAS, not what looks good in a pitch deck.</p>
+  <div class="slide-meta">
+    <span>March 2026</span>
+    <span>5 Brands</span>
+    <span>Fashion + F&B</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 2: The Reality ===== -->
+<div class="slide" data-title="The Reality">
+  <div class="slide-label">01 / Let's Be Honest</div>
+  <h2>What you want vs. what's possible right now</h2>
+  <p class="slide-sub" style="margin-bottom: 36px;">You saw produced, shoot-based creative on our site and said "we want that." Good — that's the benchmark. Let's talk honestly about the gap.</p>
+
+  <div class="g2">
+    <div class="reality-card want">
+      <div class="reality-label">What You Saw</div>
+      <h3>Produced shoot-based content</h3>
+      <p>On-location shoots with talent, professional videography, directed creative, full post-production. The kind of content that stops a scroll because it looks and feels premium.</p>
+      <div class="price-tag">$10-25K+ per brand</div>
+    </div>
+    <div class="reality-card get">
+      <div class="reality-label">Where We Start</div>
+      <h3>A system that gets you there</h3>
+      <p>$5K gets one brand done properly — 50 assets, full creative mix. Prove it works, then scale. We build a creative engine that generates results now, and those results fund the premium content over time.</p>
+      <div class="price-tag">$5K/brand/mo — or $15-25K system build</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: The Honest Version ===== -->
+<div class="slide" data-title="The Honest Version">
+  <div class="slide-label">01 / Continued</div>
+  <h2>The honest version</h2>
+
+  <div class="honest-box" style="margin-top: 8px; max-width: 780px;">
+    <h4>At $5K, you get one brand done properly</h4>
+    <p>~50 assets per month — a full mix of statics, motion graphics, and AI video. Not spread thin across five brands, but concentrated on one to prove the model and demonstrate real ROAS.</p>
+    <p style="margin-top: 12px;">Shoot-based content like what you saw on our site requires $10-25K+ per brand. That's the goal — but the smart path is to start with performance creative that drives results now, then reinvest those results into premium production.</p>
+  </div>
+
+  <p style="color: var(--dim); font-size: 15px; margin-top: 32px; max-width: 600px; line-height: 1.7;">The path is: <strong style="color: var(--text);">prove it on 1 brand at $5K</strong> &rarr; <strong style="color: var(--text);">scale to 5 brands</strong> &rarr; <strong style="color: var(--text);">fund real shoots</strong> &rarr; <strong style="color: var(--accent);">the work you saw on our site</strong>.</p>
+</div>
+
+<!-- ===== SLIDE 4: The Brands ===== -->
+<div class="slide" data-title="The Brands">
+  <div class="slide-label">02 / The Brands</div>
+  <h2>Five brands, two categories</h2>
+  <p class="slide-sub" style="margin-bottom: 32px;">Not every brand gets the same treatment. Fashion and food have fundamentally different creative needs.</p>
+
+  <table class="brands-table">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Target</th>
+        <th>Why It's Interesting</th>
+        <th>Approach</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bn">Salsa Jeans</td>
+        <td><span class="ct ct-f">Fashion</span></td>
+        <td>Women & men, 20-35</td>
+        <td>Great product to show — denim, fit, styling. Strong visual story for AI statics and AI video.</td>
+        <td>AI statics, motion graphics, AI video. Full mix.</td>
+      </tr>
+      <tr>
+        <td class="bn">Boggi Milano</td>
+        <td><span class="ct ct-f">Fashion</span></td>
+        <td>Professional men, 28-50</td>
+        <td>Italian tailoring, premium fabrics — the product and brand story translate well to AI-generated creative.</td>
+        <td>AI statics, motion graphics, AI video. Full mix.</td>
+      </tr>
+      <tr>
+        <td class="bn">Punt Roma</td>
+        <td><span class="ct ct-f">Fashion</span></td>
+        <td>Women 45+</td>
+        <td>Clothing with a clear style identity — the product and story are easy to convey through AI creative.</td>
+        <td>AI statics, motion graphics, AI video. Full mix.</td>
+      </tr>
+      <tr>
+        <td class="bn">New Shanghai</td>
+        <td><span class="ct ct-r">F&B</span></td>
+        <td>Families & foodies, 25-45</td>
+        <td>AI can't create realistic food or show someone eating it — it looks fake. Need real photos and footage as the foundation.</td>
+        <td>Real photography + AI for static ads, motion graphics, layouts.</td>
+      </tr>
+      <tr>
+        <td class="bn">Butcher Shop & Grill</td>
+        <td><span class="ct ct-r">F&B</span></td>
+        <td>Meat lovers, 25-50</td>
+        <td>Same challenge — AI-generated steaks and dining scenes don't look real. Real footage is essential, then AI builds around it.</td>
+        <td>Real photography + AI for static ads, motion graphics, layouts.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== SLIDE 5: The Split ===== -->
+<div class="slide" data-title="Fashion vs F&B">
+  <div class="slide-label">02 / The Split That Matters</div>
+  <h2>AI works for clothes. It doesn't work for food.</h2>
+
+  <div class="split-grid">
+    <div class="split-card">
+      <h3>Fashion Brands</h3>
+      <p>Jeans, suits, outfits — these are great products to show. The product itself and the brand story translate well to AI-generated statics, motion graphics, and AI video. We can produce at volume and test aggressively.</p>
+      <p style="margin-top: 12px; color: var(--dim); font-size: 14px;">Salsa Jeans, Boggi Milano, Punt Roma</p>
+      <div class="split-verdict verdict-go">AI statics + motion + AI video — full mix</div>
+    </div>
+    <div class="split-card">
+      <h3>F&B Brands</h3>
+      <p>AI can't create realistic food imagery, and it can't show someone eating — it just looks fake. We need real photos and real footage as the foundation. From there, AI handles the ad design: static ads, motion graphics, layouts, offer framing. But the food itself has to be real.</p>
+      <p style="margin-top: 12px; color: var(--dim); font-size: 14px;">New Shanghai, Butcher Shop & Grill</p>
+      <div class="split-verdict verdict-wait">Real footage first — then AI builds around it</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 6: Option 1 — Retainer ===== -->
+<div class="slide" data-title="Option 1: Retainer">
+  <div class="slide-label">03 / Option 1</div>
+  <h2>We produce it for you</h2>
+  <p style="color: var(--dim); font-size: 15px; margin-bottom: 28px;">Monthly retainer. We make the creative, you deploy it.</p>
+
+  <div class="g2">
+    <div class="price-card">
+      <div class="tier-name">1 Brand</div>
+      <div class="price">$5K <span>/mo</span></div>
+      <div class="price-desc">One brand, full creative mix. Prove the model before scaling.</div>
+      <ul>
+        <li><span class="ck">+</span> ~50 assets/month</li>
+        <li><span class="ck">+</span> Mix of statics + motion graphics + AI video</li>
+        <li><span class="ck">+</span> Hook variations for A/B testing</li>
+        <li><span class="ck">+</span> Monthly creative refresh</li>
+        <li><span class="ck">+</span> Best starting point to prove ROAS on one brand, then scale</li>
+      </ul>
+    </div>
+
+    <div class="price-card rec">
+      <span class="rec-badge">Full Portfolio</span>
+      <div class="tier-name">5 Brands</div>
+      <div class="price">$20K <span>/mo</span></div>
+      <div class="price-desc">All 5 brands. Full creative mix across the portfolio.</div>
+      <ul>
+        <li><span class="ck">+</span> ~250 assets/month across all brands</li>
+        <li><span class="ck">+</span> Statics + motion graphics + AI video per brand</li>
+        <li><span class="ck">+</span> F&B creative using supplied real photography</li>
+        <li><span class="ck">+</span> Multi-platform (Meta, TikTok, LinkedIn)</li>
+        <li><span class="ck">+</span> Creative strategy & reporting</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 7: Option 2 — Build the System ===== -->
+<div class="slide" data-title="Option 2: Build the System">
+  <div class="slide-label">03 / Option 2</div>
+  <h2>We build you the system</h2>
+  <p style="color: var(--dim); font-size: 15px; margin-bottom: 28px; max-width: 680px;">Instead of an ongoing retainer, we build a custom AI creative system into your brand operations. Your team runs it. You own it permanently. Built for 5 brands, designed to scale to 40+.</p>
+
+  <div class="g2">
+    <div class="build-card" style="padding: 36px;">
+      <div class="phase-num">01</div>
+      <h4>Prove It First</h4>
+      <div class="phase-cost">Starts with a retainer month</div>
+      <ul>
+        <li>We produce real ads for your brands first</li>
+        <li>You see exactly what the system will output</li>
+        <li>No abstract frameworks — tangible creative you can run</li>
+        <li>Results validate the approach before you invest in the build</li>
+      </ul>
+    </div>
+    <div class="build-card" style="padding: 36px;">
+      <div class="phase-num">02</div>
+      <h4>Build The System</h4>
+      <div class="phase-cost">$15-25K depending on complexity</div>
+      <ul>
+        <li>Brand creative frameworks per brand</li>
+        <li>AI toolkit configured to your brand assets</li>
+        <li>Tested prompt libraries per brand</li>
+        <li>Reusable ad templates (static + motion)</li>
+        <li>Platform playbooks</li>
+        <li>Team training & recorded walkthroughs</li>
+        <li>Your team operates independently after handover</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="compare-note">
+    <strong>Why this works:</strong> You're not buying a theoretical system. You see the output first, validate that it works for your brands, then we package everything that made it work into a system your team owns permanently. Scales from these 5 brands to the full AZADEA portfolio.
+  </div>
+</div>
+
+<!-- ===== SLIDE 8: Next Steps ===== -->
+<div class="slide" data-title="Next Steps">
+  <div class="slide-label">04 / Next Steps</div>
+  <h2>Before we go further</h2>
+
+  <div class="q-box" style="margin-top: 24px;">
+    <h3>One question changes everything</h3>
+    <p>What existing brand assets do you have? Photography, video, campaign footage from global — anything. If you're sitting on a library of unused assets, the system gets significantly more powerful at every price point. Especially for F&B, where real food photography is non-negotiable.</p>
+
+    <ul>
+      <li><span class="qn">01</span> Confirm which brands are in scope and priority order</li>
+      <li><span class="qn">02</span> Share existing photography, video, and brand guidelines</li>
+      <li><span class="qn">03</span> Align on Option 1 (retainer), Option 2 (build the system), or hybrid</li>
+      <li><span class="qn">04</span> We kick off — first campaigns live within 6 weeks</li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    if (n < 0 || n >= slides.length) return;
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+  });
+
+  // Click sides to navigate
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.slide-nav') || e.target.closest('.q-box') || e.target.closest('table') || e.target.closest('a')) return;
+    if (e.clientX > window.innerWidth * 0.65) next();
+    else if (e.clientX < window.innerWidth * 0.35) prev();
+  });
+</script>
+
+</body>
+</html>
