@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal for Habibi NY — Ads with Ali</title>
+    <meta name="description" content="A custom creative proposal prepared for Habibi NY by Ali Qureshi.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg': '#0a0a0a',
+                        'surface': '#111111',
+                        'accent': '#c8a97e',
+                        'text-primary': '#f5f5f0',
+                        'text-secondary': '#a0a0a0',
+                        'border': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'serif': ['Instrument Serif', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    maxWidth: {
+                        'container': '1200px',
+                        'narrow': '760px',
+                    },
+                    borderRadius: {
+                        'none': '0',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #c8a97e; color: #0a0a0a; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.2s; }
+        .hero-delay-3 { animation-delay: 0.35s; }
+
+        .cta-primary {
+            transition: opacity 0.2s ease;
+        }
+        .cta-primary:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body class="bg-bg text-text-primary font-mono text-[0.875rem] leading-[1.7] antialiased">
+
+    <!-- ===== NAV ===== -->
+    <nav class="border-b border-border">
+        <div class="max-w-container mx-auto px-6 py-5 flex justify-between items-center">
+            <span class="text-[0.75rem] uppercase tracking-[0.2em] text-text-primary">Ads with Ali</span>
+            <span class="text-[0.6875rem] text-text-secondary">Proposal</span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="pt-20 pb-16 md:pt-32 md:pb-24 px-6">
+        <div class="max-w-narrow mx-auto">
+            <span class="inline-block text-[0.6875rem] uppercase tracking-[0.2em] text-accent mb-8 hero-animate">
+                Prepared for Habibi NY
+            </span>
+
+            <h1 class="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.08] tracking-tight mb-8 hero-animate hero-delay-1">
+                Here's how I'd build a paid ads strategy for Habibi NY.
+            </h1>
+
+            <p class="text-text-secondary text-[0.9375rem] leading-[1.8] max-w-[560px] mb-6 hero-animate hero-delay-2">
+                I ran Habibi through the same lens I use across 50+ ad accounts and $100M+ in managed spend. This is what a proper creative strategy looks like for your brand.
+            </p>
+
+            <p class="text-text-secondary text-[0.8125rem] hero-animate hero-delay-3">
+                March 2026 &middot; Ali Qureshi &middot; Co-founder, <a href="https://adcrate.com" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Adcrate</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== THE GAPS ===== -->
+    <section class="py-16 md:py-24 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-4 fade-up">The gaps I see.</h2>
+            <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-16 max-w-narrow fade-up">
+                I did a quick analysis of your site, your product catalogue, and your current ad presence. Here's what stands out.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 fade-up">
+                <div class="border border-border p-8 md:p-10">
+                    <span class="font-serif text-[2rem] text-accent block mb-4">01</span>
+                    <h3 class="text-[0.9375rem] mb-3">No visible strategy behind the ads</h3>
+                    <p class="text-text-secondary text-[0.8125rem] leading-[1.8]">
+                        The creative feels reactive, not planned. No clear testing structure, no angle rotation, no funnel-stage targeting. There's no sign of a system deciding what gets made and why — which means you're likely producing ads based on gut feel rather than data from what's already working.
+                    </p>
+                </div>
+
+                <div class="border border-border p-8 md:p-10">
+                    <span class="font-serif text-[2rem] text-accent block mb-4">02</span>
+                    <h3 class="text-[0.9375rem] mb-3">No format diversity</h3>
+                    <p class="text-text-secondary text-[0.8125rem] leading-[1.8]">
+                        The brands winning in fragrance right now are running mashups, statics, motion graphics, short-form UGC, longer product stories, founder-style talking heads — 6-8 different formats feeding the algorithm variety. That format diversity is what keeps CPAs low and gives platforms enough signal to optimise. Without it, you're testing one variable when you should be testing five.
+                    </p>
+                </div>
+
+                <div class="border border-border p-8 md:p-10">
+                    <span class="font-serif text-[2rem] text-accent block mb-4">03</span>
+                    <h3 class="text-[0.9375rem] mb-3">No narrative diversity</h3>
+                    <p class="text-text-secondary text-[0.8125rem] leading-[1.8]">
+                        Every ad tells the same story: here's the bottle, here's the name, here's the price. But you have 50+ products across oud, floral, citrus, and woody families. You sell by occasion — date night, office, workout. You have 15,000+ reviews full of vivid scent descriptions. That's dozens of untold stories sitting unused.
+                    </p>
+                </div>
+
+                <div class="border border-border p-8 md:p-10">
+                    <span class="font-serif text-[2rem] text-accent block mb-4">04</span>
+                    <h3 class="text-[0.9375rem] mb-3">No style diversity</h3>
+                    <p class="text-text-secondary text-[0.8125rem] leading-[1.8]">
+                        The visual style is one note — clean, minimal, product-focused. That works for your site. It doesn't work for stopping thumbs. You need raw UGC that feels native to TikTok. Cinematic lifestyle shots for Meta. Review compilations for retargeting. Different audiences respond to different visual languages.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THE STRATEGY ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-4 fade-up">Here's what I'd build.</h2>
+            <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-20 max-w-narrow fade-up">
+                Not just ads. A full paid creative strategy — personas, themes, testing frameworks, creative production, and a system to measure what's working.
+            </p>
+
+            <!-- 1. Personas & ICPs -->
+            <div class="max-w-narrow mx-auto mb-20 fade-up">
+                <span class="inline-block text-[0.625rem] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 mb-6">Step 1</span>
+                <h3 class="font-serif text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.3] mb-6">Define your buyer personas</h3>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    You're selling to at least 3 distinct buyers — and each one needs different creative. These are initial sketches based on your site and product range. We'd flesh these out properly in the strategy session with your actual customer data.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+                    <div class="border border-border p-6">
+                        <h4 class="text-[0.875rem] mb-2">The Gift Buyer</h4>
+                        <p class="text-text-secondary text-[0.75rem] leading-[1.8]">
+                            Shopping for someone else. Driven by occasion (birthday, anniversary, Eid, Valentine's). Needs reassurance the gift will land. Your sets ($395-$470) and gift wrapping are built for this buyer — your ads should be too.
+                        </p>
+                    </div>
+                    <div class="border border-border p-6">
+                        <h4 class="text-[0.875rem] mb-2">The Scent Enthusiast</h4>
+                        <p class="text-text-secondary text-[0.75rem] leading-[1.8]">
+                            Collects fragrances. Knows what oud is. Cares about ingredients, longevity, sillage. Your rare-ingredient and small-batch positioning speaks directly to them. They'll respond to craft and exclusivity messaging.
+                        </p>
+                    </div>
+                    <div class="border border-border p-6">
+                        <h4 class="text-[0.875rem] mb-2">The Confidence Buyer</h4>
+                        <p class="text-text-secondary text-[0.75rem] leading-[1.8]">
+                            Wants to smell good and get noticed. Doesn't care about ingredient sourcing — cares about compliments. Driven by outcome, social validation, identity. This is your highest-volume cold traffic audience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Themes & Angles -->
+            <div class="max-w-narrow mx-auto mb-20 fade-up">
+                <span class="inline-block text-[0.625rem] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 mb-6">Step 2</span>
+                <h3 class="font-serif text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.3] mb-6">Build a theme &rarr; angle &rarr; format matrix</h3>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    Every ad starts with a theme, splits into angles, then gets produced across formats. This is how you go from 3 recycled ads to 40+ diverse creatives a month.
+                </p>
+
+                <div class="bg-surface border border-border p-6 md:p-8">
+                    <div class="font-mono text-[0.75rem] leading-[2.2] text-text-secondary">
+                        <div class="mb-4">
+                            <span class="text-accent">Theme 1:</span> <span class="text-text-primary">The Compliment</span>
+                            <div class="ml-6 mt-1">
+                                <div>&rarr; Angle: "3 strangers asked what I was wearing"</div>
+                                <div>&rarr; Angle: "My partner won't stop smelling my neck"</div>
+                                <div>&rarr; Angle: "The doorman complimented me"</div>
+                                <div class="text-accent mt-1">Formats: UGC reaction, POV video, static testimonial</div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-accent">Theme 2:</span> <span class="text-text-primary">The Occasion</span>
+                            <div class="ml-6 mt-1">
+                                <div>&rarr; Angle: "Your date night fragrance"</div>
+                                <div>&rarr; Angle: "The scent for the boardroom"</div>
+                                <div>&rarr; Angle: "Pre-workout spray ritual"</div>
+                                <div class="text-accent mt-1">Formats: Lifestyle video, static with scene, carousel</div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-accent">Theme 3:</span> <span class="text-text-primary">The Craft</span>
+                            <div class="ml-6 mt-1">
+                                <div>&rarr; Angle: "Made with ingredients most brands can't source"</div>
+                                <div>&rarr; Angle: "Small batch. 15,000+ five-star reviews."</div>
+                                <div>&rarr; Angle: "Why oud costs more than gold"</div>
+                                <div class="text-accent mt-1">Formats: Educational video, ingredient close-up static, review wall</div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-accent">Theme 4:</span> <span class="text-text-primary">The Gift</span>
+                            <div class="ml-6 mt-1">
+                                <div>&rarr; Angle: "The gift they'll actually remember"</div>
+                                <div>&rarr; Angle: "Eid gift guide: fragrances they'll keep forever"</div>
+                                <div>&rarr; Angle: "His &amp; Hers set unboxing"</div>
+                                <div class="text-accent mt-1">Formats: Unboxing UGC, gifting static, occasion carousel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-6">
+                    4 themes &times; 3 angles &times; 3 formats = 36 unique creative combinations before we even touch product-specific variations. That's the testing velocity you need.
+                </p>
+            </div>
+
+            <!-- 3. Testing Framework -->
+            <div class="max-w-narrow mx-auto mb-20 fade-up">
+                <span class="inline-block text-[0.625rem] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 mb-6">Step 3</span>
+                <h3 class="font-serif text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.3] mb-6">Structured creative testing</h3>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    Not "throw 20 ads up and see what sticks." A systematic approach to finding winners.
+                </p>
+
+                <div class="space-y-0">
+                    <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-6">
+                        <span class="font-serif text-[1.25rem] text-accent">W1</span>
+                        <div>
+                            <h4 class="text-[0.875rem] mb-1">Theme test</h4>
+                            <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                                Run one ad per theme to find which resonates. Compliment vs Occasion vs Craft vs Gift. Measure hook rate and CTR. Kill losers fast.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-6">
+                        <span class="font-serif text-[1.25rem] text-accent">W2</span>
+                        <div>
+                            <h4 class="text-[0.875rem] mb-1">Angle test</h4>
+                            <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                                Take the winning theme and test 3-4 angles within it. Same theme, different hooks. Find the specific message that converts.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-6">
+                        <span class="font-serif text-[1.25rem] text-accent">W3</span>
+                        <div>
+                            <h4 class="text-[0.875rem] mb-1">Format test</h4>
+                            <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                                Winning angle, multiple formats. UGC vs produced video vs static vs carousel. Find the format that delivers the best CPA.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[48px_1fr] gap-6 py-6">
+                        <span class="font-serif text-[1.25rem] text-accent">W4</span>
+                        <div>
+                            <h4 class="text-[0.875rem] mb-1">Scale winners</h4>
+                            <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                                Produce 5-10 variations of the winning combination. New actors, new scenes, new copy — same proven angle. Feed the algorithm fresh creative on a winning formula.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-6">
+                    This cycle repeats monthly. Each month, the strategy gets sharper because we know what works and what doesn't.
+                </p>
+            </div>
+
+            <!-- 4. Creative Production — Two Streams -->
+            <div class="max-w-narrow mx-auto mb-20 fade-up">
+                <span class="inline-block text-[0.625rem] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 mb-6">Step 4</span>
+                <h3 class="font-serif text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.3] mb-6">How the creative gets made</h3>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    This plan assumes you have video content coming in — from influencers, UGC creators, or your own shoots. I'll take that raw material and build it into ads. I can support with additional creative where needed, but the more content you feed in, the more we can produce.
+                </p>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    Two streams run in parallel:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                    <div class="border border-border p-6 md:p-8">
+                        <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-4">Stream 1: Your content, rebuilt into ads</h4>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.8] mb-4">
+                            I take the video content you're already getting and re-cut it into mashup-style ads with different narratives, hooks, and structures. Same raw footage, multiple ads — each telling a different story.
+                        </p>
+                        <ul class="space-y-2 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>Mashup edits with new narrative structures</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>Multiple ad variants from one piece of content</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>Hook swaps, testimonial compilations, reaction edits</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>Platform-native cuts for Meta, TikTok, Shorts</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="border border-border p-6 md:p-8">
+                        <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-4">Stream 2: AI-generated creative</h4>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.8] mb-4">
+                            AI lets us generate entirely new videos, visuals, and ad concepts — things your existing content can't produce. New stories, new formats, new visual directions to test against what's already working.
+                        </p>
+                        <ul class="space-y-2 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>AI-generated video ads and new story formats</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>Character-consistent actors across campaigns</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>New visual direction and brand world-building</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-[2px]">+</span>
+                                <span>Statics, motion graphics, and animated formats</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-6">
+                    The two streams complement each other. Your existing content gives authenticity and social proof. AI gives you volume, new stories to test, and visual directions that would cost thousands to shoot traditionally.
+                </p>
+            </div>
+
+            <!-- 5. Creative Systems -->
+            <div class="max-w-narrow mx-auto mb-20 fade-up">
+                <span class="inline-block text-[0.625rem] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 mb-6">Step 5</span>
+                <h3 class="font-serif text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.3] mb-6">Build creative systems into your brand</h3>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    Ads are one piece. The bigger play is building a creative operations system that compounds — so your brand doesn't depend on one person or one agency forever.
+                </p>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    Through <a href="https://adcreativeops.com" target="_blank" class="text-accent hover:opacity-80 transition-opacity">AdCreativeOps</a>, I'd set up the operating system behind your creative: documented briefs, repeatable production workflows, a testing library that grows every month, and a creative database so you always know what's been tested and what worked.
+                </p>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8]">
+                    This means your creative strategy doesn't start from scratch every month. It builds. Every test informs the next. Every winning angle gets documented and scaled. After 6 months, you have a playbook nobody else in your category has.
+                </p>
+            </div>
+
+            <!-- 6. Measuring & Monitoring -->
+            <div class="max-w-narrow mx-auto fade-up">
+                <span class="inline-block text-[0.625rem] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 mb-6">Step 6</span>
+                <h3 class="font-serif text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.3] mb-6">Measure what matters</h3>
+                <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-6">
+                    Creative without measurement is guesswork. Here's what I track every month to make sure we're moving in the right direction.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                    <div class="border border-border p-6">
+                        <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-3">Creative metrics</h4>
+                        <ul class="space-y-2 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            <li>Hook rate (first 3 seconds)</li>
+                            <li>Hold rate (watched 50%+)</li>
+                            <li>CTR by angle and format</li>
+                            <li>Creative fatigue signals</li>
+                        </ul>
+                    </div>
+                    <div class="border border-border p-6">
+                        <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-3">Performance metrics</h4>
+                        <ul class="space-y-2 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            <li>CPA by creative variant</li>
+                            <li>ROAS by theme and angle</li>
+                            <li>Win rate (% of creatives that beat control)</li>
+                            <li>Time-to-fatigue per winning ad</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-6">
+                    Monthly performance review. We sit down, look at what worked, kill what didn't, and plan next month's creative around real data — not assumptions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CREATIVE PREVIEW ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <div class="mb-16 fade-up">
+                <span class="text-accent text-[0.6875rem] uppercase tracking-[0.2em] block mb-4">Creative preview</span>
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-6">What your ads could look like.</h2>
+                <p class="text-text-secondary text-[0.8125rem] leading-[1.7] max-w-narrow">
+                    These are initial AI-generated concepts for Desert Oud — produced in minutes, not days. This is the direction we'd build on, plus short-form video, b-roll, UGC-style content, and platform-specific formats.
+                </p>
+            </div>
+
+            <!-- Row 1: Hero creatives (2 column) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 fade-up">
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/01-product-shot.png" alt="Desert Oud — Product Shot" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Product shot</span>
+                    </div>
+                </div>
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/02-headline.png" alt="Desert Oud — Headline Ad" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Headline</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Mixed formats (4 column) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 fade-up">
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/10-us-vs-them.png" alt="Desert Oud — Us vs Them" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Us vs them</span>
+                    </div>
+                </div>
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/13-negative-marketing.png" alt="Desert Oud — Bait & Switch Review" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Bait & switch</span>
+                    </div>
+                </div>
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/05-features-benefits.png" alt="Desert Oud — Features" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Features</span>
+                    </div>
+                </div>
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/06-statistics.png" alt="Desert Oud — Statistics" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Statistics</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: UGC / Native formats (2 column) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 fade-up">
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/08-ugc-tiktok.png" alt="Desert Oud — UGC TikTok" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">UGC / TikTok native</span>
+                    </div>
+                </div>
+                <div class="border border-border overflow-hidden">
+                    <img src="creatives/04-testimonial.png" alt="Desert Oud — Testimonial" class="w-full h-auto block">
+                    <div class="p-4 border-t border-border">
+                        <span class="text-accent text-[0.6875rem] uppercase tracking-[0.15em]">Testimonial</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context note -->
+            <div class="mt-12 border border-border p-6 md:p-8 fade-up">
+                <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                    <span class="text-accent">8 of 14 formats shown.</span> These are first-pass generations — produced in under 5 minutes total. In production, we'd refine these and add short-form video (hooks, transitions, supers), b-roll sequences, carousel variations, and platform-native formats for Meta, TikTok, and YouTube Shorts. Every creative gets reviewed by Ali before delivery.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DELIVERABLES ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-16 fade-up">What you'd get each month.</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 fade-up">
+                <div class="border border-border p-6 md:p-8">
+                    <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-4">Creative assets</h4>
+                    <ul class="space-y-3 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>20-40 ad creatives (depending on tier)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Influencer mashup edits with new narratives</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>AI-generated statics, video, and lifestyle scenes</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Platform-optimised for Meta, TikTok, YouTube Shorts</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border border-border p-6 md:p-8">
+                    <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-4">Strategy & direction</h4>
+                    <ul class="space-y-3 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Monthly strategy session (Zoom)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Creative briefs with angle, hook, and format specs</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Visual direction for AI and repurposed content</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Testing roadmap — what to run, in what order</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border border-border p-6 md:p-8">
+                    <h4 class="text-accent text-[0.75rem] uppercase tracking-[0.15em] mb-4">Reporting & systems</h4>
+                    <ul class="space-y-3 text-text-secondary text-[0.8125rem] leading-[1.7]">
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Monthly performance review</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Creative testing log (what worked, what didn't)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>AdCreativeOps system setup</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Unlimited revisions within scope</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-16 fade-up">Pricing.</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 fade-up">
+                <!-- Starter — recommended -->
+                <div class="border border-accent p-8 md:p-12 bg-surface relative">
+                    <span class="absolute top-0 right-0 bg-accent text-bg text-[0.5625rem] uppercase tracking-[0.2em] px-4 py-2">
+                        Recommended
+                    </span>
+
+                    <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-accent block mb-3">Starter</span>
+                    <div class="flex items-baseline gap-2 mb-8">
+                        <span class="font-serif text-[2.5rem] leading-none">$4,999</span>
+                        <span class="text-text-secondary text-[0.75rem]">/mo</span>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>20 ad creatives/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Static + short-form video</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>1 strategy session/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Character-consistent AI actors</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Meta, TikTok, YouTube Shorts</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Monthly performance review</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Unlimited revisions within scope</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Scale -->
+                <div class="border border-border p-8 md:p-12">
+                    <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-text-secondary block mb-3">Scale</span>
+                    <div class="flex items-baseline gap-2 mb-8">
+                        <span class="font-serif text-[2.5rem] leading-none">$6,000</span>
+                        <span class="text-text-secondary text-[0.75rem]">/mo</span>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>40 ad creatives/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Everything in Starter, plus:</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Custom voice cloning</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Video ad production (15-30s)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>A/B creative testing roadmap</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>2 strategy sessions/month</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[0.8125rem] text-text-secondary leading-[1.7]">
+                            <span class="text-accent mt-[2px]">+</span>
+                            <span>Priority turnaround (48hrs)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-text-secondary text-[0.8125rem] leading-[1.7] mt-8 max-w-narrow fade-up">
+                Starter is the right entry point. 20 creatives/month gives you enough to run the full testing framework across your top-selling fragrances. Once we find what converts, Scale doubles the volume and adds produced video + voice cloning.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== PROOF ===== -->
+    <section class="py-16 md:py-20 px-6 border-t border-border">
+        <div class="max-w-container mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 fade-up">
+                <div>
+                    <span class="font-serif text-[clamp(2rem,5vw,3rem)] leading-[1] text-accent block">$100M+</span>
+                    <span class="text-text-secondary text-[0.75rem] mt-2 block">in managed ad spend</span>
+                </div>
+                <div>
+                    <span class="font-serif text-[clamp(2rem,5vw,3rem)] leading-[1] text-accent block">500+</span>
+                    <span class="text-text-secondary text-[0.75rem] mt-2 block">ads produced weekly</span>
+                </div>
+                <div>
+                    <span class="font-serif text-[clamp(2rem,5vw,3rem)] leading-[1] text-accent block">50+</span>
+                    <span class="text-text-secondary text-[0.75rem] mt-2 block">ad accounts managed</span>
+                </div>
+                <div>
+                    <span class="font-serif text-[clamp(2rem,5vw,3rem)] leading-[1] text-accent block">48hrs</span>
+                    <span class="text-text-secondary text-[0.75rem] mt-2 block">turnaround time</span>
+                </div>
+            </div>
+            <div class="text-center fade-up">
+                <p class="text-text-secondary text-[0.8125rem] mb-6">Strategy informed by work across</p>
+                <div class="flex flex-wrap justify-center gap-x-10 gap-y-4">
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Huel</span>
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Harry's</span>
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Motion</span>
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">Tushy</span>
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">The Perfect Jean</span>
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">1440</span>
+                    <span class="text-[0.8125rem] tracking-[0.05em] text-text-secondary opacity-50">InVideo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="py-20 md:py-28 px-6 border-t border-border">
+        <div class="max-w-narrow mx-auto">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] mb-16 fade-up">How it works.</h2>
+
+            <div class="space-y-0 fade-up">
+                <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-8">
+                    <span class="font-serif text-[1.5rem] text-accent">01</span>
+                    <div>
+                        <h3 class="text-[1rem] mb-2">Confirm your package</h3>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            Reply to this proposal, pick your tier, and we lock in start date. Simple.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-8">
+                    <span class="font-serif text-[1.5rem] text-accent">02</span>
+                    <div>
+                        <h3 class="text-[1rem] mb-2">Onboarding & brand deep-dive</h3>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            45-minute session. I learn Habibi's brand DNA, your best sellers, your audience data, your current ad performance, and your influencer content library. We define the personas and set creative direction for the first batch.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-8">
+                    <span class="font-serif text-[1.5rem] text-accent">03</span>
+                    <div>
+                        <h3 class="text-[1rem] mb-2">First batch ships (Week 2)</h3>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            First round of creatives — mashup edits from your influencer content plus AI-generated creative. Delivered to your drive, organised by format and platform. You load, we learn.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-[48px_1fr] gap-6 border-b border-border py-8">
+                    <span class="font-serif text-[1.5rem] text-accent">04</span>
+                    <div>
+                        <h3 class="text-[1rem] mb-2">Test, review, iterate</h3>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            Monthly performance review. We look at the data — what themes landed, which formats converted, where the CPA dropped. Next month's creative strategy is built on what we now know, not guesswork.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-[48px_1fr] gap-6 py-8">
+                    <span class="font-serif text-[1.5rem] text-accent">05</span>
+                    <div>
+                        <h3 class="text-[1rem] mb-2">Systems compound</h3>
+                        <p class="text-text-secondary text-[0.8125rem] leading-[1.7]">
+                            By month 3, you have a documented creative playbook — winning angles, proven formats, a testing library that grows every cycle. The strategy gets sharper every month because it's built on real performance data from your account.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="py-24 md:py-36 px-6 border-t border-border">
+        <div class="max-w-narrow mx-auto text-center">
+            <h2 class="text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.15] mb-6 fade-up">Ready to get started?</h2>
+
+            <p class="text-text-secondary text-[0.9375rem] leading-[1.8] mb-10 fade-up">
+                Hit the button below, let me know which package works, and we'll lock in your start date.
+            </p>
+
+            <div class="fade-up">
+                <a href="mailto:ali@adcrate.co?subject=Habibi%20NY%20%E2%80%94%20Let%27s%20confirm%20this%20package&body=Hey%20Ali%2C%0A%0AI%27ve%20reviewed%20the%20proposal.%20Let%27s%20confirm%20this%20package%3A%0A%0ATier%3A%20%5BStarter%20%2F%20Scale%5D%0A%0ALooking%20forward%20to%20getting%20started." class="cta-primary inline-block bg-accent text-bg text-[0.8125rem] uppercase tracking-[0.15em] px-10 py-4 rounded-none">
+                    Let's Confirm This Package
+                </a>
+            </div>
+
+            <p class="text-text-secondary text-[0.6875rem] mt-8 fade-up">
+                I take 10 clients max. This proposal is valid for 14 days.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-border">
+        <div class="max-w-container mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span class="text-[0.6875rem] text-text-secondary">Ads with Ali &mdash; <a href="https://www.linkedin.com/in/aliqureshi1/" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Ali Qureshi</a></span>
+            <span class="text-[0.6875rem] text-text-secondary">Part of the <a href="https://adcrate.com" target="_blank" class="text-text-secondary hover:text-text-primary transition-colors">Adcrate</a> ecosystem</span>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.fade-up').forEach(function(el) {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

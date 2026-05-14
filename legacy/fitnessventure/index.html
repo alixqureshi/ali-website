@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dad Bod Reset — Everything You Need</title>
+    <meta name="description" content="The Dad Bod Reset: a fitness business for busy dads. Landing page, 7-day guide, business blueprint, and content playbook — all in one place.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream': '#FAFAF7',
+                        'cream-dark': '#F0EFE9',
+                        'ink': '#1a1a1a',
+                        'ink-light': '#4a4a4a',
+                        'muted': '#7a7a7a',
+                        'accent': '#2D6A4F',
+                        'accent-dark': '#1B4332',
+                        'accent-light': '#40916C',
+                        'input-border': '#d4d4d0',
+                        'card-bg': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        'sans': ['DM Sans', 'system-ui', 'sans-serif'],
+                    },
+                    maxWidth: {
+                        'container': '1080px',
+                    },
+                    borderRadius: {
+                        'btn': '6px',
+                        'card': '8px',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::selection { background: #2D6A4F; color: #FAFAF7; }
+        html { scroll-behavior: smooth; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-animate {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.25s; }
+        .hero-delay-3 { animation-delay: 0.4s; }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-link {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+    </style>
+</head>
+<body class="bg-cream text-ink font-sans text-base leading-relaxed antialiased">
+
+    <!-- ===== HERO ===== -->
+    <section class="min-h-[70vh] flex items-center justify-center text-center px-6 py-24">
+        <div class="max-w-[680px] w-full">
+            <span class="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent bg-accent/10 px-4 py-2 rounded-full mb-8 hero-animate">
+                Fitness Venture — The Full Package
+            </span>
+
+            <h1 class="text-[clamp(36px,7vw,56px)] font-bold leading-[1.12] tracking-tight text-ink mb-6 hero-animate hero-delay-1">
+                The Dad Bod <em class="not-italic text-accent">Reset</em>
+            </h1>
+
+            <p class="text-lg text-ink-light max-w-[540px] mx-auto hero-animate hero-delay-2">
+                A £10K/month fitness business helping busy dads get back in shape — with simple meals, 30-minute workouts, and real accountability.
+            </p>
+
+            <div class="mt-10 hero-animate hero-delay-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted mx-auto animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAGE CARDS ===== -->
+    <section class="pb-32 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Landing Page -->
+                <a href="landing.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Lead Capture</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">Landing Page</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The lead magnet capture page. Visitors enter their name and email to download the free 7-Day Dad Bod Reset Kickstart plan.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View page
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                </a>
+
+                <!-- 7-Day Guide -->
+                <a href="guide.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Lead Magnet</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">7-Day Kickstart Guide</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The free PDF guide. 7 days of simple meals, 30-minute bodyweight workouts, a full shopping list, and a printable daily habit tracker.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View guide
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                </a>
+
+                <!-- Business Pitch -->
+                <a href="pitch.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-1.5M12 12.75l3 1.5M12 12.75V17.25m-4.5-5.25L12 9.75" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Business Blueprint</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">Pitch Presentation</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The full business case for Arif. Revenue model, delivery stack, scalable systems, marketing funnel, partnership structure, and 90-day launch plan.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View pitch
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                </a>
+
+                <!-- Content Strategy -->
+                <a href="content.html" class="card-link block bg-card-bg border border-input-border rounded-card p-8 md:p-10 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-accent/10 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Content Playbook</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-ink mb-3">Content Strategy</h2>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The complete content system. 5 pillars, weekly posting schedule, how to film in under 5 minutes, trial reels strategy, and 50 ready-to-film content ideas.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-accent text-sm font-semibold">
+                        View playbook
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                </a>
+
+                <!-- Action Plan -->
+                <a href="action-plan.html" class="card-link block bg-accent text-white rounded-card p-8 md:p-10 md:col-span-2 fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-white/20 rounded-card flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-white/80">Active</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-white mb-3">Arif's Action Plan</h2>
+                    <p class="text-white/80 leading-relaxed mb-6">
+                        What Arif needs to do, in what order, and why. Phased checklist from blocking items (VSL, photos) through to ongoing coaching rhythm. ~8-10 hours total.
+                    </p>
+                    <span class="inline-flex items-center gap-2 text-white text-sm font-semibold">
+                        View action plan
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUICK STATS ===== -->
+    <section class="bg-cream-dark py-20 px-6">
+        <div class="max-w-container mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center fade-up">
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">&pound;749</p>
+                    <p class="text-muted text-sm">3-month program</p>
+                </div>
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">40</p>
+                    <p class="text-muted text-sm">members = £10K/mo</p>
+                </div>
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">30</p>
+                    <p class="text-muted text-sm">min workouts</p>
+                </div>
+                <div>
+                    <p class="text-[2rem] font-bold text-accent leading-none mb-2">0</p>
+                    <p class="text-muted text-sm">gym required</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-12 px-6 border-t border-input-border">
+        <div class="max-w-container mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p class="text-sm text-muted">&copy; 2026 The Dad Bod Reset</p>
+            <p class="text-xs text-muted">Prepared by Ali Qureshi</p>
+        </div>
+    </footer>
+
+    <!-- Scroll-triggered fade-up animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+            );
+
+            document.querySelectorAll('.fade-up').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!--
+  LEAD MAGNET TEMPLATE
+  ────────────────────
+  To launch a new one:
+  1. Copy this file → /lp/<slug>.html  (e.g. /lp/veo3.html)
+  2. Change <title> tag
+  3. Change the question + reply line (marked SWAP)
+  4. Replace the Kit form action + data-sv-form + data-uid with this lead magnet's specific Kit form values
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SWAP — short title</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+<style>
+  :root {
+    --paper: #f7f3e8;
+    --paper-dark: #efe9d6;
+    --ink: #1f1d1a;
+    --muted: #6e6657;
+    --highlight: #ffe169;
+    --marker: #2563a8;
+    --rule: #d6cdb3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    background-image: radial-gradient(circle, rgba(31,29,26,0.13) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+  }
+  .wrap {
+    max-width: 540px;
+    width: 100%;
+  }
+  .ask {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 1;
+    margin: 0 0 24px;
+    transform: rotate(-1.2deg);
+    display: inline-block;
+    position: relative;
+  }
+  .ask .hl {
+    background: linear-gradient(180deg, transparent 60%, var(--highlight) 60%, var(--highlight) 92%, transparent 92%);
+    padding: 0 4px;
+  }
+  .reply {
+    font-size: 19px;
+    line-height: 1.5;
+    margin: 0 0 22px;
+    max-width: 480px;
+  }
+  form {
+    display: flex;
+    gap: 8px;
+    max-width: 460px;
+  }
+  input[type=email] {
+    flex: 1;
+    padding: 13px 14px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  input[type=email]:focus { outline: none; background: white; }
+  button {
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4px 22px;
+  }
+  button:hover { background: var(--marker); border-color: var(--marker); }
+  .note {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 10px 0 0;
+  }
+  .signature {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: var(--marker);
+    margin-top: 36px;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 10px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+  }
+  .back:hover { color: var(--ink); }
+  @media (max-width: 540px) {
+    .ask { font-size: 48px; }
+    form { flex-direction: column; }
+    button { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<a href="/" class="back">← aliqureshi.co</a>
+<div class="wrap">
+
+  <!-- SWAP 1: the question. casual, lowercase. wrap the noun in <span class="hl"> to highlight it. -->
+  <h1 class="ask">want the <span class="hl">veo3 playbook</span>?</h1>
+
+  <!-- SWAP 2: casual reply line. one sentence. -->
+  <p class="reply">cool — drop your email below and i'll send it over.</p>
+
+  <!--
+    SWAP 3: Kit form
+    Replace action URL, data-sv-form, and data-uid with values from THIS lead magnet's Kit form.
+  -->
+  <form action="https://app.kit.com/forms/REPLACE_ME/subscriptions" method="post" data-sv-form="REPLACE_ME" data-uid="REPLACE_ME" data-format="inline" data-version="5">
+    <input type="email" name="email_address" placeholder="you@domain.com" required>
+    <button type="submit">Send it →</button>
+  </form>
+
+  <p class="note">no spam. unsubscribe anytime.</p>
+
+  <div class="signature">— Ali</div>
+</div>
+</body>
+</html>

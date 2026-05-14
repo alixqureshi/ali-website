@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Break Plan — Ayaan & Myra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface':       '#0a0a0a',
+            'surface-alt':   '#0f0f0f',
+            'surface-card':  '#111111',
+            'surface-hover': '#161616',
+            'off-white':     '#f5f5f0',
+            'muted':         '#6b6b6b',
+            'border':        '#1a1a1a',
+            'gold':          '#c9a227',
+            'gold-dim':      'rgba(201,162,39,0.15)',
+            'blue-soft':     '#4a9eff',
+            'pink-soft':     '#ff6b9d',
+            'green-soft':    '#4ade80',
+            'orange-soft':   '#fb923c',
+            'purple-soft':   '#a78bfa',
+          },
+          fontFamily: {
+            'serif':  ['Instrument Serif', 'Georgia', 'serif'],
+            'mono':   ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'JetBrains Mono', monospace; background: #0a0a0a; color: #f5f5f0; }
+    ::selection { background: #f5f5f0; color: #0a0a0a; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2a2a2a; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeUp 0.5s ease forwards; }
+    .fade-in-1 { animation-delay: 0.05s; opacity: 0; }
+    .fade-in-2 { animation-delay: 0.1s; opacity: 0; }
+    .fade-in-3 { animation-delay: 0.15s; opacity: 0; }
+    .fade-in-4 { animation-delay: 0.2s; opacity: 0; }
+    .fade-in-5 { animation-delay: 0.25s; opacity: 0; }
+
+    .section-card {
+      background: #111111;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      transition: border-color 0.3s ease;
+    }
+    .section-card:hover { border-color: rgba(201,162,39,0.2); }
+
+    .tab-btn { transition: all 0.2s ease; }
+    .tab-btn.active {
+      background: rgba(201,162,39,0.15);
+      color: #c9a227;
+      border-color: rgba(201,162,39,0.3);
+    }
+
+    .week-tab { transition: all 0.2s ease; cursor: pointer; }
+    .week-tab.active {
+      background: rgba(201,162,39,0.15);
+      color: #c9a227;
+      border-color: rgba(201,162,39,0.4);
+    }
+
+    .checklist-item input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid #333;
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .checklist-item input[type="checkbox"]:checked {
+      background: #c9a227;
+      border-color: #c9a227;
+    }
+    .checklist-item input[type="checkbox"]:checked + span {
+      text-decoration: line-through;
+      color: #6b6b6b;
+    }
+
+    .time-badge {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .progress-ring { transition: stroke-dashoffset 0.5s ease; }
+
+    .collapsible-header { cursor: pointer; user-select: none; }
+    .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .collapsible-content.open { max-height: 2000px; }
+    .collapse-arrow { transition: transform 0.2s ease; }
+    .collapse-arrow.open { transform: rotate(90deg); }
+
+    .nav-dot { transition: all 0.2s ease; }
+    .nav-dot.active { background: #c9a227; transform: scale(1.3); }
+
+    @media (max-width: 640px) {
+      .schedule-grid { font-size: 12px; }
+    }
+  </style>
+</head>
+<body class="bg-surface text-off-white min-h-screen">
+
+  <!-- Fixed nav dots (desktop) -->
+  <nav class="fixed right-4 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-3" id="navDots">
+    <a href="#hero" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Top"></a>
+    <a href="#ground-rules" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Ground Rules"></a>
+    <a href="#daily-schedule" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Daily Schedule"></a>
+    <a href="#weekly-plan" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Weekly Plan"></a>
+    <a href="#education" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Education"></a>
+    <a href="#create" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Create"></a>
+    <a href="#myra" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Myra"></a>
+    <a href="#experiences" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Experiences"></a>
+    <a href="#screen-time" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Screen Time"></a>
+    <a href="#shopping" class="nav-dot w-2 h-2 rounded-full bg-muted block" title="Shopping"></a>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+
+    <!-- Hero -->
+    <section id="hero" class="mb-16 fade-in">
+      <p class="font-mono text-[11px] text-muted tracking-widest uppercase mb-4">March 17 — April 4, 2026</p>
+      <h1 class="font-serif text-4xl sm:text-6xl leading-[1.1] mb-4">Spring Break<br><span class="text-gold">Game Plan</span></h1>
+      <p class="text-muted text-sm max-w-md leading-relaxed">3 weeks. No iPad dependency. Physical activity, education, creativity, and Quran — structured but flexible.</p>
+
+      <div class="flex gap-4 mt-8">
+        <div class="section-card px-4 py-3 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-blue-soft/20 flex items-center justify-center text-blue-soft text-sm">A</div>
+          <div>
+            <p class="text-xs text-muted">Ayaan</p>
+            <p class="text-sm">Nearly 7</p>
+          </div>
+        </div>
+        <div class="section-card px-4 py-3 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-pink-soft/20 flex items-center justify-center text-pink-soft text-sm">M</div>
+          <div>
+            <p class="text-xs text-muted">Myra</p>
+            <p class="text-sm">Age 2</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week progress -->
+      <div class="mt-8 flex gap-2" id="weekProgress">
+        <div class="week-tab active section-card px-4 py-2 text-xs" data-week="1" onclick="setWeek(1)">
+          <span class="text-muted block text-[10px] mb-1">WEEK 1</span>
+          Explorer
+        </div>
+        <div class="week-tab section-card px-4 py-2 text-xs" data-week="2" onclick="setWeek(2)">
+          <span class="text-muted block text-[10px] mb-1">WEEK 2</span>
+          Builder
+        </div>
+        <div class="week-tab section-card px-4 py-2 text-xs" data-week="3" onclick="setWeek(3)">
+          <span class="text-muted block text-[10px] mb-1">WEEK 3</span>
+          Artist
+        </div>
+      </div>
+    </section>
+
+    <!-- Ground Rules -->
+    <section id="ground-rules" class="mb-12 fade-in fade-in-1">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-6">Ground Rules</h2>
+      <div class="grid gap-3">
+        <div class="section-card p-4 flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-lg bg-orange-soft/15 flex items-center justify-center text-orange-soft text-sm flex-shrink-0 mt-0.5">1h</div>
+          <div>
+            <p class="text-sm font-medium">Screen time: 1 hour/day MAX</p>
+            <p class="text-xs text-muted mt-1">After lunch only (1:00–2:00 PM). No screens before this. No negotiation.</p>
+          </div>
+        </div>
+        <div class="section-card p-4 flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-lg bg-green-soft/15 flex items-center justify-center text-green-soft flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium">Morning block is sacred</p>
+            <p class="text-xs text-muted mt-1">Physical activity every morning before it gets hot (8:30–10:30 AM).</p>
+          </div>
+        </div>
+        <div class="section-card p-4 flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-lg bg-blue-soft/15 flex items-center justify-center text-blue-soft flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium">Ayaan's job chart</p>
+            <p class="text-xs text-muted mt-1">Daily checklist he ticks off himself — earns his screen time. Ownership, not obedience.</p>
+          </div>
+        </div>
+        <div class="section-card p-4 flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-lg bg-pink-soft/15 flex items-center justify-center text-pink-soft flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium">Myra follows a loose rhythm</p>
+            <p class="text-xs text-muted mt-1">She's 2. Flex the schedule around her naps and mood. No rigid timings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Schedule -->
+    <section id="daily-schedule" class="mb-12 fade-in fade-in-2">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Daily Schedule</h2>
+      <p class="text-xs text-muted mb-6">The backbone. Adjust as needed, but protect the blocks.</p>
+
+      <div class="space-y-2 schedule-grid">
+        <!-- Morning -->
+        <div class="section-card p-4">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="time-badge bg-muted/20 text-muted">7:00–8:00</span>
+            <span class="text-sm">Wake up & Breakfast</span>
+          </div>
+          <div class="flex gap-4 pl-2 text-xs text-muted">
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-soft"></span>Get dressed independently</div>
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-soft"></span>Breakfast with nanny</div>
+          </div>
+        </div>
+
+        <!-- Active Block 1 -->
+        <div class="section-card p-4 border-l-2 border-l-green-soft">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="time-badge bg-green-soft/15 text-green-soft">8:30–10:30</span>
+            <span class="text-sm font-medium">ACTIVE BLOCK</span>
+          </div>
+          <div class="flex gap-4 pl-2 text-xs text-muted">
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-soft"></span>Outdoor/physical (see weekly)</div>
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-soft"></span>Garden, splash, walk</div>
+          </div>
+        </div>
+
+        <div class="section-card p-3">
+          <div class="flex items-center gap-3">
+            <span class="time-badge bg-muted/20 text-muted">10:30–11:00</span>
+            <span class="text-sm text-muted">Snack + cool down</span>
+          </div>
+        </div>
+
+        <!-- Learn Block -->
+        <div class="section-card p-4 border-l-2 border-l-purple-soft">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="time-badge bg-purple-soft/15 text-purple-soft">11:00–12:00</span>
+            <span class="text-sm font-medium">LEARN BLOCK</span>
+          </div>
+          <div class="flex gap-4 pl-2 text-xs text-muted">
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-soft"></span>Education rotation</div>
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-soft"></span>Sensory play / arts</div>
+          </div>
+        </div>
+
+        <div class="section-card p-3">
+          <div class="flex items-center gap-3">
+            <span class="time-badge bg-muted/20 text-muted">12:00–1:00</span>
+            <span class="text-sm text-muted">Lunch</span>
+          </div>
+        </div>
+
+        <!-- Screen Time -->
+        <div class="section-card p-4 border-l-2 border-l-orange-soft">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="time-badge bg-orange-soft/15 text-orange-soft">1:00–2:00</span>
+            <span class="text-sm font-medium">SCREEN TIME</span>
+            <span class="text-[10px] text-orange-soft/70 uppercase tracking-wider">earned</span>
+          </div>
+          <div class="flex gap-4 pl-2 text-xs text-muted">
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-soft"></span>Educational content only</div>
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-soft"></span>Nap</div>
+          </div>
+        </div>
+
+        <!-- Create Block -->
+        <div class="section-card p-4 border-l-2 border-l-gold">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="time-badge bg-gold-dim text-gold">2:00–3:00</span>
+            <span class="text-sm font-medium">CREATE BLOCK</span>
+          </div>
+          <div class="flex gap-4 pl-2 text-xs text-muted">
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-soft"></span>Arts, crafts, building</div>
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-soft"></span>Nap continues</div>
+          </div>
+        </div>
+
+        <div class="section-card p-3">
+          <div class="flex items-center gap-3">
+            <span class="time-badge bg-muted/20 text-muted">3:00–3:30</span>
+            <span class="text-sm text-muted">Free play / reading</span>
+          </div>
+        </div>
+
+        <!-- Quran -->
+        <div class="section-card p-4 border-l-2 border-l-green-soft/60">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="time-badge bg-green-soft/10 text-green-soft/80">3:30–4:00</span>
+            <span class="text-sm font-medium">Quran Class</span>
+            <span class="text-[10px] text-muted uppercase tracking-wider">Mon / Wed / Fri</span>
+          </div>
+          <p class="text-xs text-muted pl-2">20 minutes. Myra free play with nanny.</p>
+        </div>
+
+        <!-- Active Block 2 -->
+        <div class="section-card p-4 border-l-2 border-l-green-soft">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="time-badge bg-green-soft/15 text-green-soft">4:30–6:00</span>
+            <span class="text-sm font-medium">ACTIVE BLOCK 2</span>
+          </div>
+          <div class="flex gap-4 pl-2 text-xs text-muted">
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-soft"></span>Park, bike, swim</div>
+            <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-soft"></span>Playground, walk</div>
+          </div>
+        </div>
+
+        <!-- Wind down -->
+        <div class="section-card p-3">
+          <div class="flex items-center gap-3">
+            <span class="time-badge bg-muted/20 text-muted">6:00–7:00</span>
+            <span class="text-sm text-muted">Dinner & wind down</span>
+          </div>
+        </div>
+
+        <div class="section-card p-3">
+          <div class="flex items-center gap-3">
+            <span class="time-badge bg-muted/20 text-muted">7:00–7:30</span>
+            <span class="text-sm text-muted">Reading before bed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weekly Activity Plan -->
+    <section id="weekly-plan" class="mb-12 fade-in fade-in-3">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Morning Activities</h2>
+      <p class="text-xs text-muted mb-6">Weekly rotation for the 8:30–10:30 active block.</p>
+
+      <div class="space-y-2">
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Sun</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm">Swimming</p>
+            <p class="text-xs text-muted">Ayaan's lesson + free swim. Myra splash pool.</p>
+          </div>
+          <span class="text-[10px] text-blue-soft bg-blue-soft/10 px-2 py-0.5 rounded">Pool</span>
+        </div>
+
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Mon</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm">Park + Scooter/Bike</p>
+            <p class="text-xs text-muted">Ayaan bikes, Myra in buggy or toddler trike.</p>
+          </div>
+          <span class="text-[10px] text-green-soft bg-green-soft/10 px-2 py-0.5 rounded">Park</span>
+        </div>
+
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Tue</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm">Swimming (Free Swim)</p>
+            <p class="text-xs text-muted">No lesson, just play. Both kids.</p>
+          </div>
+          <span class="text-[10px] text-blue-soft bg-blue-soft/10 px-2 py-0.5 rounded">Pool</span>
+        </div>
+
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Wed</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm">Nature Walk / Bug Hunt</p>
+            <p class="text-xs text-muted">Creek Park or garden. Ayaan takes his field journal.</p>
+          </div>
+          <span class="text-[10px] text-green-soft bg-green-soft/10 px-2 py-0.5 rounded">Outdoor</span>
+        </div>
+
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Thu</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm font-medium text-gold">Experience Day</p>
+            <p class="text-xs text-muted">Weekly outing — see experiences section.</p>
+          </div>
+          <span class="text-[10px] text-gold bg-gold-dim px-2 py-0.5 rounded">Trip</span>
+        </div>
+
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Fri</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm">Family Active Morning</p>
+            <p class="text-xs text-muted">Beach, desert, or hike. Dad joins when possible.</p>
+          </div>
+          <span class="text-[10px] text-gold bg-gold-dim px-2 py-0.5 rounded">Family</span>
+        </div>
+
+        <div class="section-card p-4 flex items-center gap-4">
+          <div class="w-10 text-center">
+            <p class="text-[10px] text-muted uppercase">Sat</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm">Football / Sports</p>
+            <p class="text-xs text-muted">Garden or park. Nanny or wife runs basic drills.</p>
+          </div>
+          <span class="text-[10px] text-green-soft bg-green-soft/10 px-2 py-0.5 rounded">Home</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="mb-12 fade-in fade-in-4">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Learn Block</h2>
+      <p class="text-xs text-muted mb-6">Ayaan's education rotation. 11:00–12:00. Max 40 min with a break.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="section-card p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Sunday</span>
+          </div>
+          <p class="text-sm font-medium text-purple-soft mb-2">Maths</p>
+          <p class="text-xs text-muted leading-relaxed">Workbook pages (Year 2), Lego counting, money games (play shop), dice games.</p>
+        </div>
+
+        <div class="section-card p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Monday</span>
+          </div>
+          <p class="text-sm font-medium text-purple-soft mb-2">Reading + Writing</p>
+          <p class="text-xs text-muted leading-relaxed">Read a chapter, write 3 sentences about it, spelling practice (10 words/week).</p>
+        </div>
+
+        <div class="section-card p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Tuesday</span>
+          </div>
+          <p class="text-sm font-medium text-purple-soft mb-2">Science / Nature</p>
+          <p class="text-xs text-muted leading-relaxed">Experiments (vinegar + baking soda, magnets, plant growing), short documentary.</p>
+        </div>
+
+        <div class="section-card p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Wednesday</span>
+          </div>
+          <p class="text-sm font-medium text-purple-soft mb-2">Arabic</p>
+          <p class="text-xs text-muted leading-relaxed">Alphabet practice, basic words, label items around the house in Arabic.</p>
+        </div>
+
+        <div class="section-card p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Thursday</span>
+          </div>
+          <p class="text-sm font-medium text-purple-soft mb-2">Creative Writing</p>
+          <p class="text-xs text-muted leading-relaxed">Write a short story, draw a comic strip, make a "book" about his week.</p>
+        </div>
+
+        <div class="section-card p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Friday</span>
+          </div>
+          <p class="text-sm font-medium text-green-soft mb-2">Quran + Islamic Learning</p>
+          <p class="text-xs text-muted leading-relaxed">Quran revision, learn a new dua, stories of the Prophets (age-appropriate).</p>
+        </div>
+
+        <div class="section-card p-4 sm:col-span-2">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] text-muted uppercase">Saturday</span>
+          </div>
+          <p class="text-sm font-medium text-purple-soft mb-2">General Knowledge / Geography</p>
+          <p class="text-xs text-muted leading-relaxed">Map puzzles, "country of the day", flag matching, world facts. Use the wall map.</p>
+        </div>
+      </div>
+
+      <!-- Resources -->
+      <div class="mt-6 collapsible">
+        <div class="collapsible-header section-card p-4 flex items-center justify-between" onclick="toggleCollapsible(this)">
+          <span class="text-sm">Resources to Get</span>
+          <span class="collapse-arrow text-muted text-xs">&#9654;</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="section-card border-t-0 rounded-t-none p-4 space-y-2 text-xs text-muted">
+            <p><span class="text-off-white">Maths workbook</span> — CGP or Schofield & Sims Year 2 (Amazon UAE)</p>
+            <p><span class="text-off-white">Reading</span> — 5-6 books: Roald Dahl, Dog Man, or whatever he'll read</p>
+            <p><span class="text-off-white">Science kit</span> — Baking soda, vinegar, food coloring, magnets</p>
+            <p><span class="text-off-white">Arabic workbook</span> — Gateway to Arabic Part 1</p>
+            <p><span class="text-off-white">World map poster</span> — Stick on wall, reference daily</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Create Block -->
+    <section id="create" class="mb-12 fade-in fade-in-5">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Create Block</h2>
+      <p class="text-xs text-muted mb-6">2:00–3:00 PM. Ayaan loves this — give him a weekly project alongside daily crafts.</p>
+
+      <!-- Weekly Projects by Week -->
+      <div class="space-y-3" id="weeklyProjects">
+        <div class="week-content week-1">
+          <div class="section-card p-5 border-l-2 border-l-gold">
+            <p class="text-[10px] text-gold uppercase tracking-widest mb-2">Week 1 Project</p>
+            <p class="font-serif text-xl mb-2">"My Adventure Book"</p>
+            <p class="text-xs text-muted leading-relaxed">A scrapbook of the break — photos, drawings, ticket stubs, writing. Starts week 1, builds throughout all 3 weeks. Present it on the last day.</p>
+          </div>
+        </div>
+        <div class="week-content week-2 hidden">
+          <div class="section-card p-5 border-l-2 border-l-gold">
+            <p class="text-[10px] text-gold uppercase tracking-widest mb-2">Week 2 Project</p>
+            <p class="font-serif text-xl mb-2">"Inventor's Workshop"</p>
+            <p class="text-xs text-muted leading-relaxed">Build things from cardboard and recycled materials — a robot, a car, a house. Save all delivery boxes this week.</p>
+          </div>
+        </div>
+        <div class="week-content week-3 hidden">
+          <div class="section-card p-5 border-l-2 border-l-gold">
+            <p class="text-[10px] text-gold uppercase tracking-widest mb-2">Week 3 Project</p>
+            <p class="font-serif text-xl mb-2">"Art Gallery"</p>
+            <p class="text-xs text-muted leading-relaxed">Create 5+ pieces of art in different styles. Display them at home at the end of the week — his own gallery opening.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily crafts -->
+      <div class="mt-4 collapsible">
+        <div class="collapsible-header section-card p-4 flex items-center justify-between" onclick="toggleCollapsible(this)">
+          <span class="text-sm">Daily Quick Craft Ideas</span>
+          <span class="collapse-arrow text-muted text-xs">&#9654;</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="section-card border-t-0 rounded-t-none p-4 grid grid-cols-2 gap-2 text-xs text-muted">
+            <p>Watercolor painting</p>
+            <p>Origami</p>
+            <p>Clay / playdough</p>
+            <p>Collage making</p>
+            <p>Friendship bracelets</p>
+            <p>Drawing challenges</p>
+            <p>Finger painting (Myra too)</p>
+            <p>Bead work</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Myra Section -->
+    <section id="myra" class="mb-12">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2"><span class="text-pink-soft">Myra's</span> Day</h2>
+      <p class="text-xs text-muted mb-6">No structured learning yet. She needs sensory input, movement, and language exposure.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="section-card p-4">
+          <p class="text-xs text-pink-soft uppercase tracking-widest mb-3">Sensory Play</p>
+          <div class="space-y-2 text-xs text-muted">
+            <p>Water play (cups, funnels)</p>
+            <p>Homemade playdough</p>
+            <p>Rice/pasta tray</p>
+            <p>Finger painting</p>
+            <p>Sand play / kinetic sand</p>
+            <p>Bubble station</p>
+          </div>
+        </div>
+
+        <div class="section-card p-4">
+          <p class="text-xs text-pink-soft uppercase tracking-widest mb-3">Movement</p>
+          <div class="space-y-2 text-xs text-muted">
+            <p>Dance party</p>
+            <p>Soft ball throwing</p>
+            <p>Climbing / playground</p>
+            <p>Walk (no buggy!)</p>
+            <p>Obstacle course</p>
+            <p>Garden free play</p>
+          </div>
+        </div>
+
+        <div class="section-card p-4">
+          <p class="text-xs text-pink-soft uppercase tracking-widest mb-3">Language</p>
+          <div class="space-y-2 text-xs text-muted">
+            <p>3+ books a day</p>
+            <p>Narrate everything</p>
+            <p>Wooden puzzles</p>
+            <p>Nursery rhymes + songs</p>
+            <p>Color naming games</p>
+            <p>Animal sounds</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card p-4 mt-3 border-l-2 border-l-orange-soft">
+        <p class="text-xs text-orange-soft mb-1">Important</p>
+        <p class="text-xs text-muted">No iPad as babysitter. She's 2 — she doesn't need it. If she watches anything, sit with her and talk about what's on screen.</p>
+      </div>
+    </section>
+
+    <!-- Experience Days -->
+    <section id="experiences" class="mb-12">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Experience Days</h2>
+      <p class="text-xs text-muted mb-6">Thursdays. One bigger outing per week.</p>
+
+      <div class="space-y-3" id="experienceDays">
+        <div class="week-content week-1">
+          <div class="section-card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <p class="text-[10px] text-gold uppercase tracking-widest mb-1">Week 1 — Thursday Mar 20</p>
+                <p class="font-serif text-xl">Dubai Aquarium</p>
+              </div>
+              <span class="text-xs text-muted">~150-200 AED</span>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">Dubai Mall. Ayaan will love the tunnel. Myra will stare at fish. Go early to avoid crowds.</p>
+          </div>
+        </div>
+
+        <div class="week-content week-2 hidden">
+          <div class="section-card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <p class="text-[10px] text-gold uppercase tracking-widest mb-1">Week 2 — Thursday Mar 27</p>
+                <p class="font-serif text-xl">OliOli Children's Museum</p>
+              </div>
+              <span class="text-xs text-muted">~120 AED/child</span>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">Al Quoz. Hands-on play for both age groups. One of the best kids' spots in Dubai.</p>
+          </div>
+        </div>
+
+        <div class="week-content week-3 hidden">
+          <div class="section-card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <p class="text-[10px] text-gold uppercase tracking-widest mb-1">Week 3 — Thursday Apr 3</p>
+                <p class="font-serif text-xl">Green Planet</p>
+              </div>
+              <span class="text-xs text-muted">~130 AED/adult</span>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">Indoor rainforest, City Walk. Animals, birds, insects. Both kids will engage.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swap options -->
+      <div class="mt-4 collapsible">
+        <div class="collapsible-header section-card p-4 flex items-center justify-between" onclick="toggleCollapsible(this)">
+          <span class="text-sm">Other Options</span>
+          <span class="collapse-arrow text-muted text-xs">&#9654;</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="section-card border-t-0 rounded-t-none p-4 space-y-2 text-xs text-muted">
+            <p><span class="text-off-white">Kidzania</span> — Role-play city. Ayaan would love it. Myra too young.</p>
+            <p><span class="text-off-white">Ski Dubai</span> — Snow play works for both. Ayaan can try skiing.</p>
+            <p><span class="text-off-white">Desert Safari (morning)</span> — Camel ride, sand play, dune views.</p>
+            <p><span class="text-off-white">Motiongate / Legoland</span> — Full day theme park.</p>
+            <p><span class="text-off-white">Beach</span> — Kite Beach or JBR. Free. Buckets and spades.</p>
+            <p><span class="text-off-white">Dubai Frame</span> — Quick visit, good for geography.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen Time Rules -->
+    <section id="screen-time" class="mb-12">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Screen Time</h2>
+      <p class="text-xs text-muted mb-6">The rules. Non-negotiable.</p>
+
+      <div class="section-card p-5 space-y-4">
+        <div class="flex gap-3 items-start">
+          <span class="text-orange-soft text-sm font-mono mt-0.5">01</span>
+          <p class="text-sm">1 hour/day, <span class="text-gold">1:00–2:00 PM only</span>. Timer on, when it's done it's done.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-orange-soft text-sm font-mono mt-0.5">02</span>
+          <p class="text-sm">No screens at meals.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-orange-soft text-sm font-mono mt-0.5">03</span>
+          <p class="text-sm">No screens in the morning — morning is active time.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-orange-soft text-sm font-mono mt-0.5">04</span>
+          <p class="text-sm">Educational or creative content only. No mindless scrolling.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-orange-soft text-sm font-mono mt-0.5">05</span>
+          <p class="text-sm">Ayaan <span class="text-gold">earns</span> screen time by completing his morning checklist. Skip it = lose the hour.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-orange-soft text-sm font-mono mt-0.5">06</span>
+          <p class="text-sm text-pink-soft/80">Myra: ideally zero solo screen time. Shared viewing only.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+        <div class="section-card p-4">
+          <p class="text-xs text-blue-soft uppercase tracking-widest mb-3">Ayaan — Good Options</p>
+          <div class="space-y-1.5 text-xs text-muted">
+            <p>National Geographic Kids</p>
+            <p>BBC Bitesize</p>
+            <p>Scratch Jr (coding)</p>
+            <p>Drawing tutorials</p>
+          </div>
+        </div>
+        <div class="section-card p-4">
+          <p class="text-xs text-pink-soft uppercase tracking-widest mb-3">Myra — If Needed</p>
+          <div class="space-y-1.5 text-xs text-muted">
+            <p>Hey Bear Sensory</p>
+            <p>Bluey (short episodes)</p>
+            <p>Or just skip it</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Camps -->
+    <section id="camps" class="mb-12">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Camps</h2>
+      <p class="text-xs text-muted mb-6">Optional. Even 1 week gives wife/nanny a break + Ayaan gets social time.</p>
+
+      <div class="space-y-2">
+        <div class="section-card p-4 flex items-center justify-between">
+          <div>
+            <p class="text-sm">Dubai Sports World</p>
+            <p class="text-xs text-muted">Multi-sport. Ages 5+</p>
+          </div>
+          <span class="text-xs text-muted">800-1200 AED/wk</span>
+        </div>
+        <div class="section-card p-4 flex items-center justify-between">
+          <div>
+            <p class="text-sm">Art Jameel / Tashkeel</p>
+            <p class="text-xs text-muted">Art workshops. Ages 5+</p>
+          </div>
+          <span class="text-xs text-muted">500-800 AED/wk</span>
+        </div>
+        <div class="section-card p-4 flex items-center justify-between">
+          <div>
+            <p class="text-sm">SuperSports Camp</p>
+            <p class="text-xs text-muted">Swimming + multi-sport. Ages 4+</p>
+          </div>
+          <span class="text-xs text-muted">700-1000 AED/wk</span>
+        </div>
+        <div class="section-card p-4 flex items-center justify-between">
+          <div>
+            <p class="text-sm">Little Kitchen Dubai</p>
+            <p class="text-xs text-muted">Kids cooking. Ages 4+</p>
+          </div>
+          <span class="text-xs text-muted">200-400 AED/session</span>
+        </div>
+        <div class="section-card p-4 flex items-center justify-between">
+          <div>
+            <p class="text-sm">Code DXB</p>
+            <p class="text-xs text-muted">Scratch coding. Ages 6+</p>
+          </div>
+          <span class="text-xs text-muted">800-1200 AED/wk</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shopping List -->
+    <section id="shopping" class="mb-12">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-2">Shopping List</h2>
+      <p class="text-xs text-muted mb-6">Get this week. Checkboxes save to your browser.</p>
+
+      <div class="section-card p-5">
+        <p class="text-xs text-gold uppercase tracking-widest mb-4">Essential</p>
+        <div class="space-y-3">
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-1">
+            <span class="text-sm">Maths workbook (Year 2)</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-2">
+            <span class="text-sm">5-6 books for Ayaan</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-3">
+            <span class="text-sm">Science supplies (baking soda, vinegar, food coloring, magnets)</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-4">
+            <span class="text-sm">Art supplies restock</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-5">
+            <span class="text-sm">Scrapbook / blank notebook</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-6">
+            <span class="text-sm">Laminated daily checklist for Ayaan</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-7">
+            <span class="text-sm">Quran progress chart</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-8">
+            <span class="text-sm">World map poster</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-9">
+            <span class="text-sm">Kinetic sand / sensory bin for Myra</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-10">
+            <span class="text-sm">Visual timer</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="section-card p-5 mt-3">
+        <p class="text-xs text-muted uppercase tracking-widest mb-4">Nice to Have</p>
+        <div class="space-y-3">
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-11">
+            <span class="text-sm">Cardboard boxes (save from deliveries)</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-12">
+            <span class="text-sm">Binoculars (cheap pair)</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-13">
+            <span class="text-sm">Bug catcher kit</span>
+          </label>
+          <label class="checklist-item flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-key="shop-14">
+            <span class="text-sm">Wooden puzzles for Myra</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Week Overview Cards -->
+    <section id="weeks-overview" class="mb-12">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-6">Week Overview</h2>
+
+      <div class="space-y-3">
+        <div class="section-card p-5 cursor-pointer week-overview-card" data-week="1" onclick="setWeek(1); window.scrollTo({top: 0, behavior: 'smooth'})">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Mar 17–22</p>
+              <p class="font-serif text-xl">Week 1: Explorer</p>
+            </div>
+            <span class="text-xs text-green-soft bg-green-soft/10 px-2 py-1 rounded">Discovery & Nature</span>
+          </div>
+          <div class="text-xs text-muted space-y-1">
+            <p>Project: My Adventure Book</p>
+            <p>Experience: Dubai Aquarium</p>
+            <p>Focus: Establish routine, get Ayaan's buy-in on checklist</p>
+          </div>
+        </div>
+
+        <div class="section-card p-5 cursor-pointer week-overview-card" data-week="2" onclick="setWeek(2); window.scrollTo({top: 0, behavior: 'smooth'})">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Mar 23–29</p>
+              <p class="font-serif text-xl">Week 2: Builder</p>
+            </div>
+            <span class="text-xs text-blue-soft bg-blue-soft/10 px-2 py-1 rounded">Creating & Building</span>
+          </div>
+          <div class="text-xs text-muted space-y-1">
+            <p>Project: Inventor's Workshop</p>
+            <p>Experience: OliOli Children's Museum</p>
+            <p>Focus: Deeper into maths + reading. Consider sports camp.</p>
+          </div>
+        </div>
+
+        <div class="section-card p-5 cursor-pointer week-overview-card" data-week="3" onclick="setWeek(3); window.scrollTo({top: 0, behavior: 'smooth'})">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Mar 30–Apr 4</p>
+              <p class="font-serif text-xl">Week 3: Artist</p>
+            </div>
+            <span class="text-xs text-purple-soft bg-purple-soft/10 px-2 py-1 rounded">Expression & Creativity</span>
+          </div>
+          <div class="text-xs text-muted space-y-1">
+            <p>Project: Art Gallery</p>
+            <p>Experience: Green Planet</p>
+            <p>Focus: Celebrate what they made. Ayaan presents Adventure Book.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Metrics -->
+    <section id="success" class="mb-16">
+      <h2 class="font-serif text-2xl sm:text-3xl mb-6">End of 3 Weeks</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="section-card p-5">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-6 h-6 rounded-full bg-blue-soft/20 flex items-center justify-center text-blue-soft text-xs">A</div>
+            <p class="text-sm font-medium">Ayaan</p>
+          </div>
+          <div class="space-y-3">
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-1" class="mt-0.5">
+              <span class="text-xs text-muted">Year 2 maths independently</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-2" class="mt-0.5">
+              <span class="text-xs text-muted">Read at least 2 full books</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-3" class="mt-0.5">
+              <span class="text-xs text-muted">Completed Adventure Book</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-4" class="mt-0.5">
+              <span class="text-xs text-muted">1 new surah or 3 new duas</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-5" class="mt-0.5">
+              <span class="text-xs text-muted">2+ new physical activities tried</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-6" class="mt-0.5">
+              <span class="text-xs text-muted">Screen dependence reduced</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="section-card p-5">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-6 h-6 rounded-full bg-pink-soft/20 flex items-center justify-center text-pink-soft text-xs">M</div>
+            <p class="text-sm font-medium">Myra</p>
+          </div>
+          <div class="space-y-3">
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-7" class="mt-0.5">
+              <span class="text-xs text-muted">More active, less passive watching</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-8" class="mt-0.5">
+              <span class="text-xs text-muted">Vocabulary noticeably expanded</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-9" class="mt-0.5">
+              <span class="text-xs text-muted">Comfortable with sensory play</span>
+            </label>
+            <label class="checklist-item flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" data-key="goal-10" class="mt-0.5">
+              <span class="text-xs text-muted">Better daily rhythm established</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center pb-8">
+      <p class="text-xs text-muted">Built with care. Less screens, more life.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Week switching
+    let currentWeek = 1;
+
+    function setWeek(week) {
+      currentWeek = week;
+      // Update week tabs
+      document.querySelectorAll('.week-tab').forEach(tab => {
+        tab.classList.toggle('active', parseInt(tab.dataset.week) === week);
+      });
+      // Show/hide week-specific content
+      document.querySelectorAll('.week-content').forEach(el => {
+        const isMatch = el.classList.contains('week-' + week);
+        el.classList.toggle('hidden', !isMatch);
+      });
+      // Update overview cards
+      document.querySelectorAll('.week-overview-card').forEach(card => {
+        const isMatch = parseInt(card.dataset.week) === week;
+        card.style.borderColor = isMatch ? 'rgba(201,162,39,0.3)' : '';
+      });
+      localStorage.setItem('springbreak-week', week);
+    }
+
+    // Collapsible sections
+    function toggleCollapsible(header) {
+      const content = header.nextElementSibling;
+      const arrow = header.querySelector('.collapse-arrow');
+      content.classList.toggle('open');
+      arrow.classList.toggle('open');
+    }
+
+    // Checkbox persistence
+    function initCheckboxes() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"][data-key]');
+      checkboxes.forEach(cb => {
+        const saved = localStorage.getItem('springbreak-' + cb.dataset.key);
+        if (saved === 'true') cb.checked = true;
+        cb.addEventListener('change', () => {
+          localStorage.setItem('springbreak-' + cb.dataset.key, cb.checked);
+        });
+      });
+    }
+
+    // Nav dot highlighting
+    function initNavDots() {
+      const sections = document.querySelectorAll('section[id]');
+      const dots = document.querySelectorAll('.nav-dot');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            dots.forEach(dot => {
+              dot.classList.toggle('active', dot.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      sections.forEach(s => observer.observe(s));
+    }
+
+    // Auto-detect current week
+    function detectCurrentWeek() {
+      const now = new Date();
+      const week1Start = new Date('2026-03-17');
+      const week2Start = new Date('2026-03-23');
+      const week3Start = new Date('2026-03-30');
+
+      if (now >= week3Start) return 3;
+      if (now >= week2Start) return 2;
+      return 1;
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedWeek = localStorage.getItem('springbreak-week');
+      setWeek(savedWeek ? parseInt(savedWeek) : detectCurrentWeek());
+      initCheckboxes();
+      initNavDots();
+    });
+  </script>
+
+</body>
+</html>

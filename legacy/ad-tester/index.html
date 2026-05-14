@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Tester — Synthetic Persona Testing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface':       '#0a0a0a',
+            'surface-alt':   '#0f0f0f',
+            'surface-card':  '#111111',
+            'surface-hover': '#161616',
+            'off-white':     '#f5f5f0',
+            'muted':         '#6b6b6b',
+            'border':        '#1a1a1a',
+            'border-focus':  '#2a2a2a',
+            'input-bg':      '#151515',
+          },
+          fontFamily: {
+            'serif':  ['Instrument Serif', 'Georgia', 'serif'],
+            'mono':   ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      background: #0a0a0a;
+      color: #f5f5f0;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: #f5f5f0; color: #0a0a0a; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb:hover { background: #2a2a2a; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.5s ease forwards; }
+
+    @keyframes pulse-muted {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .pulse-loading { animation: pulse-muted 1.5s ease-in-out infinite; }
+
+    .verdict-launch { color: #4ade80; }
+    .verdict-launch-note { color: #facc15; }
+    .verdict-refine { color: #fb923c; }
+    .verdict-drop { color: #f87171; }
+
+    .bar-fill { transition: width 0.8s ease; }
+
+    textarea, input, select { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-surface text-off-white min-h-screen">
+
+  <div class="max-w-[1000px] mx-auto px-6 py-16">
+
+    <!-- Header -->
+    <header class="mb-16">
+      <a href="/" class="text-[11px] uppercase tracking-[0.2em] text-muted border-b border-muted hover:border-off-white transition-colors pb-0.5">aliqureshi.co</a>
+      <h1 class="font-serif text-[clamp(36px,6vw,56px)] leading-[1.1] mt-6">Ad Tester</h1>
+      <p class="text-muted text-[13px] mt-3 max-w-[600px]">Test creatives against 200 synthetic personas generated from census demographics. Get predicted metrics, audience skew, and a launch/refine/drop recommendation.</p>
+    </header>
+
+    <!-- Brand Context -->
+    <section id="brand-section" class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted">Brand Context</h2>
+        <div class="flex gap-2">
+          <button id="btn-manual" class="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-off-white text-off-white bg-off-white/10 transition-colors">Manual</button>
+          <button id="btn-cached" class="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border text-muted hover:border-border-focus transition-colors">Cached Brands</button>
+        </div>
+      </div>
+
+      <!-- Manual Input -->
+      <div id="manual-inputs" class="space-y-4">
+        <div>
+          <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Product / Brand Description</label>
+          <textarea id="input-product" rows="2" placeholder="e.g., Premium men's skincare subscription. $45/month. Targets 25-40 year old men who care about grooming but hate complex routines." class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors resize-none"></textarea>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Target Audience</label>
+            <input id="input-audience" type="text" placeholder="e.g., 25-40 males, gym-goers" class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors">
+          </div>
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Price Point</label>
+            <input id="input-price" type="text" placeholder="e.g., $45/month" class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors">
+          </div>
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Target Market</label>
+            <select id="input-market" class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors appearance-none">
+              <option value="us">United States</option>
+              <option value="uk">United Kingdom</option>
+              <option value="au">Australia</option>
+              <option value="ca">Canada</option>
+              <option value="eu">European Union</option>
+              <option value="global">Global</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cached Brands -->
+      <div id="cached-inputs" class="hidden">
+        <div id="cached-brands-list" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <!-- Populated by JS -->
+        </div>
+        <p id="no-cached" class="text-muted text-[13px] hidden">No cached brands yet. Run a test with manual input to create one.</p>
+      </div>
+    </section>
+
+    <!-- Creatives Input -->
+    <section id="creatives-section" class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted">Creatives</h2>
+        <button id="btn-add-creative" class="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border text-muted hover:border-border-focus hover:text-off-white transition-colors">+ Add Creative</button>
+      </div>
+
+      <div id="creatives-container" class="space-y-6">
+        <!-- Creative A (default) -->
+        <div class="creative-card border border-border p-6" data-index="0">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-serif text-[20px] italic">Creative A</span>
+          </div>
+          <div class="space-y-4">
+            <!-- Media Upload -->
+            <div>
+              <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Creative Asset <span class="text-muted/60">(image or video)</span></label>
+              <div class="media-upload-zone relative border border-dashed border-border-focus bg-input-bg hover:border-muted transition-colors cursor-pointer" data-index="0">
+                <input type="file" name="media" accept="image/*,video/*" class="media-file-input absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="media-placeholder flex flex-col items-center justify-center py-8 pointer-events-none">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5" class="mb-2"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span class="text-[12px] text-muted">Drop an image or video, or click to upload</span>
+                  <span class="text-[11px] text-muted/60 mt-1">Static ads, UGC, video ads — any format</span>
+                </div>
+                <div class="media-preview hidden">
+                  <img class="media-preview-img hidden w-full max-h-[300px] object-contain">
+                  <video class="media-preview-video hidden w-full max-h-[300px] object-contain" controls muted></video>
+                  <div class="media-preview-info flex items-center justify-between px-4 py-2 border-t border-border">
+                    <span class="media-preview-name text-[11px] text-muted truncate"></span>
+                    <button class="media-remove text-[11px] text-muted hover:text-off-white transition-colors uppercase tracking-[0.15em]">Remove</button>
+                  </div>
+                </div>
+                <!-- Video frame extraction (hidden) -->
+                <canvas class="media-canvas hidden"></canvas>
+              </div>
+              <div class="media-frames hidden mt-3">
+                <span class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Extracted Frames</span>
+                <div class="media-frames-grid grid grid-cols-4 gap-2"></div>
+              </div>
+            </div>
+            <div>
+              <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Headline</label>
+              <input type="text" name="headline" placeholder="e.g., Your muscles are disappearing. Here's why." class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">Body Copy / Script</label>
+              <textarea name="body" rows="3" placeholder="The main ad copy, script, or voiceover text..." class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors resize-none"></textarea>
+            </div>
+            <div>
+              <label class="text-[11px] uppercase tracking-[0.15em] text-muted block mb-2">CTA</label>
+              <input type="text" name="cta" placeholder="e.g., Shop Now" class="w-full bg-input-bg border border-border-focus text-off-white text-[13px] px-4 py-3 focus:border-off-white focus:outline-none transition-colors">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submit -->
+    <section class="mb-16">
+      <div class="flex gap-4 items-center flex-wrap">
+        <button id="btn-run-test" class="bg-off-white text-surface text-[13px] uppercase tracking-[0.2em] px-12 py-4 hover:opacity-80 transition-opacity">Run Test</button>
+        <button id="btn-load-demo" class="text-[12px] uppercase tracking-[0.15em] text-muted border border-border px-6 py-4 hover:border-border-focus hover:text-off-white transition-colors">Load Demo</button>
+      </div>
+      <p id="test-status" class="text-muted text-[12px] mt-3 hidden"></p>
+    </section>
+
+    <!-- Loading State -->
+    <section id="loading-section" class="hidden mb-16">
+      <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Generating Personas & Testing</h2>
+      <div id="loading-progress" class="mb-4">
+        <div class="flex justify-between text-[12px] text-muted mb-2">
+          <span id="loading-step">Generating 200 personas...</span>
+          <span id="loading-count">0/200</span>
+        </div>
+        <div class="w-full h-[2px] bg-border">
+          <div id="loading-bar" class="h-full bg-off-white bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      <div id="loading-personas" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+        <!-- Persona skeleton cards animate in -->
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="results-section" class="hidden">
+
+      <!-- Comparison Matrix (multi-creative) -->
+      <div id="comparison-matrix" class="mb-16">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Comparison Matrix</h2>
+        <div class="overflow-x-auto">
+          <table id="matrix-table" class="w-full text-[13px]">
+            <thead>
+              <tr id="matrix-header" class="border-b border-border">
+                <th class="text-left text-[11px] uppercase tracking-[0.15em] text-muted py-3 pr-6"></th>
+                <!-- Creative columns added by JS -->
+              </tr>
+            </thead>
+            <tbody id="matrix-body">
+              <!-- Rows added by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Recommendation Cards -->
+      <div id="recommendations" class="mb-16">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Recommendations</h2>
+        <div id="recommendation-cards" class="space-y-4">
+          <!-- Cards added by JS -->
+        </div>
+      </div>
+
+      <!-- Cannibalisation Warnings -->
+      <div id="cannibalisation-section" class="mb-16 hidden">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Cannibalisation Warnings</h2>
+        <div id="cannibalisation-cards" class="space-y-4">
+          <!-- Warnings added by JS -->
+        </div>
+      </div>
+
+      <!-- Audience Skew -->
+      <div id="audience-skew-section" class="mb-16">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Audience Skew</h2>
+        <div id="audience-skew-cards" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Cards added by JS -->
+        </div>
+      </div>
+
+      <!-- Pattern Insights -->
+      <div id="patterns-section" class="mb-16">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Pattern Insights</h2>
+        <div id="pattern-cards" class="space-y-3">
+          <!-- Insights added by JS -->
+        </div>
+      </div>
+
+      <!-- Fatigue Prediction -->
+      <div id="fatigue-section" class="mb-16">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Fatigue Prediction</h2>
+        <div id="fatigue-cards" class="space-y-4">
+          <!-- Cards added by JS -->
+        </div>
+      </div>
+
+      <!-- Objection Map -->
+      <div id="objection-section" class="mb-16">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Objection Map</h2>
+        <div id="objection-bars" class="space-y-4">
+          <!-- Bars added by JS -->
+        </div>
+      </div>
+
+      <!-- Refinement Notes -->
+      <div id="refinement-section" class="mb-16 hidden">
+        <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted mb-6">Refinement Notes</h2>
+        <div id="refinement-cards" class="space-y-4">
+          <!-- Cards added by JS -->
+        </div>
+      </div>
+
+      <!-- Persona Cards -->
+      <div id="persona-section" class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-[11px] uppercase tracking-[0.2em] text-muted">Persona Reactions</h2>
+          <div class="flex gap-2">
+            <button class="tier-filter text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-off-white text-off-white bg-off-white/10 transition-colors" data-tier="all">All</button>
+            <button class="tier-filter text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border text-muted hover:border-border-focus transition-colors" data-tier="bullseye">Bullseye</button>
+            <button class="tier-filter text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border text-muted hover:border-border-focus transition-colors" data-tier="adjacent">Adjacent</button>
+            <button class="tier-filter text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border text-muted hover:border-border-focus transition-colors" data-tier="skeptic">Skeptics</button>
+            <button class="tier-filter text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border text-muted hover:border-border-focus transition-colors" data-tier="wildcard">Wild Cards</button>
+          </div>
+        </div>
+
+        <!-- Creative selector for persona view (multi-creative) -->
+        <div id="persona-creative-selector" class="flex gap-2 mb-6 hidden">
+          <!-- Buttons added by JS -->
+        </div>
+
+        <div id="persona-cards-container" class="space-y-3">
+          <!-- Persona cards added by JS -->
+        </div>
+
+        <button id="btn-show-more-personas" class="w-full text-[12px] uppercase tracking-[0.15em] text-muted border border-border py-3 mt-4 hover:border-border-focus transition-colors hidden">Show More</button>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

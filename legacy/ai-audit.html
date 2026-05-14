@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ops Audit — Ali Qureshi</title>
+    <meta name="description" content="90-minute AI assessment for business owners. Find where AI can save you 10+ hours per week. $997 one-time.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Ops Audit — Ali Qureshi">
+    <meta property="og:description" content="90-minute AI assessment. Find where AI can save you 10+ hours per week.">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --off-white: #f5f5f0;
+            --accent: #f5f5f0;
+            --gray: #6b6b6b;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--off-white);
+            font-family: var(--mono);
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--off-white);
+            color: var(--black);
+        }
+
+        a {
+            color: var(--off-white);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray);
+            transition: border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        a:hover {
+            border-color: var(--off-white);
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            padding: 24px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .top-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+        }
+
+        .site-name {
+            font-family: var(--serif);
+            font-size: 20px;
+            border-bottom: none;
+        }
+
+        .site-name:hover {
+            border-bottom: none;
+        }
+
+        .back-link {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(40px, 7vw, 64px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 17px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 48px;
+            font-family: var(--mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--off-white);
+            color: var(--black);
+            border-bottom: none;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+            border-bottom: none;
+            transform: translateY(-2px);
+        }
+
+        .price-tag {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        h2 span {
+            font-style: italic;
+        }
+
+        .section-text {
+            font-size: 16px;
+            color: var(--gray);
+            max-width: 600px;
+        }
+
+        /* Problem Section */
+        .problem-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .problem-list li {
+            padding: 20px 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .problem-list li::before {
+            content: '→';
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+
+        /* Process Section */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .process-step {
+            padding: 32px 24px;
+            border: 1px solid #1a1a1a;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: var(--serif);
+            font-size: 48px;
+            color: #1a1a1a;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+        .process-step h3 {
+            font-family: var(--serif);
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Deliverables */
+        .deliverables-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .deliverables-list li {
+            padding: 24px 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .deliverables-list li strong {
+            font-weight: 500;
+        }
+
+        .deliverables-list li span {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Proof */
+        .proof-section {
+            background: #0f0f0f;
+            text-align: center;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .stat {
+            padding: 24px;
+        }
+
+        .stat-number {
+            font-family: var(--serif);
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray);
+        }
+
+        /* Who */
+        .who-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 40px;
+        }
+
+        .who-column h3 {
+            font-family: var(--serif);
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: var(--gray);
+        }
+
+        .who-column ul {
+            list-style: none;
+        }
+
+        .who-column li {
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 14px;
+        }
+
+        .who-column.yes li::before {
+            content: '✓ ';
+            color: var(--off-white);
+        }
+
+        .who-column.no li::before {
+            content: '✗ ';
+            color: var(--gray);
+        }
+
+        .who-column.no li {
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--black), #0f0f0f);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 16px;
+        }
+
+        .cta-section .section-text {
+            margin: 0 auto 40px;
+        }
+
+        .guarantee {
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--gray);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .deliverables-list li {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .who-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html" class="site-name">Ali Qureshi</a>
+            <a href="index.html" class="back-link">← Back</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <p class="eyebrow">AI Ops Audit</p>
+            <h1>Find where AI can save you <span>10+ hours</span> every week</h1>
+            <p class="hero-description">
+                A 90-minute deep dive into your operations. I'll identify the exact tools and workflows that will give you back your time — without the fluff.
+            </p>
+            <a href="https://cal.com/aliqureshi/ai-audit" class="btn btn-primary">Book Your Audit</a>
+            <p class="price-tag">$997 one-time · 90 minutes · Full report included</p>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <p class="section-label">The Problem</p>
+            <h2>You know AI can help. You just don't know <span>where to start.</span></h2>
+            <p class="section-text">
+                You've seen the tools. You've read the threads. But you're running a business — you don't have time to test 50 apps to find the 3 that actually matter.
+            </p>
+            <ul class="problem-list">
+                <li>You're spending hours on tasks that feel like they should be automated</li>
+                <li>Your team is using ChatGPT for random things, but nothing systematic</li>
+                <li>You've tried a few AI tools but they didn't stick</li>
+                <li>You don't know what's actually possible vs. what's hype</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p class="section-label">How It Works</p>
+            <h2>From bottlenecks to <span>blueprint</span> in 90 minutes</h2>
+            <div class="process-grid">
+                <div class="process-step">
+                    <span class="step-number">01</span>
+                    <h3>Discovery Call</h3>
+                    <p>45 minutes on Zoom. I'll pull out your biggest time sinks, repetitive tasks, and operational bottlenecks. Recorded and transcribed.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">02</span>
+                    <h3>Analysis</h3>
+                    <p>I match your pain points to specific AI tools and workflows. Not theory — tools you can implement this week.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">03</span>
+                    <h3>Review Call</h3>
+                    <p>45 minutes to walk through your custom report. Priorities, quick wins, and exactly how to implement each recommendation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p class="section-label">What You Get</p>
+            <h2>A <span>roadmap</span>, not a sales pitch</h2>
+            <ul class="deliverables-list">
+                <li>
+                    <strong>Custom AI Roadmap</strong>
+                    <span>Prioritized list of AI opportunities specific to your business, ranked by impact and ease of implementation</span>
+                </li>
+                <li>
+                    <strong>Tool Recommendations</strong>
+                    <span>The exact tools to use — with links, pricing, and why each one fits your workflow</span>
+                </li>
+                <li>
+                    <strong>Implementation Guide</strong>
+                    <span>Step-by-step setup instructions for your top 3 quick wins. Do it yourself or hand it to your team.</span>
+                </li>
+                <li>
+                    <strong>ROI Estimate</strong>
+                    <span>Hours saved per week and cost breakdown. Know exactly what you're getting before you invest.</span>
+                </li>
+                <li>
+                    <strong>Call Recording</strong>
+                    <span>Full recording and transcript of both calls. Reference it anytime.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="proof-section">
+        <div class="container">
+            <p class="section-label">Why Me</p>
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-number">$35M+</div>
+                    <div class="stat-label">Ad spend managed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">40</div>
+                    <div class="stat-label">Person agency built</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Ads produced weekly</div>
+                </div>
+            </div>
+            <p class="section-text" style="margin-top: 48px; margin-left: auto; margin-right: auto;">
+                I run Adcrate — a creative agency producing 500+ ads per week. I've rebuilt our entire operation around AI and systems. I don't consult on AI in theory. I use it to run a real business, every day.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p class="section-label">Is This For You?</p>
+            <h2>Good fit vs. <span>not right now</span></h2>
+            <div class="who-grid">
+                <div class="who-column yes">
+                    <h3>This is for you if:</h3>
+                    <ul>
+                        <li>You run a business doing $500K+ revenue</li>
+                        <li>You have a team (even if small)</li>
+                        <li>You're spending 10+ hours/week on repetitive tasks</li>
+                        <li>You want actionable recommendations, not a course</li>
+                        <li>You're ready to implement in the next 30 days</li>
+                    </ul>
+                </div>
+                <div class="who-column no">
+                    <h3>This isn't for you if:</h3>
+                    <ul>
+                        <li>You're pre-revenue or just starting out</li>
+                        <li>You want someone to build it for you (that's a separate service)</li>
+                        <li>You're looking for a magic bullet</li>
+                        <li>You don't have budget for tools ($50-200/month typical)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <p class="section-label">Ready?</p>
+            <h2>Get your AI roadmap</h2>
+            <p class="section-text">
+                90 minutes. $997. A clear plan to get 10+ hours back every week.
+            </p>
+            <a href="https://cal.com/aliqureshi/ai-audit" class="btn btn-primary">Book Your Audit</a>
+            <p class="guarantee">
+                If you don't walk away with at least 3 actionable AI opportunities that will save you 5+ hours per week, I'll refund you in full. No questions asked.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Ali Qureshi · <a href="mailto:ali@humansquared.co">ali@humansquared.co</a></p>
+        </div>
+    </footer>
+</body>
+</html>
