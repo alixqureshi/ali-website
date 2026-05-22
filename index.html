@@ -6,170 +6,362 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script async src="https://f.convertkit.com/ckjs/ck.5.js"></script>
 <style>
+  @font-face {
+    font-family: 'Departure Mono';
+    src: url('https://cdn.jsdelivr.net/npm/departure-mono@1.500/dist/DepartureMono-Regular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/florianpircher/departure-mono@main/DepartureMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
   :root {
-    --bg: #faf8f4;
-    --ink: #1a1a1a;
-    --muted: #74716b;
-    --rule: #e8e4d9;
-    --link: #2563a8;
+    --bg: #f4f1ea;
+    --ink: #161514;
+    --muted: #6e6a62;
+    --rule: #d4cfc0;
+    --rule-soft: #e2dccb;
+    --live: #2a7d2e;
+    --building: #b7791f;
+    --soon: #6e6a62;
+    --accent: #1f4f8a;
   }
   * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
   body {
     margin: 0;
-    background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
+    font-family: 'Departure Mono', 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 13px;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1;
+    text-align: center;
   }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 88px 32px 72px; }
-  .name { font-size: 18px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
-  .role { font-size: 14px; color: var(--muted); margin: 0 0 24px; }
-  .bio { font-size: 16px; line-height: 1.55; margin: 0 0 14px; max-width: 560px; }
-  .now {
-    font-size: 13px;
-    color: var(--muted);
-    margin: 0 0 56px;
-    max-width: 560px;
-    line-height: 1.55;
+  .wrap {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 64px 24px 56px;
   }
-  .now .tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+
+  /* Monogram */
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
     color: var(--ink);
-    margin-right: 8px;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    margin-bottom: 36px;
   }
-  .label {
-    font-family: 'IBM Plex Mono', monospace;
+  .cursor {
+    display: inline-block;
+    width: 9px;
+    height: 18px;
+    background: var(--ink);
+    margin-left: 4px;
+    transform: translateY(3px);
+    animation: blink 1.1s steps(2, start) infinite;
+  }
+  @keyframes blink { to { visibility: hidden; } }
+
+  /* Hero */
+  .name {
     font-size: 11px;
-    font-weight: 400;
     color: var(--muted);
-    margin: 0 0 14px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.18em;
+    margin: 0 0 16px;
   }
-  .section { margin-bottom: 48px; }
-  .row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 16px;
-    padding: 12px 0;
-    border-top: 1px solid var(--rule);
-    align-items: baseline;
-    font-size: 15px;
+  .name strong { color: var(--ink); font-weight: 400; letter-spacing: 0.06em; }
+  .tagline {
+    font-size: 19px;
+    margin: 0 auto 18px;
+    max-width: 460px;
+    line-height: 1.45;
+    font-weight: 400;
+    letter-spacing: -0.005em;
   }
-  .row:last-child { border-bottom: 1px solid var(--rule); }
-  .row-main { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .row-name { font-weight: 500; }
-  .row-desc { color: var(--muted); font-size: 14px; }
-  .row a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    color: var(--link);
-    text-decoration: none;
-  }
-  .row a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .soon {
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
+  .now {
     font-size: 12px;
-    letter-spacing: 0.04em;
-  }
-  .consult p { margin: 0 0 8px; }
-  .consult .meta {
-    font-family: 'IBM Plex Mono', monospace;
     color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 8px;
+    margin: 0 auto 0;
+    max-width: 420px;
   }
-  .consult a {
-    color: var(--link);
+  .now .marker { color: var(--ink); margin-right: 6px; }
+
+  /* Section */
+  .section {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .section-label .meta { color: var(--muted); margin-left: 8px; }
+
+  /* Project table — centered, tight */
+  .table {
+    text-align: left;
+    margin: 0 auto;
+    display: inline-block;
+  }
+  .table .row {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    gap: 14px;
+    padding: 9px 0;
+    border-top: 1px dashed var(--rule-soft);
+    align-items: baseline;
+    text-align: left;
+  }
+  .table .row:first-child { border-top: none; }
+  .item-name {
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .item-name a {
+    color: var(--ink);
     text-decoration: none;
-    border-bottom: 1px solid currentColor;
+    border-bottom: 1px solid var(--rule);
   }
-  .consult a:hover { color: var(--ink); }
-  .nl-title { font-size: 16px; font-weight: 500; margin: 0 0 4px; }
-  .nl-desc { font-size: 14px; color: var(--muted); margin: 0 0 14px; }
-  form { display: flex; gap: 6px; max-width: 380px; }
+  .item-name a:hover { color: var(--accent); border-color: var(--accent); }
+  .item-desc { color: var(--muted); font-size: 12px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    white-space: nowrap;
+    justify-self: end;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    background: var(--muted);
+  }
+  .dot-live     { background: #6b8e4e; }
+  .dot-building { background: #b07a3c; }
+  .dot-soon     { background: #a5a195; }
+
+  /* Newsletter */
+  .nl-latest {
+    margin: 0 0 22px;
+  }
+  .nl-latest .lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .nl-latest .title { font-size: 14px; color: var(--ink); line-height: 1.4; margin-bottom: 4px; }
+  .nl-latest a.read {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12px;
+  }
+  .nl-latest a.read:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  form {
+    display: flex;
+    gap: 0;
+    max-width: 380px;
+    margin: 0 auto 12px;
+  }
   input[type=email] {
     flex: 1;
     padding: 9px 12px;
-    border: 1px solid #d6d1c2;
+    border: 1px solid var(--rule);
     background: var(--bg);
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--ink);
-    border-radius: 3px;
+    border-radius: 2px 0 0 2px;
+    text-align: left;
   }
-  input[type=email]:focus { outline: none; border-color: var(--ink); background: white; }
+  input[type=email]:focus { outline: none; border-color: var(--ink); background: #fff; }
   button {
     border: 1px solid var(--ink);
     cursor: pointer;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 11px;
     background: var(--ink);
     color: var(--bg);
-    padding: 0 16px;
-    border-radius: 3px;
+    padding: 0 18px;
+    border-radius: 0 2px 2px 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
-  button:hover { background: #333; border-color: #333; }
+  .archive-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 11px;
+  }
+  .archive-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Consulting */
+  .consult-copy {
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 360px;
+    margin: 0 auto 22px;
+    text-align: left;
+  }
+  .consult-lede { margin: 0 0 10px; color: var(--ink); }
+  .consult-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    counter-reset: c;
+  }
+  .consult-list li {
+    counter-increment: c;
+    padding: 4px 0 4px 28px;
+    position: relative;
+    color: var(--ink);
+  }
+  .consult-list li::before {
+    content: counter(c) ".";
+    position: absolute;
+    left: 4px;
+    color: var(--muted);
+  }
+  .consult-close { margin: 0; color: var(--muted); }
+  a.book {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  a.book:hover { background: var(--ink); color: var(--bg); }
+
   footer {
-    margin-top: 64px;
+    margin-top: 56px;
     padding-top: 22px;
     border-top: 1px solid var(--rule);
-    font-size: 13px;
-    color: var(--muted);
     display: flex;
+    justify-content: center;
     gap: 22px;
-    flex-wrap: wrap;
-    font-family: 'IBM Plex Mono', monospace;
   }
-  footer a { color: var(--ink); text-decoration: none; }
-  footer a:hover { color: var(--link); }
+  footer a {
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    transition: color 120ms ease;
+  }
+  footer a:hover { color: var(--accent); }
+  footer svg { width: 18px; height: 18px; display: block; }
+
+  @media (max-width: 500px) {
+    .wrap { padding: 44px 22px 40px; }
+    .tagline { font-size: 17px; }
+    .table .row { grid-template-columns: 1fr 70px; gap: 6px; }
+    .table .item-desc {
+      grid-column: 1 / -1;
+      margin-top: -4px;
+      padding-bottom: 2px;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1 class="name">Ali Qureshi</h1>
-  <p class="role">Cofounder, Adcrate</p>
-  <p class="bio">Builder. Cofounder of Adcrate, a creative growth partner. Building the AI systems that run it. Sharing what works.</p>
-  <p class="now"><span class="tag">Now</span>Heads-down on the Adcrate ops platform — May 2026.</p>
 
-  <div class="section">
-    <div class="label">Working on</div>
-    <div class="row"><div class="row-main"><span class="row-name">Adcrate</span><span class="row-desc">Creative growth partner</span></div><a href="https://adcrate.com">adcrate.com ↗</a></div>
-    <div class="row"><div class="row-main"><span class="row-name">AdCreativeOps</span><span class="row-desc">Agency operations system</span></div><a href="https://adcreativeops.com">adcreativeops.com ↗</a></div>
-    <div class="row"><div class="row-main"><span class="row-name">Community</span></div><span class="soon">SOON</span></div>
-  </div>
+  <span class="mark">aq<span class="cursor"></span></span>
 
-  <div class="section consult">
-    <div class="label">Consulting</div>
-    <p class="meta">40 min · $499</p>
-    <p>Bring me a problem and we'll think through it — scaling an agency, AI systems, creative strategy, growth, or positioning. <a href="https://ali-qureshi.neetocal.com/consulting-call">Book a call →</a></p>
-  </div>
+  <h1 class="tagline">Cofounder of Adcrate — a 50-person creative growth partner shipping ~500 ads a week for DTC and apps. Building the AI systems behind it.</h1>
 
-  <div class="section">
-    <div class="label">Newsletter</div>
-    <h3 class="nl-title">Leverage Lab</h3>
-    <p class="nl-desc">Weekly notes on AI, ads, and agency ops. No hype.</p>
+  <section class="section">
+    <p class="section-label">// working on</p>
+    <div class="table">
+      <div class="row">
+        <span class="item-name"><a href="https://adcrate.com">Adcrate ↗</a></span>
+        <span class="item-desc">Creative growth partner. 500 ads/wk for DTC + apps.</span>
+        <span class="pill"><span class="dot dot-live"></span>live</span>
+      </div>
+      <div class="row">
+        <span class="item-name"><a href="https://adcreativeops.com">AdCreativeOps ↗</a></span>
+        <span class="item-desc">The system we run Adcrate on, productized for agencies.</span>
+        <span class="pill"><span class="dot dot-building"></span>building</span>
+      </div>
+      <div class="row">
+        <span class="item-name">Community</span>
+        <span class="item-desc">For people in the performance creative space.</span>
+        <span class="pill"><span class="dot dot-soon"></span>soon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">// get my playbooks</p>
     <form action="https://app.kit.com/forms/8569586/subscriptions" method="post" data-sv-form="8569586" data-uid="3151f50716" data-format="inline" data-version="5">
       <input type="email" name="email_address" placeholder="you@domain.com" required>
-      <button type="submit">Subscribe →</button>
+      <button type="submit">subscribe</button>
     </form>
-  </div>
+    <a class="archive-link" href="https://aliqureshi.kit.com">browse archive →</a>
+  </section>
+
+  <section class="section">
+    <p class="section-label">// consulting <span class="meta">40 min · $499</span></p>
+    <div class="consult-copy">
+      <p class="consult-lede">I get asked two things mainly:</p>
+      <ol class="consult-list">
+        <li>How to scale an agency</li>
+        <li>How to wire AI into a business</li>
+      </ol>
+      <p class="consult-close">Happy to chat.</p>
+    </div>
+    <a class="book" href="https://ali-qureshi.neetocal.com/consulting-call">book a call →</a>
+  </section>
 
   <footer>
-    <a href="https://x.com/alixqureshi">x</a>
-    <a href="https://www.linkedin.com/in/alimqureshi/">linkedin</a>
-    <a href="https://instagram.com/alixqureshi">instagram</a>
-    <a href="mailto:ali@adcrate.com">ali@adcrate.com</a>
+    <a href="https://x.com/alixqureshi" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+    <a href="https://www.linkedin.com/in/alimqureshi/" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+    </a>
+    <a href="https://instagram.com/alixqureshi" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+    </a>
+    <a href="mailto:ali@adcrate.com" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 7l9 6 9-6"/>
+      </svg>
+    </a>
   </footer>
+
 </div>
 </body>
 </html>
