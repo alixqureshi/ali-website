@@ -234,6 +234,60 @@ fbq('track', 'PageView');
   footer a:hover { color: var(--accent); }
   footer svg { width: 18px; height: 18px; display: block; }
 
+  /* Success modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(22, 21, 20, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+    animation: modalFade 0.18s ease;
+  }
+  .modal-backdrop[hidden] { display: none; }
+  @keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+  .modal {
+    background: var(--bg);
+    border: 1px solid var(--ink);
+    padding: 36px 28px 28px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    border-radius: 2px;
+  }
+  .modal h2 {
+    font-size: 17px;
+    font-weight: 400;
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-family: inherit;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+  .modal p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+  .modal-close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 10px;
+    font-family: inherit;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--ink); }
+
   @media (max-width: 500px) {
     .wrap { padding: 44px 22px 40px; }
     .tagline { font-size: 17px; }
@@ -273,6 +327,15 @@ fbq('track', 'PageView');
     <p class="form-footnote">one email, no spam.</p>
   </section>
 
+  <!-- Success modal — shown after a successful subscribe -->
+  <div class="modal-backdrop" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
+      <h2 id="modalTitle">Thanks &mdash; check your email.</h2>
+      <p>I've sent you a link to the skill file. If it's not in your inbox, have a look in your spam folder.</p>
+    </div>
+  </div>
+
   <footer>
     <a href="https://x.com/alixqureshi" aria-label="X">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -302,22 +365,34 @@ fbq('track', 'PageView');
 </div>
 
 <script>
-  // ConvertKit v3 API subscribe + manual redirect.
-  // Same approach as the homepage newsletter form (which works), pointed at form 9522926.
-  // We deliberately do NOT load ck.5.js — that script renders SparkLoop overlays
-  // post-subscribe, which we don't want. By calling the v3 API directly + redirecting
-  // ourselves, the user goes straight from "send it" to the Notion lead-magnet page.
+  // ConvertKit v3 API subscribe — same approach as the homepage newsletter form,
+  // pointed at form 9522926. We do NOT load ck.5.js (that's the script that renders
+  // SparkLoop / Creator Network overlays). After successful submit we show our own
+  // confirmation modal — the lead-magnet link is delivered by email, not by redirect.
   (function () {
     var CK_FORM_ID = '9522926';
     var CK_API_KEY = 'd10BEfuibAt6ylMREn11ZA';
-    var REDIRECT_URL = 'https://adcrate.notion.site/How-to-make-landing-pages-with-AI-advertorials-374d5575919580c9b6dfd3a4256faab8?source=copy_link';
 
     var form = document.getElementById('leadForm');
     var emailInput = document.getElementById('leadEmail');
     var submitBtn = document.getElementById('leadSubmit');
     var submitText = document.getElementById('leadSubmitText');
+    var modal = document.getElementById('successModal');
+    var modalClose = document.getElementById('modalClose');
 
     if (!form) return;
+
+    function openModal() {
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      // move focus to the close button so keyboard / screen-reader users can dismiss
+      setTimeout(function () { modalClose && modalClose.focus(); }, 0);
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -335,18 +410,30 @@ fbq('track', 'PageView');
         fbq('track', 'Lead');
       }
 
-      // Redirect on either success or failure — the Notion page IS the lead magnet,
-      // so even if the API call hiccups, the user still gets the content they came for.
-      // (If the email was valid, the subscriber is created server-side and a follow-up
-      // email fires. If it wasn't, they at least get the Notion page in front of them.)
+      // Show the confirmation modal on either success or failure — if a network
+      // hiccup eats the request, the user still gets feedback. The email gets
+      // delivered via the Incentive email / automation wired to form 9522926.
       fetch('https://api.convertkit.com/v3/forms/' + CK_FORM_ID + '/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ api_key: CK_API_KEY, email: email })
       }).finally(function () {
-        window.location.href = REDIRECT_URL;
+        emailInput.value = '';
+        submitText.textContent = 'send it';
+        submitBtn.disabled = false;
+        openModal();
       });
     });
+
+    if (modal) {
+      modalClose && modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    }
   })();
 </script>
 
