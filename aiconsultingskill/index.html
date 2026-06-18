@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clone your favourite creator — turn their content into an AI advisor · Ali Qureshi</title>
+<meta name="description" content="The prompt that turns any creator's body of work into an AI advisor that thinks, talks and gives advice exactly like them. Free." />
+<link rel="canonical" href="https://aliqureshi.co/aiconsultingskill/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--yellow:#F5C518;--yellow-deep:#E6B200;--paper:#0A0A0C;--card:#121215;--line:#1A1A1F;--ink:#F7F5EF;--mute:#9a9a95;--mute-2:#6b6b6b;--display:"Inter",system-ui,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:var(--yellow);text-decoration:none} a:hover{text-decoration:underline}
+  h1,h2,h3,p,ul,ol{margin:0}
+  .wrap{max-width:680px;margin:0 auto;padding:44px 22px 90px}
+  .back{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--mute);display:inline-block;margin-bottom:34px}
+  .back:hover{color:var(--yellow);text-decoration:none}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--yellow);margin-bottom:14px}
+  h1{font-weight:600;font-size:34px;line-height:1.15;letter-spacing:-1px;margin-bottom:16px}
+  h1 em{font-style:italic;font-weight:400;color:var(--yellow)}
+  .lede{font-size:17px;color:var(--mute);margin-bottom:14px}
+  .lede strong{color:var(--ink);font-weight:600}
+  .proof{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--mute-2);margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+  h2{font-weight:600;font-size:21px;letter-spacing:-.4px;margin:42px 0 14px;padding-top:8px}
+  h3{font-weight:600;font-size:15px;letter-spacing:-.2px;margin:26px 0 8px}
+  p{margin-bottom:14px;color:#d7d5cd}
+  ul,ol{padding-left:20px;margin-bottom:14px} li{margin-bottom:8px;color:#d7d5cd}
+  .muted{color:var(--mute);font-size:14.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--card);border:1px solid var(--line);padding:1px 5px;border-radius:3px}
+  hr{border:none;border-top:1px solid var(--line);margin:34px 0}
+  .steps{counter-reset:s;list-style:none;padding:0}
+  .steps li{counter-increment:s;position:relative;padding:0 0 4px 40px;margin-bottom:16px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:26px;height:26px;border:1px solid var(--yellow);color:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px}
+  .steps strong{color:var(--ink)}
+  .pbox{position:relative;margin:10px 0 18px}
+  .pbox pre{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--yellow);padding:18px 18px;overflow-x:auto;white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#c9c7bf;margin:0}
+  .copy{position:absolute;top:10px;right:10px;background:var(--yellow);border:none;color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;cursor:pointer;border-radius:2px}
+  .copy:hover{background:var(--yellow-deep)}
+  /* soft newsletter CTA (not a gate) */
+  .nlcta{background:var(--card);border:1px solid var(--line);padding:24px 24px;margin-top:40px;text-align:center}
+  .nlcta .gk{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px}
+  .nlcta h3{font-size:18px;font-weight:600;margin-bottom:12px}
+  .form{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:400px;margin:0 auto}
+  .form input{flex:1;min-width:190px;background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:13px 14px;font:inherit;font-size:14px}
+  .form input:focus{outline:none;border-color:var(--yellow)}
+  .form button{background:var(--yellow);border:1px solid var(--yellow);color:var(--paper);font:inherit;font-weight:600;font-size:14px;padding:13px 20px;cursor:pointer;white-space:nowrap}
+  .form button:hover{background:var(--yellow-deep)}
+  .nlcta .note{font-size:11px;color:var(--mute-2);margin-top:11px}
+  .nl-ok{display:none;font-size:13px;color:var(--mute)}.nl-ok.show{display:block}
+  .foot{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--mute-2);margin-top:40px;text-align:center;line-height:1.9}
+</style>
+<!-- Meta Pixel — replace PIXEL_ID_HERE before driving paid traffic -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','PIXEL_ID_HERE');fbq('track','PageView');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="/resources/">&larr; The Vault</a>
+
+  <div class="eyebrow">Free prompt · the mentor layer</div>
+  <h1>Clone your favourite creator — <em>turn their content into an AI advisor</em></h1>
+  <p class="lede">Feed an AI everything your favourite creator has ever made — their videos, podcasts, talks, posts — and it stops sounding like ChatGPT and starts thinking like <strong>them</strong>. The mentor you can't get a call with, on demand, pointed at your exact problem.</p>
+  <div class="proof"><span>Works in Claude or ChatGPT</span><span>One system prompt</span><span>~10 min setup</span></div>
+
+  <h2>What this actually is</h2>
+  <p>It's one system prompt that turns a creator's body of work into an advisor. You load their real material — transcripts, posts, talks — as the AI's knowledge, drop in the prompt, and it answers in <em>their</em> voice, using <em>their</em> frameworks, applied to <em>your</em> situation. It even asks you questions back, like a real consulting call — instead of lecturing.</p>
+  <p>Pick anyone whose content you can get your hands on: the operator you'd kill for 30 minutes with, the marketer whose every post you save, the founder you keep re-watching. If they've put enough out into the world, you can rebuild their thinking and consult it any time.</p>
+
+  <h2>How to set it up</h2>
+  <ol class="steps">
+    <li><strong>Pick your tool.</strong> A <strong>Claude Project</strong> (claude.ai → Projects → Create project) or a <strong>ChatGPT Project / Custom GPT</strong>. Both let you attach knowledge + a system prompt.</li>
+    <li><strong>Gather their material.</strong> The more real content, the better the clone. Video + podcast transcripts, talks, long posts, threads — anything in their actual voice. Generic material in, generic clone out.</li>
+    <li><strong>Add it as knowledge.</strong> Upload the files or paste the transcripts into the project's knowledge (Claude Project knowledge, or a Custom GPT's knowledge files).</li>
+    <li><strong>Paste the prompt below</strong> into the project's custom instructions / system prompt. Swap <code>[CREATOR NAME]</code> for the real name.</li>
+    <li><strong>Start a chat.</strong> It'll open by asking what you want to work on — then answer like them, applied to your situation.</li>
+  </ol>
+
+  <h2>The prompt</h2>
+  <div class="pbox">
+    <button class="copy" id="copyBtn" type="button">copy</button>
+    <pre id="promptText">You are [CREATOR NAME].
+
+Everything in this project's knowledge — transcripts from their videos, podcasts, talks, posts — is your body of work and expertise. Treat it as the source of truth for how you think, the frameworks you use, the opinions you hold, and the way you talk.
+
+I'm going to ask you questions about my business. Answer the way [CREATOR NAME] actually would.
+
+How to respond:
+- Ground everything in the material. Pull from the actual frameworks, examples, and opinions in the transcripts — not generic advice. If they have a specific way of approaching something, use it.
+- Match their voice. The phrasing, the analogies, the level of bluntness, the structure they explain things in. If they're direct, be direct. If they use specific terms, use them.
+- Apply it to MY situation. Don't just recite their content back to me. Take their thinking and point it at the specific problem I bring you — like they would in an actual consulting call.
+- Ask me questions back. A good advisor doesn't lecture. If you need more context to give a real answer, ask me first — the way they would.
+
+Honesty rules (important):
+- If the material genuinely covers something, answer with confidence and reference how they've talked about it.
+- If my question goes beyond what's in the material, say so: "I haven't spoken about this exactly, but based on how I think about [related thing], here's my take…" — then extrapolate carefully from their actual principles.
+- Never invent specific claims, numbers, or stories they didn't say. Staying true to their thinking matters more than sounding impressive.
+
+Start by asking me what I want to work on.</pre>
+  </div>
+
+  <h2>Tips that make it actually work</h2>
+  <ul>
+    <li><strong>Quantity is the lever.</strong> 3 transcripts gives you a parrot. 30 gives you a clone. Dump everything they've made.</li>
+    <li><strong>Pull transcripts fast.</strong> YouTube auto-captions, podcast transcript tools, or copy their posts straight in. Raw text is fine — it doesn't need to be clean.</li>
+    <li><strong>Keep it honest.</strong> The honesty rules are the most important part — they stop it inventing fake stories and numbers in the creator's name. Don't delete them.</li>
+    <li><strong>Let it interview you.</strong> The magic is the questions it asks back. Answer them like you would on a real call.</li>
+    <li><strong>Refresh it.</strong> When they drop new content, add it to the knowledge. The clone gets sharper the more material it has.</li>
+  </ul>
+
+  <div class="nlcta">
+    <div class="gk">// before you go</div>
+    <h3>I share stuff like this every week</h3>
+    <form class="form" id="nlForm" novalidate>
+      <input type="email" id="nlEmail" name="email_address" placeholder="you@domain.com" required>
+      <button type="submit" id="nlBtn">subscribe</button>
+    </form>
+    <p class="nl-ok" id="nlOk">✓ Check your inbox to confirm.</p>
+    <p class="note">One workflow, prompt or system a week. No spam, unsubscribe anytime.</p>
+  </div>
+
+  <div class="foot">&copy; 2026 Ali Qureshi · <a href="/">home</a> · <a href="/resources/">the vault</a><br>ali@adcrate.com</div>
+</div>
+
+<script>
+(function(){
+  // copy button
+  var cb=document.getElementById('copyBtn');
+  cb&&cb.addEventListener('click',function(){
+    var t=document.getElementById('promptText').innerText;
+    navigator.clipboard.writeText(t).then(function(){cb.textContent='copied ✓';setTimeout(function(){cb.textContent='copy';},1600);});
+  });
+  // optional newsletter (not a gate)
+  var FORM_ID='8569586', API_KEY='d10BEfuibAt6ylMREn11ZA';
+  var form=document.getElementById('nlForm'),email=document.getElementById('nlEmail'),btn=document.getElementById('nlBtn'),ok=document.getElementById('nlOk');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=(email.value||'').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){email.focus();return;}
+    btn.textContent='…';btn.disabled=true;
+    if(typeof fbq!=='undefined'){fbq('track','Lead');}
+    fetch('https://api.convertkit.com/v3/forms/'+FORM_ID+'/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({api_key:API_KEY,email:v})})
+      .finally(function(){form.style.display='none';ok.classList.add('show');});
+  });
+})();
+</script>
+</body>
+</html>
