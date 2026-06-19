@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stop prompting, start running loops — the setup guide · Ali Qureshi</title>
+<meta name="description" content="The full setup for running loops in Claude instead of prompting. Set a goal the AI can grade itself against, and let it run until it passes. Free, plus 5 loops you can steal." />
+<link rel="canonical" href="https://aliqureshi.co/loops/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--yellow:#F5C518;--yellow-deep:#E6B200;--paper:#0A0A0C;--card:#121215;--line:#1A1A1F;--ink:#F7F5EF;--mute:#9a9a95;--mute-2:#6b6b6b;--display:"Inter",system-ui,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:var(--yellow);text-decoration:none} a:hover{text-decoration:underline}
+  h1,h2,h3,p,ul,ol{margin:0}
+  .wrap{max-width:680px;margin:0 auto;padding:44px 22px 90px}
+  .back{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--mute);display:inline-block;margin-bottom:34px}
+  .back:hover{color:var(--yellow);text-decoration:none}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--yellow);margin-bottom:14px}
+  h1{font-weight:600;font-size:34px;line-height:1.15;letter-spacing:-1px;margin-bottom:16px}
+  h1 em{font-style:italic;font-weight:400;color:var(--yellow)}
+  .lede{font-size:17px;color:var(--mute);margin-bottom:14px}
+  .lede strong{color:var(--ink);font-weight:600}
+  .proof{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--mute-2);margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+  h2{font-weight:600;font-size:21px;letter-spacing:-.4px;margin:42px 0 14px;padding-top:8px}
+  h3{font-weight:600;font-size:15px;letter-spacing:-.2px;margin:26px 0 8px}
+  p{margin-bottom:14px;color:#d7d5cd}
+  ul,ol{padding-left:20px;margin-bottom:14px} li{margin-bottom:8px;color:#d7d5cd}
+  .muted{color:var(--mute);font-size:14.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--card);border:1px solid var(--line);padding:1px 5px;border-radius:3px}
+  hr{border:none;border-top:1px solid var(--line);margin:34px 0}
+  .steps{counter-reset:s;list-style:none;padding:0}
+  .steps li{counter-increment:s;position:relative;padding:0 0 4px 40px;margin-bottom:16px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:26px;height:26px;border:1px solid var(--yellow);color:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px}
+  .steps strong{color:var(--ink)}
+  /* two-column compare */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 18px}
+  .vs .col{background:var(--card);border:1px solid var(--line);padding:16px 16px}
+  .vs .col.win{border-left:3px solid var(--yellow)}
+  .vs .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute-2);margin-bottom:10px}
+  .vs .col.win .k{color:var(--yellow)}
+  .vs p{font-size:14px;margin:0 0 8px}
+  .vs ul{padding-left:18px;margin:0}
+  .vs li{font-size:13.5px;color:var(--mute);margin-bottom:6px}
+  @media(max-width:560px){.vs{grid-template-columns:1fr}}
+  /* good/bad goal rows */
+  .grade{border-top:1px solid var(--line);margin-top:10px}
+  .grade .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .grade .bad{color:var(--mute-2);text-decoration:line-through;text-decoration-color:#3a3a3a;font-size:14px}
+  .grade .good{color:var(--ink);font-size:14px}
+  @media(max-width:560px){.grade .row{grid-template-columns:1fr;gap:4px}.grade .bad{font-size:13px}}
+  /* prompt box */
+  .pbox{position:relative;margin:10px 0 18px}
+  .pbox .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-2);margin-bottom:7px}
+  .pbox pre{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--yellow);padding:18px 18px;overflow-x:auto;white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#c9c7bf;margin:0}
+  .copy{position:absolute;top:34px;right:10px;background:var(--yellow);border:none;color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;cursor:pointer;border-radius:2px}
+  .copy:hover{background:var(--yellow-deep)}
+  .why{font-size:13px;color:var(--mute);margin:-8px 0 22px}
+  .why b{color:var(--ink);font-weight:600}
+  /* soft newsletter CTA (not a gate) */
+  .nlcta{background:var(--card);border:1px solid var(--line);padding:24px 24px;margin-top:40px;text-align:center}
+  .nlcta .gk{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px}
+  .nlcta h3{font-size:18px;font-weight:600;margin-bottom:12px}
+  .form{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:400px;margin:0 auto}
+  .form input{flex:1;min-width:190px;background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:13px 14px;font:inherit;font-size:14px}
+  .form input:focus{outline:none;border-color:var(--yellow)}
+  .form button{background:var(--yellow);border:1px solid var(--yellow);color:var(--paper);font:inherit;font-weight:600;font-size:14px;padding:13px 20px;cursor:pointer;white-space:nowrap}
+  .form button:hover{background:var(--yellow-deep)}
+  .nlcta .note{font-size:11px;color:var(--mute-2);margin-top:11px}
+  .nl-ok{display:none;font-size:13px;color:var(--mute)}.nl-ok.show{display:block}
+  .foot{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--mute-2);margin-top:40px;text-align:center;line-height:1.9}
+</style>
+<!-- Meta Pixel — replace PIXEL_ID_HERE before driving paid traffic -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','PIXEL_ID_HERE');fbq('track','PageView');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="/resources/">&larr; The Vault</a>
+
+  <div class="eyebrow">Free guide · the loop system</div>
+  <h1>Stop prompting. Start running <em>loops</em>.</h1>
+  <p class="lede">Normal prompting: you ask, the AI answers, that's the end. A loop doesn't stop there — it <strong>checks its own work and writes its own next prompt</strong>, over and over, until it hits the goal you set. This is the full setup, plus five loops you can steal.</p>
+  <div class="proof"><span>Works in Claude Code</span><span>No code needed</span><span>5 copy-paste loops</span></div>
+
+  <h2>What a loop actually is</h2>
+  <p>Same tool, two ways to use it. One keeps you in the chair as the quality check. The other takes you out of it.</p>
+  <div class="vs">
+    <div class="col">
+      <div class="k">Prompting</div>
+      <p>You ask. It answers. Done.</p>
+      <ul>
+        <li>Stops the second it replies — good or not</li>
+        <li>You catch what's wrong, ask again</li>
+        <li>You're the QA. Every time.</li>
+      </ul>
+    </div>
+    <div class="col win">
+      <div class="k">Looping</div>
+      <p>You set a goal. It runs until it hits it.</p>
+      <ul>
+        <li>Checks its own work against the goal</li>
+        <li>Not there? Rewrites and tries again</li>
+        <li>Repeats on its own until it passes</li>
+      </ul>
+    </div>
+  </div>
+  <p>The unlock isn't a better prompt. It's giving the AI a finish line it can check itself against — and the permission to keep going until it gets there.</p>
+
+  <h2>The 3 ingredients of a loop</h2>
+  <p>Miss any one of these and it's just prompting with extra words. Get all three and it runs itself.</p>
+  <ol class="steps">
+    <li><strong>A goal it can grade itself against.</strong> A clear pass/fail — a test, a checklist, "the page loads with no errors," "every claim has 3+ links that open." Something it can check without asking you. This is the make-or-break one.</li>
+    <li><strong>A way to see the result.</strong> It has to actually run the code, open the page, read the error, or step through the checklist. Real feedback, not a guess. Claude Code already does this out of the box.</li>
+    <li><strong>Permission to keep going until it passes.</strong> Say it out loud: don't stop at the first attempt. Build &rarr; test &rarr; read the failure &rarr; rewrite &rarr; re-test, until the bar is met.</li>
+  </ol>
+
+  <h2>The one rule that makes or breaks it</h2>
+  <p>This is the part most people get wrong. <strong>"Make it good" can't be graded</strong> — there's nothing to check against, so the loop stops at the first answer. Give it a number, a checklist, or a clear pass/fail and it can self-grade.</p>
+  <div class="grade">
+    <div class="row"><div class="bad">"Make it good."</div><div class="good">"Don't stop until the page loads with zero errors."</div></div>
+    <div class="row"><div class="bad">"Write a strong landing page."</div><div class="good">"Write it for our exact ICP. If it misses, rewrite it."</div></div>
+    <div class="row"><div class="bad">"Make the research solid."</div><div class="good">"Every claim needs 3+ links. Open each to confirm it backs the claim."</div></div>
+    <div class="row"><div class="bad">"Punch up the copy."</div><div class="good">"It has to pass all 7 of my hook checks before it's done."</div></div>
+    <div class="row"><div class="bad">"Build it well."</div><div class="good">"Build it, run it, and don't stop until it works."</div></div>
+  </div>
+  <p class="muted">The test: could a stranger look at the output and tell you pass or fail without guessing what you meant? If yes, the AI can too.</p>
+
+  <h2>Turn any prompt into a loop</h2>
+  <p>You don't need code. In Claude Code, you turn a normal request into a loop by bolting on two things: a goal it can check, and "don't stop until it passes."</p>
+  <div class="vs">
+    <div class="col">
+      <div class="k">Prompting</div>
+      <p>"Build me a landing page with this logic."</p>
+      <ul><li>Builds it, hands it over, stops. You find the bug. You ask again.</li></ul>
+    </div>
+    <div class="col win">
+      <div class="k">Looping</div>
+      <p>"Build it. Then run it and open it. If anything errors, fix it and try again. Don't stop until it loads clean and does X, Y, Z."</p>
+      <ul><li>Builds &rarr; tests &rarr; reads the failure &rarr; rewrites &rarr; re-tests, until your check passes.</li></ul>
+    </div>
+  </div>
+  <p>The formula: <strong>the task</strong> + <strong>a check it can verify itself</strong> + <strong>"don't stop until it passes."</strong> That's a loop.</p>
+
+  <h2>5 loops you can steal</h2>
+  <p>Real loops — the kind I run building the AI systems behind a $3M agency. Swap the brackets for your specifics and paste them straight into Claude Code.</p>
+
+  <h3>1. Build a page until it works</h3>
+  <div class="pbox">
+    <div class="lbl">paste into Claude Code</div>
+    <button class="copy" type="button">copy</button>
+    <pre>Build [the page] with this logic: [paste logic]. Then run it and open it in the browser. If anything errors or the logic doesn't behave, fix it and try again. Don't stop until it loads clean and every step of the logic works.</pre>
+  </div>
+  <p class="why"><b>Why it loops:</b> "it works" either is or isn't true — the AI can run it and see.</p>
+
+  <h3>2. Write copy for a specific ICP</h3>
+  <div class="pbox">
+    <div class="lbl">paste into Claude Code or a Claude Project</div>
+    <button class="copy" type="button">copy</button>
+    <pre>Write this landing page for our exact ICP: [who they are, what they want, what they fear]. Then read it back as that person. If a single line wouldn't land for them, rewrite it. Don't stop until every line speaks to that ICP.</pre>
+  </div>
+  <p class="why"><b>Why it loops:</b> "made for this ICP" is a bar it can re-read against, line by line.</p>
+
+  <h3>3. Research with real sources only</h3>
+  <div class="pbox">
+    <div class="lbl">the anti-hallucination loop</div>
+    <button class="copy" type="button">copy</button>
+    <pre>Write a one-page brief on [topic]. Every claim needs 3+ links. Open each link and confirm the source is real and actually backs the claim. Drop any link that doesn't. Don't stop until every claim has 3 working sources that hold up.</pre>
+  </div>
+  <p class="why"><b>Why it loops:</b> it goes link by link instead of trusting itself — exactly where AI usually hallucinates.</p>
+
+  <h3>4. Hold copy to your own checklist</h3>
+  <div class="pbox">
+    <div class="lbl">turn your standards into a grader</div>
+    <button class="copy" type="button">copy</button>
+    <pre>Here's my checklist for a good [hook / script / email]: [paste your checklist]. Write the [asset], then score it against all of them. For any it fails, rewrite and re-score. Don't stop until it passes every item on the list.</pre>
+  </div>
+  <p class="why"><b>Why it loops:</b> your checklist is the grader. This is how you keep a quality bar without checking every output yourself.</p>
+
+  <h3>5. Fix until the tests pass</h3>
+  <div class="pbox">
+    <div class="lbl">for anything with a test suite</div>
+    <button class="copy" type="button">copy</button>
+    <pre>Fix [the bug / feature]. After each change, run the tests. If any fail, read the output, fix the cause, and run them again. Don't stop until the full suite is green.</pre>
+  </div>
+  <p class="why"><b>Why it loops:</b> the test suite is the most honest grader there is — green or not.</p>
+
+  <h2>When you want it in code</h2>
+  <p>For most of what you'll do, Claude Code <em>is</em> the loop — you just give it the finish line and the means to check. Written literally, the same idea is a <code>while</code> loop:</p>
+  <div class="pbox">
+    <div class="lbl">the loop, in plain pseudocode</div>
+    <button class="copy" type="button">copy</button>
+    <pre>while goal not met:
+    ask the AI to act (with tools)
+    let it run the code / open the page / read the result
+    check the result against your goal
+    if it passes  -> stop
+    else          -> feed the result back and go again</pre>
+  </div>
+  <p>Call the model, let it act, check the stop condition, repeat until met. The Claude Agent SDK is built for exactly this — but you don't need a line of code to start. Give Claude Code a gradeable goal and "don't stop until it passes," and you're already looping.</p>
+
+  <h2>What kills a loop</h2>
+  <ul>
+    <li><strong>A vague goal.</strong> "Make it good" gives it nothing to check. Number, checklist, or pass/fail — always.</li>
+    <li><strong>No way to see results.</strong> If it can't run it, open it, or read the output, it's guessing.</li>
+    <li><strong>Forgetting "don't stop."</strong> Without it, it stops at attempt one. Say it explicitly.</li>
+    <li><strong>Stepping in mid-run.</strong> Let it fail and self-correct. The moment you take over, you're the machine again.</li>
+  </ul>
+
+  <hr>
+  <p class="muted">The whole thing in one line: you stop steering every step and start setting the finish line. Set the bar once, and it holds without you in the room.</p>
+
+  <div class="nlcta">
+    <div class="gk">// before you go</div>
+    <h3>I share stuff like this every week</h3>
+    <form class="form" id="nlForm" novalidate>
+      <input type="email" id="nlEmail" name="email_address" placeholder="you@domain.com" required>
+      <button type="submit" id="nlBtn">subscribe</button>
+    </form>
+    <p class="nl-ok" id="nlOk">✓ Check your inbox to confirm.</p>
+    <p class="note">One workflow, prompt or system a week. No spam, unsubscribe anytime.</p>
+  </div>
+
+  <div class="foot">&copy; 2026 Ali Qureshi · <a href="/">home</a> · <a href="/resources/">the vault</a><br>ali@adcrate.com</div>
+</div>
+
+<script>
+(function(){
+  // copy buttons (multiple)
+  document.querySelectorAll('.copy').forEach(function(cb){
+    cb.addEventListener('click',function(){
+      var pre=cb.parentNode.querySelector('pre');
+      if(!pre)return;
+      navigator.clipboard.writeText(pre.innerText).then(function(){
+        cb.textContent='copied ✓';setTimeout(function(){cb.textContent='copy';},1600);
+      });
+    });
+  });
+  // optional newsletter (not a gate)
+  var FORM_ID='8569586', API_KEY='d10BEfuibAt6ylMREn11ZA';
+  var form=document.getElementById('nlForm'),email=document.getElementById('nlEmail'),btn=document.getElementById('nlBtn'),ok=document.getElementById('nlOk');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=(email.value||'').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){email.focus();return;}
+    btn.textContent='…';btn.disabled=true;
+    if(typeof fbq!=='undefined'){fbq('track','Lead');}
+    fetch('https://api.convertkit.com/v3/forms/'+FORM_ID+'/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({api_key:API_KEY,email:v})})
+      .finally(function(){form.style.display='none';ok.classList.add('show');});
+  });
+})();
+</script>
+</body>
+</html>
