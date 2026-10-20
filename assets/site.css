@@ -260,8 +260,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .tile--adcrate { background: #f5c518; }
 .tile.tile--adcrate svg { width: 100%; height: 100%; }
-.tile--pocket { background: #b8862e; }
+.tile--pocket { background: #1d5fa8; }
 .tile svg { width: 18px; height: 18px; }
+.tile.tile--pocket svg { height: auto; }
 
 .lede .brand {
   display: inline-flex;
