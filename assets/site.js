@@ -188,6 +188,32 @@
     });
   });
 
+  // Playbooks: copy a prompt or template to the clipboard
+  document.querySelectorAll(".steal").forEach(function (box) {
+    var btn = box.querySelector(".copy-btn");
+    var pre = box.querySelector("pre");
+    if (!btn || !pre) return;
+    btn.addEventListener("click", function () {
+      var text = pre.innerText;
+      var ok = function () {
+        btn.textContent = "Copied";
+        btn.classList.add("is-done");
+        setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("is-done"); }, 1600);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(ok, function () {});
+      } else {
+        var r = document.createRange();
+        r.selectNodeContents(pre);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(r);
+        try { document.execCommand("copy"); ok(); } catch (e) {}
+        sel.removeAllRanges();
+      }
+    });
+  });
+
   // Selects: show white text once something is picked
   document.querySelectorAll("select.field").forEach(function (s) {
     s.addEventListener("change", function () { s.classList.toggle("has-value", !!s.value); });

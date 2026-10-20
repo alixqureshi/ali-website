@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The AI growth team: how a small team runs growth with agents · Ali Qureshi</title>
+  <meta name="description" content="The setup behind the 94 agents at Adcrate: the brain every tool reads, brand brains, skills, routines, the first agents to build and the rules that stop them doing something stupid.">
+  <meta property="og:title" content="The AI growth team: how a small team runs growth with agents">
+  <meta property="og:description" content="The setup behind the 94 agents at Adcrate: the brain every tool reads, brand brains, skills, routines, the first agents to build and the rules that stop them doing something stupid.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://aliqureshi.co/playbooks/ai-growth-team/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script>document.documentElement.classList.add("js")</script>
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/assets/site.js" defer></script>
+</head>
+<body>
+  <div class="frame">
+    <header class="top">
+      <nav class="pill" aria-label="Main">
+        <a class="nav-link nav-home" href="/"><img class="nav-home-face" src="/assets/ali.jpg" alt=""><span class="nav-home-text">Home</span></a>
+        <a class="nav-link" href="/playbooks/" aria-current="page"><i class="nav-active"></i><span>Playbooks</span></a>
+        <a class="nav-link" href="/work-with-me/"><span>Work with me</span></a>
+        <a class="nav-link" href="/about/"><span>About</span></a>
+        <a class="nav-link nav-cta" href="/contact/"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <header class="art-head">
+        <a class="art-back rv" href="/playbooks/">← All playbooks</a>
+        <p class="art-kicker rv" style="--d: 80ms">Playbook 01 · 14 min read · Updated 20 Oct 2026</p>
+        <h1 class="lede lede--art" data-split="150"><b>The AI growth team.</b> How a small team runs growth with AI agents. The setup behind the 94 agents at Adcrate.</h1>
+        <p class="art-sum rv" style="--d: 700ms">In the last few months I’ve built 94 agents across 9 departments at Adcrate. About half are live. The rest are still in testing, on purpose. The setup: the brain every tool reads, brand brains, skills, the first agents worth building, and the rules that stop them doing something stupid.</p>
+      </header>
+
+      <nav class="toc rv" style="--d: 820ms" aria-label="In this playbook">
+        <a href="#what"><span>01</span>Agents are the hands</a>
+        <a href="#brain"><span>02</span>The brain every tool reads</a>
+        <a href="#brand-brains"><span>03</span>Brand brains</a>
+        <a href="#skills"><span>04</span>Skills: write each job down once</a>
+        <a href="#first-agents"><span>05</span>Your first agents</a>
+        <a href="#running"><span>06</span>Running them every week</a>
+        <a href="#setup"><span>07</span>My setup, day to day</a>
+        <a href="#mistakes"><span>08</span>What broke</a>
+      </nav>
+
+      <article class="art">
+      <section id="what">
+              <h2><span class="n">01</span><span>Agents are the hands, you’re the brain</span></h2>
+        <p>For a long time I thought agents would work away in the background and I’d never touch anything. I was wrong.</p>
+        <p>Agents are hands. Read 40 Slack channels. Fill in 2,000 database rows. Draft a reply to a creator. Check every new ad for a broken link. What they can’t do is decide what good looks like. That part is still you.</p>
+        <p class="pull">The edge goes back to people who are good at marketing. AI just removes the excuse that you didn’t have time.</p>
+        <p>Everyone has the same models. The difference is the context you give them. A great strategist can explain why a hook works, why that clip goes first, why this creator and not that one. A weak one can’t, so their agents can’t either.</p>
+        <p>The roles in a creative team are merging. Strategist, editor, designer, media buyer, creator sourcer. They’re turning into one job: a marketer who knows the craft and can run agents. We already run some accounts with one strategist and AI. No account manager, no editors. If I started Adcrate today, it would be 15 very good marketers with agents, not 50 people.</p>
+        <p>So ignore the “fire your team, just use AI” pitch. The people who know the work are the ones who make the agents good.</p>
+        <p>The setup has 4 layers. Each one sits on the one before:</p>
+        <ol>
+          <li><b>A brain:</b> what’s true about you and the business, for every AI tool you use.</li>
+          <li><b>Brand brains:</b> the same idea for every client or product.</li>
+          <li><b>Skills:</b> how each job gets done, written once.</li>
+          <li><b>Agents and routines:</b> skills on a schedule, with rules on what they can touch.</li>
+        </ol>
+      </section>
+
+      <section id="brain">
+              <h2><span class="n">02</span><span>The brain every tool reads</span></h2>
+        <p>My first attempt at this failed. I wrote a beautiful folder of skills and context inside our company repo. Over the next few months, across 597 AI sessions, the tools read it about 9 times. The skills sat in a folder no tool looked in. Nothing wrote back to it. And it had copies of client data that went stale within weeks.</p>
+        <p>So I rebuilt it as a brain. One private repo that every AI tool I use reads from, and that keeps itself up to date.</p>
+
+        <h3>4 levels</h3>
+        <div class="kv">
+          <div><span class="k">1. Context</span><span class="v">What’s true and changes slowly. Who I am, how I work, how I write, the business, the offers, the creative method, past decisions and why.</span></div>
+          <div><span class="k">2. Connections</span><span class="v">A map of where live data lives (Notion, Slack, Xero, the ad platforms) and which tool reaches it. <b>Never the data itself.</b></span></div>
+          <div><span class="k">3. Skills</span><span class="v">How each job gets done. One folder per skill.</span></div>
+          <div><span class="k">4. Routines</span><span class="v">Skills on a schedule. These keep the brain current.</span></div>
+        </div>
+
+        <h3>The rule that matters most</h3>
+        <p><b>Live data is never copied.</b> Clients, team, status, creators and money are read from the source when they’re needed. The test: if it has a status, an owner or a date, it lives in Notion (or wherever your source of truth is). If it’s a belief, a rule or a method, it lives in the brain.</p>
+        <p>Break this and your agents will confidently use a client list from 3 months ago.</p>
+
+        <h3>One file every tool loads</h3>
+        <p>At the top is one short page every tool loads in every session. Who I am, how to answer me, the hard rules, and a table that says “if the task involves X, read file Y”. It’s a contents page. The tools read the rest only when they need it.</p>
+        <p>The brain is symlinked into every tool: Claude Code, Codex, Cursor, Gemini. One <code>git pull</code> updates all of them. For the chat apps (Claude and ChatGPT) a small connector on Cloudflare serves the same skills and context. No live data.</p>
+
+        <h3>It keeps itself alive</h3>
+        <ul>
+          <li><b>Capture.</b> When I say “remember that” in any tool, it writes a note to an inbox folder.</li>
+          <li><b>Nightly review.</b> At 22:30 a job reads the day’s AI sessions and writes up to 12 notes on what’s worth keeping. Precision beats recall. A brain full of noise is worse than an empty one.</li>
+          <li><b>Weekly gardener.</b> Every Monday a routine turns the inbox into proper updates and opens one pull request for me to approve.</li>
+          <li><b>Monthly audit.</b> Checks what’s stale, which links are broken and which skills nobody uses.</li>
+        </ul>
+        <p>The bottleneck is me. As I write this, a few hundred notes are waiting in the inbox and 3 gardener pull requests are unmerged. A brain that learns faster than you can review is still a good problem to have.</p>
+
+        <div class="steal">
+          <div class="steal-top"><span>Tool 1: the brain file</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre># [Your name]'s brain
+
+You are working with [name]: [role, business, what they're building]. This page loads in every session. It says who I am, how to work with me, and where everything else lives.
+
+## How to answer
+- [e.g. Direct answer first, then up to 5 bullets, then up to 3 next actions.]
+- [e.g. Give option A vs B with a recommendation. Push back when I'm wrong.]
+- [e.g. Assume and proceed unless missing info changes the outcome.]
+
+## Read on demand (don't load everything)
+| When the task involves... | Read |
+|---|---|
+| My goals and what to optimise for | context/me.md |
+| Writing as me | context/voice.md |
+| The business, offers, method | context/business/ |
+| Who's who | context/people.md |
+| Any live fact (clients, team, money) | connections/systems.md, then query the system live |
+
+## Hard rules
+1. Live data is never copied. Read it from the source when you need it.
+2. No secrets in this repo, prompts or commits.
+3. Ask before spending API money. Estimate the cost first.
+4. [Your non-negotiables, e.g. no emojis in team-facing messages.]
+5. If a skill fits the task, read its SKILL.md and learnings.md first.
+
+## Keep the brain alive
+- If I correct you or say "remember that", write a note to inbox/.
+- Don't edit context/ or skills/ mid-task. The weekly review turns inbox notes into updates.</pre>
+        </div>
+      </section>
+
+      <section id="brand-brains">
+              <h2><span class="n">03</span><span>Brand brains: one per client</span></h2>
+        <p>Do the same for every brand you market. A brand brain holds everything an agent needs to make work that looks and sounds like that brand. Built once, kept current.</p>
+        <p>Ours has 13 parts in 5 groups:</p>
+        <div class="kv">
+          <div><span class="k">Identity</span><span class="v">Online research, brand DNA, positioning, audience.</span></div>
+          <div><span class="k">Voice</span><span class="v">A voice profile, and a bank of customer language: the actual words buyers use.</span></div>
+          <div><span class="k">Visual</span><span class="v">The visual system (colours, type, photography style) and a short image prompt modifier so generated images match the brand.</span></div>
+          <div><span class="k">Strategy</span><span class="v">Persona map, theme map, format map, and which creative works for which customer.</span></div>
+          <div><span class="k">Competitive</span><span class="v">What competitors are running and what nobody has claimed yet.</span></div>
+        </div>
+        <p>On top sit 2 things that grow every week: <b>approved learnings</b> (lessons from tests, one line each, signed off by a person) and a <b>library of the brand’s winning ads</b>.</p>
+        <p>2 rules. Brand data lives on our own server, never in a code repo. And clients never see the raw brain. It’s for us to work from.</p>
+        <p>The payoff: any strategist, or any agent, can pick up a brand on day 1 and make something on brand. That’s how one person runs an account that used to need 4.</p>
+
+        <div class="steal">
+          <div class="steal-top"><span>Tool 2: build a brand brain</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Build a brand brain for [BRAND] ([URL]). Use the site, product pages (not just the homepage), reviews, ad comments and the competitors I list. Quote real sources. Never invent a statistic or a customer quote.
+
+Write one section per heading:
+
+IDENTITY
+1. Research summary: what they sell, to whom, at what price, sold where.
+2. Brand DNA: what they believe, what they'd never do.
+3. Positioning: the one-line claim, and what makes it true.
+4. Audience: who buys, in plain words.
+
+VOICE
+5. Voice profile: 5 do's, 5 don'ts, 3 example lines in their voice.
+6. Customer language: 30+ verbatim phrases buyers use, grouped by pain, desire, objection and result.
+
+VISUAL
+7. Visual system: colours (hex), fonts, photography style, what to avoid.
+8. Image prompt modifier: one short paragraph to append to any image prompt so it looks on brand.
+
+STRATEGY
+9. Persona map: 3 to 4 buying situations, each with a quote.
+10. Theme map: 5 to 7 themes, each as "We believe [audience] struggles with [problem], and [product] solves it by [mechanism]."
+11. Format map: formats likely to suit this brand and why.
+12. Creative map: which formats and angles suit which buying situation.
+
+COMPETITIVE
+13. Competitor ads: what the top 3 to 5 competitors are saying, and the angles nobody is using.
+
+Finish with a list of everything you couldn't verify.</pre>
+        </div>
+      </section>
+
+      <section id="skills">
+              <h2><span class="n">04</span><span>Skills: write each job down once</span></h2>
+        <p>A skill is a process in text form. That’s it. When people say “skills” or “markdown files”, that’s all they mean.</p>
+        <p>We have 11 company skills (copywriting, creative strategy, static ads, landing pages, case studies, collections emails and so on) and I have 13 personal ones. Each one is a folder:</p>
+        <ul>
+          <li><b>SKILL.md:</b> when to use it, what to read first, the steps, and what good looks like.</li>
+          <li><b>references/:</b> the deeper material, opened only when needed.</li>
+          <li><b>learnings.md:</b> dated notes on what worked and what broke. Read before starting, every time.</li>
+        </ul>
+        <p>People skip the learnings file. It’s the part that makes skills improve instead of rot.</p>
+
+        <h3>How to get skills out of people’s heads</h3>
+        <p>The fastest way: when something works in a session, say “turn this into a skill so I can do it again”. The tool already has the full context.</p>
+        <p>The better way, for your team: ask everyone to <b>commentate while they work</b>. An editor saying “I’m cutting here because the hook needs to land before the second beat”. A strategist talking through why they picked an angle. Record it, even if it’s just a call with yourself. Those transcripts become skills. As the models improve, the teams with the best context pull ahead.</p>
+        <p>It’s tedious. Do it anyway. It’s like onboarding a new hire who never forgets anything.</p>
+
+        <div class="steal">
+          <div class="steal-top"><span>Tool 3: the skill template</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>---
+name: [kebab-case-name]
+description: >-
+  [What this skill does in one sentence.] Use when [the exact phrases someone
+  would say, e.g. "write a brief for", "brief the creators"]. Not for [what
+  it should NOT be used for, and which skill to use instead].
+---
+
+# [Skill name]
+
+## Before you start
+- Read references/learnings.md.
+- Context you need: [files or systems to read, e.g. the brand brain, the ad account].
+- Ask only for information that changes the output. Otherwise assume and proceed.
+
+## Steps
+1. [Step, with the reason it exists]
+2. [Step]
+3. [Step]
+
+## What good looks like
+- [Concrete quality bar, e.g. "every claim traces to a real source"]
+- [A short example of good output]
+
+## Never
+- [The mistakes this skill exists to prevent]
+
+## Finish
+- [The final check before handing over, e.g. run the review skill]
+- If something went wrong or right in a way future runs should know, add a dated line to references/learnings.md.</pre>
+        </div>
+      </section>
+
+      <section id="first-agents">
+              <h2><span class="n">05</span><span>Your first agents</span></h2>
+        <p>Don’t start with the exciting agent. Start with the boring, frequent job someone hates and nobody would miss doing by hand.</p>
+        <p>Our first agent was <b>Churn Radar</b>, in September. Every Monday it reads every active client’s Slack channel and flags anyone who sounds unhappy to the account managers and leadership. Its first dry run read 21 clients and flagged 4 to watch. Nobody had to remember to check. That’s the whole value.</p>
+        <p>Next came agents that check every newly launched ad for naming mistakes and broken landing pages, set up whitelisting, shortlist creators and file the ads I save into a swipe file. Small jobs. Every day.</p>
+        <p>We built them team by team: account management, editing, creators, strategy, then ops, quality, finance and HR. The creator team had the most admin, so it got the most agents. That story is in <a href="/playbooks/creator-programmes/">Creator programmes</a>.</p>
+
+        <h3>How to pick</h3>
+        <p>Score each job 1 to 3 on 4 things. Start with the highest total:</p>
+        <div class="kv">
+          <div><span class="k">How often</span><span class="v">Daily beats weekly beats monthly.</span></div>
+          <div><span class="k">How painful</span><span class="v">Do people put it off, forget it, or complain about it?</span></div>
+          <div><span class="k">How safe</span><span class="v">Does it only read and report, or does it touch customers, money or anything public? Start with read and report.</span></div>
+          <div><span class="k">How checkable</span><span class="v">Can a person tell in 10 seconds whether the output is right?</span></div>
+        </div>
+
+        <h3>Prototype as a routine, harden only the survivors</h3>
+        <p>Every new agent starts as a scheduled Claude routine: a prompt on a timer that uses connectors to read Slack, Notion and the rest. No servers, no code. It does a dry run, then posts to a test channel, then goes live.</p>
+        <p>Most ideas die in the test channel. That’s the point. Only the ones that prove important, or need exact repeatable logic, get rebuilt as proper code.</p>
+        <p>Use the cheapest engine that works, in this order: plain code, then a routine, then a script on a machine you own, then the paid API. And a rule I wish I’d made sooner: <b>counting, checking and syncing belong in code.</b> Don’t pay a model to add up numbers.</p>
+        <p>Name agents by department and job, never with human names. “Churn Radar”, “Creator Comms”, “Ads Live Check”. Everyone knows what each one does, and nobody mistakes an agent for a person.</p>
+
+        <div class="steal">
+          <div class="steal-top"><span>Tool 4: the agent spec</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>NAME:          [Department + job, e.g. "Churn Radar". Never a human name.]
+DEPARTMENT:    [Account / Creator / Editing / Strategy / Performance / Ops / ...]
+JOB:           [One sentence. If it needs "and", it's two agents.]
+TRIGGER:       [Schedule (e.g. Mondays 08:00) / webhook / on demand]
+ENGINE:        [code / routine / local script / API]. Pick the cheapest that works.
+
+READS:         [Systems and fields it reads, live, every run]
+WRITES:        [Exactly where its output goes, e.g. a Slack channel, its own log]
+ACTION LEVEL:  0 read / 1 report / 2 post internally / 3 update named fields / 4 act outward
+               Level 4 always goes: proposal > human approval > send.
+NEVER:         [e.g. message anyone outside the company, delete anything, touch money]
+
+GOOD OUTPUT:   [What a correct run looks like, with an example]
+CHECK:         [How a person verifies a run in 10 seconds]
+GO-LIVE RULE:  Shadow first. Live after 5+ real decisions in 7 days with 80%+
+               approved without edits.
+OWNER:         [The person who approves it and reads its output]</pre>
+        </div>
+      </section>
+
+      <section id="running">
+              <h2><span class="n">06</span><span>Running them every week</span></h2>
+        <p>Building an agent takes an afternoon. Making 94 of them safe to leave running is the real work.</p>
+        <p>Ours today, by department:</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Department</th><th>Agents</th></tr></thead>
+            <tbody>
+              <tr><td>Creator</td><td>28</td></tr>
+              <tr><td>Editing</td><td>17</td></tr>
+              <tr><td>Performance</td><td>15</td></tr>
+              <tr><td>Strategy</td><td>10</td></tr>
+              <tr><td>Account management</td><td>8</td></tr>
+              <tr><td>Ops</td><td>6</td></tr>
+              <tr><td>Finance</td><td>4</td></tr>
+              <tr><td>Quality</td><td>3</td></tr>
+              <tr><td>HR</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>46 are live, 44 are in shadow mode and 4 are paused. 63 run as Claude routines on a subscription, 15 are plain code, and the rest run on a Mac mini, a laptop or the API. Most run on a schedule.</p>
+
+        <h3>The action ladder</h3>
+        <p>Every agent has a level. The level decides what it can touch:</p>
+        <div class="kv">
+          <div><span class="k">0 Read</span><span class="v">Looks, changes nothing.</span></div>
+          <div><span class="k">1 Report</span><span class="v">Writes to its own log.</span></div>
+          <div><span class="k">2 Post</span><span class="v">Posts inside the company, in Slack.</span></div>
+          <div><span class="k">3 Update</span><span class="v">Writes to specific, named fields. Nothing else.</span></div>
+          <div><span class="k">4 Act outward</span><span class="v">Anything a client, creator or customer sees. <b>Always a proposal first, then a person approves, then it sends.</b></span></div>
+        </div>
+        <p>Some things no agent can do at all: message people outside the company on its own, DM anyone, delete pages, merge code or deploy.</p>
+
+        <h3>Switches, not trust</h3>
+        <p>Each team has 3 switches: messages (off, test or live), updates (off, ask or auto) and wake (whether agents can start work on their own). New teams start at test, off, off. One kill switch puts every team back to that setting at once.</p>
+        <p>New agents start in shadow: they do the work and show it to a person, but nothing ships. They go live after at least 5 real decisions in 7 days with 80% or more approved without edits.</p>
+        <p class="pull">Draft first. Send later. Every agent earns the right to act alone.</p>
+
+        <h3>Where the work shows up</h3>
+        <ul>
+          <li><b>Notion stays the truth.</b> Agents read it live. Their own output (runs, proposals, activity) goes in a separate database, away from the system the team uses.</li>
+          <li><b>Most people never open the dashboard.</b> Only founders and department heads use it. Everyone else gets work pushed into Slack or Notion, where they already are.</li>
+          <li><b>Agents check agents.</b> A small team of quality agents reviews the other agents’ runs and flags any that are failing or drifting.</li>
+          <li><b>There’s a backup.</b> If the main AI service goes down, a second engine on the Mac mini can run the routines. We drill it weekly.</li>
+        </ul>
+
+        <h3>Watch the bill</h3>
+        <p>Over 5 days in October, our agents used about 860 million tokens. 93% were cache reads, and subscriptions covered most of it, not the API. It still made me set a target to cut usage by 40 to 60%. Know what each agent costs per run. Ask before anything new spends real money.</p>
+      </section>
+
+      <section id="setup">
+              <h2><span class="n">07</span><span>My setup, day to day</span></h2>
+        <p>The full list is in <a href="/playbooks/tech-stack/">My tech stack</a>. The short version:</p>
+        <div class="kv">
+          <div><span class="k">Control</span><span class="v">My laptop. I work in <b>Conductor</b>, which runs lots of Claude Code and Codex sessions side by side. Each gets its own copy of the repo, so they never trip over each other.</span></div>
+          <div><span class="k">Execution</span><span class="v">A <b>Mac mini</b> that’s always on at home. It runs the jobs that need a real computer: the iMessage bridge for creator comms, Codex driving web apps that have no API, overnight scripts. It works in its own branches and never syncs repos with the laptop.</span></div>
+          <div><span class="k">Builder and judge</span><span class="v">For bigger projects, sub agents do the work and a <b>different model</b> judges it against written pass or fail criteria. Claude builds, Codex marks. A model grading its own homework is too kind.</span></div>
+          <div><span class="k">Morning triage</span><span class="v">At 7am an agent reads my email, Slack, meetings and Notion and suggests up to 8 things that need me. I tap add or dismiss. It drafts the replies. <b>Nothing sends without my tap.</b></span></div>
+          <div><span class="k">Evening</span><span class="v">At 22:30 the nightly review feeds the brain.</span></div>
+        </div>
+        <p>Anything bigger than a day gets a project folder: a status file, a decisions log, open questions. The main session plans but decides nothing alone. Sub agents do the work in parallel. I answer questions one at a time. Any model, or a fresh chat next week, can read the status file and pick up where the last one stopped.</p>
+      </section>
+
+      <section id="mistakes">
+              <h2><span class="n">08</span><span>What broke, so you can skip it</span></h2>
+        <ul>
+          <li><b>An API call wiped 5,758 links.</b> An agent changed a relation in a shared Notion database. Every link between creators and ad concepts vanished. We recovered most of it from a local cache. Rule now: no agent changes a shared database’s structure through the API. A person does it in the app.</li>
+          <li><b>A form dropped 100% of leads, silently.</b> A domain behind our audit form had died. The form looked fine and sent every lead nowhere. Now every form gets a test submission after every change.</li>
+          <li><b>We ran out of Notion.</b> Too many agents querying at once hit the connector’s shared limit 2 days running. All reads now go through one service.</li>
+          <li><b>One quota took down 9 agents.</b> The Mac mini agents all used one Codex account. It hit its usage limit and all 9 stopped for a week.</li>
+          <li><b>An agent emailed the wrong people.</b> A win back agent told about 30 creators “we haven’t worked together in a while”. They were in the middle of a booking. Every message to creators now needs a person.</li>
+          <li><b>Deploys in the wrong order.</b> A prompt went live before the endpoint it called existed. Routines failed for 15 minutes. Ship the endpoint first.</li>
+          <li><b>Archiving lost work.</b> I archived old workspaces in bulk and lost uncommitted changes in 24 of them. Commit before you clean up.</li>
+        </ul>
+        <p class="big">Build the brain first. Write the skills down. Start with one boring agent, keep it in shadow until it earns trust, and add the next one next week.</p>
+      </section>
+      </article>
+
+      <div class="art-end rv">
+        <a class="art-next" href="/playbooks/creative-testing/"><span class="k">Next playbook</span><span class="v">Creative testing →</span></a>
+        <form class="pb-sub" data-form data-subject="Playbooks list" data-endpoint="">
+          <p class="pb-sub-h">Get the next playbook the day it’s out.</p>
+          <div class="fields">
+            <div class="inline-form">
+              <label class="sr-only" for="nl-email">Your email</label>
+              <input class="field" id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+              <button class="btn" type="submit">Get them</button>
+            </div>
+            <p class="form-note">One email per playbook. Nothing else.</p>
+          </div>
+          <p class="form-done">You’re on the list. The next one lands in your inbox when it’s out.</p>
+        </form>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <span>© 2026 Ali Qureshi</span>
+      <nav aria-label="Footer">
+        <a href="/playbooks/">Playbooks</a>
+        <a href="/work-with-me/">Work with me</a>
+        <a href="https://www.linkedin.com/in/alimqureshi" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>
