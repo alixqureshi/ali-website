@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Landing pages for ads: give every winning ad its own page · Ali Qureshi</title>
+  <meta name="description" content="Why every winning ad needs its own page, which ads earn one, how to pick the page type, what goes on it, and how to build one in a day with Claude Code.">
+  <meta property="og:title" content="Landing pages for ads: give every winning ad its own page">
+  <meta property="og:description" content="Why every winning ad needs its own page, which ads earn one, how to pick the page type, what goes on it, and how to build one in a day with Claude Code.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aliqureshi.co/playbooks/landing-pages/">
+  <meta property="og:image" content="https://aliqureshi.co/assets/og/landing-pages.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aliqureshi.co/assets/og/landing-pages.jpg">
+  <link rel="canonical" href="https://aliqureshi.co/playbooks/landing-pages/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/assets/site.css?v=20261021a">
+  <script>document.documentElement.classList.add("js")</script>
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/assets/site.js?v=20261021a" defer></script>
+</head>
+<body>
+  <div class="frame">
+    <header class="top">
+      <nav class="pill" aria-label="Main">
+        <a class="nav-link nav-home" href="/"><img class="nav-home-face" src="/assets/ali.jpg" alt=""><span class="nav-home-text">Home</span></a>
+        <a class="nav-link" href="/playbooks/" aria-current="page"><i class="nav-active"></i><span>Playbooks</span></a>
+        <a class="nav-link" href="/work-with-me/"><span>Work with me</span></a>
+        <a class="nav-link" href="/about/"><span>About</span></a>
+        <a class="nav-link nav-cta" href="/contact/"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <header class="art-head">
+        <a class="art-back rv" href="/playbooks/">← All playbooks</a>
+        <p class="art-kicker rv" style="--d: 80ms">Playbook 04 · 11 min read · Updated 20 Oct 2026</p>
+        <h1 class="lede lede--art" data-split="150"><b>Landing pages for ads.</b> Why every winning ad needs its own page, and how to ship one in a day.</h1>
+        <p class="art-sum rv" style="--d: 700ms">Brands spend months making ads personal to each customer, then send every one to the same product page. We studied the pages behind about $9.6M of ad spend across 26 brands to see what converts. This is what we found, and how we build a page for a winning ad in an afternoon.</p>
+      </header>
+
+      <nav class="toc rv" style="--d: 820ms" aria-label="In this playbook">
+        <a href="#why"><span>01</span>One ad, one page</a>
+        <a href="#which"><span>02</span>Which ads earn a page</a>
+        <a href="#type"><span>03</span>Pick the page type</a>
+        <a href="#spine"><span>04</span>What goes on the page</a>
+        <a href="#build"><span>05</span>Build it in a day with Claude Code</a>
+        <a href="#test"><span>06</span>Testing what converts</a>
+        <a href="#mistakes"><span>07</span>Mistakes we’ve made</a>
+      </nav>
+
+      <article class="art">
+      <section id="why">
+              <h2><span class="n">01</span><span>One ad, one page</span></h2>
+        <p>Almost every account we see makes the same mistake. A brand runs 40 different ads, each making a different promise to a different person. Then every one points at the same product page.</p>
+        <p>We pulled the landing pages behind about $9.6M of spend across 26 brands. Most accounts sent <b>60 to 90% of their spend to one page</b>. One brand sent 18 of its top 20 ads to the same URL. Another sent 17 of 20.</p>
+        <p>That page has to do the job of every ad. So it does none of them well.</p>
+        <p class="pull">The ad makes a promise. The page has to keep it, in the first screen, in the same words.</p>
+        <p>Since Meta’s Andromeda update, ads have to be genuinely different to get delivered. The page is the next lever. A woman clicks an ad about her 3am wake ups and lands on a page about “restorative sleep for the whole family”. You’ve lost her.</p>
+        <p>The broken promises we found were almost funny:</p>
+        <ul>
+          <li>A pet food ad promised a discount code. The page never showed it.</li>
+          <li>A wellness brand ran ads about cortisol. The page never said the word.</li>
+          <li>An underwear brand’s article reviewed a different product from the ad’s.</li>
+        </ul>
+        <p>Keep your product page. In most accounts it (or a main landing page) is the workhorse. An advertorial was the main page in only 4 of the 26 accounts. So the move is smaller: <b>add the page for the angle your product page can’t carry.</b></p>
+        <p>Landing pages used to take a designer, a developer and weeks of feedback. Now a finished page takes an afternoon. There’s no excuse to skip it.</p>
+      </section>
+
+      <section id="which">
+              <h2><span class="n">02</span><span>Which ads earn a page</span></h2>
+        <p>Not every ad needs a page. Build one for every test and you end up with 200 pages and no idea which work. We build for 3 kinds of ad, and an agent checks the accounts for them twice a week:</p>
+        <div class="kv">
+          <div><span class="k">New client winners</span><span class="v">In a brand’s first 21 days with us, its top 3 ads by spend over the last 90 days. They’ve proven they can spend. Give them a better page.</span></div>
+          <div><span class="k">Proven winners</span><span class="v">Any ad with <b>$5k or more</b> of spend, or 5% of the account’s spend, over the last 14 days.</span></div>
+          <div><span class="k">Hooks that don’t convert</span><span class="v">Ads people stop for and click, but don’t buy from. Our filter: hook rate 30%+, click-through 1%+, CPM at or below the account’s, $1k+ spent, but cost per purchase 30% or more worse than the account. These get a pre-sell page that does the persuading the product page can’t.</span></div>
+        </div>
+        <p>The third group is where pages pay back fastest. The ad is doing its job. The page isn’t.</p>
+
+        <h3>Build 2 pages per winner</h3>
+        <p>Every ad that earns a page gets 2, on different templates, with the traffic split. The ad has already proven the angle. What you don’t know is which page sells it best. Building both costs an extra hour. Guessing wrong costs a month.</p>
+      </section>
+
+      <section id="type">
+              <h2><span class="n">03</span><span>Pick the page type</span></h2>
+        <p>Most people pick a page type by industry. “We’re a supplement brand, so we need an advertorial.” In our data, industry was a weak predictor. Ask 4 questions instead, in this order.</p>
+        <ol>
+          <li><b>What’s the conversion?</b> An email signup wants a short squeeze page. A B2B lead often wants a quiz or a grader, then a page that shows the return. For a purchase, go to question 2.</li>
+          <li><b>How aware is the buyer?</b> Know the product and want it? Send them to a strong product page. Don’t know the problem or the solution yet? They need a pre-sell page: an advertorial or a listicle.</li>
+          <li><b>What makes you different?</b> A mechanism the big brands don’t have: a science led page, or an expert explainer for health. One provable feature: a single claim page. Lots of reasons to switch: a listicle. Price: a page that tackles price head on.</li>
+          <li><b>Any modifiers?</b> Health claims mean editorial framing. A hard product choice means add a quiz. A real visual transformation means add before and after. A premium price means lead with authority and the guarantee.</li>
+        </ol>
+        <p>Not sure? Build a “reasons why” listicle. It’s the safest default in our data.</p>
+
+        <h3>The page types that spent</h3>
+        <p>Ranked by spend:</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Type</th><th>What it is</th><th>Use it when</th></tr></thead>
+            <tbody>
+              <tr><td>Reasons listicle</td><td>“5 reasons women over 40 are switching to…”</td><td>Many reasons to switch. The default.</td></tr>
+              <tr><td>Expert explainer</td><td>An authority explains the problem, then the fix</td><td>Health, or a mechanism that needs explaining</td></tr>
+              <tr><td>Third-party review</td><td>A taste test or side-by-side review</td><td>The product wins when compared</td></tr>
+              <tr><td>Single claim</td><td>The whole page proves one thing</td><td>One feature nobody else has</td></tr>
+              <tr><td>Price objection</td><td>Takes on “why is it so expensive?”</td><td>Premium price is the main objection</td></tr>
+              <tr><td>Product page built for ads</td><td>Your product page, rebuilt around one ad’s promise</td><td>The buyer already knows the product and wants it</td></tr>
+              <tr><td>Science stack</td><td>Challenger science vs the lazy incumbent</td><td>You have a real mechanism the leaders don’t</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We expected before and after pages to win. Our data didn’t back them at all. Only use one if you have a real visual transformation to show.</p>
+        <p>A page type won’t rescue a weak angle. One wellness brand sent the same ads to a listicle and a plain product page. Both landed at almost the same cost per purchase. The ad was the problem.</p>
+      </section>
+
+      <section id="spine">
+              <h2><span class="n">04</span><span>What goes on the page</span></h2>
+        <p>The winning pages in our data looked different, but almost all shared one spine. We use it as a checklist on every page.</p>
+        <div class="kv">
+          <div><span class="k">A mechanism</span><span class="v">One checkable reason it works. Not “clinically proven”. Why.</span></div>
+          <div><span class="k">A comparison</span><span class="v">A table, or old way vs new way.</span></div>
+          <div><span class="k">A guarantee</span><span class="v">Stated once properly, then repeated near every button.</span></div>
+          <div><span class="k">Proof at 3 levels</span><span class="v">A big number (“40,000 customers”), named reviews, and borrowed authority (an expert, a publication, a credential).</span></div>
+          <div><span class="k">One offer, repeated</span><span class="v">The same offer, <b>4 to 8 times</b> down the page. Never two offers.</span></div>
+        </div>
+
+        <h3>The rules we don’t break</h3>
+        <ul>
+          <li><b>The headline says what the ad said, word for word.</b></li>
+          <li><b>Customer words write the page.</b> First, pull 30+ verbatim phrases from reviews and comments. Every key line should trace back to one.</li>
+          <li><b>Real product photos only.</b> Scrape them from the brand’s site. Clients recognise their own photos, and so do their customers. No AI generated people, ever.</li>
+          <li><b>4 to 5 buttons, spread out.</b> After the hook, the proof, the comparison and the features, plus a final block. Every one tracked.</li>
+          <li><b>Never invent anything.</b> No fake experts, reviewers, bylines, reviews, stats, timelines or “only 3 left”. A short honest page beats a long fabricated one.</li>
+          <li><b>Say who it’s not for.</b> A short “this is for you if / not for you if” section filters out the wrong buyers and builds trust.</li>
+          <li><b>Disclose it.</b> Every advertorial gets a clear disclosure. Competitors are “leading brands”, never named.</li>
+          <li><b>No way out.</b> No links back to the main site. Every button goes to the offer, or a checkout on the page itself.</li>
+        </ul>
+
+        <h3>The section toolkit</h3>
+        <p>For long pre-sell pages we keep a menu of sections. Use only the ones the brand can honestly support.</p>
+        <p class="big">Headline › Subtitle › Byline › Lead › Problem reveal › Story hook › Expert box › 3 reasons › Pull quote › Solution reveal › First CTA › Unexpected benefit › Comparison table › Testimonials › Ingredients or features › Who it’s for › Final CTA › Disclosure</p>
+        <p>Most good pre-sell pages share one emotional arc: shame, then “it’s not your fault”, then anger at whoever let them down, then hope, trust, desire and action.</p>
+
+        <h3>Steal the design, change the words</h3>
+        <p>Found a page you love? Copy its layout faithfully. Change only the words, photos, logo and accent colour. Early versions “improved” the reference and looked nothing like the page we’d picked. If the layout converted for them, that’s the part you want.</p>
+      </section>
+
+      <section id="build">
+              <h2><span class="n">05</span><span>Build it in a day with Claude Code</span></h2>
+        <p>You don’t need a developer or even a terminal. The Claude desktop app has Claude Code built in. Create a folder, open it, and work in plain English.</p>
+        <p>The secret is the folder. It’s the pile of context the page gets built from. The better the pile, the less editing later.</p>
+
+        <h3>1. Pick the angle</h3>
+        <p>Start from the winning ad (or ads) the page is for. Doing this for a brand you don’t run? Go to the Meta Ad Library, find their longest running ads and filter to static images with copy on them. Those are usually the bottom of funnel converters. Look for 3 or 4 saying the same thing. That’s your angle. Save the images.</p>
+        <p>Have a hypothesis first. Switch your brain off and you get a generic page.</p>
+
+        <h3>2. Gather everything into one folder</h3>
+        <ul>
+          <li><b>The ads:</b> images, video, and the exact copy.</li>
+          <li><b>Every image on the product page.</b> A Chrome image downloader extension grabs the lot in one click. Hundreds of files is fine.</li>
+          <li><b>The product page text.</b> Open every accordion (ingredients, how it works, FAQs), select all and copy.</li>
+          <li><b>Education content.</b> The brand’s best blog posts or science pages, copied the same way.</li>
+          <li><b>Fonts and colours.</b> Right click a headline, Inspect, filter by “font” and copy what you see. Do the same for “color”. That gives Claude the type hierarchy and palette.</li>
+          <li><b>Reviews.</b> The 30+ verbatim customer phrases.</li>
+          <li><b>Your playbook.</b> A markdown file that tells Claude how a good page is structured: the page types, the spine, the rules above. Write it once, reuse it on every page.</li>
+        </ul>
+
+        <h3>3. Run it with checkpoints</h3>
+        <p>Paste the product text and the rest into Claude Code and point it at your playbook. A good playbook stops at 3 checkpoints for a person to approve:</p>
+        <ol>
+          <li><b>The template.</b> Which page type, and why.</li>
+          <li><b>The copy table.</b> Every section’s copy, each line traced to its source (an ad, a review, the product page). This is where you catch invented claims.</li>
+          <li><b>The built page.</b> Judged on desktop first, then mobile.</li>
+        </ol>
+        <p>A first draft usually lands in under an hour. Most of that is waiting.</p>
+
+        <h3>4. Edit by screenshot</h3>
+        <p>Open the HTML file in your browser. When something’s off, screenshot that part, drag it in and say what you want. “Make this headline one line across the full width.” That’s how you edit a page, a static or a video now.</p>
+
+        <h3>5. Wire it up and ship it</h3>
+        <ul>
+          <li><b>Checkout.</b> Give Claude the real product IDs from Shopify (or connect the Shopify MCP) so the buttons add the right product to the cart.</li>
+          <li><b>Tracking.</b> The Meta pixel PageView in the head of the page, and an InitiateCheckout event on every button.</li>
+          <li><b>Images.</b> Never hotlink a Shopify CDN, the links break. Download them, check each file is really an image, then upload to your own storage.</li>
+          <li><b>Hosting.</b> Vercel or Cloudflare, both free to start. Put it on a subdomain of the brand’s site, like try.brand.com, so it looks like part of the brand.</li>
+        </ul>
+        <p>When a page works, ask Claude to turn what you just did into a skill. The next page starts from there.</p>
+
+        <div class="steal">
+          <div class="steal-top"><span>Steal this: the landing page playbook prompt</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You build landing pages for paid social ads. Everything you need is in this folder: the winning ad(s), product page text, education content, product images, fonts and colours, and customer reviews.
+
+Follow these steps and STOP at each checkpoint for my approval.
+
+STEP 1: READ
+Summarise: the ad's exact promise, who it's for, the offer, and what proof exists. Pull 30+ verbatim customer phrases. List anything missing.
+
+STEP 2: PICK THE TEMPLATE (checkpoint 1)
+Use these questions in order: conversion event > buyer awareness > what makes the product different > modifiers (health claims, hard choice, real visual transformation, premium price).
+Recommend one page type (reasons listicle, expert explainer, third-party review, single claim, price objection, science stack, or product page built for ads) and a second one for an A/B test. Explain why in 3 lines.
+
+STEP 3: COPY TABLE (checkpoint 2)
+Write the page as a table: section | copy | source of every claim.
+Rules:
+- The headline repeats the ad's promise word for word.
+- Include a mechanism, a comparison, a guarantee, proof at three levels (a number, named reviews, borrowed authority) and ONE offer repeated 4 to 8 times.
+- 4 to 5 CTAs: after the hook, proof, comparison, features, and at the end.
+- Use customer words wherever possible.
+- Never invent experts, reviews, statistics, bylines or scarcity. If proof is missing, leave the section out and tell me.
+- Include "for you if / not for you if" and a disclosure.
+
+STEP 4: BUILD (checkpoint 3)
+One self-contained HTML file. Use the brand's real fonts, colours and product images from this folder (never AI-generated people). Responsive. Judge it on desktop first, then mobile. No links out to the main site. Meta pixel PageView in the head and InitiateCheckout on every CTA, with the pixel ID left as a clearly marked placeholder.
+Score the page against the rules in step 3 and list anything I need to supply: pixel ID, product IDs, a real author, the checkout link.</pre>
+        </div>
+      </section>
+
+      <section id="test">
+              <h2><span class="n">06</span><span>Testing what converts</span></h2>
+        <p>Measure a page the simple way: <b>purchases divided by link clicks</b>, from the ads pointed at that page, over 14 days. Compare it with the account’s other pages, not with conversion rates you read online.</p>
+        <p>When it works, it’s obvious. For one jeans brand, a “5 reasons” listicle converted <b>3.7% of clicks</b>. Its other pages converted between 1.4% and 2.5%. Same ads, product and price.</p>
+
+        <h3>One template, many front doors</h3>
+        <p>Our biggest accounts don’t build every page from scratch. They clone one proven template and change only the top: the headline, the first image and the first few paragraphs.</p>
+        <p>The body is already proven, so it’s the cheapest way to give every new winning ad its own page.</p>
+
+        <div class="note">
+          <span class="h">2 checks before you send a single click</span>
+          <p>Replace the pixel placeholder with the real ID, then check the events fire. Then click every button on the page, on your phone, all the way to checkout.</p>
+        </div>
+      </section>
+
+      <section id="mistakes">
+              <h2><span class="n">07</span><span>Mistakes we’ve made</span></h2>
+        <ul>
+          <li><b>A placeholder pixel went live.</b> Someone approved the page, and that was read as approval of the placeholder too. Now anything that changes the outcome (pixel, author, checkout link) gets asked as a direct, numbered question before publishing.</li>
+          <li><b>Deploying to preview, 3 times.</b> The page was “live” on a preview link while the real domain still showed the old version. Always check the real URL after deploying.</li>
+          <li><b>Hotlinked images broke.</b> Product photos linked straight from the brand’s store disappeared from the live page. Host every image yourself.</li>
+          <li><b>Everything shipped in black.</b> Pages defaulted to black buttons instead of the brand’s colour. Set the brand colour first, and check buttons stay readable on it.</li>
+          <li><b>The wrong skin.</b> A bold grooming brand looked broken in a quiet magazine layout. Match the page’s look to the brand, not the template.</li>
+          <li><b>Fabrication.</b> The biggest failure mode by far. A model asked to “add an expert quote” will invent one. Every claim on the page traces to a source, or it comes out.</li>
+        </ul>
+        <p class="big">Find the ads that have earned a page. Build 2. Measure clicks to purchases for 14 days, keep the winner and clone it for the next ad.</p>
+      </section>
+      </article>
+
+      <div class="art-end rv">
+        <a class="art-next" href="/playbooks/tech-stack/"><span class="k">Next playbook</span><span class="v">My tech stack →</span></a>
+        <form class="pb-sub" data-form data-subject="Playbooks list" data-endpoint="">
+          <p class="pb-sub-h">Get the next playbook the day it’s out.</p>
+          <div class="fields">
+            <div class="inline-form">
+              <label class="sr-only" for="nl-email">Your email</label>
+              <input class="field" id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+              <button class="btn" type="submit">Get them</button>
+            </div>
+            <p class="form-note">One email per playbook. Nothing else.</p>
+          </div>
+          <p class="form-done">You’re on the list. The next one lands in your inbox when it’s out.</p>
+        </form>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <span>© 2026 Ali Qureshi</span>
+      <nav aria-label="Footer">
+        <a href="/playbooks/">Playbooks</a>
+        <a href="/work-with-me/">Work with me</a>
+        <a href="https://www.linkedin.com/in/alimqureshi" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>

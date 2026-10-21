@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My tech stack: every tool I use to run Adcrate with AI · Ali Qureshi</title>
+  <meta name="description" content="Every tool behind Adcrate&#x27;s AI setup: where I work, which models do what, research, creative production, creator ops, running the business, hosting, and what I dropped.">
+  <meta property="og:title" content="My tech stack: every tool I use to run Adcrate with AI">
+  <meta property="og:description" content="Every tool behind Adcrate&#x27;s AI setup: where I work, which models do what, research, creative production, creator ops, running the business, hosting, and what I dropped.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aliqureshi.co/playbooks/tech-stack/">
+  <meta property="og:image" content="https://aliqureshi.co/assets/og/tech-stack.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aliqureshi.co/assets/og/tech-stack.jpg">
+  <link rel="canonical" href="https://aliqureshi.co/playbooks/tech-stack/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/assets/site.css?v=20261021a">
+  <script>document.documentElement.classList.add("js")</script>
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/assets/site.js?v=20261021a" defer></script>
+</head>
+<body>
+  <div class="frame">
+    <header class="top">
+      <nav class="pill" aria-label="Main">
+        <a class="nav-link nav-home" href="/"><img class="nav-home-face" src="/assets/ali.jpg" alt=""><span class="nav-home-text">Home</span></a>
+        <a class="nav-link" href="/playbooks/" aria-current="page"><i class="nav-active"></i><span>Playbooks</span></a>
+        <a class="nav-link" href="/work-with-me/"><span>Work with me</span></a>
+        <a class="nav-link" href="/about/"><span>About</span></a>
+        <a class="nav-link nav-cta" href="/contact/"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <header class="art-head">
+        <a class="art-back rv" href="/playbooks/">← All playbooks</a>
+        <p class="art-kicker rv" style="--d: 80ms">Playbook 05 · 5 min read · Updated 20 Oct 2026</p>
+        <h1 class="lede lede--art" data-split="150"><b>My tech stack.</b> Every tool I use to run Adcrate and build with AI, what each one is for, and what I dropped.</h1>
+        <p class="art-sum rv" style="--d: 700ms">People ask what we use. This is the list as of this month, with no affiliate links. The tools that run a performance creative agency shipping 500+ ads a week, and the rules I use to pick them.</p>
+      </header>
+
+      <nav class="toc rv" style="--d: 820ms" aria-label="In this playbook">
+        <a href="#rules"><span>01</span>How I choose tools</a>
+        <a href="#work"><span>02</span>Where I work</a>
+        <a href="#models"><span>03</span>Which model does what</a>
+        <a href="#research"><span>04</span>Research and ad data</a>
+        <a href="#production"><span>05</span>Creative production</a>
+        <a href="#creators"><span>06</span>Creator ops</a>
+        <a href="#business"><span>07</span>Running the business</a>
+        <a href="#infra"><span>08</span>Hosting and infrastructure</a>
+        <a href="#dropped"><span>09</span>What I dropped, and why</a>
+      </nav>
+
+      <article class="art">
+      <section id="rules">
+              <h2><span class="n">01</span><span>How I choose tools</span></h2>
+        <p>Tools change every month. The rules don’t. These 5 decide almost everything on this page.</p>
+        <ul>
+          <li><b>One source of truth per thing.</b> Notion for work, Xero for money, the ad platforms for performance. Everything else reads from them live. Nothing keeps its own copy.</li>
+          <li><b>Everything needs a way in for AI.</b> If a tool has no API or connector, an agent can’t use it. It stays a job for a person forever.</li>
+          <li><b>Cheapest engine that works.</b> Plain code first, then a scheduled routine, then a script on a machine I own, then the paid API.</li>
+          <li><b>Self host when per seat pricing punishes you.</b> If the whole team needs to see something, paying per seat makes no sense.</li>
+          <li><b>Prototype first, harden the survivors.</b> Every new agent or tool starts as the scrappiest version that works. Only the ones we keep using get rebuilt properly.</li>
+        </ul>
+      </section>
+
+      <section id="work">
+              <h2><span class="n">02</span><span>Where I work</span></h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Tool</th><th>What I use it for</th></tr></thead>
+            <tbody>
+              <tr><td>Claude Code</td><td>Where most of the work happens. Building, writing, research, running skills. In the desktop app, so no terminal needed.</td></tr>
+              <tr><td>Conductor</td><td>Runs lots of Claude Code and Codex sessions side by side on my laptop, each in its own copy of the repo.</td></tr>
+              <tr><td>Codex</td><td>The second opinion. When agents build something, a different model judges it against written pass or fail criteria. Also drives web apps that have no API.</td></tr>
+              <tr><td>Claude (chat and routines)</td><td>Scheduled routines run most of our agents on a subscription. Connectors give them Notion, Slack, Gmail, Drive and the rest.</td></tr>
+              <tr><td>My brain repo</td><td>A private GitHub repo with my context, skills and routines. Every tool above reads it. How it works is in <a href="/playbooks/ai-growth-team/">The AI growth team</a>.</td></tr>
+              <tr><td>Mac mini</td><td>Always on at home. Runs the jobs that need a real computer: the iMessage bridge, overnight scripts, Codex on web apps. I reach it over Tailscale.</td></tr>
+              <tr><td>Composio</td><td>Gives Codex and scripts access to hundreds of apps with the logins handled for me.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="models">
+              <h2><span class="n">03</span><span>Which model does what</span></h2>
+        <p>No model is best at everything. This is what each one does for us in production.</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Job</th><th>Model</th></tr></thead>
+            <tbody>
+              <tr><td>Strategy, briefs, scripts, copy</td><td>Claude</td></tr>
+              <tr><td>Quick checks and reviews</td><td>Smaller Claude models (Haiku), often checking a bigger one’s draft</td></tr>
+              <tr><td>Images for statics</td><td>Gemini image models: the pro model for finals, the fast one for iterations</td></tr>
+              <tr><td>Photoreal hero images</td><td>Higgsfield</td></tr>
+              <tr><td>Video</td><td>Veo and Kling</td></tr>
+              <tr><td>Voiceover</td><td>ElevenLabs</td></tr>
+              <tr><td>Songs for song ads</td><td>Suno</td></tr>
+              <tr><td>Bulk data entry</td><td>A small, cheap model. Enriching 2,000+ creator profiles cost us pennies.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>One rule for images: never let the image model write the words on an ad. It writes gibberish that screams AI. Generate the image, then put the copy on with code.</p>
+      </section>
+
+      <section id="research">
+              <h2><span class="n">04</span><span>Research and ad data</span></h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Tool</th><th>What I use it for</th></tr></thead>
+            <tbody>
+              <tr><td>Parker</td><td>Ad performance, ad comments, reviews and competitor ads in one place, queryable from Claude. My co-founder built it for exactly this.</td></tr>
+              <tr><td>Foreplay</td><td>Ad library data for audits and swipe files.</td></tr>
+              <tr><td>Meta Ad Library</td><td>Free, and still the fastest way to see what a competitor has run for months.</td></tr>
+              <tr><td>Reddit, reviews, comments</td><td>Not a tool, but the most important research source we have. We still read it ourselves.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="production">
+              <h2><span class="n">05</span><span>Creative production</span></h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Tool</th><th>What I use it for</th></tr></thead>
+            <tbody>
+              <tr><td>AdcreateOS</td><td>Our internal creative app. Brand brains, strategy, statics generation, approval boards, and fingerprints that match live ads back to the work. It never writes to Meta. Clients launch in their own ad accounts.</td></tr>
+              <tr><td>Frame.io</td><td>Video review. Every comment our reviewers leave becomes training data for our QA standards.</td></tr>
+              <tr><td>pics.io</td><td>Asset library for footage and finished ads. Replaced Air in August.</td></tr>
+              <tr><td>Google Drive</td><td>One folder per brand, one per concept, for creator uploads and deliveries.</td></tr>
+              <tr><td>Claude Code + HTML</td><td>Landing pages, case studies, decks and one-pagers, as plain HTML files. See <a href="/playbooks/landing-pages/">Landing pages for ads</a>.</td></tr>
+              <tr><td>Paper</td><td>Designing pages before building them, including this site.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="creators">
+              <h2><span class="n">06</span><span>Creator ops</span></h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Tool</th><th>What I use it for</th></tr></thead>
+            <tbody>
+              <tr><td>Chatwoot</td><td>One inbox for every creator conversation: email, WhatsApp and iMessage. Self hosted, so no per seat fees and the whole team sees everything.</td></tr>
+              <tr><td>WhatsApp Cloud API</td><td>Official WhatsApp on a dedicated number. One to one chats instead of hundreds of groups.</td></tr>
+              <tr><td>BlueBubbles</td><td>The iMessage bridge on the Mac mini. US creators reply to iMessage far more than WhatsApp.</td></tr>
+              <tr><td>Tally</td><td>Creator applications, and most other forms.</td></tr>
+              <tr><td>PandaDoc</td><td>Creator contracts, drafted by an agent and checked by a person.</td></tr>
+              <tr><td>Notion</td><td>The creator pool, bookings and briefs.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The full system is in <a href="/playbooks/creator-programmes/">Creator programmes</a>.</p>
+      </section>
+
+      <section id="business">
+              <h2><span class="n">07</span><span>Running the business</span></h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Tool</th><th>What I use it for</th></tr></thead>
+            <tbody>
+              <tr><td>Notion</td><td>The source of truth for clients, team, creatives, creators and meetings. Agents read it live.</td></tr>
+              <tr><td>Slack</td><td>Where the team works, and where agents post their work so nobody has to open another app.</td></tr>
+              <tr><td>Xero</td><td>Finance. The one place creator spend and margins are counted.</td></tr>
+              <tr><td>Pipedrive</td><td>Sales pipeline.</td></tr>
+              <tr><td>beehiiv and Kit</td><td>Email. beehiiv for audit leads, Kit for my own list.</td></tr>
+              <tr><td>n8n</td><td>Simple automations, when a workflow doesn’t need AI at all. I prefer it to Zapier.</td></tr>
+              <tr><td>Google Workspace</td><td>Email, calendar and the odd sheet that genuinely needs to be a sheet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="infra">
+              <h2><span class="n">08</span><span>Hosting and infrastructure</span></h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Tool</th><th>What I use it for</th></tr></thead>
+            <tbody>
+              <tr><td>Cloudflare</td><td>Websites and landing pages (Workers), image and file storage (R2), small databases (D1), video hosting (Stream), and the connector that serves my brain to chat apps.</td></tr>
+              <tr><td>Railway</td><td>Anything that needs a server: AdcreateOS, the agent runner and dashboard, Chatwoot, our MCP servers.</td></tr>
+              <tr><td>GitHub</td><td>Everything is in git: sites, apps, agent prompts, skills, the brain. Static sites like this one deploy from it.</td></tr>
+              <tr><td>Postgres</td><td>Agent output only: runs, proposals, activity. The real data stays in Notion.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Things I built</h3>
+        <p>When a job kept coming back, we built a tool for it. Most are small MCP servers, so Claude uses them like any other connector:</p>
+        <ul>
+          <li><b>An advertorial builder.</b> Brand extraction, research, brief, copy validation, preview and publishing for pre-sell pages.</li>
+          <li><b>A carousel pipeline.</b> Renders carousels from a brief.</li>
+          <li><b>A YouTube research tool.</b> Transcripts and channel search, for finding what’s working.</li>
+          <li><b>A brain connector.</b> Serves my skills and context to Claude and ChatGPT in the browser.</li>
+          <li><b>The agent runner and dashboard.</b> Where our 94 agents report in, and where a person approves anything that goes out.</li>
+        </ul>
+      </section>
+
+      <section id="dropped">
+              <h2><span class="n">09</span><span>What I dropped, and why</span></h2>
+        <div class="kv">
+          <div><span class="k">Front and Missive</span><span class="v">Looked at both for creator comms. Per seat pricing, for a team that all needs to see everything. Chatwoot instead.</span></div>
+          <div><span class="k">SendBlue</span><span class="v">Tried it for iMessage. Only spam came through. Replaced with our own bridge on the Mac mini.</span></div>
+          <div><span class="k">Air</span><span class="v">Moved our asset library to pics.io in August.</span></div>
+          <div><span class="k">QuickBooks</span><span class="v">Moved to Xero, owned by our finance lead.</span></div>
+          <div><span class="k">Group chats</span><span class="v">300+ WhatsApp groups with creators, there only so the team could see the chats. One shared inbox replaced them all.</span></div>
+          <div><span class="k">Public Notion pages</span><span class="v">We used to share creator briefs as public pages. It nearly got our workspace switched off. Private links now.</span></div>
+        </div>
+        <p class="big">Pick tools your agents can reach. Build your own only for the jobs that keep coming back.</p>
+      </section>
+      </article>
+
+      <div class="art-end rv">
+        <a class="art-next" href="/playbooks/ai-growth-team/"><span class="k">Next playbook</span><span class="v">The AI growth team →</span></a>
+        <form class="pb-sub" data-form data-subject="Playbooks list" data-endpoint="">
+          <p class="pb-sub-h">Get the next playbook the day it’s out.</p>
+          <div class="fields">
+            <div class="inline-form">
+              <label class="sr-only" for="nl-email">Your email</label>
+              <input class="field" id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+              <button class="btn" type="submit">Get them</button>
+            </div>
+            <p class="form-note">One email per playbook. Nothing else.</p>
+          </div>
+          <p class="form-done">You’re on the list. The next one lands in your inbox when it’s out.</p>
+        </form>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <span>© 2026 Ali Qureshi</span>
+      <nav aria-label="Footer">
+        <a href="/playbooks/">Playbooks</a>
+        <a href="/work-with-me/">Work with me</a>
+        <a href="https://www.linkedin.com/in/alimqureshi" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>
