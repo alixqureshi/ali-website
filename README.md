@@ -28,4 +28,6 @@ Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http:
 
 `assets/site.css` contains the shared visual system. `assets/site.js` handles forms, the newsletter library and reduced motion. Pixel illustrations are SVGs exported from the approved Paper designs. The six-second Dubai loop is local and has no audio.
 
+Motion stays in the shared CSS: short stepped heading reveals, staggered content entrances, a library entrance and button feedback. Native cross-document view transitions add a quick page crossfade in supporting browsers. Motion runs only when `prefers-reduced-motion` is `no-preference`; content and navigation work without it. The newsletter uses a navy gradient over the upper artwork rather than dimming the entire video, and has no footer bar.
+
 Deploy through a feature branch and PR to `main`. Verify the Pages build and live routes after merging. No frontend build or package installation is needed for production.
