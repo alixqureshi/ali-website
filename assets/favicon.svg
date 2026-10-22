@@ -1,1 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#07182D"/><g fill="#EFE3C5"><rect x="12" y="18" width="4" height="4"/><rect x="16" y="18" width="4" height="4"/><rect x="20" y="18" width="4" height="4"/><rect x="8" y="22" width="4" height="4"/><rect x="12" y="22" width="4" height="4"/><rect x="20" y="22" width="4" height="4"/><rect x="24" y="22" width="4" height="4"/><rect x="8" y="26" width="4" height="4"/><rect x="12" y="26" width="4" height="4"/><rect x="20" y="26" width="4" height="4"/><rect x="24" y="26" width="4" height="4"/><rect x="8" y="30" width="4" height="4"/><rect x="12" y="30" width="4" height="4"/><rect x="16" y="30" width="4" height="4"/><rect x="20" y="30" width="4" height="4"/><rect x="24" y="30" width="4" height="4"/><rect x="8" y="34" width="4" height="4"/><rect x="12" y="34" width="4" height="4"/><rect x="20" y="34" width="4" height="4"/><rect x="24" y="34" width="4" height="4"/><rect x="8" y="38" width="4" height="4"/><rect x="12" y="38" width="4" height="4"/><rect x="20" y="38" width="4" height="4"/><rect x="24" y="38" width="4" height="4"/><rect x="8" y="42" width="4" height="4"/><rect x="12" y="42" width="4" height="4"/><rect x="20" y="42" width="4" height="4"/><rect x="24" y="42" width="4" height="4"/><rect x="38" y="18" width="4" height="4"/><rect x="42" y="18" width="4" height="4"/><rect x="46" y="18" width="4" height="4"/><rect x="34" y="22" width="4" height="4"/><rect x="38" y="22" width="4" height="4"/><rect x="46" y="22" width="4" height="4"/><rect x="50" y="22" width="4" height="4"/><rect x="34" y="26" width="4" height="4"/><rect x="38" y="26" width="4" height="4"/><rect x="46" y="26" width="4" height="4"/><rect x="50" y="26" width="4" height="4"/><rect x="34" y="30" width="4" height="4"/><rect x="38" y="30" width="4" height="4"/><rect x="46" y="30" width="4" height="4"/><rect x="50" y="30" width="4" height="4"/><rect x="34" y="34" width="4" height="4"/><rect x="38" y="34" width="4" height="4"/><rect x="42" y="34" width="4" height="4"/><rect x="46" y="34" width="4" height="4"/><rect x="50" y="34" width="4" height="4"/><rect x="38" y="38" width="4" height="4"/><rect x="42" y="38" width="4" height="4"/><rect x="46" y="38" width="4" height="4"/><rect x="46" y="42" width="4" height="4"/><rect x="50" y="42" width="4" height="4"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#07182D"/>
+  <g fill="#EFE3C5" shape-rendering="crispEdges">
+    <!-- A: shared cap height and baseline; Q tail extends below. -->
+    <rect x="12" y="14" width="12" height="4"/>
+    <rect x="8" y="18" width="8" height="4"/>
+    <rect x="20" y="18" width="8" height="4"/>
+    <rect x="8" y="22" width="8" height="4"/>
+    <rect x="20" y="22" width="8" height="4"/>
+    <rect x="8" y="26" width="20" height="4"/>
+    <rect x="8" y="30" width="8" height="4"/>
+    <rect x="20" y="30" width="8" height="4"/>
+    <rect x="8" y="34" width="8" height="4"/>
+    <rect x="20" y="34" width="8" height="4"/>
+    <rect x="8" y="38" width="8" height="4"/>
+    <rect x="20" y="38" width="8" height="4"/>
+    <!-- Q: shared cap height and baseline; Q tail extends below. -->
+    <rect x="36" y="14" width="16" height="4"/>
+    <rect x="32" y="18" width="8" height="4"/>
+    <rect x="48" y="18" width="8" height="4"/>
+    <rect x="32" y="22" width="8" height="4"/>
+    <rect x="48" y="22" width="8" height="4"/>
+    <rect x="32" y="26" width="8" height="4"/>
+    <rect x="48" y="26" width="8" height="4"/>
+    <rect x="32" y="30" width="8" height="4"/>
+    <rect x="48" y="30" width="8" height="4"/>
+    <rect x="32" y="34" width="8" height="4"/>
+    <rect x="44" y="34" width="12" height="4"/>
+    <rect x="36" y="38" width="20" height="4"/>
+    <rect x="52" y="42" width="8" height="4"/>
+    <rect x="56" y="46" width="4" height="4"/>
+  </g>
+</svg>

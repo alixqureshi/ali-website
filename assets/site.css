@@ -229,8 +229,7 @@ summary:focus-visible {
   margin: 0 3px 3px;
 }
 .brand {
-  display: inline-flex;
-  align-items: center;
+  display: inline;
   color: var(--cream);
   font-weight: 600;
   white-space: nowrap;
@@ -372,7 +371,9 @@ summary:focus-visible {
   line-height: 24px;
   font-weight: 500;
   text-align: center;
-  transition: opacity 0.2s;
+  transition:
+    opacity 0.18s,
+    transform 0.18s ease-out;
 }
 .btn:hover {
   opacity: 0.85;
@@ -779,9 +780,20 @@ textarea.field {
   min-height: calc(100svh - 28px);
   padding-bottom: 30px;
 }
-.frame--newsletter > .site-footer {
-  margin-top: 24px;
-  background: var(--frame);
+.frame--newsletter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(7 24 45 / 0.86) 0%,
+    rgb(7 24 45 / 0.86) 45%,
+    rgb(7 24 45 / 0.7) 55%,
+    rgb(7 24 45 / 0.22) 72%,
+    rgb(7 24 45 / 0) 90%
+  );
 }
 .newsletter-main {
   flex: 1;
@@ -793,7 +805,6 @@ textarea.field {
   min-height: 680px;
 }
 .newsletter-scene {
-  filter: brightness(0.55);
   position: absolute;
   left: -52px;
   right: -52px;
@@ -807,7 +818,7 @@ textarea.field {
 }
 .newsletter-signup {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   width: 100%;
   max-width: 600px;
@@ -1310,6 +1321,97 @@ textarea.field {
   .home-copy {
     font-size: 18px;
     line-height: 28px;
+  }
+}
+/* Short entrances echo the pixel type without animating individual letters. */
+@keyframes pixel-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.4;
+  }
+  to {
+    clip-path: inset(0);
+    opacity: 1;
+  }
+}
+@keyframes content-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes library-arrive {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 10px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-group(root) {
+    animation-duration: 0.18s;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.18s;
+    animation-timing-function: ease-in-out;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  .wordmark {
+    animation: pixel-reveal 0.3s steps(10, end) both;
+  }
+  .display-title,
+  .home-copy .home-intro {
+    animation: pixel-reveal 0.46s steps(12, end) both;
+  }
+  .home-copy > p:not(.home-intro),
+  .page-main > :not(.display-title),
+  .contact-main > :not(.title-row),
+  .workshop-hero > *,
+  .newsletter-signup > :not(.display-title) {
+    animation: content-arrive 0.4s ease-out both;
+    animation-delay: 0.08s;
+  }
+  .home-copy > p:nth-of-type(3),
+  .page-main > .page-intro,
+  .newsletter-signup > form {
+    animation-delay: 0.16s;
+  }
+  .newsletter-signup > .previous-toggle {
+    animation-delay: 0.22s;
+  }
+  .book-card {
+    animation: content-arrive 0.4s ease-out both;
+    animation-delay: 0.12s;
+  }
+  .book-card:nth-child(2) {
+    animation-delay: 0.19s;
+  }
+  .book-card:nth-child(3) {
+    animation-delay: 0.26s;
+  }
+  .library.is-modal {
+    animation: library-arrive 0.2s ease-out both;
+  }
+  .question[open] > p {
+    animation: content-arrive 0.22s ease-out both;
+  }
+  @media (hover: hover) {
+    .btn:not(:disabled):hover {
+      transform: translateY(-2px);
+    }
   }
 }
 @media (prefers-reduced-motion: reduce) {
