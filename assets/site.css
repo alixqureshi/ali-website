@@ -229,8 +229,7 @@ summary:focus-visible {
   margin: 0 3px 3px;
 }
 .brand {
-  display: inline-flex;
-  align-items: center;
+  display: inline;
   color: var(--cream);
   font-weight: 600;
   white-space: nowrap;
