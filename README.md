@@ -1,16 +1,31 @@
 # aliqureshi.co
 
-Personal site. Static HTML, deployed via GitHub Pages.
+Ali Qureshi’s personal website. Static HTML, CSS and JavaScript, deployed by GitHub Pages from `main`.
 
-## Structure
+## Pages
 
-- `index.html` — the site (single page, builder's notebook aesthetic)
-- `lp/template.html` — copy this for new lead magnet pages
-- `legacy/` — previous version of the site, preserved
-- Redirect files at `/consulting.html`, `/ai-audit.html`, `/newsletter.html`, `/azadea.html`, and `/<lead-magnet>/index.html` route old URLs to their `/legacy/` equivalents
+- `/` — Home C: type, navy pixel texture and a compact name wordmark.
+- `/work-with-me/` — AI consulting, implementation and training.
+- `/ai-with-ali/` — newsletter signup, Dubai pixel animation and an interactive library of published editions.
+- `/workshops/build-your-ai-brain/` — workshop interest page.
+- `/contact/` — enquiries through the visitor’s email app.
 
-## Adding a new lead magnet page
+`/about/` redirects home. Old newsletter and playbook URLs redirect to AI with Ali. The independent tools and lead magnet pages remain in place.
 
-1. Copy `lp/template.html` → `<slug>/index.html`
-2. Swap the title, question, reply line, and Kit form values
-3. Commit; GitHub Pages deploys it at `aliqureshi.co/<slug>`
+## Preview
+
+Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http://127.0.0.1:8092.
+
+## Integrations
+
+- Contact is a mailto draft, not a server submission. The visitor must send the draft in their email app. A status message states that explicitly.
+- Newsletter signup posts to the existing public Kit form. If Kit needs additional verification, the form links to the hosted signup rather than claiming success.
+- `.github/workflows/fetch-posts.yml` refreshes `posts.json` from published Kit broadcasts. Only real, public editions appear in the bookshelf. Keep private API credentials in GitHub Actions secrets, never in frontend code.
+- The workshop currently accepts enquiries. It has no payment link, final ticket price, session date or automated attendee email sequence yet.
+- The video honours reduced motion. The newsletter library supports keyboard navigation and returns focus when closed. Without JavaScript the library remains visible.
+
+## Assets and styling
+
+`assets/site.css` contains the shared visual system. `assets/site.js` handles forms, the newsletter library and reduced motion. Pixel illustrations are SVGs exported from the approved Paper designs. The six-second Dubai loop is local and has no audio.
+
+Deploy through a feature branch and PR to `main`. Verify the Pages build and live routes after merging. No frontend build or package installation is needed for production.
