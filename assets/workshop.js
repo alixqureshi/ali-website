@@ -2,7 +2,7 @@
 (() => {
   // Booking switch. Leave empty until checkout is live; the buttons then link
   // to the waitlist. Paste the payment link here to open bookings.
-  const CHECKOUT_URL = "";
+  const CHECKOUT_URL = "https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004";
 
   if (CHECKOUT_URL) {
     for (const a of document.querySelectorAll("[data-book]")) {
