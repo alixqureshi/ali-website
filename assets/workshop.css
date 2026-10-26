@@ -684,3 +684,70 @@
     height: 420px;
   }
 }
+
+/* Booked page */
+.booked {
+  max-width: 760px;
+  padding-bottom: 72px;
+}
+.booked-lead {
+  margin-top: 28px;
+  font-size: 19px;
+  line-height: 30px;
+}
+.booked-card {
+  margin: 32px 0 64px;
+  padding: 34px 38px;
+  background: var(--cream);
+  border-left: 6px solid var(--yellow);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.booked-card h2 {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.booked-card p {
+  color: #334a5c;
+  font-size: 16px;
+  line-height: 26px;
+}
+.booked-card .booked-when {
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 500;
+}
+.booked-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 10px;
+}
+.booked-actions .text-link {
+  color: var(--ink);
+  font-size: 14px;
+}
+.booked-steps {
+  margin-top: 20px;
+}
+.booked-steps li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.booked-steps .book-number {
+  color: var(--yellow);
+}
+.booked-help {
+  margin-top: 28px;
+  color: var(--body);
+}
+@media (max-width: 760px) {
+  .booked-card {
+    padding: 26px 22px;
+  }
+}
