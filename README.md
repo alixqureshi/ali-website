@@ -42,6 +42,23 @@ successful checkout can supply the actual amount, currency and a stable purchase
 identifier. The unpublished `/workshops/build-your-ai-brain/booked/` page is not
 part of this change.
 
+## Google Analytics
+
+The same five marketing pages load `assets/analytics.js`, configured by
+`data-measurement-id="G-D74XK8FM1T"` on each script tag. The **AI with Ali** account
+(`413490358`) belongs to `ali@adcrate.co`; property **aliqureshi.co** (`560833513`)
+uses Europe/London time and USD. The web stream is **AI with Ali website**
+(`16207726510`).
+
+The tag measures standard page views on `aliqureshi.co` and `www.aliqureshi.co`.
+Enhanced measurement is off in the stream, so automatic form interactions and
+outbound-link details are not collected. No submitted contact fields or custom
+purchase events are sent. Google signals and ad personalization are disabled in
+the tag configuration. Local previews, Global Privacy Control, Do Not Track and
+the standard `ga-disable-G-D74XK8FM1T` opt-out skip the Google script. A per-page
+guard prevents duplicate initialization. If a consent manager is added, gate
+this script on analytics consent.
+
 ## Assets and styling
 
 `assets/site.css` contains the shared visual system. `assets/site.js` handles forms, the newsletter library and reduced motion. Pixel illustrations are SVGs exported from the approved Paper designs. The six-second Dubai loop is local and has no audio.
