@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07182D" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Payment confirmation · AI with Ali</title>
+    <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&amp;family=Geist:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/assets/site.css" />
+    <style>
+      .confirmation { max-width: 760px; padding: 80px 0 100px; }
+      .confirmation h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1.1; margin: 20px 0 26px; }
+      .confirmation p { font-size: 18px; line-height: 1.7; max-width: 620px; }
+      .confirmation-note { border-top: 1px solid var(--line); padding-top: 26px; margin-top: 32px; }
+      .confirmation .btn { margin: 30px 0; }
+      .confirmation a:not(.btn) { text-decoration: underline; text-underline-offset: 4px; }
+      .confirmation footer { margin-top: 40px; color: var(--muted); font-size: 14px; }
+    </style>
+    <script src="/assets/workshop-checkout-config.js" defer></script>
+    <script src="/assets/workshop-booking.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="frame">
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label="Ali Qureshi home">ALI QURESHI</a>
+        <a href="/workshops/build-your-ai-brain/">Workshop details</a>
+      </header>
+      <main id="main" class="confirmation">
+        <span class="eyebrow">BUILD YOUR AI BRAIN</span>
+        <section aria-live="polite" aria-atomic="true" aria-busy="true" id="booking-status">
+          <h1 id="booking-title">Checking your payment</h1>
+          <p id="booking-message">Please wait while we check with Stripe.</p>
+        </section>
+        <button class="btn" id="booking-retry" type="button" hidden>Check again</button>
+        <noscript><p>JavaScript is needed to check your payment here. Your Stripe receipt is your payment record. Contact Ali if you need help.</p></noscript>
+        <p class="confirmation-note">Need help? <a href="/contact/?topic=ai-brain-workshop#enquiry">Contact Ali</a>. Use the email address you entered at checkout when enquiring.</p>
+        <footer>Payments are processed by ADCRATE LTD through Stripe.</footer>
+      </main>
+    </div>
+  </body>
+</html>

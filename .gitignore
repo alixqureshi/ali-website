@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+node_modules/
+checkout-service/data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
