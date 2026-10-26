@@ -1,0 +1,5 @@
+# This repository also contains a separately deployed Node payment service.
+# GitHub Pages must publish only the static site, not the service sources.
+exclude:
+  - checkout-service
+  - node_modules
