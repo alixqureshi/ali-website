@@ -24,6 +24,24 @@ Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http:
 - The workshop page lists the USD97 ticket, the call-notes-to-proposal demonstration, DIY materials and an optional USD999 setup. It currently accepts enquiries: there is no payment link, confirmed session date or automated attendee email sequence. Do not describe its enquiry CTA as a paid booking.
 - The video honours reduced motion. The newsletter library supports keyboard navigation and returns focus when closed. Without JavaScript the library remains visible.
 
+## Meta pixel
+
+The five marketing pages load `assets/meta-pixel.js` with dataset/pixel ID
+`1167132298977136` (AI with Ali). It sends one explicit `PageView` per page load,
+only on `aliqureshi.co` and `www.aliqureshi.co`. Local previews, Global Privacy
+Control and Do Not Track opt-outs do not load Meta's script. Automatic event
+configuration is disabled; no form fields or advanced-matching data are supplied.
+The homepage includes the portfolio's `facebook-domain-verification` meta tag.
+Domain verification still needs completing in Meta after deployment.
+
+There is no existing consent manager on this site. If one is added, gate this
+script on marketing consent. No noscript image bypass is installed.
+
+`Purchase` is not fired from an arbitrary confirmation-page visit. Add it when a
+successful checkout can supply the actual amount, currency and a stable purchase
+identifier. The unpublished `/workshops/build-your-ai-brain/booked/` page is not
+part of this change.
+
 ## Assets and styling
 
 `assets/site.css` contains the shared visual system. `assets/site.js` handles forms, the newsletter library and reduced motion. Pixel illustrations are SVGs exported from the approved Paper designs. The six-second Dubai loop is local and has no audio.
