@@ -21,7 +21,7 @@ Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http:
 - Contact is a mailto draft, not a server submission. The visitor must send the draft in their email app. A status message states that explicitly.
 - Newsletter signup posts to the existing public Kit form. If Kit needs additional verification, the form links to the hosted signup rather than claiming success.
 - `.github/workflows/fetch-posts.yml` refreshes `posts.json` from published Kit broadcasts. Only real, public editions appear in the bookshelf. Keep private API credentials in GitHub Actions secrets, never in frontend code.
-- The workshop currently accepts enquiries. It has no payment link, final ticket price, session date or automated attendee email sequence yet.
+- The workshop page lists the USD97 ticket, the call-notes-to-proposal demonstration, DIY materials and an optional USD999 setup. It currently accepts enquiries: there is no payment link, confirmed session date or automated attendee email sequence. Do not describe its enquiry CTA as a paid booking.
 - The video honours reduced motion. The newsletter library supports keyboard navigation and returns focus when closed. Without JavaScript the library remains visible.
 
 ## Assets and styling
