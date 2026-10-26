@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Test checkout · AI with Ali</title>
+<style>
+  * { box-sizing:border-box } body { margin:0; background:#07182d; color:#efe3c5; font:18px/1.6 system-ui,sans-serif }
+  main { max-width:700px; margin:auto; padding:80px 24px } h1 { font-size:clamp(32px,6vw,52px); line-height:1.15 }
+  p { color:#b6c4ce } .label { text-transform:uppercase; letter-spacing:.12em; font-size:13px }
+  button { color:#07182d; background:#efe3c5; padding:16px 24px; border:0; font:600 18px system-ui; cursor:pointer }
+  button:disabled { opacity:.5 } button:focus-visible { outline:2px solid #f5c518; outline-offset:5px }
+</style>
+<main>
+  <p class="label">AI with Ali · Stripe sandbox</p>
+  <h1>Test the workshop checkout</h1>
+  <p>USD97. This is a test checkout. No real money is charged and no workshop seat is booked. The workshop date is undecided and public booking is closed.</p>
+  <button type="button" id="checkout">Open test checkout</button>
+  <p id="status" aria-live="polite"></p>
+  <p>Use Stripe’s test payment details only.</p>
+</main>
+<script src="/preview.js" defer></script>
+</html>

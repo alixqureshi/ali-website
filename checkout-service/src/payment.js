@@ -20,7 +20,8 @@ export async function inspectPayment(stripe, config, sessionId) {
   const items = session.line_items;
   const item = items?.data?.[0];
   if (session.livemode !== config.live || session.mode !== 'payment' ||
-      objectId(session.payment_link) !== config.paymentLinkId ||
+      session.payment_link != null || session.metadata?.offer !== 'ai-brain-workshop' ||
+      session.metadata?.cohort_id !== config.cohortId ||
       session.currency !== config.currency || items?.has_more ||
       items?.data?.length !== 1 || objectId(item?.price) !== config.priceId ||
       item.quantity !== 1 || item.price.unit_amount !== config.unitAmount ||

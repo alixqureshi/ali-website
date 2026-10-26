@@ -13,7 +13,7 @@ import { createApp } from '../src/app.js';
 const config = {
   mode: 'test', live: false, accountId: 'acct_fixture',
   webhookSecret: 'whsec_fixture_not_a_real_secret',
-  paymentLinkId: 'plink_workshop_fixture', priceId: 'price_workshop_fixture',
+  priceId: 'price_workshop_fixture',
   cohortId: 'fixture-cohort', currency: 'usd', unitAmount: 9700,
   origins: ['https://aliqureshi.co'], databasePath: ':memory:'
 };
@@ -21,7 +21,8 @@ const sessionId = 'cs_test_fixture12345678';
 function paidSession(overrides = {}) {
   return {
     id: sessionId, livemode: false, mode: 'payment', status: 'complete',
-    payment_status: 'paid', payment_link: config.paymentLinkId,
+    payment_status: 'paid', payment_link: null,
+    metadata: { offer: 'ai-brain-workshop', cohort_id: config.cohortId },
     amount_total: 9700, currency: 'usd',
     customer_details: { email: 'buyer@example.invalid', name: 'Private Buyer' },
     line_items: { has_more: false, data: [{ quantity: 1,
@@ -60,20 +61,25 @@ test('configuration fails closed on missing settings, live/test mismatch and uns
   assert.throws(() => readConfig({}), /Missing configuration/);
   const env = {
     STRIPE_SECRET_KEY: 'sk_test_fixture', STRIPE_WEBHOOK_SECRET: config.webhookSecret,
-    STRIPE_ACCOUNT_ID: config.accountId, STRIPE_PAYMENT_LINK_ID: config.paymentLinkId,
+    STRIPE_ACCOUNT_ID: config.accountId,
     STRIPE_PRICE_ID: config.priceId, WORKSHOP_COHORT_ID: config.cohortId, DATABASE_PATH: ':memory:'
   };
   assert.equal(readConfig(env).mode, 'test');
   assert.throws(() => readConfig({ ...env, STRIPE_MODE: 'live' }), /does not match/);
   assert.throws(() => readConfig({ ...env, ALLOWED_ORIGINS: 'http://example.com' }), /exact HTTPS/);
   assert.throws(() => readConfig({ ...env, ALLOWED_ORIGINS: 'https://aliqureshi.co/path' }), /exact HTTPS/);
+  assert.equal(readConfig(env).checkoutEnabled, false);
+  assert.throws(() => readConfig({ ...env, STRIPE_MODE: 'live', STRIPE_SECRET_KEY: 'sk_live_fixture', CHECKOUT_ENABLED: 'true' }), /Live checkout activation/);
+  assert.throws(() => readConfig({ ...env, SITE_ORIGIN: 'http://untrusted.example' }), /SITE_ORIGIN/);
 });
 
-test('only the paid workshop session for this mode, link, price and quantity qualifies', async () => {
+test('only the paid workshop session for this mode, cohort, offer, price and quantity qualifies', async () => {
   const inspect = session => inspectPayment(fakeStripe(async () => session), config, sessionId);
   assert.equal((await inspect(paidSession())).status, 'paid');
   for (const override of [
     { livemode: true }, { mode: 'subscription' }, { payment_link: 'plink_unrelated' },
+    { metadata: {} }, { metadata: { offer: 'other', cohort_id: config.cohortId } },
+    { metadata: { offer: 'ai-brain-workshop', cohort_id: 'different-cohort' } },
     { currency: 'gbp' }, { amount_total: 0 },
     { line_items: { has_more: true, data: paidSession().line_items.data } },
     { line_items: { data: [{ quantity: 1, price: { id: 'price_unrelated', unit_amount: 9700, currency: 'usd' } }] } },

@@ -1,107 +1,50 @@
-# AI with Ali payment confirmation service
+# AI with Ali workshop checkout
 
-Prepared for the USD97 Build your AI brain workshop. **Not deployed, connected to
-Stripe, or accepting payments yet.** Ali confirmed **ADCRATE LTD** as merchant
-on 2026-10-26, and said the workshop date is undecided. The public site still
-takes enquiries; its CTAs have not been changed.
+Prepared for the one-time **USD97** workshop, merchant **ADCRATE LTD**. Not deployed or connected to Stripe credentials yet. Public booking stays closed: Ali has not chosen a date. No landing-page CTAs changed.
 
-The landing page will link to a Stripe Payment Link. Configure the link to return
-to `/workshops/build-your-ai-brain/booked/?session_id={CHECKOUT_SESSION_ID}`.
-The confirmation page must ask this service whether payment actually succeeded;
-loading the page itself is never evidence of a sale.
+## Flow
 
-## Contract
+The backend creates a Stripe-hosted Checkout Session for a server-owned Price and cohort. Each session uses Ali’s navy **#07182D** and display name, without modifying Adcrate-wide branding. Adaptive Pricing is disabled per session to keep USD. Quantity is fixed at one, with no upsells, discounts, saved payment methods or customer IDs supplied by the browser. Card/wallet payments only for this initial test.
 
-- `GET /healthz`: service mode and health, no account details.
-- `GET /api/booking-status?session_id=cs_...`: retrieves the current Stripe session
-  and verifies mode, Payment Link, exact Price, quantity, currency, settled payment
-  and refunds. Returns only status and non-personal transaction/event/value fields.
-  This route creates no booking and sends no emails or conversion events.
-- `POST /webhooks/stripe`: Stripe-signed raw JSON only. Processes
-  `checkout.session.completed`, `checkout.session.async_payment_succeeded` and
-  `charge.refunded`. Retrieves the current payment before storing a booking.
-  SQLite transactions deduplicate event IDs and paid sessions, including retries.
-  A refunded booking cannot be revived by an out-of-order paid event.
+Stripe redirects to `/workshops/build-your-ai-brain/booked/?session_id={CHECKOUT_SESSION_ID}`. The page checks payment with the backend before showing success. A redirect or page visit alone never counts as a sale. Signed webhooks create one booking per paid session; refunds suppress pending fulfillment. SQLite transactions deduplicate webhook events and sessions.
 
-Bookings contain Stripe IDs and payment/cohort state, not card data, customer
-names, emails or raw webhook bodies. Stripe remains the source for buyer details.
-All paid bookings start with `fulfillment_status=pending`; **no attendee emails,
-Zoom invitations or server-side Meta/GA purchase events are active in this service.**
-Partial refunds are conservatively excluded from the pending fulfillment list
-for manual review; do not automatically revoke a seat for a partial refund.
+## Endpoints and safeguards
+
+- `GET /healthz`: health and test/live mode, no merchant details.
+- `POST /api/checkout`: JSON with `attempt_id` (UUID v4), exact allowed browser Origin required. Server fixes price, quantity, cohort, branding and return URLs. Repeated attempts use the same Stripe idempotency key. Limit: 10 attempts per IP per minute, with bounded transient counters. Closed booking fails before Stripe is called.
+- `GET /preview`: test-only launcher, available only with test mode and `CHECKOUT_ENABLED=true`. Never serves a live sales page.
+- `GET /api/booking-status?session_id=cs_...`: retrieves current payment and verifies mode, exact offer/cohort metadata, Price, currency, quantity, settlement and refunds. Returns status and hashed non-personal order/value fields. Creates no booking or emails.
+- `POST /webhooks/stripe`: raw-body Stripe signature verification. Handles `checkout.session.completed`, `checkout.session.async_payment_succeeded`, and `charge.refunded`. Retrieves current Stripe state before persisting. Network/storage failures return 503 for Stripe retry.
+
+New sessions default to disabled. **Enabling session creation in live mode is deliberately blocked in configuration** until schedule, tax treatment, booking terms and fulfillment are agreed and the tested launch is reviewed. Test configuration is not approval to collect live money.
+
+Bookings contain Stripe IDs and payment/cohort state, not buyer names, emails, card details or raw webhook bodies. Stripe remains the buyer-details source. Paid bookings start with fulfillment pending. No invitations, attendee emails or server-side conversion delivery exist yet. Partial refunds require manual review; do not automatically revoke seats.
 
 ## Local validation
 
-Requires Node 24–26. `npm ci` then `npm test`. Tests use locally signed fixtures
-and a mocked Stripe client, with no Stripe calls, purchases, emails or ad events.
-The fixture secrets are fictional. Use `npm start` only after configuration.
+Node 24–26: `npm ci` then `npm test`. Tests use mocked Stripe calls and locally signed fictional fixtures. They do not spend money, send email or report ad purchases. `npm start` requires real private test configuration and verifies the merchant account matches the credential.
 
-Copy `.env.example` to an ignored `.env` for local development and use
-`node --env-file=.env src/server.js`. Never paste real secrets into a chat,
-source file, README or commit. Use the hosting provider's secret manager for a
-deployment. At startup, the service verifies the merchant account ID against the
-Stripe credential and refuses to start on a mismatch. Mode defaults to **test**;
-the credential prefix and webhook event must match the configured mode.
+For local development copy `.env.example` to ignored `.env`, then run `node --env-file=.env src/server.js`. Never paste secrets into chat, source, README or commits. Configure hosted secrets in the provider’s private variable store.
 
-## Stripe sandbox setup
+## Test setup
 
-1. Use the confirmed merchant **ADCRATE LTD**, account
-   `acct_1M9wquGUKYQC9sJN`. Stripe currently requires representative verification.
-   Ali handles any business verification, bank details, passwords and security
-   codes directly in Stripe. No identity details are stored in this repository.
-2. In a Stripe sandbox/test mode, create the USD97 one-time workshop Product and
-   Price. Create a Payment Link for quantity 1, no quantity adjustment or optional
-   products. Keep checkout currency USD; configure any required tax treatment with
-   the merchant before live activation. The backend captures the actual charged
-   amount, including configured tax/discount effects.
-3. Configure receipt emails in Stripe and the confirmation redirect above.
-4. Add the actual merchant, test Payment Link, Price, cohort, API credential and
-   webhook signing secret in the deployment's secret manager. The Stripe API
-   credential needs read access to the merchant account, Checkout Sessions and
-   expanded payment/Price/charge data. It does not need payment-write access.
-5. Register the deployed `/webhooks/stripe` endpoint for the three event types.
-   Test and live endpoints have different signing secrets.
-6. Mount a persistent volume at `/data` and use one service replica. Configure
-   `DATABASE_PATH=/data/bookings.sqlite`; do not run production with an ephemeral
-   database. No existing Adcrate service should be reused for this personal site.
+1. Confirm merchant in the dashboard: ADCRATE LTD, account `acct_1M9wquGUKYQC9sJN`. Ali completed representative verification; current Payments status is Active. Stripe has a separate W8/W9 task warning payouts pause November 2, 2026. Ali completes that declaration himself; recheck live status before launch.
+2. Existing **test** Product: `prod_VVucDPoNL4r4kw`; one-time USD97 Price: `price_1UUsnaGUKYQC9sJNqekIf1VK`. It inherited Advertising Services classification from Adcrate. That is not an approved workshop tax category. Automatic tax is off only for this test fixture. Review category, registrations and inclusive/exclusive pricing before any live offer.
+3. A Checkout Studio draft named AI with Ali — workshop has the navy override scoped to this checkout. The backend includes the corresponding session-specific settings directly. No saved Payment Link is required. Do not confirm Studio’s suggested shared Adaptive Pricing change.
+4. Set private `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, account and Price IDs, a test-only cohort such as `test-undated`, and `DATABASE_PATH=/data/bookings.sqlite`. Use `CHECKOUT_ENABLED=true` only in test mode for now.
+5. The restricted **test** credential needs Checkout Sessions write/read, and read access to Account, Prices, Payment Intents and Charges for merchant/offer/payment verification. Do not grant live access, payouts, refunds, customers write, or account settings write. New credentials require action-time approval. Keep any setup webhook-management permission separate; the running service does not create endpoints.
+6. Register the deployed `/webhooks/stripe` endpoint for the three events above and put its signing secret in private config. Test/live signing secrets are separate.
+7. Use a separate personal Railway service, one replica, with persistent `/data` storage. Add the exact service origin to `ALLOWED_ORIGINS` for its test launcher. Use `TRUST_PROXY_HOPS=1` only behind Railway’s single trusted proxy; use 0 locally. Do not trust arbitrary proxy chains.
+8. `SITE_ORIGIN` controls the confirmation/cancel destination; use the production site only after the prepared confirmation page is deployed. For local tests, HTTP localhost/127.0.0.1 is allowed in test mode. The public site’s `assets/workshop-checkout-config.js` still has an empty status endpoint and test mode.
 
-## Confirmation page
+## Tracking and delivery
 
-`/workshops/build-your-ai-brain/booked/` is prepared with neutral, pending,
-verified, test, refunded and unavailable states. It sends no analytics until a
-live payment for this offer is verified. It removes checkout/campaign query
-parameters before loading analytics and uses a hashed order ID, never the Stripe
-checkout token, buyer name or email, in conversion events. Tab-only session
-storage preserves checking after refresh; it does not put the token back in URLs.
+The confirmation page removes the checkout query before analytics. Tab-only storage permits refresh checking. Live verified payments alone can send Purchase events with one-way hashed order IDs; checkout tokens, buyer names and emails are never supplied to analytics. Local previews, test payments, GPC/DNT and GA opt-outs do not send purchases. Per-browser local-storage deduplication is best effort; blockers, storage/network failures and closed tabs can lose browser events. **CAPI is not implemented.** Browser events are not the sales ledger.
 
-`assets/workshop-checkout-config.js` intentionally has an empty `statusEndpoint`
-and `mode: "test"`. Set the HTTPS endpoint and matching mode only after deployment.
-Test payments, local previews, GPC/DNT and GA opt-outs are respected. Live mode
-uses the existing Meta dataset and GA4 property. Purchase events have stable
-order IDs, with best-effort local-storage deduplication per browser. Storage
-failure suppresses tracking; blockers, closed tabs and browser/network failures
-can lose browser conversions. **CAPI is not implemented**; browser tracking is
-not a durable sales ledger. Do not claim guaranteed or cross-device deduplication.
+Stripe receipts are distinct from workshop invitations. Connect transactional delivery or document a manual cohort operation before sales open, with actual schedule, join instructions, exception handling and fulfillment state. No screen claims an invitation was sent.
 
-## Still required before live launch
+## Remaining launch checks
 
-- Workshop date/time, booking/cancellation terms and actual
-  sandbox Product/Price/Payment Link.
-- Deploy this service with persistent storage and secrets. Hosting cost and
-  destination must be settled before provisioning; nothing is provisioned yet.
-- Connect and visually verify the prepared booked page against the deployed
-  Stripe service. Verify actual browser conversion requests in live mode only
-  after a genuine authorized purchase, keeping checkout tokens out of analytics.
-- Wire the landing page only once actual checkout and workshop details are ready.
-- Connect attendee registration/transactional delivery. Stripe receipts are not
-  workshop join instructions. Until that is automated, a documented manual cohort
-  operation is required, and no screen may claim an invitation was sent.
-- Complete end-to-end sandbox checks (successful, declined, delayed, duplicate,
-  refunded, reopened confirmation) and verify browser analytics/CAPI behavior.
-- Review and activate live mode separately. Never run a real-money test payment
-  or refund without Ali handling/authorizing that financial action.
+Deploy with secrets and persistent storage; verify actual Stripe success/decline/retry/refund, duplicate webhook handling, reopened confirmation and attendee delivery. Visually inspect desktop/mobile and resolve the Studio preview’s missing logo placeholder. Agree date/timezone, tax, refund/booking terms and delivery before a separate live activation change. Then connect real live Price and credentials and enable the landing-page booking CTA. Ali handles any real-money test purchase/refund directly.
 
-Provider references:
-[Payment Links](https://docs.stripe.com/payment-links),
-[after payment](https://docs.stripe.com/payment-links/post-payment),
-[webhook signatures](https://docs.stripe.com/events/manage-webhook-endpoints#signature-errors).
+References: [Stripe Checkout Sessions](https://docs.stripe.com/api/checkout/sessions/create), [customization](https://docs.stripe.com/payments/checkout/customization/appearance), [webhooks](https://docs.stripe.com/events/manage-webhook-endpoints).
