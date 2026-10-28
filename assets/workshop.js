@@ -4,12 +4,42 @@
   // to the waitlist. Paste the payment link here to open bookings.
   const CHECKOUT_URL = "https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004";
 
+  // Pass Meta's browser IDs to Stripe as client_reference_id, so the
+  // server-side Purchase (meta-capi on Railway) can be matched to the ad click.
+  // Payment links only accept letters, digits, dashes and underscores:
+  //   a1-<fbp version>-<fbp time>-<fbp random>-<fbc version>-<fbc time>-<fbclid>
+  // Opted-out visitors send "optout" and the server skips their Purchase.
+  const optedOut = navigator.globalPrivacyControl === true || navigator.doNotTrack === "1";
+  const cookie = (name) =>
+    (document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`)) || [])[1] || "";
+  const stripeRef = () => {
+    if (optedOut) return "optout";
+    const p = /^fb\.(\d)\.(\d+)\.(\d+)$/.exec(cookie("_fbp")) || [];
+    let c = /^fb\.(\d)\.(\d+)\.([A-Za-z0-9_-]+)$/.exec(cookie("_fbc"));
+    const fbclid = new URLSearchParams(location.search).get("fbclid");
+    if (!c && fbclid && /^[A-Za-z0-9_-]+$/.test(fbclid)) c = [, "1", String(Date.now()), fbclid];
+    c = c || [];
+    const join = (parts) => ["a1", ...parts].map((v) => v || "").join("-");
+    const ref = join([p[1], p[2], p[3], c[1], c[2], c[3]]);
+    if (!p[1] && !c[1]) return "";
+    return ref.length <= 200 ? ref : join([p[1], p[2], p[3]]);
+  };
+
   if (CHECKOUT_URL) {
     for (const a of document.querySelectorAll("[data-book]")) {
       a.href = CHECKOUT_URL;
       const label = a.querySelector("[data-book-label]");
       if (label) label.textContent = "Book your seat · $97";
       else a.textContent = "Book your seat ↗";
+      // Read the cookies at click time: the pixel sets _fbp after the page loads.
+      const withRef = () => {
+        const url = new URL(CHECKOUT_URL);
+        const ref = stripeRef();
+        if (ref) url.searchParams.set("client_reference_id", ref);
+        a.href = url.toString();
+      };
+      a.addEventListener("click", withRef);
+      a.addEventListener("auxclick", withRef);
     }
     for (const p of document.querySelectorAll("[data-prebooking]")) p.remove();
   }

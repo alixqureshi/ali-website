@@ -4,7 +4,10 @@
 
   var params = new URLSearchParams(window.location.search);
   var session = params.get("session_id") || "";
-  if (!/^cs_(live|test)_[A-Za-z0-9]+$/.test(session)) return;
+  // Live sessions only, so test checkouts never reach the ad account. This is
+  // the browser half; meta-capi sends the Stripe-confirmed Purchase with the
+  // same event ID and Meta keeps one.
+  if (!/^cs_live_[A-Za-z0-9]+$/.test(session)) return;
 
   // Strip the session ID from the address bar so it isn't shared or bookmarked.
   params.delete("session_id");

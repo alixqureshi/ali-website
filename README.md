@@ -37,10 +37,28 @@ Domain verification still needs completing in Meta after deployment.
 There is no existing consent manager on this site. If one is added, gate this
 script on marketing consent. No noscript image bypass is installed.
 
-`Purchase` is not fired from an arbitrary confirmation-page visit. Add it when a
-successful checkout can supply the actual amount, currency and a stable purchase
-identifier. The unpublished `/workshops/build-your-ai-brain/booked/` page is not
-part of this change.
+### Workshop Purchase
+
+`Purchase` is sent twice with the same event ID (the Stripe checkout session
+ID), and Meta keeps one:
+
+- **Browser:** `assets/workshop-booked.js` fires it on the booked page when the
+  Stripe redirect carries a `cs_live_` session ID. Test sessions are ignored.
+- **Server:** the `meta-capi` Railway Function (project `ai-with-ali-checkout`)
+  receives Stripe's `checkout.session.completed` webhook at
+  `/stripe/webhook`, checks the signature, and sends the Purchase through the
+  Conversions API with hashed buyer details. It only sends paid, live sessions
+  whose success URL is the booked page. This catches buyers who never reach the
+  booked page.
+
+The workshop page passes the visitor's `_fbp` and `_fbc` values to Stripe as
+`client_reference_id` (format `a1-…`, documented in `assets/workshop.js`) so
+the server event can be matched to the ad click. Visitors with Global Privacy
+Control or Do Not Track send `optout` instead, and the server skips their
+Purchase, matching the pixel's behaviour.
+
+The Stripe webhook signing secret and the Conversions API token live only in
+Railway variables, never in this repository.
 
 ## Google Analytics
 
