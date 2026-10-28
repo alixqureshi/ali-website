@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="lp-v5-page">
+<html lang="en" class="w8-page">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,10 +29,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Geist:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Geist:wght@400;500;600;700&family=Inter:wght@400;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
     />
     <link rel="stylesheet" href="/assets/site.css" />
-    <link rel="stylesheet" href="/assets/workshop-v5.css" />
+    <link rel="stylesheet" href="/assets/workshop-v8.css" />
     <script src="/assets/site.js" defer></script>
     <script src="/assets/workshop.js" defer></script>
     <script src="/assets/meta-pixel.js" defer></script>
@@ -40,87 +40,158 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="frame">
-      <header class="lp-header">
-        <span class="wordmark">AI WITH ALI</span>
-        <a
-          class="lp-header-cta"
-          data-book
-          href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
+    <div class="frame w8-frame">
+      <header class="w8-header">
+        <span class="wordmark w8-wordmark">AI WITH ALI</span>
+        <a class="w8-header-cta" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
           >Book your seat · $97</a
         >
       </header>
 
-      <main id="main" class="lp">
-        <section class="lp-hero" aria-labelledby="lp-title">
-          <h1 class="lp-h lp-h--hero" id="lp-title">
-            <span class="lp-line">You pay for AI and it still</span>
-            <span class="lp-line">doesn’t <mark>know your business.</mark></span>
+      <main id="main" class="w8">
+        <!-- 1. Hero -->
+        <section class="w8-hero" aria-labelledby="w8-title">
+          <h1 class="w8-h w8-h--hero" id="w8-title">
+            You pay for AI and <br class="w8-m" />it still <br class="w8-d" />doesn’t
+            <br class="w8-m" /><mark>know your business.</mark>
           </h1>
-          <p class="lp-hero-sub">
-            Watch me set up mine, live. Then build AI that tells you what needs
-            you each morning and drafts the replies in your words.
-          </p>
+          <div class="w8-hero-sub">
+            <p>
+              <strong
+                >A 2-hour live online workshop. I’ll show you the company brain (a folder of files
+                AI reads first) and the AI agents I run my 50-person agency on, and how to set up
+                your own.</strong
+              >
+            </p>
+            <p>You leave with everything you need to set up yours.</p>
+          </div>
 
-          <!-- Video slot. No recording yet, so this is a still from the session.
-               To add the video, replace the two <img> tags with:
-               <video controls playsinline preload="none" poster="/assets/workshop/session-still.jpg" src="..."></video> -->
-          <figure class="lp-video">
-            <img
-              class="lp-video-poster"
-              src="/assets/workshop/session-still.jpg"
-              width="1920"
-              height="1080"
-              fetchpriority="high"
-              alt="A slide from the session: a brain is a folder, showing the starter folder with company, offer, customers, voice and approvals files"
-            />
-            <img class="lp-video-cam" src="/assets/ali.jpg" width="150" height="112" alt="" />
-            <figcaption class="lp-video-caption">A slide from the live session</figcaption>
+          <figure class="w8-call">
+            <p class="sr-only">
+              A preview of the call: Ali’s screen shows his company brain folder, a one-line request
+              to make the deck for Friday’s all-hands, the files the AI read, and the finished first
+              slide, with Ali on webcam.
+            </p>
+
+            <!-- Desktop: the large app window -->
+            <div class="w8-win w8-d" aria-hidden="true">
+              <div class="w8-win-in">
+                <div class="w8-win-bar">
+                  <i class="w8-dot w8-dot--r"></i><i class="w8-dot w8-dot--y"></i
+                  ><i class="w8-dot w8-dot--g"></i>
+                  <span class="w8-win-title">my-company-brain</span>
+                </div>
+                <div class="w8-win-body">
+                  <div class="w8-side">
+                    <span class="w8-dir">company-brain/</span>
+                    <span>company.md</span>
+                    <span>prices.md</span>
+                    <span>customers.md</span>
+                    <span>voice.md</span>
+                    <span>rules.md</span>
+                    <span class="w8-dir w8-dir--gap">skills/</span>
+                    <span>morning-brief/</span>
+                    <span>write-it-like-me/</span>
+                    <span class="w8-side-on">deck-in-our-brand/</span>
+                    <span>call-to-follow-up/</span>
+                    <span class="w8-dir w8-dir--gap">agents/</span>
+                  </div>
+                  <div class="w8-win-main">
+                    <span class="w8-win-ask">Make the deck for Friday’s all-hands.</span>
+                    <ul class="w8-win-checks">
+                      <li>Read brand.md, voice.md</li>
+                      <li>Pulled October numbers</li>
+                      <li>Checked the team list</li>
+                      <li>Opened September’s deck</li>
+                    </ul>
+                    <div class="w8-slide">
+                      <span class="w8-slide-kicker">ALL-HANDS · OCTOBER</span>
+                      <span class="w8-slide-title">Where we are, and what’s next</span>
+                    </div>
+                    <div class="w8-thumbs">
+                      <div class="w8-thumb">
+                        <span>The numbers</span>
+                        <span class="w8-bars"><i></i><i></i><i></i><i></i></span>
+                      </div>
+                      <div class="w8-thumb">
+                        <span>Welcome, Priya</span>
+                        <i class="w8-thumb-dot"></i>
+                      </div>
+                      <div class="w8-thumb w8-thumb--lines">
+                        <span>Next month</span>
+                        <i></i><i></i><i></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w8-cam">
+                <img src="/assets/ali.jpg" width="300" height="300" alt="" />
+                <span>Ali Qureshi</span>
+              </div>
+            </div>
+
+            <!-- Mobile: the compact 16:9 window -->
+            <div class="w8-mwin w8-m" aria-hidden="true">
+              <div class="w8-mwin-bar">
+                <i class="w8-dot w8-dot--r"></i><i class="w8-dot w8-dot--y"></i
+                ><i class="w8-dot w8-dot--g"></i>
+                <span class="w8-mwin-title">my-company-brain</span>
+              </div>
+              <div class="w8-mwin-body">
+                <div class="w8-mwin-left">
+                  <span class="w8-mwin-ask">Make Friday’s all-hands deck.</span>
+                  <ul class="w8-mwin-checks">
+                    <li>Read brand.md, voice.md</li>
+                    <li>Pulled October numbers</li>
+                    <li>Checked the team list</li>
+                    <li>Built 9 slides</li>
+                  </ul>
+                </div>
+                <div class="w8-mwin-right">
+                  <div class="w8-mwin-slide">
+                    <span class="w8-mwin-kicker">ALL-HANDS · OCTOBER</span>
+                    <span class="w8-mwin-stitle">Where we are, and what’s next</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w8-mcam">
+                <img src="/assets/ali.jpg" width="300" height="300" alt="" />
+                <span>Ali Qureshi</span>
+              </div>
+            </div>
+
+            <figcaption class="w8-call-caption">
+              What you’ll see on the call: my real setup, shared live, building a deck from one line.
+            </figcaption>
           </figure>
 
-          <div class="lp-cta">
-            <a class="lp-btn" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
+          <div class="w8-cta">
+            <a class="w8-btn" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
               >Book your seat · $97 ↗</a
             >
-            <p class="lp-when">
-              <span data-when="long">Thursday 19 November, 16:00–18:00 UK time</span> · 2 hours live · Recording included
+            <p class="w8-when">
+              <span data-when="long">Thursday 19 November, 16:00–18:00 UK time</span
+              ><span class="w8-when-sep"> · </span>2 hours live · Recording included
             </p>
           </div>
         </section>
 
-        <ul class="lp-ticker" aria-label="What you set up">
-          <li>✓ KNOWS YOUR BUSINESS</li>
-          <li>✓ WHAT NEEDS YOU, AT 7AM</li>
-          <li>✓ REPLIES IN YOUR WORDS</li>
-          <li>✓ NOTHING SENDS WITHOUT YOU</li>
-          <li>✓ FILES YOU OWN</li>
-        </ul>
-
-        <section class="lp-section lp-section--center lp-familiar" aria-labelledby="lp-familiar">
-          <h2 class="lp-h" id="lp-familiar">
-            <span class="lp-line">You explain your business</span>
-            <span class="lp-line">to AI <mark>every single day.</mark></span>
-          </h2>
-          <div class="lp-familiar-copy">
-            <p>
-              You paste the same paragraph into every new chat. Memory fills up.
-              Projects skip the file you uploaded. Your custom GPTs stop working
-              on 11 December.
-            </p>
-            <p class="lp-familiar-kicker">
-              And you’re still the one who remembers what every client asked for.
-            </p>
-          </div>
-        </section>
-
-        <section class="lp-section lp-compare" aria-labelledby="lp-compare">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-compare">
-              <span class="lp-line">From a chat that guesses</span>
-              <span class="lp-line">to AI that <mark>already knows.</mark></span>
+        <!-- 2. Before and after -->
+        <section class="w8-section w8-compare" aria-labelledby="w8-compare">
+          <div class="w8-head">
+            <h2 class="w8-h" id="w8-compare">
+              From a chat that <br class="w8-m" />guesses <br class="w8-d" />to AI that
+              <br class="w8-m" /><mark>already knows.</mark>
             </h2>
+            <p class="w8-sub w8-sub--compare">
+              Right now you paste the same paragraph into every chat, then rewrite what comes back.
+              Here’s what changes.
+            </p>
           </div>
-          <table class="lp-table">
+
+          <!-- Desktop: full 3-column table -->
+          <table class="w8-table w8-d">
             <thead>
               <tr>
                 <td></td>
@@ -131,191 +202,336 @@
             <tbody>
               <tr>
                 <th scope="row">Your business</th>
-                <td data-label="A BLANK CHAT">You paste the same paragraph every time.</td>
-                <td data-label="YOUR SETUP">It reads your files. Prices, customers and how you write.</td>
+                <td>You paste the same paragraph every time.</td>
+                <td>It reads your files. Prices, customers and how you write.</td>
               </tr>
               <tr>
                 <th scope="row">Your morning</th>
-                <td data-label="A BLANK CHAT">You dig through email and messages to find what matters.</td>
-                <td data-label="YOUR SETUP">A short list of what needs you, ready at 7am.</td>
+                <td>You dig through email and messages to find what matters.</td>
+                <td>A short list of what needs you, ready at 7am.</td>
               </tr>
               <tr>
                 <th scope="row">Your replies</th>
-                <td data-label="A BLANK CHAT">Generic drafts you end up rewriting.</td>
-                <td data-label="YOUR SETUP">Drafted in your words. You change a line and send.</td>
+                <td>Generic drafts you end up rewriting.</td>
+                <td>Drafted in your words. You change a line and send.</td>
               </tr>
               <tr>
                 <th scope="row">Your clients</th>
-                <td data-label="A BLANK CHAT">You remember what each one asked for.</td>
-                <td data-label="YOUR SETUP">It remembers, so nothing slips through the cracks.</td>
+                <td>You remember what each one asked for.</td>
+                <td>It remembers, so nothing slips through the cracks.</td>
               </tr>
               <tr>
-                <th scope="row">When tools change</th>
-                <td data-label="A BLANK CHAT">Your custom GPTs stop working on 11 December.</td>
-                <td data-label="YOUR SETUP">Plain files go with you to any AI.</td>
+                <th scope="row">Your decks and docs</th>
+                <td>You re-upload the brand guide and last month’s deck.</td>
+                <td>It already has your brand, your numbers and how you write.</td>
               </tr>
             </tbody>
           </table>
-          <a class="lp-btn lp-btn--stack" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004">
-            <span data-book-label>Book your seat · $97</span>
+
+          <!-- Mobile: compact 2-column card -->
+          <table class="w8-mtable w8-m">
+            <thead>
+              <tr>
+                <th scope="col">A BLANK CHAT</th>
+                <th scope="col">YOUR SETUP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="w8-mtable-label"><th colspan="2" scope="rowgroup">Your business</th></tr>
+              <tr>
+                <td><span class="w8-mi"><span class="w8-x" aria-hidden="true">✕</span><span>Paste it in every time</span></span></td>
+                <td><span class="w8-mi"><span class="w8-ok" aria-hidden="true">✓</span><span>Already knows it</span></span></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr class="w8-mtable-label"><th colspan="2" scope="rowgroup">Your morning</th></tr>
+              <tr>
+                <td><span class="w8-mi"><span class="w8-x" aria-hidden="true">✕</span><span>Dig through your inbox</span></span></td>
+                <td><span class="w8-mi"><span class="w8-ok" aria-hidden="true">✓</span><span>A list ready at 7am</span></span></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr class="w8-mtable-label"><th colspan="2" scope="rowgroup">Your replies</th></tr>
+              <tr>
+                <td><span class="w8-mi"><span class="w8-x" aria-hidden="true">✕</span><span>Generic, you rewrite them</span></span></td>
+                <td><span class="w8-mi"><span class="w8-ok" aria-hidden="true">✓</span><span>Drafted in your words</span></span></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr class="w8-mtable-label"><th colspan="2" scope="rowgroup">Your clients</th></tr>
+              <tr>
+                <td><span class="w8-mi"><span class="w8-x" aria-hidden="true">✕</span><span>You remember everything</span></span></td>
+                <td><span class="w8-mi"><span class="w8-ok" aria-hidden="true">✓</span><span>It remembers for you</span></span></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr class="w8-mtable-label"><th colspan="2" scope="rowgroup">Your decks and docs</th></tr>
+              <tr>
+                <td><span class="w8-mi"><span class="w8-x" aria-hidden="true">✕</span><span>Re-upload the brand guide</span></span></td>
+                <td><span class="w8-mi"><span class="w8-ok" aria-hidden="true">✓</span><span>Has your brand and numbers</span></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <a class="w8-btn w8-btn--stack w8-d" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004">
+            <span>Book your seat · $97</span>
             <small data-when="short">Thursday 19 November · 16:00 UK time</small>
           </a>
         </section>
 
-        <section class="lp-section lp-inuse" aria-labelledby="lp-inuse">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-inuse">
-              <span class="lp-line">Mine knows every client</span>
-              <span class="lp-line"><mark>before I ask.</mark></span>
+        <!-- 3. How I actually use it -->
+        <section class="w8-section w8-inuse" aria-labelledby="w8-inuse">
+          <div class="w8-head">
+            <h2 class="w8-h" id="w8-inuse">
+              How I actually use it: <br /><mark>the all-hands deck.</mark>
             </h2>
+            <p class="w8-sub w8-sub--inuse">
+              The same job, two ways. How you’re probably doing it now, and how you could do it with
+              this system.
+            </p>
           </div>
-          <div class="lp-panel lp-knows">
-            <h3 class="lp-label">WHAT IT KNOWS ABOUT EVERY CLIENT</h3>
-            <ul>
-              <li><strong>Client context</strong>Who they are, what they sell and who buys it.</li>
-              <li><strong>Dos and don’ts</strong>What they approve and what they never want to see.</li>
-              <li><strong>Performance data</strong>Which ads are working right now, pulled in live.</li>
-              <li><strong>Brand guidelines</strong>Their voice, their look and the claims we can and can’t make.</li>
-            </ul>
+
+          <!-- Mobile: the scoreboard -->
+          <div class="w8-score w8-m">
+            <div class="w8-score-card">
+              <p class="w8-label">NOW</p>
+              <p class="w8-score-num">14 <span>messages</span></p>
+              <p class="w8-score-note">40 minutes. Still fixing it.</p>
+            </div>
+            <div class="w8-score-card w8-score-card--sys">
+              <p class="w8-label">WITH THE SYSTEM</p>
+              <p class="w8-score-num">1 <span>message</span></p>
+              <p class="w8-score-note">Deck ready. You check it.</p>
+            </div>
+          </div>
+
+          <div class="w8-duo">
+            <article class="w8-panel w8-now w8-d" aria-labelledby="w8-now-h">
+              <header class="w8-panel-head">
+                <h3 class="w8-label" id="w8-now-h">HOW YOU’RE DOING IT NOW</h3>
+                <span>14 messages</span>
+              </header>
+              <div class="w8-chat w8-chat--now">
+                <p class="w8-msg w8-msg--you">Make a deck for Friday’s all-hands.</p>
+                <p class="w8-msg w8-msg--ai">
+                  Happy to help! What does your company do, and what should the deck cover?
+                </p>
+                <p class="w8-msg w8-msg--you"><span>Attached:</span> brand-guidelines.pdf</p>
+                <p class="w8-msg w8-msg--you">Here are this month’s numbers. [pasted]</p>
+                <p class="w8-msg w8-msg--ai">Here’s a draft with a modern blue gradient theme!</p>
+                <p class="w8-msg w8-msg--you">No, use our colours. And our font.</p>
+                <p class="w8-msg w8-msg--you">
+                  <span>Attached:</span> all-hands-september.pptx. Use this structure.
+                </p>
+                <p class="w8-msg w8-msg--ai">
+                  Great idea! I’ve updated it to unlock synergies across the team.
+                </p>
+                <p class="w8-msg w8-msg--you">Make it sound like me. Not a press release.</p>
+                <p class="w8-msg w8-msg--you">And Priya joined last week, add her.</p>
+              </div>
+              <p class="w8-panel-foot">40 minutes in. You’re still fixing it.</p>
+            </article>
+
+            <article class="w8-panel w8-sys" aria-labelledby="w8-sys-h">
+              <header class="w8-panel-head w8-d">
+                <h3 class="w8-label" id="w8-sys-h">WITH THE SYSTEM</h3>
+                <span>1 message</span>
+              </header>
+              <div class="w8-chat w8-chat--sys">
+                <p class="w8-msg w8-msg--you">Make the deck for Friday’s all-hands.</p>
+                <ul class="w8-steps">
+                  <li>Read brand.md <span>· colours, fonts, logo</span></li>
+                  <li>Pulled October numbers <span>· Xero</span></li>
+                  <li>Checked the team <span>· Priya joined 21 Oct</span></li>
+                  <li>Opened September’s deck <span>· same structure</span></li>
+                  <li>Wrote it in your voice <span>· voice.md</span></li>
+                  <li>Built 9 slides</li>
+                </ul>
+                <div class="w8-ready">
+                  <div>
+                    <p class="w8-ready-title">Deck ready</p>
+                    <p class="w8-ready-sub">9 slides · your brand · October numbers</p>
+                  </div>
+                  <span class="w8-ready-open" aria-hidden="true">Open</span>
+                </div>
+              </div>
+              <p class="w8-panel-foot">One line in. It does the digging, you check it and present.</p>
+            </article>
           </div>
         </section>
 
-        <section class="lp-section lp-agents" aria-labelledby="lp-agents">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-agents">
-              <span class="lp-line">Three small jobs that take</span>
-              <span class="lp-line">the catching up <mark>off you.</mark></span>
-            </h2>
+        <!-- 4. What you leave with -->
+        <section class="w8-section w8-get" aria-labelledby="w8-get">
+          <div class="w8-head">
+            <h2 class="w8-h" id="w8-get">What you <br /><mark>leave with.</mark></h2>
+            <p class="w8-sub w8-sub--get">Sent after the session, so you can start that week.</p>
           </div>
-          <p class="lp-sub">Shown on Hartley &amp; Co, a made-up bookkeeping firm with 14 people.</p>
-          <div class="lp-agent-grid">
-            <article class="lp-panel lp-agent">
-              <h3>Morning brief</h3>
-              <p class="lp-agent-what">Reads your email, messages and calendar. Arrives at 7am.</p>
-              <div class="lp-agent-out">
-                <p class="lp-agent-meta">7:00 · Morning brief</p>
-                <p>
-                  3 things need you today.<br />1. Dan asked for a price yesterday. Reply drafted.<br />2.
-                  Priya’s VAT is due Friday. March receipts still missing.<br />3. Call with Leeds Dental
-                  at 2pm. Last call’s notes attached.
-                </p>
-              </div>
-              <p class="lp-agent-you">You decide what to do first</p>
-            </article>
-            <article class="lp-panel lp-agent">
-              <h3>Reply drafts</h3>
-              <p class="lp-agent-what">Reads the message, your prices and how you write.</p>
-              <div class="lp-agent-out">
-                <p class="lp-agent-meta">Draft · to Priya</p>
-                <p>
-                  Hi Priya, we still need March receipts for the Leeds site to file your
-                  VAT on Friday. Could you upload them by Wednesday? The link’s the same as
-                  last quarter.
-                </p>
-              </div>
-              <p class="lp-agent-you">You edit and send</p>
-            </article>
-            <article class="lp-panel lp-agent">
-              <h3>Call to follow up</h3>
-              <p class="lp-agent-what">Reads your call notes and what you offer. Runs after each call.</p>
-              <div class="lp-agent-out">
-                <p class="lp-agent-meta">Draft · to Amir</p>
-                <p>
-                  Hi Amir, thanks for today. You said January cash is the worry. I’ll send
-                  2 options for quarterly management accounts by Thursday, both with a cash
-                  forecast.
-                </p>
-              </div>
-              <p class="lp-agent-you">You check and send</p>
-            </article>
-          </div>
-        </section>
 
-        <section class="lp-section lp-section--center lp-get" aria-labelledby="lp-get">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-get">
-              <span class="lp-line">Everything you need</span>
-              <span class="lp-line">to <mark>build yours.</mark></span>
-            </h2>
+          <div class="w8-bento">
+            <div class="w8-bento-top">
+              <article class="w8-card w8-card--brain">
+                <div class="w8-card-head">
+                  <p class="w8-label">WHAT IT KNOWS</p>
+                  <h3>Your company brain</h3>
+                  <p class="w8-d">
+                    5 files AI reads before every job: who you are, what you charge, who you work with,
+                    how you write and what it must never do.
+                  </p>
+                  <p class="w8-m">5 files AI reads before every job.</p>
+                </div>
+                <div class="w8-files" aria-hidden="true">
+                  <ul class="w8-file-list">
+                    <li>company.md</li>
+                    <li class="is-on">prices.md</li>
+                    <li>customers.md</li>
+                    <li>voice.md</li>
+                    <li>rules.md</li>
+                  </ul>
+                  <div class="w8-file">
+                    <p class="w8-file-name">prices.md</p>
+                    <p class="w8-file-h"># What we charge</p>
+                    <p>- Service: <b>[name]</b> · <b>[price]</b></p>
+                    <p>- What’s included: <b>[list]</b></p>
+                    <p class="w8-d">- Never discount: <b>[rules]</b></p>
+                    <p class="w8-d">- How we quote: <b>[example]</b></p>
+                  </div>
+                </div>
+                <p class="w8-card-note">Fill them in yourself, or let it interview you.</p>
+              </article>
+
+              <div class="w8-bento-stack">
+                <article class="w8-card">
+                  <div class="w8-card-head">
+                    <p class="w8-label">WHAT IT DOES</p>
+                    <h3>4 ready-made skills</h3>
+                    <p>Jobs you ask for in one line. Each one reads your brain first.</p>
+                  </div>
+                  <ul class="w8-skills">
+                    <li>Morning brief</li>
+                    <li>Write it like me</li>
+                    <li>Call to follow-up</li>
+                    <li>Keep it current</li>
+                  </ul>
+                </article>
+
+                <article class="w8-card">
+                  <div class="w8-card-head">
+                    <p class="w8-label">WHAT RUNS ON ITS OWN</p>
+                    <h3>The agent rule</h3>
+                    <p>The 1-page template I build every agent from. Turn any job into one.</p>
+                  </div>
+                  <ol class="w8-rule">
+                    <li><span>1</span>A job you do every week</li>
+                    <li><span>2</span>What goes in</li>
+                    <li><span>3</span>What good looks like</li>
+                    <li><span>4</span>Who checks it</li>
+                  </ol>
+                </article>
+              </div>
+            </div>
+
+            <div class="w8-bento-bottom">
+              <article class="w8-card w8-card--small">
+                <div class="w8-card-head">
+                  <p class="w8-label">GETTING IT WORKING</p>
+                  <h3>7-day plan</h3>
+                  <p class="w8-d">20 minutes a day, from empty folder to your first agent.</p>
+                  <p class="w8-m">20 minutes a day to your first agent.</p>
+                </div>
+                <ol class="w8-days" aria-hidden="true">
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                  <li>4</li>
+                  <li>5</li>
+                  <li>6</li>
+                  <li class="is-on">7</li>
+                </ol>
+              </article>
+
+              <article class="w8-card w8-card--small">
+                <div class="w8-card-head">
+                  <p class="w8-label">GETTING IT WORKING</p>
+                  <h3>The recording</h3>
+                  <p>The full session to watch back.</p>
+                </div>
+                <div class="w8-rec w8-d" aria-hidden="true">
+                  <div class="w8-rec-win">
+                    <div class="w8-rec-bar"><i></i><i></i><i></i></div>
+                    <div class="w8-rec-body">
+                      <div class="w8-rec-nav"><i></i><i class="is-on"></i><i></i><i></i><i></i></div>
+                      <div class="w8-rec-text"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="/assets/ali.jpg" width="300" height="300" alt="" loading="lazy" />
+                </div>
+                <div class="w8-mrec w8-m" aria-hidden="true">
+                  <div class="w8-mrec-win">
+                    <div class="w8-mrec-bar"><i></i><i></i><i></i></div>
+                    <div class="w8-mrec-body"><i></i><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="w8-mrec-avatar"><i></i><i></i></div>
+                </div>
+              </article>
+
+              <article class="w8-card w8-card--qa">
+                <div class="w8-card-head">
+                  <p class="w8-label">ON THE CALL</p>
+                  <h3>Live Q&amp;A</h3>
+                  <p>Your questions answered with my setup open.</p>
+                </div>
+                <div class="w8-qa" aria-hidden="true">
+                  <p class="w8-qa-q">Can it read my Gmail?</p>
+                  <p class="w8-qa-a">Yes. Here’s how.</p>
+                </div>
+              </article>
+            </div>
           </div>
-          <p class="lp-sub">Sent after the session, so you can start that week.</p>
-          <ol class="lp-get-grid">
-            <li class="lp-panel">
-              <span class="lp-num">01</span>
-              <h3>The recording</h3>
-              <p>Watch it again while you build, with a chapter for each part.</p>
-            </li>
-            <li class="lp-panel">
-              <span class="lp-num">02</span>
-              <h3>Starter folder</h3>
-              <p>
-                Fill-in-the-blanks files for your company, prices, customers, voice and
-                rules. Works in Claude and Codex.
-              </p>
-            </li>
-            <li class="lp-panel">
-              <span class="lp-num">03</span>
-              <h3>3 agent templates</h3>
-              <p>
-                Morning brief, reply drafts and call to follow up, ready to switch on in the
-                Claude desktop app.
-              </p>
-            </li>
-            <li class="lp-panel">
-              <span class="lp-num">04</span>
-              <h3>7-day plan</h3>
-              <p>One 20-minute step a day, from an empty folder to your first agent running.</p>
-            </li>
-            <li class="lp-panel">
-              <span class="lp-num">05</span>
-              <h3>Live Q&amp;A</h3>
-              <p>Ask anything on the call. I answer with my own setup open.</p>
-            </li>
-            <li class="lp-panel lp-panel--cream">
-              <span class="lp-num">BONUS UNTIL 11 DEC</span>
-              <h3>Custom GPT move</h3>
-              <p>Move what’s in your custom GPTs into files you own, before they stop working.</p>
-            </li>
-          </ol>
-          <div class="lp-get-foot">
-            <p class="lp-sub">Runs on any Claude plan. No terminal, no code.</p>
-            <a class="lp-btn lp-btn--stack" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004">
-              <span data-book-label>Book your seat · $97</span>
+
+          <div class="w8-get-foot">
+            <p>Works with ChatGPT, Claude or whichever AI you already pay for. No code.</p>
+            <a class="w8-btn w8-btn--stack" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004">
+              <span>Book your seat · $97</span>
               <small data-when="short">Thursday 19 November · 16:00 UK time</small>
             </a>
           </div>
         </section>
 
-        <section class="lp-section lp-host" aria-labelledby="lp-host">
-          <div class="lp-head lp-host-head">
-            <h2 class="lp-h" id="lp-host">
-              <span class="lp-line">Built and run inside a</span>
-              <span class="lp-line"><mark>50-person agency.</mark></span>
-            </h2>
+        <!-- 5. Host -->
+        <section class="w8-section w8-host" aria-labelledby="w8-host">
+          <div class="w8-head">
+            <h2 class="w8-h" id="w8-host">Built and run inside a <br /><mark>50-person agency.</mark></h2>
           </div>
-          <div class="lp-host-bio">
-            <img src="/assets/ali.jpg" alt="Ali Qureshi" width="140" height="140" loading="lazy" />
+          <div class="w8-bio">
+            <img src="/assets/ali.jpg" alt="Ali Qureshi" width="300" height="300" loading="lazy" />
             <div>
               <h3>Ali Qureshi</h3>
-              <p>
-                I co-founded Adcrate, a 50-person performance creative agency, in 2022.
-                Before that I ran UK marketing for Honor.
+              <p class="w8-d">
+                I co-founded Adcrate, a 50-person performance creative agency, in 2022. I built the
+                agents that run a lot of it, and I’ll show you what worked and what broke.
               </p>
-              <p>
-                I’ve built the agents that run a lot of the agency and rolled them out to
-                the team. I’ll show you what worked and what broke, so you don’t learn it
-                the hard way.
-              </p>
+              <p class="w8-m">Co-founder of Adcrate. I built the agents that run a lot of it.</p>
             </div>
           </div>
-          <dl class="lp-stats">
+          <div class="w8-runs w8-d">
+            <h3 class="w8-label">WHAT I RUN AT THE AGENCY</h3>
+            <ul>
+              <li>Morning triage</li>
+              <li>Replies in my voice</li>
+              <li>Invoice chaser</li>
+              <li>Client health</li>
+              <li>Hiring shortlist</li>
+              <li>Weekly client reports</li>
+            </ul>
+          </div>
+          <dl class="w8-stats">
             <div><dt>2022</dt><dd>Co-founded Adcrate</dd></div>
             <div><dt>50</dt><dd>People on the team</dd></div>
             <div><dt>2,000+</dt><dd>Ads made every month</dd></div>
             <div><dt>50+</dt><dd>Brands across the US, UK and MENA</dd></div>
           </dl>
-          <div class="lp-brands">
-            <p class="lp-label">ADCRATE HAS WORKED WITH</p>
+          <div class="w8-brands">
+            <p>The same system is how we make ads for leading brands like</p>
             <ul>
               <li>Huel</li>
               <li>Harry’s</li>
@@ -328,109 +544,91 @@
           </div>
         </section>
 
-        <section class="lp-section lp-section--center lp-setup" aria-labelledby="lp-setup">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-setup">
-              <span class="lp-line">Rather not build it?</span>
-              <span class="lp-line">I’ll set it up <mark>with you.</mark></span>
-            </h2>
-          </div>
-          <p class="lp-sub lp-narrow">
-            Build it yourself with the pack. Or I’ll set it up on your business with you,
-            working in a week.
-          </p>
-          <ul class="lp-panel lp-setup-list">
-            <li>Your brain, built from the documents you send me</li>
-            <li>Your first agent, connected to one of your tools</li>
-            <li>A check that tells you if it ever stops running</li>
-            <li>30 days of support. Working on your data in 7 days or a full refund</li>
-          </ul>
-          <p class="lp-fine lp-narrow">
-            $999 founding price for the first cohorts, then $1,500. Your $97 ticket comes
-            off if you book within 10 days. I do these myself, 5 a month.
-          </p>
-        </section>
-
-        <section class="lp-section lp-section--center lp-seat" aria-labelledby="lp-seat">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-seat">
-              <span class="lp-line">One live <mark>session.</mark></span>
-            </h2>
-          </div>
-          <div class="lp-ticket">
-            <p class="lp-ticket-name">THE AI SETUP I RUN MY BUSINESS ON</p>
-            <p class="lp-ticket-price">$97</p>
+        <!-- 6. Your seat -->
+        <section class="w8-section w8-seat" aria-labelledby="w8-seat">
+          <h2 class="w8-h" id="w8-seat">One live <mark>session.</mark></h2>
+          <div class="w8-ticket">
+            <p class="w8-ticket-name">THE AI SETUP I RUN MY BUSINESS ON</p>
+            <p class="w8-ticket-price">$97</p>
             <ul>
-              <li>✓ 2 hours live with Ali, Thursday 19 November</li>
-              <li>✓ The recording and starter folder</li>
-              <li>✓ 3 agent templates and a 7-day plan</li>
+              <li>✓ 2 hours live, Thursday 19 November, with Q&amp;A</li>
+              <li>✓ Your company brain and 4 ready-made skills</li>
+              <li>✓ The agent rule, 7-day plan and recording</li>
             </ul>
-            <a class="lp-btn lp-btn--block" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
+            <a class="w8-btn w8-btn--block" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
               >Book your seat ↗</a
             >
-            <p class="lp-ticket-note">
-              <span data-when="range">16:00 to 18:00 UK time</span>. Can’t make it live? You still get everything.
+            <p class="w8-ticket-note">
+              <span data-when="range">16:00 to 18:00 UK time</span>.<br class="w8-d" /> Can’t make it
+              live?<br class="w8-m" /> You still get the recording.
             </p>
           </div>
         </section>
 
-        <section class="lp-section lp-faq" aria-labelledby="lp-faq">
-          <div class="lp-head">
-            <h2 class="lp-h" id="lp-faq">Questions</h2>
-          </div>
-          <div class="lp-faq-list">
-            <details class="question">
+        <!-- 7. FAQ -->
+        <section class="w8-section w8-faq" aria-labelledby="w8-faq">
+          <h2 class="w8-h" id="w8-faq">Questions</h2>
+          <div class="w8-faq-list">
+            <details>
               <summary>Do I need to be technical?</summary>
               <p>
-                No. It runs in the Claude desktop app. No terminal, no code. You edit plain
-                text files in normal words.
+                No. No terminal, no code. You fill in plain text files in normal words, and it runs
+                in the AI app you already use.
               </p>
             </details>
-            <details class="question">
+            <details>
               <summary>Is my business data safe?</summary>
               <p>
-                The files live on your computer. When Claude reads them, they’re processed
-                by Anthropic like any other chat. I’ll show you the settings I use and what
-                I keep out of the folder.
+                The files live on your computer. When your AI reads them, they’re processed by your AI
+                provider like any other chat. I’ll show you the settings I use and what I keep out of the folder.
               </p>
             </details>
-            <details class="question">
+            <details>
               <summary>Will it send things without me?</summary>
               <p>No. The agents read, flag and draft. You decide what goes out.</p>
             </details>
-            <details class="question">
+            <details>
               <summary>What do I need?</summary>
               <p>
-                Any Claude account. I’m on Max. I’ll show you how to run it on your plan
-                rather than pay-per-use API tokens, so the cost doesn’t creep up on you. It
-                works with Codex too. I use both.
+                Any paid AI plan, like ChatGPT or Claude. I use Claude and I’ll show you how to run it
+                on your plan rather than pay-per-use API tokens, so the cost doesn’t creep up on you.
               </p>
             </details>
-            <details class="question">
+            <details>
               <summary>Is this a build-along?</summary>
               <p>
-                No. You watch me set it up and run it, ask questions, then build yours with
-                the pack and the 7-day plan.
+                No. You watch me set it up and run it, ask questions, then build yours with the pack
+                and the 7-day plan.
+              </p>
+            </details>
+            <details>
+              <summary>Can you set it up for me?</summary>
+              <p>
+                Yes. If you’d rather not build it yourself, I’ll set it up on your business with you.
+                It’s $999 for the first cohorts, and your $97 ticket comes off if you book within 10
+                days.
               </p>
             </details>
           </div>
         </section>
 
-        <section class="lp-section lp-section--center lp-close" aria-labelledby="lp-close">
-          <h2 class="lp-h lp-h--close" id="lp-close">
-            <span class="lp-line">Stop explaining your business.</span>
-            <span class="lp-line">Set up AI that <mark>knows it.</mark></span>
+        <!-- 8. Close -->
+        <section class="w8-section w8-close" aria-labelledby="w8-close">
+          <h2 class="w8-h w8-h--close" id="w8-close">
+            Stop explaining <br class="w8-m" />your business. <br />Set up AI that
+            <br class="w8-m" /><mark>knows it.</mark>
           </h2>
-          <a class="lp-btn" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
+          <a class="w8-btn" data-book href="https://buy.stripe.com/aFa9ATeBJgSg4SUgOG24004"
             >Book your seat · $97 ↗</a
           >
-          <p class="lp-when">
-            <span data-when="long">Thursday 19 November, 16:00–18:00 UK time</span> · 2 hours live · Recording included
+          <p class="w8-when">
+            <span data-when="long">Thursday 19 November, 16:00–18:00 UK time</span
+            ><span class="w8-when-sep"> · </span>2 hours live · Recording included
           </p>
         </section>
       </main>
 
-      <footer class="site-footer">
+      <footer class="site-footer w8-footer">
         <span>Ali Qureshi</span
         ><a
           class="social-icon"
