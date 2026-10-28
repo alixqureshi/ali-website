@@ -54,6 +54,10 @@ Purchase, matching the pixel's behaviour.
 The Stripe webhook signing secret and the Conversions API token live only in
 Railway variables, never in this repository.
 
+The existing Function source, configuration notes and handler tests are versioned
+in [`services/meta-capi/`](services/meta-capi/README.md). Website deployment does
+not redeploy that Function.
+
 ## Google Analytics
 
 The same five marketing pages load `assets/analytics.js`, configured by
