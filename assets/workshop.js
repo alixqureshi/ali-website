@@ -215,7 +215,8 @@
   const end = new Date("2026-11-19T18:00:00Z");
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   if (!zone) return;
-  const label = zone === "Europe/London" ? "UK" : "your time";
+  const city = zone.split("/").pop().replace(/_/g, " ");
+  const label = zone === "Europe/London" ? "UK time" : `${city} time`;
   const day = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long" }).format(start);
   const time = (d) => new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(d);
   const text = {
