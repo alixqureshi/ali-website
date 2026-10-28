@@ -1,4 +1,4 @@
-// Optional integration draft. Not imported by the deployed Railway Function.
+// Buyer fulfillment integration. Inlined into the Railway Function by sync-fulfillment.mjs.
 // Caller must verify Stripe's raw-body signature before invoking this module.
 const WORKSHOP_LINK = "plink_1UUtKzGUKYQC9sJNfefzx2NZ";
 type Config = Record<string, string | undefined>;

@@ -1,4 +1,4 @@
-// AI with Ali: Stripe checkout -> Meta Conversions API Purchase.
+// AI with Ali: verified Stripe checkout -> Meta Purchase and Kit buyer tagging.
 //
 // Stripe sends checkout.session.completed here. For a paid, live session that
 // came from the workshop payment link, this sends one Purchase to Meta with the
@@ -11,7 +11,9 @@
 //   META_PIXEL_ID          defaults to the AI with Ali pixel
 //   META_TEST_EVENT_CODE   optional, routes events to Test events in Events Manager
 //   STRIPE_PAYMENT_LINKS   optional, comma separated plink_ IDs to accept
-//   ALLOW_TEST_MODE        "1" to accept Stripe test mode sessions (testing only)
+//   KIT_API_KEY            Kit v4 key for the dedicated buyer integration (secret)
+//   KIT_FULFILLMENT_ENABLED "true" enables buyer tagging, default off
+//   KIT_BUYER_TAG_ID        optional, defaults to the workshop buyer tag
 
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 
@@ -139,6 +141,78 @@ async function sendPurchase(event: any, session: any) {
   return { value, currency, meta: `events_received=${result.events_received}` };
 }
 
+// BEGIN INLINED KIT FULFILLMENT
+// Buyer fulfillment integration. Inlined into the Railway Function by sync-fulfillment.mjs.
+// Caller must verify Stripe's raw-body signature before invoking this module.
+const WORKSHOP_LINK = "plink_1UUtKzGUKYQC9sJNfefzx2NZ";
+type Config = Record<string, string | undefined>;
+type Transport = typeof fetch;
+
+function isPaidWorkshop(event: any, config: Config): boolean {
+  const s = event?.data?.object;
+  const links = (config.STRIPE_PAYMENT_LINKS || WORKSHOP_LINK).split(",").map(x => x.trim()).filter(Boolean);
+  return ["checkout.session.completed", "checkout.session.async_payment_succeeded"].includes(event?.type)
+    && event.livemode === true && s?.livemode === true
+    && s.object === "checkout.session" && /^cs_live_[A-Za-z0-9]+$/.test(s.id || "")
+    && s.mode === "payment" && s.payment_status === "paid"
+    && Number.isSafeInteger(s.amount_total) && s.amount_total > 0
+    && /^[a-z]{3}$/.test(s.currency || "") && links.includes(s.payment_link);
+}
+
+async function fulfillWorkshopBuyer(event: any, config: Config, transport: Transport = fetch) {
+  if (config.KIT_FULFILLMENT_ENABLED !== "true") return { status: "disabled" };
+  if (!isPaidWorkshop(event, config)) return { status: "ineligible" };
+  if (!config.KIT_API_KEY) throw new Error("KIT_API_KEY is required when fulfillment is enabled");
+  const tag = config.KIT_BUYER_TAG_ID || "25020379";
+  if (!/^\d+$/.test(tag)) throw new Error("Invalid KIT_BUYER_TAG_ID");
+  const session = event.data.object;
+  const email = String(session.customer_details?.email || session.customer_email || "").trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Paid buyer email is unavailable; manual fulfillment required");
+  async function request(path: string, body: unknown) {
+    const res = await transport(`https://api.kit.com/v4${path}`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "X-Kit-Api-Key": config.KIT_API_KEY! },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(8000),
+    });
+    // Never log provider payloads, buyer details, or credentials on failure.
+    if (!res.ok) throw new Error(`Kit HTTP ${res.status}`);
+    return res.json();
+  }
+  // Kit's documented upsert preserves existing subscriber state; it does not
+  // reactivate an unsubscribed subscriber. No marketing-consent tag is applied.
+  const result = await request("/subscribers", { email_address: email, state: "active" });
+  const subscriber = result.subscriber;
+  if (!Number.isSafeInteger(subscriber?.id) || subscriber.id <= 0) throw new Error("Kit did not acknowledge a subscriber");
+  if (subscriber.state !== "active") return { status: "manual_delivery_required", reason: "subscriber_not_active" };
+  // Tagging an already-tagged subscriber returns200 rather than creating a new
+  // subscription. Let the single native buyer-tag automation enroll the sequence;
+  // do not add them to the sequence on every Stripe/Meta retry.
+  const tagged = await request(`/tags/${tag}/subscribers/${subscriber.id}`, {});
+  if (tagged.subscriber?.id !== subscriber.id) throw new Error("Kit did not acknowledge the buyer tag");
+  return { status: "tagged", subscriberId: subscriber.id };
+}
+
+async function processVerifiedWorkshopPurchase(
+  event: any,
+  config: Config,
+  sendMeta: (event: any, session: any) => Promise<unknown>,
+  transport: Transport = fetch,
+) {
+  if (!isPaidWorkshop(event, config)) return { status: "ineligible", retry: false };
+  // Both effects start independently. Tracking opt-out affects Meta only, and
+  // Meta errors cannot prevent the buyer's confirmation workflow from running.
+  const meta = event.data.object.client_reference_id === "optout"
+    ? Promise.resolve({ status: "privacy_opt_out" })
+    : Promise.resolve().then(() => sendMeta(event, event.data.object));
+  const [metaResult, buyerResult] = await Promise.allSettled([
+    meta, fulfillWorkshopBuyer(event, config, transport),
+  ]);
+  return { status: "processed", meta: metaResult, buyer: buyerResult,
+    retry: metaResult.status === "rejected" || buyerResult.status === "rejected" };
+}
+// END INLINED KIT FULFILLMENT
+
 const json = (status: number, data: unknown) =>
   new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json" } });
 
@@ -164,16 +238,23 @@ Bun.serve({
       return json(200, { skipped: reason });
     }
 
-    try {
-      if (session.client_reference_id === "optout") return json(200, { skipped: "visitor opted out" });
-      const sent = await sendPurchase(event, session);
-      console.log(`sent Purchase ${session.id} ${sent.value} ${sent.currency} ${sent.meta}`);
-      return json(200, { sent: true });
-    } catch (err) {
-      // A non-2xx response makes Stripe retry, and Meta dedupes on event_id.
-      console.error(`failed ${session.id}: ${(err as Error).message}`);
-      return json(502, { error: "meta send failed" });
+    const effects = await processVerifiedWorkshopPurchase(event, env, sendPurchase);
+    const buyer = effects.buyer!;
+    const meta = effects.meta!;
+    const privacyOptOut = session.client_reference_id === "optout";
+    const buyerStatus = buyer.status === "fulfilled" ? buyer.value.status : "failed";
+    if (effects.retry) {
+      // Both effects already ran. Retry keeps Meta's event ID and Kit's buyer tag.
+      console.error(`purchase effects failed ${session.id}: meta=${meta.status} buyer=${buyerStatus}`);
+      return json(502, { error: "purchase processing incomplete", buyer: buyerStatus });
     }
+    if (buyerStatus === "manual_delivery_required") {
+      console.warn(`manual buyer delivery required ${session.id}`);
+    }
+    console.log(`processed Purchase ${session.id}: meta=${privacyOptOut ? "privacy_opt_out" : "sent"} buyer=${buyerStatus}`);
+    return json(200, { sent: !privacyOptOut, buyer: buyerStatus,
+      ...(privacyOptOut ? { skipped: "visitor opted out" } : {}) });
+
   },
 });
 

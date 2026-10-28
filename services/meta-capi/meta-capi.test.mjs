@@ -30,3 +30,57 @@ test('uses actual tax inclusive amount',async()=>{const e=event();e.data.object.
 test('handles zero decimal currency',async()=>{const e=event();e.data.object.currency='jpy';e.data.object.amount_total=15000;await send(e);assert.equal(requests[0].body.data[0].custom_data.value,15000);});
 test('Meta failure returns retryable 502',async()=>{const f=globalThis.fetch;globalThis.fetch=async()=>new Response('error',{status:500});assert.equal((await send(event())).status,502);globalThis.fetch=f;});
 test('Meta no acceptance returns retryable 502',async()=>{const f=globalThis.fetch;globalThis.fetch=async()=>Response.json({events_received:0});assert.equal((await send(event())).status,502);globalThis.fetch=f;});
+
+// Exercise the exact single-file Railway handler with both providers enabled.
+async function withBuyer(configure, run) {
+  const originalFetch=globalThis.fetch;
+  const originalKey=env.KIT_API_KEY, originalFlag=env.KIT_FULFILLMENT_ENABLED;
+  const calls=[];let tagCalls=0;
+  env.KIT_API_KEY='fixture-kit-key';env.KIT_FULFILLMENT_ENABLED='true';
+  globalThis.fetch=async(url,opts)=>{
+    calls.push({url,body:JSON.parse(opts.body)});
+    if(url.startsWith('https://api.kit.com')){
+      if(configure.kitFailure)return new Response('',{status:503});
+      const tagging=url.includes('/tags/');if(tagging)tagCalls++;
+      return Response.json({subscriber:{id:321,state:configure.state||'active'}},{status:tagging&&tagCalls>1?200:201});
+    }
+    if(configure.metaFailure)return new Response('',{status:503});
+    return Response.json({events_received:1});
+  };
+  try{await run(calls);}finally{
+    globalThis.fetch=originalFetch;
+    if(originalKey===undefined)delete env.KIT_API_KEY;else env.KIT_API_KEY=originalKey;
+    if(originalFlag===undefined)delete env.KIT_FULFILLMENT_ENABLED;else env.KIT_FULFILLMENT_ENABLED=originalFlag;
+  }
+}
+test('single-file handler runs Meta and Kit for a signed paid buyer',async()=>withBuyer({},async calls=>{
+  const r=await send(event());assert.equal(r.status,200);assert.equal((await r.json()).buyer,'tagged');
+  assert.equal(calls.filter(x=>x.url.startsWith('https://api.kit.com')).length,2);
+  assert.equal(calls.filter(x=>x.url.startsWith('https://graph.facebook.com')).length,1);
+}));
+test('single-file handler fulfills privacy-opted-out buyer without Meta',async()=>withBuyer({},async calls=>{
+  const e=event();e.data.object.client_reference_id='optout';const r=await send(e);
+  assert.equal(r.status,200);assert.deepEqual(await r.json(),{sent:false,buyer:'tagged',skipped:'visitor opted out'});
+  assert.equal(calls.length,2);assert.ok(calls.every(x=>x.url.startsWith('https://api.kit.com')));
+}));
+test('single-file handler completes buyer tagging despite Meta failure',async()=>withBuyer({metaFailure:true},async calls=>{
+  const r=await send(event());assert.equal(r.status,502);assert.equal((await r.json()).buyer,'tagged');assert.ok(calls.some(x=>x.url.includes('/tags/')));
+}));
+test('single-file handler still sends Meta despite Kit failure',async()=>withBuyer({kitFailure:true},async calls=>{
+  const r=await send(event());assert.equal(r.status,502);assert.ok(calls.some(x=>x.url.startsWith('https://graph.facebook.com')));
+}));
+test('single-file webhook replay uses the same buyer tag and Meta event ID',async()=>withBuyer({},async calls=>{
+  assert.equal((await send(event())).status,200);assert.equal((await send(event())).status,200);
+  const tags=calls.filter(x=>x.url.includes('/tags/'));assert.equal(tags.length,2);assert.equal(tags[0].url,tags[1].url);
+  const metas=calls.filter(x=>x.url.startsWith('https://graph.facebook.com'));assert.equal(metas[0].body.data[0].event_id,metas[1].body.data[0].event_id);
+  assert.ok(calls.every(x=>!x.url.includes('/sequences/')));
+}));
+test('single-file handler exposes manual delivery need for unsubscribed buyer',async()=>withBuyer({state:'cancelled'},async calls=>{
+  const r=await send(event());assert.equal(r.status,200);assert.equal((await r.json()).buyer,'manual_delivery_required');assert.ok(!calls.some(x=>x.url.includes('/tags/')));
+}));
+test('single-file handler never sends test Stripe sessions to Kit',async()=>withBuyer({},async calls=>{
+  const e=event();e.livemode=false;e.data.object.livemode=false;assert.equal((await send(e)).status,200);assert.equal(calls.length,0);
+}));
+test('single-file handler rejects unsigned buyer payload before either provider',async()=>withBuyer({},async calls=>{
+  assert.equal((await send(event(),{signature:'invalid'})).status,400);assert.equal(calls.length,0);
+}));

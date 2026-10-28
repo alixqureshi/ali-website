@@ -6,7 +6,8 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test *.test.mjs",
-    "start": "bun run meta-capi.ts"
+    "test": "node sync-fulfillment.mjs --check && node --test *.test.mjs",
+    "start": "bun run meta-capi.ts",
+    "sync": "node sync-fulfillment.mjs"
   }
 }
