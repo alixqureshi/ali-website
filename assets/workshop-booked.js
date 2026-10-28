@@ -1,43 +1,13 @@
-/* Booked page: record one Purchase per Stripe checkout session, then tidy the URL. */
-(function (window, document) {
+/* Remove checkout identifiers before analytics loads. A redirect URL is not proof of payment. */
+(function (window) {
   "use strict";
 
   var params = new URLSearchParams(window.location.search);
-  var session = params.get("session_id") || "";
-  // Live sessions only, so test checkouts never reach the ad account. This is
-  // the browser half; meta-capi sends the Stripe-confirmed Purchase with the
-  // same event ID and Meta keeps one.
-  if (!/^cs_live_[A-Za-z0-9]+$/.test(session)) return;
+  if (!params.has("session_id")) return;
 
-  // Strip the session ID from the address bar so it isn't shared or bookmarked.
+  // Purchase is recorded only by meta-capi after Stripe verifies a paid session.
+  // Never send Meta or Google purchase events from an unverified query string.
   params.delete("session_id");
   var query = params.toString();
   window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : "") + window.location.hash);
-
-  var key = "aiwa-purchase-" + session;
-  try {
-    if (window.localStorage.getItem(key)) return;
-    window.localStorage.setItem(key, "1");
-  } catch (e) {
-    // Storage blocked: the eventID still lets Meta deduplicate.
-  }
-
-  var value = { value: 97, currency: "USD" };
-  if (window.fbq) {
-    window.fbq(
-      "trackSingle",
-      "1167132298977136",
-      "Purchase",
-      { value: 97, currency: "USD", content_name: "Build your AI brain", content_type: "product" },
-      { eventID: session }
-    );
-  }
-  if (window.gtag) {
-    window.gtag("event", "purchase", {
-      transaction_id: session,
-      value: value.value,
-      currency: value.currency,
-      items: [{ item_id: "build-your-ai-brain", item_name: "Build your AI brain", price: 97, quantity: 1 }]
-    });
-  }
-})(window, document);
+})(window);
