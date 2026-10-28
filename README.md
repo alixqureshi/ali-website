@@ -21,7 +21,7 @@ Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http:
 - Contact is a mailto draft, not a server submission. The visitor must send the draft in their email app. A status message states that explicitly.
 - Newsletter signup posts to the existing public Kit form. If Kit needs additional verification, the form links to the hosted signup rather than claiming success.
 - `.github/workflows/fetch-posts.yml` refreshes `posts.json` from published Kit broadcasts. Only real, public editions appear in the bookshelf. Keep private API credentials in GitHub Actions secrets, never in frontend code.
-- The workshop page lists the USD97 ticket, the call-notes-to-proposal demonstration, DIY materials and an optional USD999 setup. It currently accepts enquiries: there is no payment link, confirmed session date or automated attendee email sequence. Do not describe its enquiry CTA as a paid booking.
+- The workshop page sells a USD97 ticket through Stripe for “The AI setup I run my business on”, 19 November 2026, 16:00–18:00 UK. The buyer pack is the company brain files, four skill files, an agent template, the 7-day plan and recording. The booked route is a public details page, not a payment verification endpoint. Buyer confirmation and joining instructions must be driven by verified payment automation.
 - The video honours reduced motion. The newsletter library supports keyboard navigation and returns focus when closed. Without JavaScript the library remains visible.
 
 ## Meta pixel
@@ -39,17 +39,11 @@ script on marketing consent. No noscript image bypass is installed.
 
 ### Workshop Purchase
 
-`Purchase` is sent twice with the same event ID (the Stripe checkout session
-ID), and Meta keeps one:
-
-- **Browser:** `assets/workshop-booked.js` fires it on the booked page when the
-  Stripe redirect carries a `cs_live_` session ID. Test sessions are ignored.
-- **Server:** the `meta-capi` Railway Function (project `ai-with-ali-checkout`)
-  receives Stripe's `checkout.session.completed` webhook at
-  `/stripe/webhook`, checks the signature, and sends the Purchase through the
-  Conversions API with hashed buyer details. It only sends paid, live sessions
-  whose success URL is the booked page. This catches buyers who never reach the
-  booked page.
+`Purchase` is sent only by the `meta-capi` Railway Function (project
+`ai-with-ali-checkout`) after a signed Stripe webhook confirms a paid, live
+checkout for the workshop. The browser does not trust `session_id` query
+parameters or emit Meta/Google purchase events. `assets/workshop-booked.js`
+removes the checkout identifier before analytics loads; it does not verify payment.
 
 The workshop page passes the visitor's `_fbp` and `_fbc` values to Stripe as
 `client_reference_id` (format `a1-…`, documented in `assets/workshop.js`) so
