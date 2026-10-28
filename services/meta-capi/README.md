@@ -24,7 +24,7 @@ This directory versions the source already running as the Railway `meta-capi` Fu
 | Workshop payment link | `plink_1UUtKzGUKYQC9sJNfefzx2NZ` |
 | Meta dataset | `1167132298977136` |
 | Runtime | Railway Function, Bun 1.4.4 |
-| Source deployment | `fa3ebc20-e932-4204-b05d-35dab60601a6`, SUCCESS observed 28 October 2026 UTC |
+| Prior CAPI-only deployment | `fa3ebc20-e932-4204-b05d-35dab60601a6`, SUCCESS observed 28 October 2026 UTC |
 
 Keep one function instance of this integration; do not provision a second webhook consumer merely to deploy a source change. The unused `checkout-api` service is not required.
 
@@ -44,7 +44,7 @@ Store credentials only in Railway variables. Never put secret values in source, 
 
 The existing legacy `ALLOW_TEST_MODE` variable is not used by the hardened handler. Test Stripe sessions are always rejected by this production source. Do not toggle live configuration to rehearse a sandbox flow.
 
-No Kit buyer fulfillment or GA4 purchase submission is implemented here. Paid-buyer email automation is a separate integration; a valid payment must not imply marketing consent.
+GA4 purchase submission is not implemented here. Kit buyer tagging is wired separately from marketing consent; email sending still depends on the native automation and sequence release state.
 
 ## Validation
 
@@ -71,23 +71,36 @@ After tests and review, replace the existing Function's complete source with thi
 
 When changing payment eligibility or fulfillment, verify the exact intended Stripe product/link and use an isolated sandbox for Stripe-generated tests. Do not manufacture paid live Stripe events or generate production Purchase events for a test.
 
-## Optional buyer fulfillment adapter (not deployed)
+## Buyer fulfillment integration
 
-`kit-fulfillment.ts` is a dormant adapter prepared for the buyer email integration. It is **not imported by `meta-capi.ts`**, not deployed, and cannot send email or call Kit merely by merging this PR. It is disabled unless `KIT_FULFILLMENT_ENABLED` is exactly `true`; enabling a variable alone on the existing Function does not wire it in.
+`kit-fulfillment.ts` is the readable Kit adapter. `sync-fulfillment.mjs` embeds it into `meta-capi.ts` so the Railway Function remains a single self-contained file with no relative imports. After changing the adapter run `npm run sync`, then `npm test`; tests fail if the embedded source is stale. Deploy only `meta-capi.ts`.
 
-Its additional configuration names are `KIT_FULFILLMENT_ENABLED`, `KIT_API_KEY` and optional `KIT_BUYER_TAG_ID`. Keep the flag false/unset and do not create or copy a credential without the approved access grant. The buyer tag defaults to `25020379`. The intended native Kit automation is buyer tag → booking sequence `2948382`; automation `2155405` is being configured separately and remains paused until release.
+Buyer tagging is disabled unless `KIT_FULFILLMENT_ENABLED` is exactly `true`. Additional variables:
 
-The adapter revalidates paid workshop eligibility, upserts the buyer, and adds only the buyer tag. It never sets an offers/marketing-consent tag or directly reenrolls a sequence. Kit's upsert preserves an existing subscriber's state; the adapter requires manual delivery for a non-active subscriber rather than reactivating them. Marketing broadcasts must still require the separate explicit consent segment. A newly active Kit record is not evidence of marketing consent.
+| Variable | Purpose |
+| --- | --- |
+| `KIT_FULFILLMENT_ENABLED` | Explicit opt-in to buyer tagging; default off. |
+| `KIT_API_KEY` | Dedicated Kit v4 integration key stored only in Railway. |
+| `KIT_BUYER_TAG_ID` | Optional override; defaults to buyer tag `25020379`. |
 
-`processVerifiedWorkshopPurchase` is an integration helper for use **after raw-body Stripe signature verification**. It starts Meta and Kit effects independently. Meta privacy opt-out skips tracking only; it does not skip buyer fulfillment. Meta failure cannot prevent Kit from running. A failed effect requests a webhook retry, while already-applied buyer tags return HTTP200 from Kit without adding a new tag transition. Keep the native buyer automation limited to one enrollment per subscriber; do not remove/re-add the tag on retries.
+The intended native Kit automation `2155405` runs buyer tag → remove welcome-active → booking sequence `2948382`. That automation and sequence must remain inactive with unpublished emails during setup; sequence repeat is false. Tagging alone must not be described as a sent buyer confirmation. Check the live automation/sequence state before activating delivery.
 
-Before wiring this helper into production:
+After verified payment, the handler starts Meta and Kit independently. Meta tracking opt-out skips Meta only; it still fulfills the buyer. Meta failure cannot prevent Kit from running. A provider failure returns HTTP502 so Stripe retries, retaining the Meta session event ID and the same Kit buyer tag. Kit documents HTTP200 when a subscriber already has a tag, so retries do not create a new tag transition. The native booking sequence must also retain one-time enrollment; do not remove/re-add buyer tags on retries.
 
-1. Verify the native automation's buyer-tag trigger, one-time enrollment, booking sequence content, refund suppression and sending-domain settings. Leave it paused until the release checks pass.
-2. Obtain approved Kit access and supply the secret through Railway variables. Do not copy a broad Composio credential into Railway.
-3. Inline the adapter functions into the Railway Function's complete single-file source (relative imports are not supported by that runtime), and replace the current Meta-only side-effect block with the helper. Handle its `retry` result with HTTP502 and report `manual_delivery_required` for operator action without logging buyer PII. Preserve the verified-signature and payment-eligibility boundaries.
-4. Rehearse normal payment, privacy opt-out, provider failure, replay and refund suppression with an isolated test workflow before enabling delivery. No Kit calls or emails have been sent by these tests.
+The adapter upserts and tags buyers, without setting offers/marketing-consent tags or enrolling a sequence directly. Kit's documented upsert preserves an existing subscriber's state. For non-active subscribers the handler returns and logs `manual_delivery_required` rather than reactivating them. Handle these manually through a suitable transactional delivery route; do not interpret the webhook's HTTP200 as email delivery. Marketing broadcasts must still require the separate explicit-consent segment. A newly active Kit record is not marketing consent.
 
-There are 12 additional isolated adapter tests, bringing `npm test` to 33 passing tests. They cover default-off behavior, explicit configuration, paid-only eligibility, privacy-independent fulfillment, provider failure isolation, idempotent tagging rather than sequence reenrollment, unsubscribed-state preservation and missing buyer email. These tests do not establish exactly-once delivery by Kit; that final behavior also depends on the native automation settings and a release rehearsal.
+41 isolated tests run without network access: 21 original CAPI tests, 12 adapter tests, and 8 tests exercising the exact self-contained handler with both providers enabled. They cover privacy opt-out, failure isolation, webhook replay, subscriber state, paid-link restrictions, and unsigned/test rejection. No real buyer or email is created by these tests.
+
+## Refund suppression boundary
+
+Automatic refunds are not implemented. The current Stripe endpoint subscribes only to paid checkout events. A generic `charge.refunded` event from the shared Adcrate account does not identify the workshop payment link. There is no Stripe API credential or durable session/payment-intent ledger in this service to establish that relationship. Do not guess from buyer email or amount; that could suppress workshop access after an unrelated Adcrate refund.
+
+Before any refund is processed for this workshop, an operator must verify the exact workshop purchase in Stripe and apply Kit refund tag `25020380` to that buyer. The booking sequence, buyer segment and prospect segment exclude that tag. This tags/suppresses delivery only; it does not create a Stripe refund. Do not remove the buyer tag and re-add it later as a workaround, because that can retrigger automation. Automated refund handling requires an authoritative payment-intent→workshop mapping and replay/out-of-order tests before adding a signed refund-event subscription.
+
+## Safe release checks
+
+1. Store the approved dedicated key in Railway and verify it by a read-only Kit account request without exposing it. Check enabled/disabled flag names, intended tag and native flow/sequence states.
+2. Deploy the self-contained source to the existing Function. Observe SUCCESS for that exact deployment, compare source readback and verify health plus unsigned/test/ineligible payload rejection.
+3. Verify both providers in the local handler tests. Do not send a synthetic paid live buyer through production. Use an isolated Stripe sandbox and separate Kit test workflow for a real provider integration rehearsal once available. Keep live automation inactive until buyer delivery is explicitly released.
 
 Primary API references: [subscriber upsert](https://developers.kit.com/api-reference/subscribers/create-a-subscriber), [tag a subscriber](https://developers.kit.com/api-reference/tags/tag-a-subscriber). The latter documents HTTP200 when the subscriber already has the tag.
