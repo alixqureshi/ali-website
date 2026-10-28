@@ -70,3 +70,24 @@ Read the currently deployed Function source first and compare it with this direc
 After tests and review, replace the existing Function's complete source with this file through Railway's Function source editor or `update-function-source-code` tool, preserving existing variables and endpoint. This operation deploys immediately unless staged. Do not run a bare new-project deployment from this directory. Observe SUCCESS for the exact deployment and verify health/signature rejection before claiming completion. Roll back using the previous Railway deployment/source if needed.
 
 When changing payment eligibility or fulfillment, verify the exact intended Stripe product/link and use an isolated sandbox for Stripe-generated tests. Do not manufacture paid live Stripe events or generate production Purchase events for a test.
+
+## Optional buyer fulfillment adapter (not deployed)
+
+`kit-fulfillment.ts` is a dormant adapter prepared for the buyer email integration. It is **not imported by `meta-capi.ts`**, not deployed, and cannot send email or call Kit merely by merging this PR. It is disabled unless `KIT_FULFILLMENT_ENABLED` is exactly `true`; enabling a variable alone on the existing Function does not wire it in.
+
+Its additional configuration names are `KIT_FULFILLMENT_ENABLED`, `KIT_API_KEY` and optional `KIT_BUYER_TAG_ID`. Keep the flag false/unset and do not create or copy a credential without the approved access grant. The buyer tag defaults to `25020379`. The intended native Kit automation is buyer tag → booking sequence `2948382`; automation `2155405` is being configured separately and remains paused until release.
+
+The adapter revalidates paid workshop eligibility, upserts the buyer, and adds only the buyer tag. It never sets an offers/marketing-consent tag or directly reenrolls a sequence. Kit's upsert preserves an existing subscriber's state; the adapter requires manual delivery for a non-active subscriber rather than reactivating them. Marketing broadcasts must still require the separate explicit consent segment. A newly active Kit record is not evidence of marketing consent.
+
+`processVerifiedWorkshopPurchase` is an integration helper for use **after raw-body Stripe signature verification**. It starts Meta and Kit effects independently. Meta privacy opt-out skips tracking only; it does not skip buyer fulfillment. Meta failure cannot prevent Kit from running. A failed effect requests a webhook retry, while already-applied buyer tags return HTTP200 from Kit without adding a new tag transition. Keep the native buyer automation limited to one enrollment per subscriber; do not remove/re-add the tag on retries.
+
+Before wiring this helper into production:
+
+1. Verify the native automation's buyer-tag trigger, one-time enrollment, booking sequence content, refund suppression and sending-domain settings. Leave it paused until the release checks pass.
+2. Obtain approved Kit access and supply the secret through Railway variables. Do not copy a broad Composio credential into Railway.
+3. Inline the adapter functions into the Railway Function's complete single-file source (relative imports are not supported by that runtime), and replace the current Meta-only side-effect block with the helper. Handle its `retry` result with HTTP502 and report `manual_delivery_required` for operator action without logging buyer PII. Preserve the verified-signature and payment-eligibility boundaries.
+4. Rehearse normal payment, privacy opt-out, provider failure, replay and refund suppression with an isolated test workflow before enabling delivery. No Kit calls or emails have been sent by these tests.
+
+There are 12 additional isolated adapter tests, bringing `npm test` to 33 passing tests. They cover default-off behavior, explicit configuration, paid-only eligibility, privacy-independent fulfillment, provider failure isolation, idempotent tagging rather than sequence reenrollment, unsubscribed-state preservation and missing buyer email. These tests do not establish exactly-once delivery by Kit; that final behavior also depends on the native automation settings and a release rehearsal.
+
+Primary API references: [subscriber upsert](https://developers.kit.com/api-reference/subscribers/create-a-subscriber), [tag a subscriber](https://developers.kit.com/api-reference/tags/tag-a-subscriber). The latter documents HTTP200 when the subscriber already has the tag.

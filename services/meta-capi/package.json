@@ -6,7 +6,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test meta-capi.test.mjs",
+    "test": "node --test *.test.mjs",
     "start": "bun run meta-capi.ts"
   }
 }
