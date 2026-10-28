@@ -27,10 +27,8 @@
 
   if (CHECKOUT_URL) {
     for (const a of document.querySelectorAll("[data-book]")) {
+      // The page HTML carries the button labels; only the link is set here.
       a.href = CHECKOUT_URL;
-      const label = a.querySelector("[data-book-label]");
-      if (label) label.textContent = "Book your seat · $97";
-      else a.textContent = "Book your seat ↗";
       // Read the cookies at click time: the pixel sets _fbp after the page loads.
       const withRef = () => {
         const url = new URL(CHECKOUT_URL);
