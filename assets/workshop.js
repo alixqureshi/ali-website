@@ -208,3 +208,22 @@
   );
   io.observe(section);
 })();
+
+// Show the session time in the visitor's own time zone. The HTML carries the UK time as the fallback.
+(() => {
+  const start = new Date("2026-11-19T16:00:00Z");
+  const end = new Date("2026-11-19T18:00:00Z");
+  const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if (!zone) return;
+  const label = zone === "Europe/London" ? "UK" : "your time";
+  const day = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long" }).format(start);
+  const time = (d) => new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(d);
+  const text = {
+    long: `${day}, ${time(start)}–${time(end)} ${label}`,
+    short: `${day} · ${time(start)} ${label}`,
+    range: `${time(start)} to ${time(end)} ${label}`,
+  };
+  for (const el of document.querySelectorAll("[data-when]")) {
+    if (text[el.dataset.when]) el.textContent = text[el.dataset.when];
+  }
+})();
