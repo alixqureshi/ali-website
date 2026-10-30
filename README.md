@@ -21,7 +21,7 @@ Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http:
 - Contact is a mailto draft, not a server submission. The visitor must send the draft in their email app. A status message states that explicitly.
 - Newsletter signup posts to the existing public Kit form. If Kit needs additional verification, the form links to the hosted signup rather than claiming success.
 - `.github/workflows/fetch-posts.yml` refreshes `posts.json` from published Kit broadcasts. Only real, public editions appear in the bookshelf. Keep private API credentials in GitHub Actions secrets, never in frontend code.
-- The workshop page sells a USD97 ticket through Stripe for “The AI setup I run my business on”, 19 November 2026, 16:00–18:00 UK. The buyer pack is the company brain files, four skill files, an agent template, the 7-day plan and recording. The booked route is a public details page, not a payment verification endpoint. Buyer confirmation and joining instructions must be driven by verified payment automation.
+- The workshop page sells a USD97 ticket through Stripe for “Build Your AI Team”, 19 November 2026, 16:00–18:00 UK. The buyer pack is the company brain files, four skill files, an agent template, the 7-day plan and recording. The booked route is a public details page, not a payment verification endpoint. Buyer confirmation and joining instructions must be driven by verified payment automation.
 - The video honours reduced motion. The newsletter library supports keyboard navigation and returns focus when closed. Without JavaScript the library remains visible.
 
 ## Meta pixel
