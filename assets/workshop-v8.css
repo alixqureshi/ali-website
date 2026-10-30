@@ -201,6 +201,17 @@
   gap: 22px;
   padding: 56px 0 64px;
 }
+.w8-eyebrow {
+  /* 20px to the title (hero gap is 22px). */
+  margin-bottom: -2px;
+  color: var(--yellow);
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-wrap: balance;
+}
 .w8-hero-sub {
   display: flex;
   flex-direction: column;
@@ -238,6 +249,43 @@
   align-items: center;
   gap: 12px;
   padding-top: 14px;
+}
+
+/* How it works strip (between the hero and the comparison) */
+.w8-how {
+  padding: 32px 0 72px;
+  border-top: 1px solid var(--line);
+}
+.w8-how ol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.w8-how li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.w8-how li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.w8-how-num {
+  color: var(--yellow);
+  font: 900 28px/32px var(--display);
+}
+.w8-how p {
+  font-size: 17px;
+  line-height: 25px;
+}
+.w8-how .w8-how-lead {
+  color: var(--cream);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 /* Desktop call window. --u is 1px when the window is 1000px wide and scales with it. */
@@ -696,6 +744,30 @@
 }
 .w8-ok {
   color: var(--yellow);
+}
+
+/* Ownership callout (after the comparison) */
+.w8-own {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 36px 44px;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--yellow);
+  border-radius: 10px;
+  background: var(--panel);
+}
+.w8-own h2 {
+  color: var(--cream);
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.w8-own p {
+  max-width: 760px;
+  font-size: 19px;
+  line-height: 29px;
 }
 
 /* 3. How I use it */
@@ -1163,6 +1235,69 @@
   text-wrap: balance;
 }
 
+/* Keeping it reliable (after what you leave with) */
+.w8-reliable {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 64px;
+}
+.w8-reliable-head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 0 0 380px;
+}
+.w8-reliable-label {
+  color: var(--yellow);
+  font: 700 13px/16px var(--display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.w8-reliable h2 {
+  color: var(--cream);
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+.w8-reliable-head > p:last-child {
+  font-size: 18px;
+  line-height: 27px;
+}
+.w8-reliable-list {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-top: 30px;
+  border-bottom: 1px solid var(--line);
+}
+.w8-reliable-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding-block: 20px;
+  border-top: 1px solid var(--line);
+}
+.w8-reliable-list li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.w8-reliable-num {
+  flex: 0 0 28px;
+  color: var(--yellow);
+  font: 900 22px/28px var(--display);
+}
+.w8-reliable-list p {
+  font-size: 17px;
+  line-height: 25px;
+}
+.w8-reliable-list .w8-reliable-lead {
+  color: var(--cream);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
 /* 5. Host */
 .w8-host {
   gap: 32px;
@@ -1408,6 +1543,15 @@
   }
 }
 @media (max-width: 960px) and (min-width: 761px) {
+  .w8-reliable {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .w8-reliable-head {
+    flex-basis: auto;
+    max-width: 560px;
+  }
   .w8-duo {
     grid-template-columns: 1fr;
     max-width: 560px;
@@ -1541,6 +1685,58 @@
   .w8-cta {
     width: 100%;
     padding-top: 12px;
+  }
+  .w8-eyebrow {
+    /* 14px to the title (hero gap is 20px). */
+    margin-bottom: -6px;
+    font-size: 17px;
+    line-height: 24px;
+  }
+
+  /* How it works */
+  .w8-how {
+    padding: 24px 0 8px;
+  }
+  .w8-how ol {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .w8-how li {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .w8-how li > div {
+    gap: 4px;
+  }
+  .w8-how-num {
+    flex: 0 0 22px;
+    font-size: 22px;
+    line-height: 26px;
+  }
+  .w8-how p {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .w8-how .w8-how-lead {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  /* Ownership */
+  .w8-own {
+    gap: 10px;
+    padding: 24px 22px;
+    border-left-width: 5px;
+  }
+  .w8-own h2 {
+    font-size: 26px;
+    line-height: 31px;
+  }
+  .w8-own p {
+    font-size: 16px;
+    line-height: 24px;
   }
 
   /* Compare */
@@ -1962,6 +2158,49 @@
   }
   .w8-ticket .w8-btn {
     padding-inline: 24px;
+  }
+
+  /* Keeping it reliable */
+  .w8-reliable {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-block: 0;
+  }
+  .w8-reliable-head {
+    flex-basis: auto;
+    gap: 14px;
+  }
+  .w8-reliable h2 {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .w8-reliable-head > p:last-child {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .w8-reliable-list {
+    padding-top: 6px;
+  }
+  .w8-reliable-list li {
+    gap: 14px;
+    padding-block: 16px;
+  }
+  .w8-reliable-list li > div {
+    gap: 3px;
+  }
+  .w8-reliable-num {
+    flex-basis: 22px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .w8-reliable-list p {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .w8-reliable-list .w8-reliable-lead {
+    font-size: 17px;
+    line-height: 24px;
   }
 
   /* FAQ */
