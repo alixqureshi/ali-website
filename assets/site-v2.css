@@ -157,7 +157,6 @@
   text-align: center;
 }
 .v2-rule {
-  border-top: 1px solid var(--line);
 }
 .v2-sub {
   max-width: 640px;
@@ -553,7 +552,6 @@
   width: 100%;
   margin-top: auto;
   padding-top: 20px;
-  border-top: 1px solid var(--line);
 }
 .v2-case-stat dt {
   color: var(--yellow);
@@ -575,7 +573,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px;
   padding-top: 32px;
-  border-top: 1px solid var(--line);
   counter-reset: v2-step;
 }
 .v2-steps li {
@@ -650,7 +647,6 @@
   width: 100%;
   margin-top: auto;
   padding-top: 22px;
-  border-top: 1px solid var(--line);
   color: var(--body);
   font-size: 14px;
   line-height: 20px;
@@ -772,7 +768,6 @@
 }
 .v2-fit {
   gap: 24px;
-  border-top: 1px solid var(--line);
 }
 .v2-fit > p {
   font-size: 18px;
@@ -890,7 +885,6 @@ textarea.v2-field {
   justify-content: space-between;
   gap: 48px;
   padding: 40px 0 72px;
-  border-top: 1px solid var(--line);
 }
 .v2-email h2 {
   font-size: 28px;
@@ -934,7 +928,6 @@ textarea.v2-field {
   flex-direction: column;
   gap: 48px;
   padding-block: 72px;
-  border-top: 1px solid var(--line);
 }
 .v2-system-row {
   display: flex;
@@ -999,7 +992,6 @@ textarea.v2-field {
 }
 .v2-system-close {
   gap: 24px;
-  border-top: 1px solid var(--line);
 }
 .v2-system-close h2 {
   color: var(--cream);
@@ -1534,4 +1526,9 @@ textarea.v2-field {
   color: var(--body);
   font-size: 17px;
   line-height: 26px;
+}
+
+/* No horizontal rules around the stats row */
+.v2 .w8-stats {
+  border-block: 0;
 }
