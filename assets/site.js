@@ -24,8 +24,14 @@
         contact.elements.email.value +
         "\n\n" +
         contact.elements.message.value;
+      // Send to the address in the form's mailto action, so the page decides where it goes.
+      var to =
+        (contact.getAttribute("action") || "").replace(/^mailto:/, "") ||
+        "ali@adcrate.co";
       var url =
-        "mailto:hello@aliqureshi.co?subject=" +
+        "mailto:" +
+        to +
+        "?subject=" +
         encodeURIComponent(subject) +
         "&body=" +
         encodeURIComponent(body);
