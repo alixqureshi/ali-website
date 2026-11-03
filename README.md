@@ -8,7 +8,7 @@ Ali Qureshi’s personal website. Static HTML, CSS and JavaScript, deployed by G
 - `/work-with-me/` — AI consulting, implementation and training.
 - `/ai-with-ali/` — newsletter signup, Dubai pixel animation and an interactive library of published editions.
 - `/workshops/build-your-ai-brain/`: $97 workshop landing page (v5 design). Styles in `assets/workshop-v5.css`; booking and Stripe reference in `assets/workshop.js`.
-- `/contact/` — enquiries through the visitor’s email app.
+- `/contact/` — two-step enquiry form. Enquiries are saved to Notion through `workers/enquiry`.
 
 `/about/` redirects home. Old newsletter and playbook URLs redirect to AI with Ali. The independent tools and lead magnet pages remain in place.
 
@@ -18,7 +18,7 @@ Run `npx live-server . --host=127.0.0.1 --port=8092 --no-browser` and open http:
 
 ## Integrations
 
-- Contact is a mailto draft, not a server submission. The visitor must send the draft in their email app. A status message states that explicitly.
+- Contact posts to the enquiry Worker (`workers/enquiry`, Cloudflare), which adds a row to the "Website enquiries" database in Notion (AI with Ali · Base camp). Set its URL as `ENQUIRY_ENDPOINT` in `assets/site-v2.js`. The Notion token is a Worker secret (`npx wrangler secret put NOTION_TOKEN`), never in this repo. If the endpoint is empty or the request fails, the form opens an email draft instead and says so.
 - Newsletter signup posts to the existing public Kit form. If Kit needs additional verification, the form links to the hosted signup rather than claiming success.
 - `.github/workflows/fetch-posts.yml` refreshes `posts.json` from published Kit broadcasts. Only real, public editions appear in the bookshelf. Keep private API credentials in GitHub Actions secrets, never in frontend code.
 - The workshop page sells a USD97 ticket through Stripe for “Build Your AI Team”, 19 November 2026, 16:00–18:00 UK. The buyer pack is the company brain files, four skill files, an agent template, the 7-day plan and recording. The booked route is a public details page, not a payment verification endpoint. Buyer confirmation and joining instructions must be driven by verified payment automation.

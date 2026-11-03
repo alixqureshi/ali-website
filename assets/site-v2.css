@@ -1559,3 +1559,196 @@ textarea.v2-field {
   object-fit: cover;
   object-position: top left;
 }
+
+/* ---------- Contact: two-step enquiry form ---------- */
+.v2-enq {
+  padding: 40px 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  scroll-margin-top: 24px;
+}
+.v2-enq-form,
+.v2-enq-step {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.v2-enq-step,
+.v2-enq-q {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/* Without JavaScript both steps show and the form opens an email draft. */
+.js .v2-enq-step:not(.is-current) {
+  display: none;
+}
+.v2-enq-step > legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
+  padding: 0;
+}
+.v2-enq-count {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.v2-enq-title {
+  color: var(--cream);
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.v2-enq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.v2-enq-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.v2-enq-field > span,
+.v2-enq-q > legend {
+  color: var(--cream);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 500;
+}
+.v2-enq-field em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 400;
+}
+.v2-enq-q > legend {
+  margin-bottom: 12px;
+  padding: 0;
+}
+.v2-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.v2-chips label {
+  position: relative;
+  cursor: pointer;
+}
+.v2-chips input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.v2-chips span {
+  display: block;
+  padding: 11px 18px;
+  border: 1px solid var(--chip-line);
+  border-radius: 8px;
+  background: var(--deep);
+  color: var(--cream);
+  font-size: 16px;
+  line-height: 22px;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.v2-chips label:hover span {
+  border-color: var(--muted);
+}
+.v2-chips input:checked + span {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 600;
+}
+.v2-chips input:focus-visible + span {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+.v2-enq-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.v2-enq-actions {
+  display: flex;
+  gap: 12px;
+}
+.v2-enq-actions .w8-btn {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+.v2-enq-actions .w8-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.v2-enq-back {
+  padding: 16px 28px;
+  border: 1px solid var(--chip-line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--cream);
+  font: inherit;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.v2-enq-back[hidden] {
+  display: none;
+}
+.v2-enq .form-status {
+  color: var(--body);
+  font-size: 14px;
+  line-height: 20px;
+}
+.v2-enq .form-status a {
+  color: var(--cream);
+  text-decoration: underline;
+}
+.v2-enq-done {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  outline: none;
+}
+.v2-enq-done[hidden] {
+  display: none;
+}
+.v2-enq-done h2 {
+  color: var(--cream);
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.v2-enq-done p:not(.w8-label) {
+  font-size: 18px;
+  line-height: 28px;
+}
+@media (max-width: 760px) {
+  .v2-enq {
+    padding: 28px 20px;
+  }
+  .v2-enq-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .v2-enq-title,
+  .v2-enq-done h2 {
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .v2-enq-actions .w8-btn {
+    flex: 1;
+  }
+}

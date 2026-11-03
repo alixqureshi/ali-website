@@ -56,67 +56,112 @@
             <main id="main" class="w8 v2">
         <section class="v2-page-hero" aria-labelledby="v2-title">
           <h1 class="w8-h w8-h--hero" id="v2-title">Book a <br class="w8-m" /><mark>30-minute call.</mark></h1>
-          <p>We look at how your business runs, and I show you where AI would pay off first.</p>
+          <p>A few quick questions so I come prepared. It takes about a minute.</p>
         </section>
 
-        <!-- Booking: email for now. When a Cal.com or Calendly link exists, set BOOK_CALL_URL in
-             /assets/site-v2.js (the button below follows it) or embed the calendar here. -->
-        <section class="v2-book" id="book" aria-labelledby="v2-book">
-          <div class="v2-book-main">
-            <p class="w8-label">BOOK A CALL</p>
-            <h2 id="v2-book">Email me and I’ll send you a time.</h2>
-            <p>
-              A line on your team and what you’d like AI to take on is plenty. I reply within a
-              day.
-            </p>
-            <a
-              class="w8-btn"
-              data-book-call-email
-              href="mailto:ali@adcrate.co?subject=30-minute%20call"
-              >Email to book a call ↗</a
-            >
-          </div>
-
+        <!-- Enquiry form: two short steps. site-v2.js sends the answers to the enquiry Worker
+             (workers/enquiry), which saves them to the "Website enquiries" database in Notion.
+             If the Worker is not set up or fails, it falls back to an email draft. -->
+        <section class="v2-enq" id="book" aria-labelledby="v2-enq">
+          <h2 class="sr-only" id="v2-enq">Tell me about your team</h2>
           <form
             id="enquiry"
-            class="v2-book-form"
-            data-contact-form
+            class="v2-enq-form"
+            data-enquiry-form
             action="mailto:ali@adcrate.co"
             method="post"
             enctype="text/plain"
           >
-            <h3>Or send a message</h3>
-            <label class="sr-only" for="contact-name">Full name</label
-            ><input
-              id="contact-name"
-              class="v2-field"
-              name="name"
-              placeholder="Full name"
-              autocomplete="name"
-              required
-            />
-            <label class="sr-only" for="contact-email">Email</label
-            ><input
-              id="contact-email"
-              class="v2-field"
-              name="email"
-              type="email"
-              placeholder="Email"
-              autocomplete="email"
-              required
-            />
-            <label class="sr-only" for="contact-message">Your message</label
-            ><textarea
-              id="contact-message"
-              class="v2-field"
-              name="message"
-              placeholder="Message…"
-              required
-            ></textarea>
-            <button class="w8-btn w8-btn--block" type="submit">Send message</button>
-            <p class="v2-form-note">Opens an email draft for you to send.</p>
+            <fieldset class="v2-enq-step" data-step="1">
+              <legend>
+                <span class="v2-enq-count">Step 1 of 2</span>
+                <span class="v2-enq-title">About you</span>
+              </legend>
+              <div class="v2-enq-grid">
+                <label class="v2-enq-field"
+                  ><span>Name</span
+                  ><input class="v2-field" name="name" autocomplete="name" required
+                /></label>
+                <label class="v2-enq-field"
+                  ><span>Work email</span
+                  ><input
+                    class="v2-field"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="you@company.com"
+                    required
+                /></label>
+                <label class="v2-enq-field"
+                  ><span>Company</span
+                  ><input class="v2-field" name="company" autocomplete="organization" required
+                /></label>
+                <label class="v2-enq-field"
+                  ><span>Your role</span
+                  ><input
+                    class="v2-field"
+                    name="role"
+                    autocomplete="organization-title"
+                    placeholder="e.g. Founder, Head of Ops"
+                /></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="v2-enq-step" data-step="2">
+              <legend>
+                <span class="v2-enq-count">Step 2 of 2</span>
+                <span class="v2-enq-title">Your team</span>
+              </legend>
+              <fieldset class="v2-enq-q">
+                <legend>How many people work there?</legend>
+                <div class="v2-chips">
+                  <label><input type="radio" name="team_size" value="1-10" required /><span>1-10</span></label>
+                  <label><input type="radio" name="team_size" value="11-50" /><span>11-50</span></label>
+                  <label><input type="radio" name="team_size" value="51-200" /><span>51-200</span></label>
+                  <label><input type="radio" name="team_size" value="200+" /><span>200+</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="v2-enq-q">
+                <legend>What are you most interested in?</legend>
+                <div class="v2-chips">
+                  <label><input type="radio" name="interest" value="Team training" required /><span>Team training</span></label>
+                  <label><input type="radio" name="interest" value="AI brain and agent install" /><span>AI brain and agent install</span></label>
+                  <label><input type="radio" name="interest" value="Bespoke builds" /><span>Bespoke builds</span></label>
+                  <label><input type="radio" name="interest" value="Not sure yet" /><span>Not sure yet</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="v2-enq-q">
+                <legend>When would you want to start?</legend>
+                <div class="v2-chips">
+                  <label><input type="radio" name="timing" value="This month" required /><span>This month</span></label>
+                  <label><input type="radio" name="timing" value="Next quarter" /><span>Next quarter</span></label>
+                  <label><input type="radio" name="timing" value="Later this year" /><span>Later this year</span></label>
+                  <label><input type="radio" name="timing" value="Just exploring" /><span>Just exploring</span></label>
+                </div>
+              </fieldset>
+              <label class="v2-enq-field"
+                ><span>What’s the first job you’d hand to AI? <em>(optional)</em></span
+                ><input class="v2-field" name="first_job" placeholder="e.g. weekly client reports"
+              /></label>
+            </fieldset>
+
+            <!-- Spam trap: people never see or fill this. -->
+            <label class="v2-enq-trap" aria-hidden="true"
+              >Website<input name="website" tabindex="-1" autocomplete="off"
+            /></label>
+
+            <div class="v2-enq-actions">
+              <button class="v2-enq-back" type="button" data-enq-back hidden>Back</button>
+              <button class="w8-btn" type="submit" data-enq-next>Continue</button>
+            </div>
             <p class="form-status" role="status" aria-live="polite"></p>
           </form>
+
+          <div class="v2-enq-done" data-enq-done hidden tabindex="-1">
+            <p class="w8-label">SENT</p>
+            <h2>Thanks. I’ll email you within a day to find a time.</h2>
+            <p>If it’s urgent, email me at <a class="v2-link" href="mailto:ali@adcrate.co">ali@adcrate.co</a>.</p>
+          </div>
         </section>
 
         <section class="v2-oncall" aria-labelledby="v2-oncall">
