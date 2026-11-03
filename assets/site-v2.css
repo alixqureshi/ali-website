@@ -1533,3 +1533,10 @@ textarea.v2-field {
 .v2-page .w8-stats {
   border-block: 0;
 }
+
+.v2-case-line {
+  margin: 0;
+  color: var(--body);
+  font-size: 18px;
+  line-height: 28px;
+}
