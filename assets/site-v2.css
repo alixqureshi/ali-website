@@ -1552,3 +1552,10 @@ textarea.v2-field {
 .v2-shot--wide {
   margin-top: 32px;
 }
+/* Line the screenshots up across both case cards */
+.v2-case .v2-shot {
+  margin-top: auto;
+  aspect-ratio: 1600 / 839;
+  object-fit: cover;
+  object-position: top left;
+}
