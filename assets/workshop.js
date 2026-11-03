@@ -25,6 +25,26 @@
     return ref.length <= 200 ? ref : join([p[1], p[2], p[3]]);
   };
 
+  // Count the first Book click per page view as a checkout start. Only fires when the
+  // pixel and GA loaded (production, no opt-out). Purchase stays server-side.
+  let checkoutTracked = false;
+  const trackCheckout = () => {
+    if (checkoutTracked) return;
+    checkoutTracked = true;
+    const params = { value: 97, currency: "USD" };
+    if (window.fbq)
+      window.fbq("trackSingle", "1167132298977136", "InitiateCheckout", {
+        ...params,
+        content_name: "Build Your AI Team",
+      });
+    if (window.gtag)
+      window.gtag("event", "begin_checkout", {
+        ...params,
+        transport_type: "beacon",
+        items: [{ item_name: "Build Your AI Team", price: 97, quantity: 1 }],
+      });
+  };
+
   if (CHECKOUT_URL) {
     for (const a of document.querySelectorAll("[data-book]")) {
       // The page HTML carries the button labels; only the link is set here.
@@ -38,6 +58,8 @@
       };
       a.addEventListener("click", withRef);
       a.addEventListener("auxclick", withRef);
+      a.addEventListener("click", trackCheckout);
+      a.addEventListener("auxclick", (e) => e.button === 1 && trackCheckout());
     }
     for (const p of document.querySelectorAll("[data-prebooking]")) p.remove();
   }
