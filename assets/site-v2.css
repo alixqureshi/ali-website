@@ -293,7 +293,6 @@
   gap: 56px;
   padding: 40px 44px;
   border: 1px solid var(--line);
-  border-left: 6px solid var(--yellow);
   border-radius: 10px;
   background: var(--panel);
 }
@@ -793,7 +792,6 @@
   gap: 56px;
   padding: 40px 44px;
   border: 1px solid var(--line);
-  border-left: 6px solid var(--yellow);
   border-radius: 12px;
   background: var(--panel);
   scroll-margin-top: 24px;
