@@ -1510,3 +1510,29 @@ textarea.v2-field {
     line-height: 34px;
   }
 }
+
+/* Case study: overview / problem / solution */
+.v2-case-ops {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin: 4px 0 0;
+}
+.v2-case-ops dt {
+  margin-top: 14px;
+  color: var(--yellow);
+  font-family: "Doto", "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.v2-case-ops dt:first-child {
+  margin-top: 0;
+}
+.v2-case-ops dd {
+  margin: 0;
+  color: var(--body);
+  font-size: 17px;
+  line-height: 26px;
+}
