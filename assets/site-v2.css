@@ -1540,3 +1540,15 @@ textarea.v2-field {
   font-size: 18px;
   line-height: 28px;
 }
+
+.v2-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.v2-shot--wide {
+  margin-top: 32px;
+}
