@@ -753,7 +753,6 @@
   gap: 12px;
   padding: 36px 44px;
   border: 1px solid var(--line);
-  border-left: 6px solid var(--yellow);
   border-radius: 10px;
   background: var(--panel);
 }
@@ -1425,7 +1424,6 @@
   gap: 20px;
   width: min(460px, 100%);
   padding: 32px;
-  border-left: 6px solid var(--yellow);
   border-radius: 4px;
   background: var(--cream);
 }
