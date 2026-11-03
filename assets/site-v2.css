@@ -1529,6 +1529,7 @@ textarea.v2-field {
 }
 
 /* No horizontal rules around the stats row */
-.v2 .w8-stats {
+.w8-stats.v2-stats--4,
+.v2-page .w8-stats {
   border-block: 0;
 }
