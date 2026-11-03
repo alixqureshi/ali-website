@@ -1,0 +1,11 @@
+# Enquiry Worker: saves contact form enquiries from aliqureshi.co to Notion.
+# Deploy from this folder with `npx wrangler deploy`.
+# The Notion token is a secret, never committed: `npx wrangler secret put NOTION_TOKEN`.
+name = "ali-enquiry"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+# "Website enquiries" in AI with Ali · Base camp.
+NOTION_DATA_SOURCE_ID = "8b3ab6d8-dfe3-486e-8d33-c7d4da32527e"
+ALLOWED_ORIGINS = "https://aliqureshi.co,https://www.aliqureshi.co,http://127.0.0.1:8766,http://localhost:8766"

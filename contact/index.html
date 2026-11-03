@@ -1,18 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="w8-page v2-page">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#07182D" />
-    <title>Get in touch · Ali Qureshi</title>
+    <title>Book a 30-minute call · AI with Ali</title>
     <meta
       name="description"
-      content="Tell me what you’re working on. Discuss an AI setup, a custom build, ongoing implementation or a team workshop."
+      content="Book a 30-minute call with Ali Qureshi. We look at how your business runs, and I show you where AI would pay off first."
     />
-    <meta property="og:title" content="Get in touch · Ali Qureshi" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aliqureshi.co/contact/" />
+    <meta property="og:title" content="Book a 30-minute call · AI with Ali" />
     <meta
       property="og:description"
-      content="Tell me what you’re working on. Discuss an AI setup, a custom build, ongoing implementation or a team workshop."
+      content="Book a 30-minute call with Ali Qureshi. We look at how your business runs, and I show you where AI would pay off first."
     />
     <link rel="canonical" href="https://aliqureshi.co/contact/" />
     <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml" />
@@ -20,124 +22,182 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Geist:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
     />
+    <script>document.documentElement.classList.add("js");</script>
     <link rel="stylesheet" href="/assets/site.css" />
+    <link rel="stylesheet" href="/assets/workshop-v8.css" />
+    <link rel="stylesheet" href="/assets/site-v2.css" />
     <script src="/assets/site.js" defer></script>
+    <script src="/assets/site-v2.js" defer></script>
     <script src="/assets/meta-pixel.js" defer></script>
     <script src="/assets/analytics.js" data-measurement-id="G-D74XK8FM1T" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="frame">
-      <header class="site-header">
-        <a class="wordmark" href="/" aria-label="Ali Qureshi home"
-          >ALI QURESHI</a
-        >
-        <nav class="pill" aria-label="Main">
-          <a class="nav-link" href="/">Home</a
-          ><a class="nav-link" href="/ai-with-ali/">AI with Ali</a
-          ><a class="nav-link" href="/work-with-me/">Work with me</a
-          ><a class="nav-link nav-cta" href="/contact/" aria-current="page"
-            >Contact</a
-          >
+    <div class="frame w8-frame">
+      <header class="v2-header">
+        <a class="wordmark v2-wordmark" href="/" aria-label="AI with Ali home">AI WITH ALI</a>
+        <nav class="v2-nav" id="v2-nav" aria-label="Main">
+          <a href="/#work-with-me">Work with me</a>
+          <a href="/workshops/build-your-ai-brain/">Workshop</a>
+          <a href="/about/">About</a>
+          <a href="/contact/" aria-current="page">Contact</a>
         </nav>
-      </header>
-      <main id="main" class="contact-main">
-        <div class="title-row">
-          <h1 class="display-title">GET IN TOUCH</h1>
-          <img src="/assets/pixel/envelope.svg" width="84" height="60" alt="" />
+        <div class="v2-header-end">
+          <button class="v2-menu-btn" type="button" aria-expanded="false" aria-controls="v2-nav">
+            <span class="v2-menu-icon" aria-hidden="true"></span
+            ><span class="v2-menu-label">Menu</span>
+          </button>
+          <a class="w8-header-cta" data-book-call href="/contact/">Book a call</a>
         </div>
-        <p class="page-intro">
-          Tell me what you’re working on and I’ll reply within a day. Or email
-          me at
-          <a class="text-link" href="mailto:hello@aliqureshi.co"
-            >hello@aliqureshi.co</a
+      </header>
+
+            <main id="main" class="w8 v2">
+        <section class="v2-page-hero" aria-labelledby="v2-title">
+          <h1 class="w8-h w8-h--hero" id="v2-title">Book a <br class="w8-m" /><mark>30-minute call.</mark></h1>
+          <p>A few quick questions so I come prepared. It takes about a minute.</p>
+        </section>
+
+        <!-- Enquiry form: two short steps. site-v2.js sends the answers to the enquiry Worker
+             (workers/enquiry), which saves them to the "Website enquiries" database in Notion.
+             If the Worker is not set up or fails, it falls back to an email draft. -->
+        <section class="v2-enq" id="book" aria-labelledby="v2-enq">
+          <h2 class="sr-only" id="v2-enq">Tell me about your team</h2>
+          <form
+            id="enquiry"
+            class="v2-enq-form"
+            data-enquiry-form
+            action="mailto:ali@adcrate.co"
+            method="post"
+            enctype="text/plain"
           >
-        </p>
-        <form
-          id="enquiry"
-          class="contact-form"
-          data-contact-form
-          action="mailto:hello@aliqureshi.co"
-          method="post"
-          enctype="text/plain"
-        >
-          <div class="field-pair">
-            <label class="sr-only" for="contact-name">Full name</label
-            ><input
-              id="contact-name"
-              class="field"
-              name="name"
-              placeholder="Full name"
-              autocomplete="name"
-              required
-            />
-            <label class="sr-only" for="contact-email">Email</label
-            ><input
-              id="contact-email"
-              class="field"
-              name="email"
-              type="email"
-              placeholder="Email"
-              autocomplete="email"
-              required
-            />
+            <fieldset class="v2-enq-step" data-step="1">
+              <legend>
+                <span class="v2-enq-count">Step 1 of 2</span>
+                <span class="v2-enq-title">About you</span>
+              </legend>
+              <div class="v2-enq-grid">
+                <label class="v2-enq-field"
+                  ><span>Name</span
+                  ><input class="v2-field" name="name" autocomplete="name" required
+                /></label>
+                <label class="v2-enq-field"
+                  ><span>Work email</span
+                  ><input
+                    class="v2-field"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="you@company.com"
+                    required
+                /></label>
+                <label class="v2-enq-field"
+                  ><span>Company</span
+                  ><input class="v2-field" name="company" autocomplete="organization" required
+                /></label>
+                <label class="v2-enq-field"
+                  ><span>Your role</span
+                  ><input
+                    class="v2-field"
+                    name="role"
+                    autocomplete="organization-title"
+                    placeholder="e.g. Founder, Head of Ops"
+                /></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="v2-enq-step" data-step="2">
+              <legend>
+                <span class="v2-enq-count">Step 2 of 2</span>
+                <span class="v2-enq-title">Your team</span>
+              </legend>
+              <fieldset class="v2-enq-q">
+                <legend>How many people work there?</legend>
+                <div class="v2-chips">
+                  <label><input type="radio" name="team_size" value="1-10" required /><span>1-10</span></label>
+                  <label><input type="radio" name="team_size" value="11-50" /><span>11-50</span></label>
+                  <label><input type="radio" name="team_size" value="51-200" /><span>51-200</span></label>
+                  <label><input type="radio" name="team_size" value="200+" /><span>200+</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="v2-enq-q">
+                <legend>What are you most interested in?</legend>
+                <div class="v2-chips">
+                  <label><input type="radio" name="interest" value="Team training" required /><span>Team training</span></label>
+                  <label><input type="radio" name="interest" value="AI brain and agent install" /><span>AI brain and agent install</span></label>
+                  <label><input type="radio" name="interest" value="Bespoke builds" /><span>Bespoke builds</span></label>
+                  <label><input type="radio" name="interest" value="Not sure yet" /><span>Not sure yet</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="v2-enq-q">
+                <legend>When would you want to start?</legend>
+                <div class="v2-chips">
+                  <label><input type="radio" name="timing" value="This month" required /><span>This month</span></label>
+                  <label><input type="radio" name="timing" value="Next quarter" /><span>Next quarter</span></label>
+                  <label><input type="radio" name="timing" value="Later this year" /><span>Later this year</span></label>
+                  <label><input type="radio" name="timing" value="Just exploring" /><span>Just exploring</span></label>
+                </div>
+              </fieldset>
+              <label class="v2-enq-field"
+                ><span>What’s the first job you’d hand to AI? <em>(optional)</em></span
+                ><input class="v2-field" name="first_job" placeholder="e.g. weekly client reports"
+              /></label>
+            </fieldset>
+
+            <!-- Spam trap: people never see or fill this. -->
+            <label class="v2-enq-trap" aria-hidden="true"
+              >Website<input name="website" tabindex="-1" autocomplete="off"
+            /></label>
+
+            <div class="v2-enq-actions">
+              <button class="v2-enq-back" type="button" data-enq-back hidden>Back</button>
+              <button class="w8-btn" type="submit" data-enq-next>Continue</button>
+            </div>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="v2-enq-done" data-enq-done hidden tabindex="-1">
+            <p class="w8-label">SENT</p>
+            <h2>Thanks. I’ll email you within a day to find a time.</h2>
+            <p>If it’s urgent, email me at <a class="v2-link" href="mailto:ali@adcrate.co">ali@adcrate.co</a>.</p>
           </div>
-          <label class="sr-only" for="contact-message">Your message</label
-          ><textarea
-            id="contact-message"
-            class="field"
-            name="message"
-            placeholder="Message…"
-            required
-          ></textarea>
-          <button class="btn btn--block" type="submit">Send message</button>
-          <p class="form-note">Opens an email draft for you to send.</p>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
-        <section class="contact-questions">
-          <h2 class="section-title">Questions</h2>
-          <p class="page-intro">What people usually ask me first:</p>
-          <details class="question">
-            <summary>What kind of work do you take on?</summary>
-            <p>
-              AI consulting, implementation and team training. That can mean
-              company assistants, marketing workflows or internal tools. We
-              choose the work around your business.
-            </p>
-          </details>
-          <details class="question">
-            <summary>How do we start working together?</summary>
-            <p>
-              Tell me what you’re working on and where you need help. I’ll reply
-              within a day with next steps.
-            </p>
-          </details>
-          <details class="question">
-            <summary>Can I hire you for a one-off project?</summary>
-            <p>
-              Yes. We can scope a company AI setup, a custom workflow or a tool.
-              Ongoing implementation is available when there is more to build
-              and improve.
-            </p>
-          </details>
+        </section>
+
+        <section class="v2-oncall" aria-labelledby="v2-oncall">
+          <h2 id="v2-oncall">On the call</h2>
+          <ol class="v2-steps">
+            <li>We look at how your business runs today.</li>
+            <li>I show you where AI would pay off first, whether you hire me or not.</li>
+            <li>If it’s a fit, you leave knowing the scope and the fee.</li>
+          </ol>
+        </section>
+
+        <section class="v2-email" aria-labelledby="v2-email">
+          <div class="v2-email-main">
+            <h2 id="v2-email">Prefer email?</h2>
+            <div class="v2-email-links">
+              <a class="v2-link" href="mailto:ali@adcrate.co">ali@adcrate.co</a>
+              <a
+                class="v2-link v2-link--quiet"
+                href="https://www.linkedin.com/in/alimqureshi/"
+                target="_blank"
+                rel="noopener"
+                >LinkedIn</a
+              >
+            </div>
+          </div>
+          <p>Based in Dubai and London. Working with teams in the UK, US and UAE.</p>
         </section>
       </main>
-      <footer class="site-footer">
-        <span>Ali Qureshi</span
-        ><a
-          class="social-icon"
-          href="https://www.linkedin.com/in/alimqureshi"
-          target="_blank"
-          rel="noopener"
-          aria-label="Ali Qureshi on LinkedIn"
-          ><svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-            /></svg
-        ></a>
+
+      <footer class="v2-footer">
+        <span>Ali Qureshi</span>
+        <nav aria-label="Footer">
+          <a href="https://www.linkedin.com/in/alimqureshi/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/ai-with-ali/">Newsletter</a>
+          <a href="/contact/">Contact</a>
+        </nav>
       </footer>
     </div>
   </body>

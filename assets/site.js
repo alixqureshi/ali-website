@@ -1,6 +1,32 @@
 /* Small progressive enhancements. Every enquiry still has a visible email route. */
 (function () {
   "use strict";
+  // Remember where this visitor came from (UTMs, referring site, first page) so the
+  // enquiry form can save it to Notion. Kept only in this browser, for 90 days; a new
+  // visit with UTMs replaces it.
+  try {
+    var params = new URLSearchParams(location.search);
+    var utm = {};
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(
+      function (key) {
+        if (params.get(key)) utm[key] = params.get(key).slice(0, 100);
+      },
+    );
+    var saved = JSON.parse(localStorage.getItem("aiWithAliSource") || "null");
+    var stale = !saved || Date.now() - saved.at > 90 * 864e5;
+    if (stale || Object.keys(utm).length) {
+      var from = document.referrer ? new URL(document.referrer).hostname : "";
+      localStorage.setItem(
+        "aiWithAliSource",
+        JSON.stringify({
+          utm: utm,
+          referrer: from === location.hostname ? "" : from,
+          landing: location.pathname,
+          at: Date.now(),
+        }),
+      );
+    }
+  } catch (error) {}
   var contact = document.querySelector("[data-contact-form]");
   if (contact) {
     var topics = {
@@ -24,8 +50,14 @@
         contact.elements.email.value +
         "\n\n" +
         contact.elements.message.value;
+      // Send to the address in the form's mailto action, so the page decides where it goes.
+      var to =
+        (contact.getAttribute("action") || "").replace(/^mailto:/, "") ||
+        "ali@adcrate.co";
       var url =
-        "mailto:hello@aliqureshi.co?subject=" +
+        "mailto:" +
+        to +
+        "?subject=" +
         encodeURIComponent(subject) +
         "&body=" +
         encodeURIComponent(body);
@@ -63,6 +95,12 @@
           throw new Error("Please finish signup on Kit");
         status.textContent =
           "Thanks. Check your inbox for any confirmation email from Kit.";
+        // Only fires when tracking loaded (production, no opt-out). No form data is sent.
+        if (window.fbq)
+          window.fbq("trackSingle", "1167132298977136", "CompleteRegistration", {
+            content_name: "Newsletter",
+          });
+        if (window.gtag) window.gtag("event", "sign_up", { method: "newsletter" });
         signup.reset();
       } catch (error) {
         status.replaceChildren(
