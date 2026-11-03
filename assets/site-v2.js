@@ -69,7 +69,24 @@
       new FormData(form).forEach(function (value, key) {
         data[key] = String(value).trim();
       });
-      data.page = location.pathname + location.search;
+      data.page = location.pathname;
+      var source = {};
+      try {
+        source = JSON.parse(localStorage.getItem("aiWithAliSource") || "{}") || {};
+      } catch (error) {}
+      var utm = source.utm || {};
+      data.utm_source = utm.utm_source || "";
+      data.utm_campaign = utm.utm_campaign || "";
+      data.source_detail = Object.keys(utm)
+        .map(function (key) {
+          return key + "=" + utm[key];
+        })
+        .concat(
+          source.referrer ? ["referrer=" + source.referrer] : [],
+          source.landing ? ["landed on " + source.landing] : [],
+          ["sent from " + data.page],
+        )
+        .join(" · ");
       return data;
     }
 
@@ -134,6 +151,10 @@
           body: JSON.stringify(data),
         });
         if (!response.ok) throw new Error("Enquiry failed: " + response.status);
+        // Only fires when tracking loaded (production, no opt-out). No form data is sent.
+        if (window.fbq)
+          window.fbq("trackSingle", "1167132298977136", "Lead", { content_name: "Enquiry" });
+        if (window.gtag) window.gtag("event", "generate_lead", { form: "enquiry" });
         form.hidden = true;
         done.hidden = false;
         done.focus();

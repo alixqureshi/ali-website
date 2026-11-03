@@ -43,7 +43,9 @@ export default {
       company: text("company", 200),
       role: text("role", 120),
       firstJob: text("first_job", 1000),
-      page: text("page", 300),
+      utmSource: text("utm_source", 100),
+      utmCampaign: text("utm_campaign", 100),
+      sourceDetail: text("source_detail", 1000),
     };
     if (!enquiry.name || !enquiry.company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enquiry.email))
       return reply(400, { error: "Name, a valid email and company are required." });
@@ -70,7 +72,9 @@ export default {
           "Interested in": select(data.interest),
           Timing: select(data.timing),
           "First job for AI": richText(enquiry.firstJob),
-          Message: richText(enquiry.page ? "Sent from " + enquiry.page : ""),
+          "UTM source": richText(enquiry.utmSource),
+          "UTM campaign": richText(enquiry.utmCampaign),
+          "Source detail": richText(enquiry.sourceDetail),
           Source: select("Website contact form"),
         },
       }),

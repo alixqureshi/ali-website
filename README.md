@@ -58,6 +58,22 @@ The existing Function source, configuration notes and handler tests are versione
 in [`services/meta-capi/`](services/meta-capi/README.md). Website deployment does
 not redeploy that Function.
 
+### Leads and signups
+
+Two browser events, sent only when the pixel and GA loaded (production, no
+opt-out) and carrying no form answers:
+
+- A saved enquiry on `/contact/` sends Meta `Lead` and GA `generate_lead`
+  (`assets/site-v2.js`). The email-draft fallback sends nothing, because the
+  enquiry is not confirmed.
+- A confirmed Kit newsletter signup sends Meta `CompleteRegistration` and GA
+  `sign_up` (`assets/site.js`).
+
+`assets/site.js` also keeps the visitor's first UTMs, referring site and landing
+page in `localStorage` (`aiWithAliSource`, 90 days, replaced by a new UTM visit).
+The enquiry form sends them to the Worker, which fills the UTM source, UTM
+campaign and Source detail columns in Notion.
+
 ## Google Analytics
 
 The same five marketing pages load `assets/analytics.js`, configured by
@@ -68,8 +84,9 @@ uses Europe/London time and USD. The web stream is **AI with Ali website**
 
 The tag measures standard page views on `aliqureshi.co` and `www.aliqureshi.co`.
 Enhanced measurement is off in the stream, so automatic form interactions and
-outbound-link details are not collected. No submitted contact fields or custom
-purchase events are sent. Google signals and ad personalization are disabled in
+outbound-link details are not collected. No submitted contact fields or purchase events are sent; the
+`generate_lead` and `sign_up` events above are the only custom events. Mark
+`generate_lead` as a key event in GA (Admin, Events). Google signals and ad personalization are disabled in
 the tag configuration. Local previews, Global Privacy Control, Do Not Track and
 the standard `ga-disable-G-D74XK8FM1T` opt-out skip the Google script. A per-page
 guard prevents duplicate initialization. If a consent manager is added, gate
