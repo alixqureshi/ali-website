@@ -27,9 +27,9 @@
   }
 
   // The contact form posts to the enquiry Worker (workers/enquiry), which saves each
-  // enquiry to Notion. Until the Worker is deployed this is empty and the form opens an
-  // email draft instead, so no enquiry is lost.
-  var ENQUIRY_ENDPOINT = "";
+  // enquiry to Notion. If this is empty or the request fails, the form opens an email
+  // draft instead, so no enquiry is lost.
+  var ENQUIRY_ENDPOINT = "https://ali-enquiry.ali-e80.workers.dev";
 
   var enquiry = document.querySelector("[data-enquiry-form]");
   if (enquiry) setUpEnquiry(enquiry);
