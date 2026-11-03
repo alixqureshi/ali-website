@@ -633,7 +633,6 @@
 }
 .v2-close {
   gap: 24px;
-  border-top: 1px solid var(--line);
 }
 .v2-close > p {
   font-size: 18px;
