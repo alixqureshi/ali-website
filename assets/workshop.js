@@ -233,8 +233,8 @@
 
 // Show the session time in the visitor's own time zone. The HTML carries the UK time as the fallback.
 (() => {
-  const start = new Date("2026-11-19T16:00:00Z");
-  const end = new Date("2026-11-19T18:00:00Z");
+  const start = new Date("2026-11-19T15:00:00Z");
+  const end = new Date("2026-11-19T17:00:00Z");
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   if (!zone) return;
   const city = zone.split("/").pop().replace(/_/g, " ");
