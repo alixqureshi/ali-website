@@ -1429,3 +1429,12 @@ textarea.field {
     background-image: url("/assets/pixel-texture-mobile.svg");
   }
 }
+
+.site-footer-legal {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+}
+.site-footer-legal a {
+  color: inherit;
+}

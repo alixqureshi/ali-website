@@ -2231,3 +2231,7 @@
     font-size: 13px;
   }
 }
+
+.w8-faq details a {
+  text-decoration: underline;
+}
