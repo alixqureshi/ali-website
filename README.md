@@ -8,6 +8,7 @@ Ali Qureshi’s personal website. Static HTML, CSS and JavaScript, deployed by G
 - `/work-with-me/` — AI consulting, implementation and training.
 - `/ai-with-ali/` — newsletter signup, Dubai pixel animation and an interactive library of published editions.
 - `/workshops/build-your-ai-brain/`: $97 workshop landing page (v5 design). Styles in `assets/workshop-v5.css`; booking and Stripe reference in `assets/workshop.js`.
+- `/privacy/` and `/terms/` — privacy policy and workshop ticket terms. They load no pixel or analytics. Update them if the processors, tracking or ticket terms change.
 - `/contact/` — two-step enquiry form. Enquiries are saved to Notion through `workers/enquiry`.
 
 `/about/` redirects home. Old newsletter and playbook URLs redirect to AI with Ali. The independent tools and lead magnet pages remain in place.

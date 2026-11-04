@@ -1752,3 +1752,39 @@ textarea.v2-field {
     flex: 1;
   }
 }
+
+/* Privacy and terms */
+.v2-legal {
+  padding-bottom: 72px;
+}
+.v2-legal .v2-page-hero .w8-label {
+  margin-top: 16px;
+}
+.v2-legal-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+  font-size: 17px;
+  line-height: 28px;
+}
+.v2-legal-copy h2 {
+  margin-top: 24px;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+}
+.v2-legal-copy ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+.v2-legal-copy a {
+  text-decoration: underline;
+}
+.v2-footer > span {
+  white-space: nowrap;
+}
